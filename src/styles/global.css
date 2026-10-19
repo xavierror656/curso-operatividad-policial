@@ -75,10 +75,6 @@
       transition-duration: 0.01ms !important;
     }
   }
-  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-    outline: 3px solid var(--color-secondary);
-    outline-offset: 2px;
-  }
   main:focus {
     outline: none;
   }
@@ -91,4 +87,18 @@
   h4 {
     @apply font-display;
   }
+}
+
+/*
+ * Foco visible de alto contraste. Va fuera de las capas para que tenga
+ * prioridad sobre el contorno gris claro de los componentes de FlyonUI.
+ */
+:is(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+.bg-primary :is(a, button):focus-visible,
+.deck-body :is(a, button):focus-visible,
+.presenter :is(a, button):focus-visible {
+  outline-color: #e08a8a;
 }
