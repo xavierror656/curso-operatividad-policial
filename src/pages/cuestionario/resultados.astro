@@ -14,6 +14,8 @@ const cortas = [
   'Llamada capturada dos veces',
   'Responsabilidad del dato',
 ]
+
+if (cortas.length !== reactivos.length) throw new Error('resultados.astro: `cortas` debe tener un elemento por reactivo')
 ---
 
 <Layout title="Resultados del grupo · Cuestionario" description="Compara el diagnóstico inicial contra el cierre del grupo.">
@@ -34,17 +36,17 @@ const cortas = [
     <section class="mt-10 space-y-10" data-out hidden>
       <div class="grid gap-4 sm:grid-cols-3">
         <div class="rounded-box border border-base-content/10 p-5">
-          <p class="text-sm text-base-content/60">Promedio al inicio</p>
+          <p class="text-sm text-base-content/70">Promedio al inicio</p>
           <p class="font-display text-4xl font-bold" data-avg-d>–</p>
         </div>
         <div class="rounded-box border border-base-content/10 p-5">
-          <p class="text-sm text-base-content/60">Promedio al cierre</p>
+          <p class="text-sm text-base-content/70">Promedio al cierre</p>
           <p class="font-display text-4xl font-bold" data-avg-c>–</p>
         </div>
         <div class="rounded-box border border-secondary/40 bg-secondary/5 p-5">
-          <p class="text-sm text-base-content/60">Avance del grupo</p>
+          <p class="text-sm text-base-content/70">Avance del grupo</p>
           <p class="font-display text-4xl font-bold text-secondary" data-gain>–</p>
-          <p class="text-xs text-base-content/60" data-gain-note></p>
+          <p class="text-xs text-base-content/70" data-gain-note></p>
         </div>
       </div>
 
@@ -61,7 +63,7 @@ const cortas = [
 
       <div>
         <h2 class="text-xl font-semibold">Por participante</h2>
-        <div class="mt-3 overflow-x-auto rounded-box border border-base-content/10">
+        <div class="mt-3 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Tabla de participantes, se desplaza horizontalmente">
           <table class="table">
             <thead><tr><th>Nombre</th><th>Área</th><th>Inicio</th><th>Cierre</th><th>Avance</th></tr></thead>
             <tbody data-rows></tbody>
@@ -91,6 +93,8 @@ const cortas = [
     const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : undefined)
     const fmt = (n?: number) => (n === undefined ? '–' : n.toFixed(1))
 
+    // Une al mismo participante aunque cambien acentos, mayúsculas o espacios
+    const norm = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/\s+/g, ' ').trim()
     const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!)
 
     $('[data-calc]').addEventListener('click', () => {
@@ -98,7 +102,7 @@ const cortas = [
       for (const line of $<HTMLTextAreaElement>('[data-codes]').value.split(/\r?\n/)) {
         const [tag, modo, bits, nombre = '', area = ''] = line.trim().split('|')
         if (tag !== 'C3' || !/^[DC]$/.test(modo) || !new RegExp(`^[01]{${total}}$`).test(bits)) continue
-        const id = `${nombre.trim().toLowerCase()}|${area.trim().toLowerCase()}`
+        const id = `${norm(nombre)}|${norm(area)}`
         const p = map.get(id) ?? { nombre: nombre.trim(), area: area.trim() }
         p[modo as 'D' | 'C'] = bits
         map.set(id, p)
@@ -124,7 +128,7 @@ const cortas = [
           const c = pct('C', q)
           const bar = (v: number | undefined, color: string, name: string) =>
             `<div class="flex items-center gap-2" title="${name}: ${v ?? '–'}%"><span class="h-3 rounded-e" style="width:${v ?? 0}%;background:${color};min-width:${v ? 2 : 0}px"></span><span class="text-xs tabular-nums text-base-content/70">${v === undefined ? '–' : v + '%'}</span></div>`
-          return `<li class="grid gap-1 sm:grid-cols-[16rem_1fr] sm:items-center"><span class="text-sm"><span class="text-base-content/50">${q + 1}.</span> ${esc(label)}</span><div class="grid gap-0.5">${bar(d, '#a9abbd', 'Inicio')}${bar(c, 'var(--color-primary)', 'Cierre')}</div></li>`
+          return `<li class="grid gap-1 sm:grid-cols-[16rem_1fr] sm:items-center"><span class="text-sm"><span class="text-base-content/70">${q + 1}.</span> ${esc(label)}</span><div class="grid gap-0.5">${bar(d, '#a9abbd', 'Inicio')}${bar(c, 'var(--color-primary)', 'Cierre')}</div></li>`
         })
         .join('')
 
@@ -142,7 +146,8 @@ const cortas = [
     })
 
     $('[data-csv]').addEventListener('click', () => {
-      const q = (s: string) => `"${s.replace(/"/g, '""')}"`
+      // Un texto que empieza con = + - @ se abriría como fórmula en Excel; se neutraliza con un apóstrofo
+      const q = (s: string) => `"${(/^[=+\-@\t\r]/.test(s) ? `'${s}` : s).replace(/"/g, '""')}"`
       const head = ['Nombre', 'Área', 'Inicio', 'Cierre', 'Avance', ...labels.flatMap((_, i) => [`P${i + 1} inicio`, `P${i + 1} cierre`])]
       const rows = personas.map((p) => {
         const d = score(p.D)

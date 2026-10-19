@@ -32,12 +32,12 @@ export const reactivos: Reactivo[] = [
   },
   {
     pregunta: 'Si la latitud y la longitud se capturaron al revés, el punto aparecerá:',
-    opciones: ['En otra región del mundo', 'En el centro del municipio', 'Unos metros desplazado', 'Exactamente en el mismo lugar'],
+    opciones: ['Fuera del municipio, lejos de donde ocurrió', 'En el centro del municipio', 'Unos metros desplazado', 'Exactamente en el mismo lugar'],
     correcta: 0,
   },
   {
     pregunta: 'El propósito de un tablero de mando, a diferencia de un reporte, es:',
-    opciones: ['Sustituir al parte informativo', 'Guardar el histórico completo', 'Imprimirse al cierre del mes', 'Consultarse de forma recurrente para decidir'],
+    opciones: ['Sustituir al parte informativo de cada turno', 'Guardar el histórico completo de registros', 'Imprimirse al cierre de cada mes para archivo', 'Consultarse de forma recurrente para decidir'],
     correcta: 3,
   },
   {
@@ -48,10 +48,10 @@ export const reactivos: Reactivo[] = [
   {
     pregunta: 'Las variables críticas de un registro de incidencia incluyen:',
     opciones: [
-      'Solo el tipo de delito',
-      'El número de patrulla y nada más',
+      'Tipo de delito, colonia y número de patrulla',
+      'Nombre del elemento, turno y número de patrulla',
       'Fecha, hora, tipo de delito, colonia, sector y coordenadas',
-      'Únicamente el nombre del elemento',
+      'Solo el tipo de delito y el nombre de la colonia',
     ],
     correcta: 2,
   },
@@ -88,7 +88,7 @@ export const explicaciones: { porque: string; dia: 1 | 2 | 3 }[] = [
   { porque: 'La misma colonia escrita de varias formas es un problema de consistencia: no se puede contar ni agrupar.', dia: 1 },
   { porque: 'Se comparte la estructura (nombres y tipos de columnas), nunca filas, coordenadas ni folios reales.', dia: 1 },
   { porque: 'Día/mes contra mes/día es un formato invertido. Se resuelve fijando un solo formato y validando el rango.', dia: 1 },
-  { porque: 'Con latitud y longitud al revés, el punto cae fuera del municipio, en otra región del mundo.', dia: 3 },
+  { porque: 'Con latitud y longitud al revés, el punto cae fuera del municipio, lejos de donde ocurrió, o ni siquiera se puede ubicar.', dia: 3 },
   { porque: 'El tablero se consulta de forma recurrente para decidir; un reporte es una fotografía de un periodo.', dia: 2 },
   { porque: 'Que una consulta corra no significa que cuente bien. Se compara contra un conteo de control conocido.', dia: 2 },
   { porque: 'Fecha, hora, tipo de delito, colonia, sector y coordenadas son las variables mínimas para analizar y mapear.', dia: 1 },

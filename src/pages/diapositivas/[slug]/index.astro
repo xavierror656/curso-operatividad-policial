@@ -27,6 +27,9 @@ const qr = await qrSvg(participantUrl)
   </head>
   <body class="deck-body">
     <div class="deck-wrap">
+      <p class="deck-mobile-note" role="note">
+        Las diapositivas están hechas para proyectar. En el celular lea mejor el <a href={`${base}/participante/${deck.slug}/`}>material del participante</a>.
+      </p>
       <div class="deck-stage" data-deck={deck.slug} tabindex="-1">
         {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} qr={qr} qrUrl={participantUrl} />)}
       </div>
@@ -69,6 +72,12 @@ const qr = await qrSvg(participantUrl)
         <button type="button" class="btn btn-text btn-square btn-sm" data-toggle-reveal aria-pressed="true" aria-label="Revelar viñetas una por una" title="Viñetas una por una (R)">
           <span class="icon-[tabler--list-details] size-5"></span>
         </button>
+        <button type="button" class="btn btn-text btn-square btn-sm" data-mode-btn="large" aria-pressed="false" aria-label="Texto grande" title="Texto grande (L)">
+          <span class="icon-[tabler--text-size] size-5" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="btn btn-text btn-square btn-sm" data-mode-btn="contrast" aria-pressed="false" aria-label="Alto contraste" title="Alto contraste (C)">
+          <span class="icon-[tabler--contrast-2] size-5" aria-hidden="true"></span>
+        </button>
         <button type="button" class="btn btn-text btn-square btn-sm" data-toggle-notes aria-pressed="false" aria-label="Notas del instructor" title="Notas (N)">
           <span class="icon-[tabler--notes] size-5"></span>
         </button>
@@ -108,15 +117,15 @@ const qr = await qrSvg(participantUrl)
             <section class="mb-4">
               <h4 class="mb-1 flex items-baseline justify-between gap-2 text-sm font-semibold">
                 <span>{/^\d/.test(block.id) ? `${block.id} · ` : ''}{block.label}</span>
-                <span class="text-xs font-normal text-base-content/60">{block.range}</span>
+                <span class="text-xs font-normal text-base-content/70">{block.range}</span>
               </h4>
               <ul class="menu p-0">
                 {items.map(({ s, i }) => (
                   <li>
                     <a href={`#${i + 1}`} data-goto={i} class="items-start gap-3 py-1.5">
-                      <span class="w-6 shrink-0 text-end text-xs tabular-nums text-base-content/50">{i + 1}</span>
+                      <span class="w-6 shrink-0 text-end text-xs tabular-nums text-base-content/70">{i + 1}</span>
                       <span class="flex-1 text-sm leading-snug">{s.title}</span>
-                      <span class="shrink-0 text-xs tabular-nums text-base-content/50">{s.time}</span>
+                      <span class="shrink-0 text-xs tabular-nums text-base-content/70">{s.time}</span>
                     </a>
                   </li>
                 ))}
@@ -359,6 +368,23 @@ const qr = await qrSvg(participantUrl)
         }
         .deck-stage .slide.is-active {
           animation: none;
+        }
+      }
+          .deck-mobile-note {
+        display: none;
+        padding: 0.6rem 1rem;
+        background: #b7791f;
+        color: #fff;
+        font-size: 0.95rem;
+      }
+      .deck-mobile-note a {
+        color: #fff;
+        font-weight: 700;
+        text-decoration: underline;
+      }
+      @media (max-width: 700px) {
+        .deck-mobile-note {
+          display: block;
         }
       }
     </style>

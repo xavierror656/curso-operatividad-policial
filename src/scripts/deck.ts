@@ -76,6 +76,7 @@ export function initDeck() {
   /** Modos de proyección que se recuerdan en este navegador: 'large' (texto grande) y 'contrast' (alto contraste) */
   const toggleMode = (mode: 'large' | 'contrast', on = stage.toggleAttribute(`data-${mode}`)) => {
     stage.toggleAttribute(`data-${mode}`, on)
+    document.querySelector(`[data-mode-btn="${mode}"]`)?.setAttribute('aria-pressed', String(on))
     try {
       localStorage.setItem(`deck-${mode}`, on ? '1' : '0')
     } catch {}
@@ -86,6 +87,8 @@ export function initDeck() {
       if (localStorage.getItem(`deck-${mode}`) === '1') toggleMode(mode, true)
     } catch {}
   }
+
+  document.querySelectorAll<HTMLElement>('[data-mode-btn]').forEach((b) => b.addEventListener('click', () => toggleMode(b.dataset.modeBtn as 'large' | 'contrast')))
 
   const setBlackout = (on: boolean, broadcast = true) => {
     blackout.hidden = !on
@@ -235,7 +238,7 @@ export function initDeck() {
       case 'PageDown':
       case ' ':
       case 'Enter':
-        if (e.key === 'Enter' && (e.target as HTMLElement).closest('button, a')) return
+        if ((e.key === 'Enter' || e.key === ' ') && (e.target as HTMLElement).closest('button, a, summary, input, select')) return
         move(1)
         break
       case 'ArrowLeft':

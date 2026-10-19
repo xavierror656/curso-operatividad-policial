@@ -5,6 +5,8 @@ export const curso = {
   duracion: '37 horas',
   modalidad: 'Presencial y virtual, en sesiones de 2 horas',
   periodo: 'Un mes',
+  /** Lo que cubren las diapositivas de este sitio. Confirmar con la Secretaría cómo se cubre el resto del programa. */
+  presenciales: 'Tres sesiones presenciales de 4 horas (12 h) con diapositivas; el resto del programa de 37 h se imparte en sesiones adicionales por confirmar.',
   dirigido:
     'Personal de tecnologías de la información y personal operativo de la Secretaría de Seguridad Pública Municipal.',
   prerrequisito:
@@ -90,7 +92,7 @@ export const temas: Tema[] = [
     horas: 3,
     contenido:
       'Notebooks, tipos de datos y estructuras básicas, introducción a pandas. Regla de seguridad para el uso de asistentes de IA con información institucional.',
-    ia: 'Generar código a partir de lenguaje natural, leer y verificar el código devuelto e interpretar errores compartiendo solo el mensaje de error.',
+    ia: 'Generar código a partir de lenguaje natural, leer y verificar el código devuelto e interpretar errores compartiendo solo el mensaje de error, revisado para que no traiga valores de datos.',
     producto: 'Notebook de ejercicios resuelto con asistencia.',
   },
   {

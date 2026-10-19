@@ -14,7 +14,7 @@ const totalFallas = filasError.filter((f) => f.falla).length
       Esta tabla ficticia tiene registros que no pasarían una revisión. Marque la casilla de cada fila que vea con problemas y pulse «Revisar». Hoy es 19 de octubre de 2026 y el catálogo de sectores va del 1 al 6.
     </p>
 
-    <div class="mt-6 overflow-x-auto rounded-box border border-base-content/10">
+    <div class="mt-6 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Tabla de registros, se desplaza horizontalmente">
       <table class="table table-sm">
         <caption class="sr-only">Registros ficticios de incidentes</caption>
         <thead>
@@ -31,7 +31,7 @@ const totalFallas = filasError.filter((f) => f.falla).length
                 <td>{f.delito}</td>
                 <td><span class="whitespace-pre">{f.colonia}</span></td>
                 <td>{f.sector}</td>
-                <td>{f.lat || <em class="text-base-content/60">vacío</em>}</td>
+                <td>{f.lat || <em class="text-base-content/70">vacío</em>}</td>
                 <td>{f.lon}</td>
               </tr>
               <tr data-exp={i} hidden><td></td><td colspan="8" class="text-sm"></td></tr>
@@ -47,8 +47,8 @@ const totalFallas = filasError.filter((f) => f.falla).length
       <p class="text-sm" data-result role="status" aria-live="polite"></p>
     </div>
 
-    <p class="mt-10 text-sm text-base-content/60">
-      Esto mismo se automatiza en el Día 1 con Python. Revise también la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
+    <p class="mt-10 text-sm text-base-content/70">
+      Estas mismas revisiones se hacen en el Día 1 con las reglas de la plataforma web. Revise también la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
     </p>
   </article>
 

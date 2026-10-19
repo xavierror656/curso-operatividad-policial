@@ -82,7 +82,7 @@ export const dia3: Deck = {
         label: 'Tabla',
         items: ['Cuauhtémoc: 214 registros', 'No muestra si están juntos o dispersos', 'No muestra qué calles comparten'],
       },
-      right: { label: 'Mapa', items: ['Los 214 puntos sobre las calles', 'Se ven agrupamientos y huecos', 'Se ve la frontera entre sectores'] },
+      right: { label: 'Mapa', items: ['Los 214 puntos sobre las calles', 'Se ven agrupamientos y huecos', 'Se ve la frontera entre distritos'] },
       notes:
         'Pregunte al grupo: con 214 registros en un distrito, ¿se reparten igual las unidades en todo el distrito? El mapa responde eso; la tabla no.',
     },
@@ -117,7 +117,7 @@ export const dia3: Deck = {
       table: {
         head: ['Error', 'Qué se ve en el mapa', 'Consecuencia'],
         rows: [
-          ['Columnas invertidas', 'Puntos fuera del continente', 'Registros perdidos sin aviso'],
+          ['Columnas invertidas', 'Puntos fuera del municipio o sin ubicarse', 'Registros perdidos sin aviso'],
           ['Sistema equivocado', 'Capa desplazada o en otro lugar', 'Todo el mapa es falso'],
           ['Medir en grados', 'Radios y áreas sin sentido', 'Concentración mal calculada'],
         ],
@@ -356,6 +356,18 @@ export const dia3: Deck = {
     },
     {
       block: '3',
+      time: '10:58',
+      layout: 'timer',
+      kicker: 'Práctica guiada',
+      title: 'Exporte su mapa en PDF: tiene 8 minutos',
+      minutes: 8,
+      bullets: ['Minuto 3 · Mapa por sector listo', 'Minuto 6 · Composición con título y leyenda', 'Minuto 8 · PDF exportado'],
+      ruleReminder: true,
+      notes:
+        'Práctica cronometrada del bloque. Quien termine antes puede pedir al asistente un script para repetir el proceso, recordando la regla de oro. Revise que el conteo de puntos siga dando 928.',
+    },
+    {
+      block: '3',
       time: '11:08',
       layout: 'takeaway',
       kicker: 'Qué se lleva del bloque',
@@ -378,13 +390,13 @@ export const dia3: Deck = {
         { label: 'Mapa de concentración', detail: 'Día 3' },
         { label: 'Recomendación', detail: 'Qué haría distinto el mando' },
       ],
-      notes: 'Dé diez minutos para que cada quien arme su presentación con lo que ya tiene. No se construye nada nuevo.',
+      notes: 'Forme equipos de cuatro o cinco personas y dé cuatro minutos para armar la presentación con lo que ya tienen. No se construye nada nuevo.',
     },
     {
       block: '4',
-      time: '11:17',
+      time: '11:19',
       layout: 'checklist',
-      title: 'Cada presentación responde cuatro puntos en tres minutos',
+      title: 'Cada equipo responde cuatro puntos en cinco minutos',
       bullets: [
         'Qué errores encontró y cómo los resolvió',
         'Qué muestra su tablero y cómo lo verificó',
@@ -395,17 +407,17 @@ export const dia3: Deck = {
     },
     {
       block: '4',
-      time: '11:27',
+      time: '11:21',
       layout: 'timer',
-      title: 'Tres minutos por participante',
-      minutes: 3,
-      bullets: ['Minuto 1 · Archivo y tablero', 'Minuto 2 · Mapa', 'Minuto 3 · Recomendación'],
+      title: 'Cinco minutos por equipo',
+      minutes: 5,
+      bullets: ['Minuto 2 · Archivo y tablero', 'Minuto 3 · Mapa', 'Minuto 5 · Recomendación'],
       notes:
-        'Reinicie el cronómetro con el botón de reinicio después de cada participante. Si el grupo es grande, forme equipos para que el tiempo alcance.',
+        'Cuatro equipos de cinco minutos llenan de 11:21 a 11:41. Reinicie el cronómetro después de cada equipo. Con más de cuatro equipos, la presentación individual completa pasa a una sesión adicional.',
     },
     {
       block: '4',
-      time: '11:45',
+      time: '11:41',
       layout: 'cards',
       title: 'La IA ayuda, pero tiene tres límites que no desaparecen',
       cards: [
@@ -418,7 +430,7 @@ export const dia3: Deck = {
     },
     {
       block: '4',
-      time: '11:48',
+      time: '11:43',
       layout: 'takeaway',
       kicker: 'Lo que se lleva del curso',
       title: 'Quien firma el resultado responde por él',
@@ -428,20 +440,18 @@ export const dia3: Deck = {
     },
     {
       block: '4',
-      time: '11:50',
-      layout: 'bullets',
+      time: '11:44',
+      layout: 'timer',
       kicker: 'Cuestionario de cierre',
       title: 'El cuestionario de cierre mide cuánto avanzó el grupo',
-      bullets: [
-        'Las mismas diez preguntas del inicio del Día 1',
-        'Diez minutos, sin consultar material',
-        'Compara el punto de partida con el de llegada',
-      ],
-      notes: 'Reparta las versiones A y B alternadas en el aula, igual que al inicio del Día 1.',
+      minutes: 10,
+      bullets: ['Las mismas diez preguntas del Día 1', 'Elija «Cierre» y conteste sin consultar', 'Entregue su código al instructor'],
+      notes:
+        'Es el mismo cuestionario del inicio del Día 1, para comparar el punto de partida contra el de llegada. Recoja los códigos (C3|C|...) y las dos preguntas de aplicación.',
     },
     {
       block: '4',
-      time: '11:58',
+      time: '11:54',
       layout: 'cards',
       kicker: 'Cierre del curso',
       title: 'Se lleva herramientas que puede usar desde mañana',
@@ -449,6 +459,7 @@ export const dia3: Deck = {
         { icon: 'icon-[tabler--certificate]', title: 'Constancia', text: 'Para cada participante que acredita.' },
         { icon: 'icon-[tabler--folder]', title: 'Materiales', text: 'Datos de práctica, ejercicios y presentaciones.' },
         { icon: 'icon-[tabler--route]', title: 'Siguiente paso', text: 'Revise esta semana un archivo real de su área.' },
+        { icon: 'icon-[tabler--flag-check]', title: 'Compromiso y encuesta', text: 'En la sección Cierre del sitio: cinco minutos. Si no alcanza, queda de tarea.' },
       ],
       notes:
         'Recuerde los criterios de acreditación: 80% de asistencia, productos de cada tema y proyecto integrador. Al aplicar lo aprendido a un archivo real, la regla de oro aplica con más razón.',

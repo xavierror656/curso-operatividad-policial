@@ -8,7 +8,6 @@ export type Layout =
   | 'rule'
   | 'decision'
   | 'flow'
-  | 'capture'
   | 'alerts'
   | 'table'
   | 'break'

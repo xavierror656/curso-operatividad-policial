@@ -78,7 +78,7 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
             </li>
           ))}
         </ul>
-        <p class="mt-2 text-sm text-base-content/60">Las marcas se guardan solo en este dispositivo.</p>
+        <p class="mt-2 text-sm text-base-content/70">Las marcas se guardan solo en este dispositivo.</p>
       </section>
     )}
 
@@ -151,7 +151,7 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
     </section>
 
     {otros.length > 0 && (
-      <p class="mt-10 text-sm text-base-content/60">
+      <p class="mt-10 text-sm text-base-content/70">
         Ver también: {otros.map((d, i) => <>{i > 0 && ' · '}<a class="link" href={href(`/participante/${d.slug}/`)}>Día {d.day}</a></>)}
       </p>
     )}
@@ -164,6 +164,7 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
       let saved: number[] = []
       try {
         saved = JSON.parse(localStorage.getItem(key) ?? '[]')
+        if (!Array.isArray(saved)) saved = []
       } catch {}
       const boxes = [...list.querySelectorAll<HTMLInputElement>('[data-check]')]
       boxes.forEach((b) => {

@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="Privacidad · Operatividad policial" description="Qué guarda este sitio en su navegador, para qué y cómo borrarlo.">
+  <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Aviso de privacidad</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Qué guarda este sitio y cómo borrarlo</h1>
+
+    <div class="alert alert-soft alert-info mt-6 items-start">
+      <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
+      <p>Este sitio <strong>no envía nada a ningún servidor</strong>, no usa cookies de seguimiento ni analítica. Todo lo que usted escribe se queda en su propio navegador o aparece en pantalla para que usted lo copie.</p>
+    </div>
+
+    <section class="mt-8 space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold">Qué se guarda</h2>
+        <ul class="mt-2 list-disc space-y-1 ps-6">
+          <li>Su calificación del cuestionario de diagnóstico y de cierre.</li>
+          <li>Su compromiso de la próxima semana, si lo guarda.</li>
+          <li>Las marcas de las listas de verificación y del taller.</li>
+          <li>Sus preferencias de las diapositivas (notas, texto grande, alto contraste).</li>
+        </ul>
+        <p class="mt-2 text-base-content/75">El nombre y el área del cuestionario <strong>no se guardan</strong>: solo forman la línea de texto que usted entrega al instructor. Puede usar su número de lista en lugar de su nombre.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold">Para qué</h2>
+        <p class="mt-2 text-base-content/75">Para comparar su resultado inicial con el final y para que sus marcas no se pierdan al cerrar la página. No se usa para ningún otro fin.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold">Equipos compartidos</h2>
+        <p class="mt-2 text-base-content/75">Si usa un equipo del aula, borre sus datos al terminar o trabaje en una ventana privada. Lo que se guarda en un navegador lo puede ver la persona que use después ese mismo navegador.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold">Información de la Secretaría</h2>
+        <p class="mt-2 text-base-content/75">Los ejercicios usan datos sintéticos o anonimizados. No escriba en este sitio nombres, domicilios, folios, coordenadas ni resultados reales.</p>
+      </div>
+
+      <div class="alert alert-soft alert-warning items-start">
+        <span class="icon-[tabler--alert-triangle] size-5 shrink-0"></span>
+        <p><strong>Pendiente de confirmar:</strong> el responsable del tratamiento y el aviso de privacidad integral aplicable a la Secretaría de Seguridad Pública Municipal y a Grupo Karsam. Este texto es un resumen para los participantes.</p>
+      </div>
+    </section>
+
+    <section class="mt-10 rounded-box border-2 border-secondary p-5 print:hidden" aria-labelledby="h-borrar">
+      <h2 id="h-borrar" class="text-xl font-semibold">Borrar mis datos de este equipo</h2>
+      <p class="mt-2 text-base-content/75">Elimina del navegador todo lo que este sitio guardó: calificaciones, compromiso, marcas y preferencias.</p>
+      <button type="button" class="btn btn-secondary mt-4" data-borrar><span class="icon-[tabler--trash] size-5"></span>Borrar mis datos</button>
+      <p class="mt-3 text-sm" role="status" aria-live="polite" data-estado></p>
+    </section>
+  </article>
+
+  <script>
+    document.querySelector('[data-borrar]')!.addEventListener('click', () => {
+      const estado = document.querySelector<HTMLElement>('[data-estado]')!
+      try {
+        const claves = Object.keys(localStorage).filter((k) => /^(cuestionario-c3|compromiso-c3|verificacion-c3|check-|deck-)/.test(k))
+        claves.forEach((k) => localStorage.removeItem(k))
+        estado.textContent = claves.length ? `Listo: se borraron ${claves.length} elemento${claves.length === 1 ? '' : 's'}.` : 'No había nada guardado en este navegador.'
+      } catch {
+        estado.textContent = 'No se pudo acceder al almacenamiento de este navegador. No hay nada que borrar o está bloqueado.'
+      }
+    })
+  </script>
+</Layout>

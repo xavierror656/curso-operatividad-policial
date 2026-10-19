@@ -45,7 +45,9 @@ import { verificacion } from '../../data/recursos'
   </article>
 
   <script>
-    const key = 'verificacion-c3'
+    // La clave cambia si cambian los puntos de la lista, para no marcar otro punto por error
+    const hash = [...document.querySelectorAll('[data-grupo] li span')].map((x) => x.textContent).join('|').split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0)
+    const key = `verificacion-c3-${hash}`
     let saved: Record<string, number[]> = {}
     try {
       saved = JSON.parse(localStorage.getItem(key) ?? '{}')

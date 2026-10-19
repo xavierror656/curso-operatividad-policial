@@ -50,9 +50,9 @@ const links = [
         <a href={`${base}/diapositivas/`} class="btn btn-secondary btn-sm max-lg:ms-auto max-sm:hidden">
           <span class="icon-[tabler--presentation] size-4" aria-hidden="true"></span>Presentar
         </a>
-        <button type="button" class="collapse-toggle btn btn-outline btn-square btn-sm max-sm:ms-auto lg:hidden" data-collapse="#menu-movil" aria-controls="menu-movil" aria-label="Abrir menú">
-          <span class="icon-[tabler--menu-2] collapse-open:hidden size-5"></span>
-          <span class="icon-[tabler--x] collapse-open:block hidden size-5"></span>
+        <button type="button" class="collapse-toggle btn btn-outline btn-square btn-sm max-sm:ms-auto lg:hidden" data-collapse="#menu-movil" aria-controls="menu-movil" aria-expanded="false" aria-label="Menú">
+          <span class="icon-[tabler--menu-2] collapse-open:hidden size-5" aria-hidden="true"></span>
+          <span class="icon-[tabler--x] collapse-open:block hidden size-5" aria-hidden="true"></span>
         </button>
       </div>
       <div id="menu-movil" class="collapse hidden w-full overflow-hidden transition-[height] duration-300 lg:hidden">
@@ -72,7 +72,12 @@ const links = [
     <footer class="bg-primary text-primary-content/75 print:hidden">
       <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm md:flex-row md:justify-between md:px-6">
         <span>Herramientas tecnológicas orientadas a la operatividad policial · Grupo Karsam</span>
-        <span>Ejercicios con datos sintéticos o anonimizados.</span>
+        <span class="flex flex-wrap gap-x-4 gap-y-1">
+          <a class="link" href={`${base}/privacidad/`}>Privacidad</a>
+          <a class="link" href={`${base}/datos/`}>Datos de práctica</a>
+          <a class="link" href={`${base}/instructor/`}>Instructor</a>
+          <span>Ejercicios con datos sintéticos o anonimizados.</span>
+        </span>
       </div>
     </footer>
 

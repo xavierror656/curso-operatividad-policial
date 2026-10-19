@@ -50,7 +50,7 @@
   right: 3cqw;
   display: flex;
   gap: 1.4cqw;
-  font-size: calc(0.95cqw * var(--tz, 1));
+  font-size: calc(1.25cqw * var(--tz, 1));
   color: var(--gris);
   letter-spacing: 0.04em;
 }
@@ -69,7 +69,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 2cqw;
-  font-size: calc(0.95cqw * var(--tz, 1));
+  font-size: calc(1.25cqw * var(--tz, 1));
   color: var(--gris);
 }
 .slide--dark .slide-foot {
@@ -102,7 +102,7 @@
 .s-kicker {
   font-family: 'Lexend', sans-serif;
   font-weight: 600;
-  font-size: calc(1.15cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--rojo);
@@ -157,7 +157,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.3cqw;
-  font-size: calc(1.1cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   color: #8f91a6;
 }
 
@@ -307,7 +307,7 @@
 }
 .slide .s-side-label {
   font-family: 'Lexend', sans-serif;
-  font-size: calc(1.15cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   height: auto;
   padding: 0.35cqw 0.9cqw;
   gap: 0.4cqw;
@@ -341,7 +341,7 @@
   text-align: left;
   font-family: 'Lexend', sans-serif;
   font-weight: 500;
-  font-size: calc(1.05cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--gris);
@@ -384,7 +384,7 @@
 }
 .s-chart-caption {
   margin-bottom: 1.2cqw;
-  font-size: calc(1.25cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   color: var(--gris);
 }
 .s-bars {
@@ -501,7 +501,7 @@
   line-height: 1.2;
 }
 .s-dash-cell > span:last-child:not(.s-dash-num) {
-  font-size: calc(1.25cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   color: var(--gris);
 }
 .s-dash-num {
@@ -518,7 +518,7 @@
   color: #fff;
   font-family: 'Lexend', sans-serif;
   font-weight: 700;
-  font-size: calc(1.2cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
 }
 .s-dash-cell:first-child {
   border-color: var(--rojo);
@@ -614,7 +614,7 @@
   align-items: center;
   gap: 0.4cqw;
   padding: 0.4cqw 0 0.4cqw 2.2cqw;
-  font-size: calc(1.2cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   color: var(--gris);
 }
 .s-decision-out {
@@ -680,7 +680,7 @@
 .s-flow-num {
   font-family: 'Lexend', sans-serif;
   font-weight: 700;
-  font-size: calc(1.2cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   color: var(--rojo);
 }
 .s-flow-arrow {
@@ -752,7 +752,7 @@
   background: var(--navy);
   color: #fff;
   font-family: 'Lexend', sans-serif;
-  font-size: calc(1.15cqw * var(--tz, 1));
+  font-size: calc(1.45cqw * var(--tz, 1));
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -925,7 +925,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.5cqw;
-  font-size: calc(0.95cqw * var(--tz, 1));
+  font-size: calc(1.25cqw * var(--tz, 1));
   color: #c8c9d6;
   text-align: center;
 }
@@ -942,7 +942,7 @@
 }
 .s-qr-url {
   max-width: 18cqw;
-  font-size: calc(0.8cqw * var(--tz, 1));
+  font-size: calc(1.25cqw * var(--tz, 1));
   color: #8f91a6;
   word-break: break-all;
 }
@@ -1063,4 +1063,14 @@
   border-left: 0.35cqw solid var(--rojo);
   background: var(--fondo-suave);
   font-size: calc(1.45cqw * var(--tz, 1));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .s-timer[data-state='done'] .s-timer-clock {
+    animation: none;
+  }
+}
+[data-deck][data-contrast] .slide--dark {
+  --rojo: #ffb3b3;
+  --rojo-claro: #fff;
 }

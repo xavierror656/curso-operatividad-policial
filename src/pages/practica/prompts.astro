@@ -90,12 +90,12 @@ const grupos = [
     id: 'error',
     titulo: 'Errores y revisión de código',
     icon: 'icon-[tabler--bug]',
-    intro: 'El mensaje de error es estructura y se puede compartir tal cual. Una fila de datos no.',
+    intro: 'El mensaje de error es estructura y se puede compartir, pero revíselo antes: algunos errores traen el valor del dato (por ejemplo, una fecha o un nombre). Quite esos valores. Una fila de datos nunca se comparte.',
     prompts: [
       {
         titulo: 'Me salió un error',
         texto:
-          'Al ejecutar mi código pandas me salió este error: [pega solo el mensaje de error, sin filas]. Mi df tiene las columnas [lista con tipos]. Explica qué significa en palabras sencillas y cómo corregirlo.',
+          'Al ejecutar mi código pandas me salió este error: [pega solo el mensaje de error, sin ningún valor de dato ni fila]. Mi df tiene las columnas [lista con tipos]. Explica qué significa en palabras sencillas y cómo corregirlo.',
       },
       {
         titulo: 'Explicar un código línea por línea',
@@ -150,7 +150,7 @@ const grupos = [
       ))}
     </div>
 
-    <p class="mt-12 text-sm text-base-content/60">
+    <p class="mt-12 text-sm text-base-content/70">
       Antes de pegar cualquier cosa, entrene con la <a class="link" href={href('/practica/regla-de-oro/')}>práctica de la regla de oro</a> y revise la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
     </p>
   </article>

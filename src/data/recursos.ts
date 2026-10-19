@@ -37,8 +37,8 @@ export const casos: Caso[] = [
   {
     dia: 2,
     titulo: 'La consulta que contó de más',
-    paso: 'Un asistente de IA generó una consulta SQL que unía incidentes con una tabla de unidades. El tablero mostró 412 incidentes del mes.',
-    error: 'La unión duplicaba las filas con más de una unidad asignada y nadie comparó contra el conteo de control (268).',
+    paso: 'Un asistente de IA generó una consulta SQL que unía incidentes con una tabla de unidades. El tablero mostró 428 registros para un distrito que en realidad tenía 214.',
+    error: 'La unión duplicaba las filas con más de una unidad asignada y nadie comparó contra el conteo de control (214).',
     consecuencia: 'El informe al mando sobrestimó la incidencia en más de 50 % y hubo que retirarlo.',
     leccion: 'Toda consulta generada con IA se verifica contra un conteo conocido antes de publicarse.',
     pregunta: '¿Qué conteo de control habría usado?',
@@ -138,9 +138,9 @@ export const filasError: FilaError[] = [
   { folio: 'J-0001', fecha: '14/03/2026', hora: '08:15', delito: 'Robo a transeúnte', colonia: 'Bellavista', sector: '2', lat: '31.7412', lon: '-106.4870' },
   { folio: 'J-0002', fecha: '14/03/2026', hora: '09:40', delito: 'Violencia familiar', colonia: 'Hacienda de las Torres', sector: '4', lat: '31.6425', lon: '-106.3290' },
   { folio: 'J-0003', fecha: '15/03/2026', hora: '25:10', delito: 'Robo de vehículo', colonia: 'Bellavista', sector: '2', lat: '31.7380', lon: '-106.4820', falla: 'Exactitud: la hora 25:10 no existe.' },
-  { folio: 'J-0004', fecha: '15/03/2026', hora: '11:05', delito: 'Robo a casa', colonia: 'HACIENDA LAS TORRES ', sector: '4', lat: '31.6440', lon: '-106.3310', falla: 'Consistencia: la colonia está escrita distinto al catálogo (mayúsculas y espacio final).' },
+  { folio: 'J-0004', fecha: '15/03/2026', hora: '11:05', delito: 'Robo a casa habitación', colonia: 'HACIENDA LAS TORRES ', sector: '4', lat: '31.6440', lon: '-106.3310', falla: 'Consistencia: la colonia está escrita distinto al catálogo (mayúsculas y espacio final).' },
   { folio: 'J-0002', fecha: '14/03/2026', hora: '09:40', delito: 'Violencia familiar', colonia: 'Hacienda de las Torres', sector: '4', lat: '31.6425', lon: '-106.3290', falla: 'Duplicado: el folio J-0002 ya se capturó con los mismos datos.' },
-  { folio: 'J-0006', fecha: '16/03/2026', hora: '14:30', delito: 'Robo a negocio', colonia: 'Centro', sector: '1', lat: '-106.4870', lon: '31.7005', falla: 'Exactitud: latitud y longitud están invertidas.' },
+  { folio: 'J-0006', fecha: '16/03/2026', hora: '14:30', delito: 'Robo a comercio', colonia: 'Centro', sector: '1', lat: '-106.4870', lon: '31.7005', falla: 'Exactitud: latitud y longitud están invertidas.' },
   { folio: 'J-0007', fecha: '12/11/2027', hora: '16:20', delito: 'Lesiones', colonia: 'Centro', sector: '1', lat: '31.7250', lon: '-106.4800', falla: 'Oportunidad: la fecha es posterior a la de hoy.' },
   { folio: 'J-0008', fecha: '17/03/2026', hora: '19:45', delito: 'Robo a transeúnte', colonia: 'Bellavista', sector: '2', lat: '', lon: '-106.4850', falla: 'Completitud: falta la latitud.' },
   { folio: 'J-0009', fecha: '17/03/2026', hora: '21:10', delito: 'Daño en propiedad', colonia: 'Centro', sector: '9', lat: '31.7260', lon: '-106.4790', falla: 'Consistencia: el sector 9 no existe en el catálogo (1 a 6).' },
@@ -227,6 +227,18 @@ export const verificacion: GrupoVerificacion[] = [
 ]
 
 export const versiones = [
+  {
+    version: '1.3',
+    fecha: '2026-10-19',
+    cambios: [
+      'Auditoría: cifras unificadas (428 contra 214; 1,058 menos 130 igual 928), cuestionario de diagnóstico programado en el Día 1 y cierre del Día 3 reorganizado por equipos.',
+      'Día 1: diapositiva de ETL, cuestionario de diagnóstico y seis vicios de captura completos. Día 3: práctica cronometrada de exportación.',
+      'Modelo ER, prompts de EDA, limpieza y gráficas, y nuevos distractores en el cuestionario.',
+      'Datos sintéticos descargables con diccionario, aviso de privacidad con borrado de datos, y materiales del instructor (rúbrica, asistencia, protocolo de incidente y plan B).',
+      'Diapositivas: botones de texto grande y alto contraste, letra mínima mayor y teclado corregido. Sitio sin conexión que muestra la versión más reciente.',
+      'Verificación automática del contenido antes de publicar.',
+    ],
+  },
   {
     version: '1.2',
     fecha: '2026-10-19',

@@ -1,43 +1,33 @@
-# Astro Starter Kit: Minimal
+# Curso 3 · Herramientas tecnológicas orientadas a la operatividad policial
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material del participante, práctica, cuestionario y cierre. Se publica en GitHub Pages y funciona sin conexión.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Comandos
 
-## 🚀 Project Structure
+| Comando | Qué hace |
+| :-- | :-- |
+| `npm ci` | Instala dependencias |
+| `npm run dev` | Servidor local en `localhost:4321` |
+| `npm run verificar` | Revisa tiempos, cuestionario, temario y datos de práctica |
+| `npm run build` | Genera `dist/` y el modo sin conexión |
+| `python datos/generar.py` | Regenera los datos sintéticos de `public/datos/` |
 
-Inside of your Astro project, you'll see the following folders and files:
+## Dónde cambiar cada cosa
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Día en que va el grupo** (línea de avance de la portada): `diaActual` en `src/data/curso.ts`.
+- **Diapositivas**: `src/data/dia-1.ts`, `dia-2.ts`, `dia-3.ts`. Cada una lleva bloque, hora, layout y notas del instructor.
+- **Cuestionario**: `src/data/cuestionario.ts` (reactivos, clave y explicaciones). Si cambia el número de reactivos, actualice `cortas` en `src/pages/cuestionario/resultados.astro`.
+- **Casos, escenarios, hoja de verificación, encuesta y versiones**: `src/data/recursos.ts`.
+- **Datos de práctica**: `datos/generar.py` (semilla fija).
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Política de datos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+El sitio es público. **No debe contener datos reales** de la Secretaría: nombres, domicilios, folios, coordenadas de eventos ni cifras operativas. Todo ejemplo es ficticio o sintético. El sitio no envía nada a servidores ni usa analítica; vea `/privacidad/`. Lleva `noindex` para no aparecer en buscadores.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Pendientes de confirmar con la Secretaría y Grupo Karsam
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Cómo se cubre el resto del programa de 37 horas (las diapositivas cubren tres sesiones de 4 horas).
+- Regla de asistencia (80 %), rúbrica del producto final y protocolo de incidente (`/instructor/`).
+- Responsable y aviso de privacidad integral.
+- Si las notas del instructor y los resultados pueden ser públicos.
+- Prompts de Metabase y PyQGIS: se dejaron para una segunda etapa.

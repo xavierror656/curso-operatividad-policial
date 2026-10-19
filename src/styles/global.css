@@ -35,7 +35,7 @@
   --color-info-content: #ffffff;
   --color-success: #3e7d56;
   --color-success-content: #ffffff;
-  --color-warning: #b7791f;
+  --color-warning: #8a5a12;
   --color-warning-content: #ffffff;
   --color-error: #aa4545;
   --color-error-content: #ffffff;
@@ -61,6 +61,12 @@
 }
 
 @layer base {
+  @media (pointer: coarse) {
+    .btn-sm {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
+  }
   html {
     scroll-behavior: smooth;
   }
@@ -101,4 +107,18 @@
 .deck-body :is(a, button):focus-visible,
 .presenter :is(a, button):focus-visible {
   outline-color: #e08a8a;
+}
+
+@media print {
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  .card {
+    break-inside: avoid;
+  }
+  input[type='checkbox'] {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }

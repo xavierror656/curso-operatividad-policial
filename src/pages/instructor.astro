@@ -1,0 +1,120 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+
+const rubrica = [
+  { criterio: 'Archivo depurado', c2: 'Documenta los errores hallados y cómo se resolvieron; conteo antes y después que cuadra.', c1: 'Depura, pero no documenta o el conteo no se explica.', c0: 'No entrega archivo depurado.' },
+  { criterio: 'Tablero de mando', c2: 'Tres vistas y filtro de periodo; cifras verificadas contra un conteo de control.', c1: 'Vistas completas, sin verificación o sin filtro.', c0: 'No presenta tablero.' },
+  { criterio: 'Mapa de concentración', c2: 'Puntos validados, método de clasificación en la leyenda y excluidos anotados en el pie.', c1: 'Mapa correcto, sin leyenda completa o sin anotar excluidos.', c0: 'No presenta mapa o está desplazado.' },
+  { criterio: 'Recomendación operativa', c2: 'Decisión concreta apoyada en la evidencia de su propio tablero y mapa.', c1: 'Recomendación general, poco ligada a la evidencia.', c0: 'No recomienda.' },
+  { criterio: 'Uso seguro de la IA', c2: 'Ningún dato compartido; verificó lo que generó el asistente.', c1: 'Verificó, pero compartió más de lo debido sin consecuencias.', c0: 'Compartió datos reales o no verificó.' },
+]
+const incidente = [
+  'Detenga la actividad. No continúe la conversación con el asistente.',
+  'Avise de inmediato al instructor y a la persona responsable de seguridad de la información.',
+  'Anote qué herramienta se usó, qué tipo de dato se compartió y a qué hora. No vuelva a escribir el dato.',
+  'El responsable decide las medidas: solicitar la eliminación al proveedor, revisar si el dato se puede reconocer, avisar a quien corresponda.',
+  'Registre el incidente y lo aprendido. Se reconoce al participante que avisa a tiempo.',
+]
+const planB = [
+  ['Sin internet', 'El sitio queda guardado en el navegador si se abrió una vez con conexión. De respaldo: guion, resumen del día y hoja de verificación impresos en PDF.'],
+  ['No autorizan instalar Python o QGIS', 'Equipo preinstalado o máquina virtual, Jupyter local en memoria USB, QGIS portable. Google Colab solo con los datos sintéticos de este sitio, nunca con datos reales, porque los sube a un tercero.'],
+  ['Metabase sin permiso para subir CSV', 'Cargue la tabla de práctica en la base de datos antes de la sesión. Confirme con TI.'],
+  ['No hay asistente de IA autorizado', 'Demostración con la pantalla del instructor, con instrucciones ya preparadas en la página de prompts.'],
+  ['Falla el proyector', 'Guion del instructor y resumen del día impresos; ejercicios en las páginas de práctica desde los equipos.'],
+  ['Grupo grande', 'Presentaciones por equipos de cuatro o cinco personas. Los equipos también trabajan los ejercicios en parejas.'],
+]
+---
+
+<Layout title="Instructor · Operatividad policial" description="Rúbrica, asistencia, protocolo de incidente, plan B y evaluación del curso.">
+  <article class="mx-auto max-w-5xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Uso del instructor</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Materiales de apoyo del instructor</h1>
+    <div class="alert alert-soft alert-warning mt-5 items-start">
+      <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
+      <p>Son <strong>propuestas</strong> para validar con la Secretaría y con Grupo Karsam antes de aplicarlas: la rúbrica, la regla de asistencia y el protocolo de incidente.</p>
+    </div>
+    <nav class="mt-6 flex flex-wrap gap-2 print:hidden" aria-label="Secciones">
+      <a class="btn btn-outline btn-sm" href="#rubrica">Rúbrica</a>
+      <a class="btn btn-outline btn-sm" href="#asistencia">Asistencia</a>
+      <a class="btn btn-outline btn-sm" href="#incidente">Protocolo de incidente</a>
+      <a class="btn btn-outline btn-sm" href="#planb">Plan B</a>
+      <a class="btn btn-outline btn-sm" href="#evaluacion">Evaluación del curso</a>
+      <a class="btn btn-outline btn-sm" href="#inclusion">Inclusión</a>
+    </nav>
+
+    <section id="rubrica" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Rúbrica del producto final</h2>
+      <p class="mt-2 text-base-content/75">Cinco criterios de 0 a 2 puntos: 2 completo, 1 parcial, 0 ausente. Se acredita con <strong>6 de 10</strong> y sin incidencias de manejo de la información.</p>
+      <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Rúbrica, se desplaza horizontalmente">
+        <table class="table">
+          <thead><tr><th scope="col">Criterio</th><th scope="col">2 puntos</th><th scope="col">1 punto</th><th scope="col">0 puntos</th></tr></thead>
+          <tbody>{rubrica.map((r) => <tr><th scope="row">{r.criterio}</th><td>{r.c2}</td><td>{r.c1}</td><td>{r.c0}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="asistencia" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Asistencia</h2>
+      <p class="mt-2 text-base-content/75">Con tres sesiones de 4 horas, el 80 % equivale a 9.6 de 12 horas: en la práctica, asistir a las tres sesiones o a dos completas más la mayor parte de la tercera. <strong>Definir con la Secretaría</strong> si se aplica por sesiones o por horas, y cómo se reponen las faltas justificadas.</p>
+      <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Lista de asistencia, se desplaza horizontalmente">
+        <table class="table">
+          <thead><tr><th scope="col">Nombre o número de lista</th><th scope="col">Área</th><th scope="col">Día 1</th><th scope="col">Día 2</th><th scope="col">Día 3</th><th scope="col">%</th></tr></thead>
+          <tbody>{Array.from({ length: 12 }, () => <tr><td class="h-10"></td><td></td><td></td><td></td><td></td><td></td></tr>)}</tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-outline btn-sm mt-3 print:hidden" onclick="print()"><span class="icon-[tabler--printer] size-4"></span>Imprimir</button>
+    </section>
+
+    <section id="incidente" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Protocolo si alguien pega un dato real</h2>
+      <p class="mt-2 text-base-content/75">«Cero incidencias» significa que ningún dato personal o institucional salió hacia una herramienta no autorizada durante el curso. Si ocurre:</p>
+      <ol class="mt-4 space-y-3">
+        {incidente.map((p, i) => <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-content">{i + 1}</span><span>{p}</span></li>)}
+      </ol>
+    </section>
+
+    <section id="planb" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Plan B</h2>
+      <dl class="mt-4 grid gap-3 md:grid-cols-2">
+        {planB.map((p) => <div class="rounded-box border border-base-content/10 p-4"><dt class="font-display font-semibold">{p[0]}</dt><dd class="mt-1 text-base-content/75">{p[1]}</dd></div>)}
+      </dl>
+    </section>
+
+    <section id="evaluacion" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Evaluación del curso y seguimiento</h2>
+      <div class="mt-4 grid gap-4 md:grid-cols-2">
+        <div class="rounded-box border border-base-content/10 p-5">
+          <h3 class="font-display font-semibold">Condiciones del aula (se llena al inicio)</h3>
+          <ul class="mt-2 space-y-1">
+            {['Cada participante tiene equipo con sesión abierta', 'La red funciona y el sitio se abrió una vez con conexión', 'Proyector legible desde la última fila (probar teclas L y C)', 'Datos de práctica descargados en cada equipo', 'Instancia de Metabase y QGIS verificados'].map((t) => <li><label class="flex items-start gap-3 p-1"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5" /><span>{t}</span></label></li>)}
+          </ul>
+        </div>
+        <div class="rounded-box border border-base-content/10 p-5">
+          <h3 class="font-display font-semibold">Evaluación del instructor (la contesta el grupo)</h3>
+          <p class="mt-1 text-sm text-base-content/70">Con la encuesta del <a class="link" href={href('/cierre/')}>cierre</a>, escala de 1 a 5. Sumar preguntas propias sobre dominio del tema, claridad de las instrucciones y manejo del tiempo.</p>
+          <h3 class="mt-4 font-display font-semibold">Seguimiento a 30 y 60 días</h3>
+          <ul class="mt-2 list-disc space-y-1 ps-6 text-base-content/80">
+            <li>¿Aplicó el compromiso que escribió? ¿Qué obtuvo?</li>
+            <li>¿Qué producto usa hoy en su área?</li>
+            <li>¿Qué le faltó para aplicarlo?</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="inclusion" class="mt-12 scroll-mt-24">
+      <h2 class="text-2xl font-semibold">Inclusión y apoyos</h2>
+      <ul class="mt-3 list-disc space-y-2 ps-6 text-base-content/80">
+        <li>Quien no domine hojas de cálculo trabaja en pareja con alguien con más experiencia y sigue el resumen del día.</li>
+        <li>Texto grande y alto contraste en las diapositivas con las teclas <kbd class="kbd kbd-sm">L</kbd> y <kbd class="kbd kbd-sm">C</kbd>, o con los botones de la barra.</li>
+        <li>Todo el material se imprime: guion, resumen del día, hoja de verificación y prompts.</li>
+        <li>Preguntar al inicio si alguien necesita un apoyo y ajustar el ritmo y la ubicación en el aula.</li>
+      </ul>
+    </section>
+
+    <p class="mt-12 text-sm text-base-content/70">
+      Material relacionado: <a class="link" href={href('/datos/')}>datos de práctica</a>, <a class="link" href={href('/practica/prompts/')}>prompts para IA</a>, <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a> y <a class="link" href={href('/cuestionario/resultados/')}>resultados del cuestionario</a>.
+    </p>
+  </article>
+</Layout>

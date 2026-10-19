@@ -70,8 +70,19 @@ export const dia1: Deck = {
 
     // ───────────── Bloque 1A ─────────────
     {
-      block: '1A',
+      block: 'Apertura',
       time: '08:06',
+      layout: 'timer',
+      kicker: 'Cuestionario de diagnóstico',
+      title: 'Diez preguntas para saber de dónde parte el grupo',
+      minutes: 10,
+      bullets: ['Abra el sitio del curso y entre a «Cuestionario»', 'Elija «Diagnóstico» y conteste sin consultar', 'No cuenta para acreditar. Entregue su código al instructor'],
+      notes:
+        'Es el punto de partida que se compara contra el cierre del Día 3. Pida contestar sin buscar y sin comentar. Al terminar, recoja los códigos (C3|D|...) y guárdelos para la pantalla de resultados del grupo. Para ganar tiempo, el bloque 1A se imparte en versión corta.',
+    },
+    {
+      block: '1A',
+      time: '08:16',
       layout: 'goal',
       kicker: 'Bloque 1 · 08:00 a 08:30',
       title: 'En esta media hora conectamos el dato con la decisión en calle',
@@ -84,7 +95,7 @@ export const dia1: Deck = {
     },
     {
       block: '1A',
-      time: '08:08',
+      time: '08:17',
       layout: 'bullets',
       title: 'Un registro sucio manda la patrulla al lugar equivocado',
       bullets: [
@@ -98,7 +109,7 @@ export const dia1: Deck = {
     },
     {
       block: '1A',
-      time: '08:13',
+      time: '08:20',
       layout: 'cards',
       title: 'La calidad del dato se mide en cuatro dimensiones',
       cards: [
@@ -112,7 +123,7 @@ export const dia1: Deck = {
     },
     {
       block: '1A',
-      time: '08:21',
+      time: '08:24',
       layout: 'cards',
       title: 'Seis variables deciden si un registro sirve para operar',
       cards: [
@@ -128,7 +139,7 @@ export const dia1: Deck = {
     },
     {
       block: '1A',
-      time: '08:26',
+      time: '08:27',
       layout: 'takeaway',
       kicker: 'Qué se lleva del bloque',
       title: 'Un dato sin calidad no sostiene ninguna decisión de mando',
@@ -259,7 +270,7 @@ export const dia1: Deck = {
       title: 'Los catálogos son la referencia contra la que se valida todo',
       cards: [
         { icon: 'icon-[tabler--grid-dots]', title: 'Cuadrantes', text: 'La división operativa mínima del territorio.' },
-        { icon: 'icon-[tabler--map-2]', title: 'Sectores', text: 'Agrupan cuadrantes bajo un mando responsable.' },
+        { icon: 'icon-[tabler--map-2]', title: 'Sectores y distritos', text: 'Los sectores agrupan cuadrantes bajo un mando; un distrito agrupa varios sectores.' },
         { icon: 'icon-[tabler--building-community]', title: 'Colonias oficiales', text: 'La única forma válida de escribir una colonia.' },
         { icon: 'icon-[tabler--list-details]', title: 'Catálogo unificado de delitos', text: 'Un solo nombre para cada tipo de delito.' },
       ],
@@ -346,7 +357,21 @@ export const dia1: Deck = {
       },
       bullets: ['Un folio con 2 unidades genera 2 filas al unir', 'Cuente folios distintos, no filas', 'Compare contra un conteo de control'],
       notes:
-        'Adelante el caso del Día 2: una consulta generada con IA unía incidentes con unidades y el tablero mostró 412 en lugar de 268. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
+        'Adelante el caso del Día 2: una consulta generada con IA unía incidentes con unidades y el tablero mostró 428 registros en un distrito que tenía 214. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
+    },
+    {
+      block: '2A',
+      time: '09:24',
+      layout: 'flow',
+      kicker: 'Proceso ETL',
+      title: 'Todo archivo pasa por tres pasos: extraer, transformar y cargar',
+      steps: [
+        { label: 'Extraer', detail: 'Tomar los registros de su fuente' },
+        { label: 'Transformar', detail: 'Limpiar, validar y normalizar con los catálogos' },
+        { label: 'Cargar', detail: 'Dejar el archivo íntegro y disponible' },
+      ],
+      notes:
+        'ETL son las siglas en inglés de extract, transform, load. Hoy se hace con la plataforma; en los siguientes días el archivo cargado alimenta el tablero y el mapa. Es el tema 2 del temario: aquí solo se nombra y se ubica.',
     },
     {
       block: '2A',
@@ -367,8 +392,10 @@ export const dia1: Deck = {
       title: 'En esta media hora aprendemos a ver seis errores a simple vista',
       bullets: [
         'Colonias mal escritas',
-        'Fechas imposibles y formatos invertidos',
-        'Coordenadas invertidas o fuera del municipio',
+        'Fechas imposibles',
+        'Formatos de fecha invertidos',
+        'Coordenadas invertidas',
+        'Puntos fuera del municipio',
         'Duplicados por doble captura',
       ],
       notes: 'Una diapositiva por vicio. En cada una, pida que lo busquen en su propio archivo antes de pasar a la siguiente.',
@@ -618,7 +645,7 @@ export const dia1: Deck = {
       time: '10:48',
       layout: 'alerts',
       title: 'Las tarjetas de alerta le dicen cuánto y dónde revisar',
-      lead: 'Archivo de práctica de 1,200 registros. Cifras ficticias.',
+      lead: 'Archivo de práctica de 1,058 registros. Cifras ficticias.',
       alerts: [
         { tone: 'error', icon: 'icon-[tabler--calendar-x]', value: '38', label: 'Fechas inválidas' },
         { tone: 'error', icon: 'icon-[tabler--map-pin-off]', value: '21', label: 'Coordenadas fuera del municipio' },
@@ -627,7 +654,7 @@ export const dia1: Deck = {
       ],
       capture: 'Tarjetas de alerta y tabla de inconsistencias tras ejecutar las reglas.',
       notes:
-        'Cada tarjeta lleva a su tabla de inconsistencias. Muestre cómo pasar de la tarjeta a las filas afectadas. Las cifras de cada participante serán distintas.',
+        'Cada tarjeta lleva a su tabla de inconsistencias. Muestre cómo pasar de la tarjeta a las filas afectadas. Las cifras de cada participante serán distintas. Conciliación de la práctica: 1,058 registros menos los 130 marcados que se excluyen del archivo depurado dejan los 928 que se usan en los Días 2 y 3.',
     },
     {
       block: '3B',

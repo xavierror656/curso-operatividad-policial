@@ -159,7 +159,7 @@ export const dia2: Deck = {
         { label: 'Contar registros', detail: 'Debe coincidir con su archivo' },
       ],
       notes:
-        'El conteo de registros es el primer control del día: si su archivo tiene 928 registros, la tabla en Metabase debe tener 928. Si no coincide, algo se perdió en la carga.',
+        'El conteo de registros es el primer control del día: si su archivo tiene 928 registros, la tabla en Metabase debe tener 928. Si no coincide, algo se perdió en la carga. Antes de la sesión confirme con TI que la instancia de Metabase permita subir CSV; si no, cargue la tabla de práctica con antelación.',
     },
     {
       block: '1',
@@ -244,13 +244,13 @@ export const dia2: Deck = {
       },
       bullets: ['El despliegue se decide por sector', 'Compare contra las unidades asignadas', 'Pregunta del mando: ¿dónde refuerzo?'],
       notes:
-        'Cifras ficticias. Confirme los nombres de distrito contra el catálogo de sectores vigente. Haga notar que Aldama queda a un registro de Universidad: la diferencia entre ellos no es operativamente relevante.',
+        'Cifras ficticias. Confirme los nombres de distrito contra el catálogo de distritos vigente. Haga notar que Aldama queda a un registro de Universidad: la diferencia entre ellos no es operativamente relevante.',
     },
     {
       block: '2',
       time: '09:28',
       layout: 'chart',
-      title: 'La incidencia sube desde las 18:00 y llega al máximo a las 21:00',
+      title: 'La incidencia se acelera desde las 18:00 y llega al máximo a las 21:00',
       chart: {
         kind: 'line',
         caption: 'Registros por hora del día, de 0 a 23 h (928). Cifras ficticias.',
@@ -393,7 +393,7 @@ export const dia2: Deck = {
       right: {
         label: 'Instrucción segura',
         block:
-          'Tengo una tabla incidentes con columnas fecha_evento (fecha), sector (texto) y tipo_delito (texto). Escribe una consulta SQL que cuente los robos por sector en marzo de 2026.',
+          'Tengo una tabla incidentes con columnas fecha_evento (fecha), sector (entero) y tipo_delito (texto). Escribe una consulta SQL que cuente los robos por sector en marzo de 2026.',
       },
       ruleReminder: true,
       notes:

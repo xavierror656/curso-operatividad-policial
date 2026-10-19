@@ -4,7 +4,7 @@ import Layout from '../../layouts/Layout.astro'
 /** Casos ficticios. Los corchetes indican dónde iría un dato real. */
 const casos = [
   { texto: 'Mi archivo tiene las columnas fecha_evento, colonia, latitud y longitud.', ok: true, porque: 'Son nombres de columnas: describen la estructura, no a nadie.' },
-  { texto: 'Me salió este error: KeyError: \'fecha_evento\'', ok: true, porque: 'El mensaje de error es estructura. Compártalo tal cual, sin filas.' },
+  { texto: 'Me salió este error: KeyError: \'fecha_evento\'', ok: true, porque: 'El mensaje de error es estructura, pero revíselo: si trae un valor de un dato (una fecha, un nombre), quítelo antes de pegarlo. Nunca filas.' },
   { texto: '14/03/2026, Robo a transeúnte, [nombre de la víctima], Bellavista', ok: false, porque: 'Es una fila del archivo y trae el nombre de una persona.' },
   { texto: 'En la columna latitud algunos decimales vienen con punto y otros con coma.', ok: true, porque: 'Describe un formato, no un dato. Es justo lo que el asistente necesita.' },
   { texto: 'Este folio no cuadra con el sistema: [folio del parte informativo]', ok: false, porque: 'Los folios identifican un expediente real. Nunca se comparten.' },
@@ -54,8 +54,8 @@ const casos = [
       <section data-final hidden tabindex="-1">
         <div class="card border border-secondary/40 shadow-none">
           <div class="card-body items-start gap-3">
-            <p class="text-sm uppercase tracking-widest text-base-content/60">Resultado</p>
-            <p class="font-display text-5xl font-bold"><span data-score></span><span class="text-2xl text-base-content/50"> / {casos.length}</span></p>
+            <p class="text-sm uppercase tracking-widest text-base-content/70">Resultado</p>
+            <p class="font-display text-5xl font-bold"><span data-score></span><span class="text-2xl text-base-content/70"> / {casos.length}</span></p>
             <p data-verdict></p>
             <p class="font-display text-lg font-semibold">Comparta la estructura, nunca los datos. Ante la duda, no lo comparta y pregunte.</p>
             <button type="button" class="btn btn-outline mt-2" data-restart><span class="icon-[tabler--refresh] size-5"></span>Intentar de nuevo</button>

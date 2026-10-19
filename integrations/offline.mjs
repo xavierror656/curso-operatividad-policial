@@ -60,9 +60,10 @@ export default function offline({ name, shortName, themeColor = '#191b2d' }) {
         const sw = `// Generado en el build. No editar a mano.
 const VERSION = ${JSON.stringify(version)}
 const FILES = ${JSON.stringify(urls)}
+const BASE = ${JSON.stringify(base)}
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(VERSION).then((cache) => cache.addAll(FILES)).then(() => self.skipWaiting()))
+  event.waitUntil(caches.open(VERSION).then((cache) => cache.addAll(FILES.map((u) => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting()))
 })
 
 self.addEventListener('activate', (event) => {
@@ -76,19 +77,33 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET' || new URL(request.url).origin !== self.location.origin) return
+
+  // Páginas: primero la red, con tiempo límite, para ver siempre la versión nueva; sin conexión, la guardada
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      new Promise((resolve) => {
+        const saved = () => caches.match(request, { ignoreSearch: true })
+        const timer = setTimeout(() => saved().then((hit) => hit && resolve(hit)), 3000)
+        fetch(request)
+          .then((res) => { clearTimeout(timer); resolve(res) })
+          .catch(() => { clearTimeout(timer); saved().then((hit) => resolve(hit || caches.match(BASE))) })
+      }),
+    )
+    return
+  }
+
+  // Archivos del sitio: primero lo guardado. Si falla la red, el error se deja pasar tal cual
   event.respondWith(
     caches.match(request, { ignoreSearch: true }).then(
       (hit) =>
         hit ||
-        fetch(request)
-          .then((res) => {
-            if (res.ok) {
-              const copy = res.clone()
-              caches.open(VERSION).then((cache) => cache.put(request, copy))
-            }
-            return res
-          })
-          .catch(() => caches.match(${JSON.stringify(base)})),
+        fetch(request).then((res) => {
+          if (res.ok) {
+            const copy = res.clone()
+            caches.open(VERSION).then((cache) => cache.put(request, copy))
+          }
+          return res
+        }),
     ),
   )
 })

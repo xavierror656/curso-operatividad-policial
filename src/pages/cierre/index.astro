@@ -29,7 +29,7 @@ import { href } from '../../lib/site'
         </div>
       </div>
       <p class="mt-3 text-sm text-base-content/70" data-avance-note></p>
-      <p class="mt-1 text-sm text-base-content/60">Los resultados salen de este dispositivo; si contestó en otro, no aparecerán. Total de preguntas: {reactivos.length}.</p>
+      <p class="mt-1 text-sm text-base-content/70">Los resultados salen de este dispositivo; si contestó en otro, no aparecerán. Total de preguntas: {reactivos.length}.</p>
       <a href={href('/cuestionario/')} class="btn btn-outline btn-sm mt-3">Ir al cuestionario</a>
     </section>
 
@@ -62,7 +62,7 @@ import { href } from '../../lib/site'
           <span class="text-sm text-base-content/70" data-comp-status role="status"></span>
         </div>
       </form>
-      <p class="mt-2 text-sm text-base-content/60">Se guarda solo en este dispositivo. Tómele una foto o imprímalo para llevarlo.</p>
+      <p class="mt-2 text-sm text-base-content/70">Se guarda solo en este dispositivo. Tómele una foto o imprímalo para llevarlo.</p>
     </section>
 
     <!-- 3. Encuesta -->
@@ -75,7 +75,7 @@ import { href } from '../../lib/site'
             <legend class="font-display font-medium">{q.texto}</legend>
             <div class="mt-2 flex gap-2">
               {[1, 2, 3, 4, 5].map((n) => (
-                <label class="flex size-12 cursor-pointer items-center justify-center rounded-box border border-base-content/20 font-display text-lg has-checked:border-secondary has-checked:bg-secondary has-checked:text-secondary-content">
+                <label class="flex size-12 cursor-pointer items-center justify-center rounded-box border border-base-content/20 font-display text-lg has-checked:border-secondary has-checked:bg-secondary has-checked:text-secondary-content has-focus-visible:outline-3 has-focus-visible:outline-offset-2 has-focus-visible:outline-secondary">
                   <input type="radio" name={q.id} value={n} class="sr-only" />{n}
                 </label>
               ))}
@@ -99,7 +99,7 @@ import { href } from '../../lib/site'
       </div>
     </section>
 
-    <p class="mt-12 text-sm text-base-content/60 print:hidden">
+    <p class="mt-12 text-sm text-base-content/70 print:hidden">
       ¿Es instructor? Junte las respuestas en <a class="link" href={href('/cierre/resultados/')}>Resultados de la encuesta</a>.
     </p>
   </article>

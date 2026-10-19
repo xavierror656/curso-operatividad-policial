@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+
+const columnas = [
+  ['folio', 'Texto', 'Identificador sintético (S-00001). No corresponde a ningún expediente.'],
+  ['fecha_evento', 'Texto DD/MM/AAAA', 'Fecha del evento, en marzo de 2026.'],
+  ['hora', 'Texto HH:MM', 'Hora del evento, de 00:00 a 23:59.'],
+  ['delito', 'Texto', 'Tipo de delito: seis valores del catálogo de práctica.'],
+  ['colonia', 'Texto', 'Colonia de práctica («Colonia Demo 1A»). Son nombres inventados.'],
+  ['distrito', 'Texto', 'Seis distritos: Cuauhtémoc, Universidad, Aldama, Babícora, Delicias y Chihuahua.'],
+  ['sector', 'Entero 1 a 6', 'Sector al que pertenece el distrito.'],
+  ['latitud', 'Decimal', 'Entre 31.60 y 31.80 en los registros válidos.'],
+  ['longitud', 'Decimal', 'Entre -106.55 y -106.30 en los registros válidos.'],
+]
+const errores = [
+  ['38', 'Fechas inválidas', '31/02/2026, 15/13/2026, 00/03/2026 o fechas futuras.'],
+  ['21', 'Coordenadas erróneas', 'Latitud y longitud invertidas o puntos fuera del municipio.'],
+  ['54', 'Colonias sin coincidencia', 'Mayúsculas, espacio final, «Col.» o sin la palabra «Demo».'],
+  ['17', 'Duplicados', 'Mismo folio y mismos datos capturados dos veces.'],
+]
+const archivos = [
+  { nombre: 'incidentes_practica_sucio.csv', detalle: '1,058 registros con 130 errores sembrados. Es el archivo del Día 1.' },
+  { nombre: 'incidentes_practica_depurado.csv', detalle: '928 registros ya depurados. Es el archivo de los Días 2 y 3.' },
+]
+---
+
+<Layout title="Datos de práctica · Operatividad policial" description="Archivos CSV sintéticos del curso, con su diccionario de datos y los errores sembrados.">
+  <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Material del curso</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Datos de práctica</h1>
+    <div class="alert alert-soft alert-warning mt-5 items-start">
+      <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
+      <p>Los datos son <strong>100 % sintéticos</strong>: no hay hechos, personas, colonias ni coordenadas reales de eventos. Los totales por delito, distrito, hora y día de la semana coinciden con las gráficas del Día 2.</p>
+    </div>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {archivos.map((a) => (
+        <a href={href(`/datos/${a.nombre}`)} download class="card border border-base-content/10 shadow-none transition hover:border-secondary">
+          <div class="card-body gap-2">
+            <span class="icon-[tabler--file-spreadsheet] size-8 text-secondary" aria-hidden="true"></span>
+            <h2 class="font-display text-base font-semibold break-all">{a.nombre}</h2>
+            <p class="text-sm text-base-content/70">{a.detalle}</p>
+            <span class="btn btn-secondary btn-sm mt-1 w-fit"><span class="icon-[tabler--download] size-4"></span>Descargar</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="mt-12 text-2xl font-semibold">Diccionario de datos</h2>
+    <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Diccionario de datos, se desplaza horizontalmente">
+      <table class="table">
+        <thead><tr><th scope="col">Columna</th><th scope="col">Tipo</th><th scope="col">Descripción</th></tr></thead>
+        <tbody>{columnas.map((c) => <tr><th scope="row" class="font-mono text-sm">{c[0]}</th><td>{c[1]}</td><td>{c[2]}</td></tr>)}</tbody>
+      </table>
+    </div>
+
+    <h2 class="mt-12 text-2xl font-semibold">Errores sembrados en el archivo del Día 1</h2>
+    <p class="mt-2 text-base-content/75">130 registros marcados que se excluyen del archivo depurado: 1,058 menos 130 dejan 928.</p>
+    <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Errores sembrados, se desplaza horizontalmente">
+      <table class="table">
+        <thead><tr><th scope="col">Registros</th><th scope="col">Tipo</th><th scope="col">Cómo se ve</th></tr></thead>
+        <tbody>{errores.map((e) => <tr><th scope="row" class="tabular-nums">{e[0]}</th><td>{e[1]}</td><td>{e[2]}</td></tr>)}</tbody>
+      </table>
+    </div>
+
+    <h2 class="mt-12 text-2xl font-semibold">Cómo se generaron</h2>
+    <p class="mt-2 text-base-content/75">Con el script <code>datos/generar.py</code> del repositorio, con semilla fija: se obtienen siempre los mismos archivos. Si cambian las cifras del Día 2, se ajusta el script y se vuelven a generar.</p>
+  </article>
+</Layout>
