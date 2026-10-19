@@ -1,0 +1,273 @@
+---
+import type { Slide } from '../../data/types'
+
+interface Props {
+  slide: Slide
+  index: number
+  total: number
+  day: number
+}
+
+const { slide: s, index, total, day } = Astro.props
+const dark = s.layout === 'cover' || s.layout === 'break' || s.layout === 'rule'
+const blockLabel = /^\d/.test(s.block) ? `Bloque ${s.block}` : s.block
+const cardCols = (s.cards?.length ?? 0) > 4 ? 3 : (s.cards?.length ?? 0) === 2 ? 2 : (s.cards?.length ?? 0)
+const tone = (side: { tone?: string }, i: number) => side.tone ?? (i === 0 ? 'bad' : 'good')
+
+// Gráfica: escala común a partir de cero y marcas del eje en números redondos
+const chart = s.chart
+const max = chart ? Math.max(...chart.data.map((d) => d.value)) : 0
+const step = max > 100 ? 50 : max > 40 ? 20 : max > 20 ? 10 : 5
+const top = Math.ceil(max / step) * step || 1
+const ticks = Array.from({ length: top / step + 1 }, (_, i) => i * step)
+const W = 1000
+const H = 380
+const pad = { l: 56, r: 16, t: 16, b: 44 }
+const x = (i: number) => pad.l + (i * (W - pad.l - pad.r)) / Math.max(1, (chart?.data.length ?? 1) - 1)
+const y = (v: number) => pad.t + (1 - v / top) * (H - pad.t - pad.b)
+const linePath = chart?.data.map((d, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(d.value).toFixed(1)}`).join(' ')
+const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
+---
+
+<section class:list={['slide', { 'slide--dark': dark }]} data-index={index} data-block={s.block} data-time={s.time} data-layout={s.layout} aria-label={`Diapositiva ${index + 1}: ${s.title}`}>
+  <div class="slide-inner">
+    <span class="slide-bar" aria-hidden="true"></span>
+
+    {!dark && (
+      <header class="slide-meta">
+        <span>{blockLabel}</span>
+        <span class="slide-meta-time"><span class="icon-[tabler--clock-hour-8]"></span>{s.time}</span>
+      </header>
+    )}
+
+    <div class:list={['slide-body', `slide-body--${s.layout}`]}>
+      {s.kicker && <p class="s-kicker">{s.kicker}</p>}
+      {s.layout === 'cover' ? <h1 class="s-title s-title--xl">{s.title}</h1> : <h2 class:list={['s-title', { 's-title--xl': s.layout === 'break' }]}>{s.title}</h2>}
+      {s.lead && s.layout !== 'rule' && <p class="s-lead">{s.lead}</p>}
+
+      {/* Portada */}
+      {s.layout === 'cover' && (
+        <div class="s-cover-foot">
+          <span>Herramientas tecnológicas orientadas a la operatividad policial</span>
+          <span>Secretaría de Seguridad Pública Municipal de Ciudad Juárez</span>
+        </div>
+      )}
+
+      {/* Lista simple */}
+      {s.layout === 'bullets' && (
+        <ul class="s-list">{s.bullets?.map((b) => <li>{b}</li>)}</ul>
+      )}
+
+      {/* Qué vamos a lograr */}
+      {s.layout === 'goal' && (
+        <ol class="s-goal">
+          {s.bullets?.map((b, i) => (
+            <li><span class="s-goal-num">{i + 1}</span><span>{b}</span></li>
+          ))}
+        </ol>
+      )}
+
+      {/* Qué se lleva / lista de verificación */}
+      {(s.layout === 'takeaway' || s.layout === 'checklist') && (
+        <ul class:list={['s-checks', { 's-checks--panel': s.layout === 'takeaway' }]}>
+          {s.bullets?.map((b) => (
+            <li><span class:list={[s.layout === 'takeaway' ? 'icon-[tabler--arrow-badge-right-filled]' : 'icon-[tabler--square-check-filled]', 's-check-icon']}></span><span>{b}</span></li>
+          ))}
+        </ul>
+      )}
+
+      {/* Tarjetas */}
+      {s.layout === 'cards' && (
+        <div class="s-cards" style={`--cols:${cardCols}`}>
+          {s.cards?.map((c) => (
+            <article class="card s-card">
+              <div class="card-body">
+                {c.icon && <span class="s-card-icon"><span class={c.icon}></span></span>}
+                <h3 class="s-card-title">{c.title}</h3>
+                {c.text && <p class="s-card-text">{c.text}</p>}
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+
+      {/* Comparación error / correcto */}
+      {s.layout === 'compare' && (
+        <div class="s-compare">
+          {[s.left, s.right].map((side, i) => side && (
+            <div class:list={['s-side', `s-side--${tone(side, i)}`]}>
+              <span class:list={['badge', 's-side-label', { 'badge-error': tone(side, i) === 'bad', 'badge-success': tone(side, i) === 'good', 'badge-primary': tone(side, i) === 'neutral' }]}>
+                {tone(side, i) !== 'neutral' && <span class={tone(side, i) === 'bad' ? 'icon-[tabler--x]' : 'icon-[tabler--check]'}></span>}{side.label}
+              </span>
+              {side.block && <pre class="s-side-block">{side.block}</pre>}
+              {side.items && <ul class="s-side-list">{side.items.map((it) => <li>{it}</li>)}</ul>}
+              {side.rows && (
+                <table class="s-side-table">
+                  <thead><tr>{side.rows[0].map((h) => <th>{h}</th>)}</tr></thead>
+                  <tbody>{side.rows.slice(1).map((r) => <tr>{r.map((c) => <td>{c}</td>)}</tr>)}</tbody>
+                </table>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Regla de oro */}
+      {s.layout === 'rule' && (
+        <div class="s-rule">
+          <div class="s-rule-row"><span class="s-rule-tag s-rule-tag--yes">{s.left?.label}</span><ul>{s.left?.items?.map((it) => <li>{it}</li>)}</ul></div>
+          <div class="s-rule-row"><span class="s-rule-tag s-rule-tag--no">{s.right?.label}</span><ul>{s.right?.items?.map((it) => <li>{it}</li>)}</ul></div>
+          <p class="s-rule-foot">{s.lead}</p>
+        </div>
+      )}
+
+      {/* Diagrama de decisión */}
+      {s.layout === 'decision' && (
+        <div class="s-decision">
+          <div class="s-decision-qs">
+            {s.steps?.map((q, i) => (
+              <>
+                <div class="s-decision-q"><span class="s-decision-num">{i + 1}</span>{q.label}<span class="s-decision-yes">Sí <span class="icon-[tabler--arrow-right]"></span></span></div>
+                <div class="s-decision-down"><span class="icon-[tabler--arrow-down]"></span> No</div>
+              </>
+            ))}
+            <div class="s-decision-out s-decision-out--ok"><span class="icon-[tabler--circle-check]"></span>{s.no}</div>
+          </div>
+          <div class="s-decision-out s-decision-out--stop"><span class="icon-[tabler--hand-stop]"></span>{s.yes}</div>
+        </div>
+      )}
+
+      {/* Flujo */}
+      {s.layout === 'flow' && (
+        <ol class="s-flow">
+          {s.steps?.map((st, i) => (
+            <>
+              {i > 0 && <li class="s-flow-arrow" aria-hidden="true"><span class="icon-[tabler--arrow-narrow-right]"></span></li>}
+              <li class="s-flow-step">
+                <span class="s-flow-num">{i + 1}</span>
+                <strong>{st.label}</strong>
+                {st.detail && <span>{st.detail}</span>}
+              </li>
+            </>
+          ))}
+        </ol>
+      )}
+
+      {/* Tarjetas de alerta */}
+      {s.layout === 'alerts' && (
+        <div class="s-alerts">
+          {s.alerts?.map((a) => (
+            <div class:list={['s-alert', `s-alert--${a.tone}`]}>
+              <span class={a.icon}></span>
+              <strong>{a.value}</strong>
+              <span>{a.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Tabla */}
+      {s.layout === 'table' && s.table && (
+        <div class="s-table-wrap">
+          <table class="table s-table">
+            <thead><tr>{s.table.head.map((h) => <th>{h}</th>)}</tr></thead>
+            <tbody>{s.table.rows.map((r) => <tr>{r.map((c, ci) => (ci === 0 ? <th>{c}</th> : <td>{c}</td>))}</tr>)}</tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Gráfica de una sola serie, con conclusiones a la derecha */}
+      {s.layout === 'chart' && chart && (
+        <div class="s-chart-wrap">
+          <figure class="s-chart">
+            <figcaption class="s-chart-caption">{chart.caption}</figcaption>
+            {chart.kind === 'bar' ? (
+              <ul class="s-bars" role="list">
+                {chart.data.map((d) => (
+                  <li class:list={['s-bar-row', { 'is-hi': isHi(d.label) }]} title={`${d.label}: ${d.value}`}>
+                    <span class="s-bar-label">{d.label}</span>
+                    <span class="s-bar-track"><span class="s-bar" style={`width:${(d.value / top) * 100}%`}></span></span>
+                    <span class="s-bar-value">{d.value}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <svg class="s-line" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={chart.caption}>
+                {ticks.map((t) => (
+                  <g>
+                    <line x1={pad.l} x2={W - pad.r} y1={y(t)} y2={y(t)} class="s-grid" />
+                    <text x={pad.l - 10} y={y(t) + 6} text-anchor="end" class="s-axis">{t}</text>
+                  </g>
+                ))}
+                {chart.data.map((d, i) => (i % 3 === 0 || i === chart.data.length - 1) && (
+                  <text x={x(i)} y={H - 12} text-anchor="middle" class="s-axis">{d.label}</text>
+                ))}
+                <path d={linePath} class="s-line-path" />
+                {chart.data.map((d, i) => (
+                  <g class:list={{ 'is-hi': isHi(d.label) }}>
+                    <circle cx={x(i)} cy={y(d.value)} r="5" class="s-dot"><title>{`${d.label}: ${d.value}`}</title></circle>
+                    {isHi(d.label) && <text x={x(i)} y={y(d.value) - 16} text-anchor="middle" class="s-line-label">{d.value}</text>}
+                  </g>
+                ))}
+              </svg>
+            )}
+          </figure>
+          {s.bullets && <ul class="s-chart-notes">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+        </div>
+      )}
+
+      {/* Tablero esquemático: el número indica el orden de lectura */}
+      {s.layout === 'dashboard' && (
+        <div class="s-dash">
+          {s.cards?.map((c, i) => (
+            <div class="s-dash-cell" style={`--span:${c.span ?? 2}`}>
+              <span class="s-dash-num">{i + 1}</span>
+              <strong>{c.title}</strong>
+              {c.text && <span>{c.text}</span>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Receso */}
+      {s.layout === 'break' && (
+        <div class="s-break">
+          <span class="icon-[tabler--coffee] s-break-icon"></span>
+          {s.bullets?.map((b) => <p>{b}</p>)}
+        </div>
+      )}
+
+      {/* Cronómetro */}
+      {s.layout === 'timer' && (
+        <div class="s-timer" data-timer data-minutes={s.minutes}>
+          <div class="s-timer-clock" data-timer-display>{String(s.minutes).padStart(2, '0')}:00</div>
+          <div class="s-timer-side">
+            <ul class="s-timer-marks">{s.bullets?.map((b) => <li>{b}</li>)}</ul>
+            <div class="s-timer-actions no-print">
+              <button type="button" class="btn btn-primary s-timer-btn" data-timer-toggle><span class="icon-[tabler--player-play-filled]"></span><span data-timer-label>Iniciar</span></button>
+              <button type="button" class="btn btn-outline btn-secondary s-timer-btn" data-timer-reset aria-label="Reiniciar cronómetro"><span class="icon-[tabler--refresh]"></span></button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Marcador de captura pendiente */}
+      {s.capture && (
+        <div class="s-capture" role="note">
+          <span class="icon-[tabler--photo-plus]"></span>
+          <span><strong>[CAPTURA</strong>: {s.capture}<strong>]</strong></span>
+        </div>
+      )}
+    </div>
+
+    {!dark || s.layout === 'rule' ? (
+      <footer class="slide-foot">
+        <span>Operatividad policial · Día {day}</span>
+        {s.ruleReminder && (
+          <span class="s-reminder"><span class="icon-[tabler--shield-lock]"></span>Regla de oro: estructura sí, datos nunca</span>
+        )}
+        <span class="slide-num">{index + 1} / {total}</span>
+      </footer>
+    ) : null}
+  </div>
+</section>

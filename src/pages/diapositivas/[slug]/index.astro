@@ -1,0 +1,274 @@
+---
+import '../../../styles/global.css'
+import '../../../styles/slides.css'
+import Slide from '../../../components/slides/Slide.astro'
+import { decks } from '../../../data/decks'
+import type { Deck } from '../../../data/types'
+
+export function getStaticPaths() {
+  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+}
+
+const { deck } = Astro.props as { deck: Deck }
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const total = deck.slides.length
+const notes = deck.slides.map((s) => s.notes)
+const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
+---
+
+<!doctype html>
+<html lang="es-MX" data-theme="karsam">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <title>{`Día ${deck.day} · Diapositivas`}</title>
+  </head>
+  <body class="deck-body">
+    <div class="deck-wrap">
+      <div class="deck-stage" data-deck={deck.slug}>
+        {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
+      </div>
+    </div>
+
+    <aside class="deck-notes no-print" data-notes-panel hidden>
+      <div class="mx-auto flex max-w-5xl gap-3">
+        <span class="icon-[tabler--notes] mt-0.5 size-5 shrink-0 text-rojo-claro"></span>
+        <p data-notes-text></p>
+      </div>
+    </aside>
+
+    <nav class="deck-bar no-print" aria-label="Controles de la presentación">
+      <div class="progress deck-progress" role="progressbar" aria-label="Avance" aria-valuemin="1" aria-valuemax={total}>
+        <div class="progress-bar progress-secondary" data-progress style="width: 0%"></div>
+      </div>
+      <div class="deck-bar-row">
+        <a href={`${base}/diapositivas/`} class="btn btn-text btn-square btn-sm" aria-label="Volver al índice de presentaciones" title="Volver">
+          <span class="icon-[tabler--arrow-left] size-5"></span>
+        </a>
+        <button type="button" class="btn btn-text btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="deck-index" data-overlay="#deck-index" title="Índice (G)">
+          <span class="icon-[tabler--list-numbers] size-5"></span><span class="max-sm:hidden">Índice</span>
+        </button>
+        <span class="badge badge-soft badge-secondary max-md:hidden" data-block-badge></span>
+
+        <div class="mx-auto flex items-center gap-1">
+          <button type="button" class="btn btn-text btn-square btn-sm" data-prev aria-label="Anterior" title="Anterior (←)">
+            <span class="icon-[tabler--chevron-left] size-5"></span>
+          </button>
+          <span class="min-w-16 text-center text-sm tabular-nums" data-counter>1 / {total}</span>
+          <button type="button" class="btn btn-text btn-square btn-sm" data-next aria-label="Siguiente" title="Siguiente (→)">
+            <span class="icon-[tabler--chevron-right] size-5"></span>
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-text btn-square btn-sm" data-toggle-notes aria-pressed="false" aria-label="Notas del instructor" title="Notas (N)">
+          <span class="icon-[tabler--notes] size-5"></span>
+        </button>
+        <a href={`${base}/diapositivas/${deck.slug}/presentador/`} target="deck-presentador" class="btn btn-text btn-square btn-sm" data-presenter aria-label="Abrir vista del presentador" title="Vista del presentador (P)">
+          <span class="icon-[tabler--device-desktop-analytics] size-5"></span>
+        </a>
+        <button type="button" class="btn btn-text btn-square btn-sm max-sm:hidden" data-print aria-label="Imprimir o guardar en PDF" title="Imprimir / PDF">
+          <span class="icon-[tabler--printer] size-5"></span>
+        </button>
+        <button type="button" class="btn btn-text btn-square btn-sm" data-fullscreen aria-label="Pantalla completa" title="Pantalla completa (F)">
+          <span class="icon-[tabler--maximize] size-5"></span>
+        </button>
+        <button type="button" class="btn btn-text btn-square btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="deck-help" data-overlay="#deck-help" aria-label="Atajos de teclado" title="Atajos (?)">
+          <span class="icon-[tabler--keyboard] size-5"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Índice de diapositivas con bloque y minuto estimado -->
+    <div id="deck-index" class="overlay overlay-open:translate-x-0 drawer drawer-start hidden max-w-md no-print" role="dialog" tabindex="-1" aria-labelledby="deck-index-title">
+      <div class="drawer-header">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary">Día {deck.day} · {deck.schedule}</p>
+          <h3 id="deck-index-title" class="drawer-title">{deck.title}</h3>
+        </div>
+        <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Cerrar" data-overlay="#deck-index">
+          <span class="icon-[tabler--x] size-5"></span>
+        </button>
+      </div>
+      <div class="drawer-body">
+        {deck.blocks.map((block) => {
+          const items = deck.slides.map((s, i) => ({ s, i })).filter(({ s }) => s.block === block.id)
+          return (
+            <section class="mb-4">
+              <h4 class="mb-1 flex items-baseline justify-between gap-2 text-sm font-semibold">
+                <span>{/^\d/.test(block.id) ? `${block.id} · ` : ''}{block.label}</span>
+                <span class="text-xs font-normal text-base-content/60">{block.range}</span>
+              </h4>
+              <ul class="menu p-0">
+                {items.map(({ s, i }) => (
+                  <li>
+                    <a href={`#${i + 1}`} data-goto={i} class="items-start gap-3 py-1.5">
+                      <span class="w-6 shrink-0 text-end text-xs tabular-nums text-base-content/50">{i + 1}</span>
+                      <span class="flex-1 text-sm leading-snug">{s.title}</span>
+                      <span class="shrink-0 text-xs tabular-nums text-base-content/50">{s.time}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        })}
+      </div>
+    </div>
+
+    <!-- Atajos -->
+    <div id="deck-help" class="overlay modal overlay-open:opacity-100 hidden no-print" role="dialog" tabindex="-1" aria-labelledby="deck-help-title">
+      <div class="modal-dialog overlay-open:opacity-100">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="deck-help-title" class="modal-title">Atajos de teclado</h3>
+            <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Cerrar" data-overlay="#deck-help">
+              <span class="icon-[tabler--x] size-5"></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table table-sm">
+              <tbody>
+                <tr><td><kbd class="kbd kbd-sm">→</kbd> <kbd class="kbd kbd-sm">Espacio</kbd> <kbd class="kbd kbd-sm">AvPág</kbd></td><td>Siguiente</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">←</kbd> <kbd class="kbd kbd-sm">RePág</kbd></td><td>Anterior</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">Inicio</kbd> <kbd class="kbd kbd-sm">Fin</kbd></td><td>Primera / última</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">G</kbd></td><td>Índice con tiempos</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">N</kbd></td><td>Mostrar u ocultar notas</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">P</kbd></td><td>Vista del presentador (otra ventana)</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">F</kbd></td><td>Pantalla completa</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">B</kbd></td><td>Pantalla en negro</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">T</kbd></td><td>Iniciar o pausar el cronómetro</td></tr>
+              </tbody>
+            </table>
+            <p class="mt-3 text-sm text-base-content/70">Los controles remotos de presentación funcionan como flechas o AvPág/RePág.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deck-blackout" data-blackout hidden></div>
+
+    <script type="application/json" id="deck-data" set:html={JSON.stringify({ notes, blockLabels })}></script>
+
+    <script>
+      import 'flyonui/flyonui'
+      import { initDeck } from '../../../scripts/deck'
+      initDeck()
+    </script>
+
+    <style is:global>
+      .deck-body {
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background: #0e0f1c;
+        color: #e8e8f0;
+      }
+      .deck-wrap {
+        flex: 1;
+        min-height: 0;
+        container-type: size;
+        display: grid;
+        place-items: center;
+        padding: 0.75rem;
+      }
+      .deck-stage {
+        width: min(100cqw, calc(100cqh * 16 / 9));
+        box-shadow: 0 20px 60px rgb(0 0 0 / 0.45);
+      }
+      .deck-stage .slide:not(.is-active) {
+        display: none;
+      }
+      .deck-stage .slide.is-active {
+        animation: deck-in 180ms ease-out;
+      }
+      @keyframes deck-in {
+        from {
+          opacity: 0.4;
+        }
+      }
+      .deck-notes {
+        max-height: 30dvh;
+        overflow: auto;
+        padding: 0.9rem 1.25rem;
+        background: #191b2d;
+        border-top: 1px solid #2c2f49;
+        font-size: 1.05rem;
+        line-height: 1.5;
+      }
+      .deck-bar {
+        background: #14152a;
+        border-top: 1px solid #23253d;
+        transition: opacity 200ms;
+      }
+      .deck-bar .btn-text,
+      .deck-bar [data-counter] {
+        color: #d9d9e6;
+      }
+      .deck-bar-row {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        padding: 0.35rem 0.75rem;
+      }
+      .deck-progress {
+        height: 3px;
+        border-radius: 0;
+        background: #23253d;
+      }
+      .deck-progress .progress-bar {
+        border-radius: 0;
+        transition: width 200ms;
+      }
+      .deck-blackout {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: #000;
+      }
+      body.is-fullscreen .deck-wrap {
+        padding: 0;
+      }
+      body.is-fullscreen .deck-stage {
+        box-shadow: none;
+      }
+      body.is-fullscreen .deck-bar {
+        position: fixed;
+        inset: auto 0 0 0;
+        opacity: 0;
+      }
+      body.is-fullscreen .deck-bar:hover,
+      body.is-fullscreen .deck-bar:focus-within {
+        opacity: 1;
+      }
+      #deck-index,
+      #deck-help {
+        color: var(--color-base-content);
+      }
+      @media print {
+        .deck-body {
+          display: block;
+          height: auto;
+          overflow: visible;
+          background: #fff;
+        }
+        .deck-wrap {
+          display: block;
+          padding: 0;
+          container-type: normal;
+        }
+        .deck-stage {
+          width: 100%;
+          box-shadow: none;
+        }
+        .deck-stage .slide:not(.is-active) {
+          display: block;
+        }
+        .deck-stage .slide.is-active {
+          animation: none;
+        }
+      }
+    </style>
+  </body>
+</html>

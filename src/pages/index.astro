@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { curso, enfoque, sesiones, temas, productos, requerimientos, acreditacion } from '../data/curso'
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
+---
+
+<Layout>
+  <!-- Portada -->
+  <section class="relative overflow-hidden bg-primary text-primary-content">
+    <span class="absolute inset-y-0 start-0 w-1.5 bg-secondary" aria-hidden="true"></span>
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-[1.4fr_1fr] md:px-6 md:py-24">
+      <div>
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-rojo-claro">Curso 3 · {curso.institucion}</p>
+        <h1 class="mt-4 text-4xl font-semibold leading-tight text-balance md:text-5xl">{curso.nombre}</h1>
+        <p class="mt-6 max-w-2xl text-lg text-primary-content/75">
+          Del registro capturado en calle al tablero de mando y al mapa de concentración: depurar, analizar y presentar la información operativa con criterio, apoyándose en asistentes de IA sin exponer un solo dato.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={`${base}/diapositivas/`} class="btn btn-secondary btn-lg">
+            <span class="icon-[tabler--presentation] size-5"></span>Diapositivas de los 3 días
+          </a>
+          <a href="#temario" class="btn btn-lg btn-outline border-primary-content/30 text-primary-content hover:bg-primary-content/10">Ver temario</a>
+        </div>
+      </div>
+      <dl class="grid grid-cols-2 content-center gap-4">
+        {[
+          ['Duración', curso.duracion],
+          ['Periodo', curso.periodo],
+          ['Temas', `${temas.length} temas`],
+          ['Modalidad', 'Presencial y virtual'],
+        ].map(([k, v]) => (
+          <div class="rounded-box border border-primary-content/10 bg-primary-content/5 p-5">
+            <dt class="text-xs uppercase tracking-widest text-primary-content/55">{k}</dt>
+            <dd class="mt-1 font-display text-2xl font-semibold">{v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Objetivo y enfoque -->
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <div class="grid gap-10 md:grid-cols-[1fr_2fr]">
+      <div>
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Objetivo general</p>
+        <h2 class="mt-3 text-3xl font-semibold text-balance">Información operativa convertida en decisiones</h2>
+      </div>
+      <p class="text-lg text-base-content/80">{curso.objetivo}</p>
+    </div>
+
+    <div class="mt-12 grid gap-5 md:grid-cols-3">
+      {enfoque.map((e) => (
+        <article class="card border border-base-content/10 shadow-none">
+          <div class="card-body gap-3">
+            <span class="grid size-11 place-items-center rounded-lg bg-secondary/10 text-secondary">
+              <span class:list={[e.icon, 'size-6']}></span>
+            </span>
+            <h3 class="card-title font-display">{e.titulo}</h3>
+            <p class="text-base-content/70">{e.texto}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Regla de oro -->
+  <section id="regla" class="scroll-mt-20 bg-primary text-primary-content">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-[1fr_1.2fr] md:px-6">
+      <div>
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-rojo-claro">Regla de oro</p>
+        <h2 class="mt-3 text-4xl font-semibold leading-tight">Comparta la estructura, nunca los datos.</h2>
+        <p class="mt-5 text-primary-content/70">
+          Se establece en la primera sesión y se recuerda cada vez que un asistente de IA aparece en pantalla. El asistente genera el código; los datos permanecen en el equipo del participante.
+        </p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <div class="rounded-box border border-primary-content/10 bg-primary-content/5 p-6">
+          <p class="font-display text-xl font-bold text-verde">SÍ se comparte</p>
+          <ul class="mt-3 space-y-2 text-primary-content/85">
+            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Nombres de las columnas</li>
+            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Tipos de dato y formatos</li>
+            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>El mensaje de error que apareció</li>
+            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Lo que se necesita validar</li>
+          </ul>
+        </div>
+        <div class="rounded-box border border-primary-content/10 bg-primary-content/5 p-6">
+          <p class="font-display text-xl font-bold text-rojo-claro">NO se comparte nunca</p>
+          <ul class="mt-3 space-y-2 text-primary-content/85">
+            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Nombres de personas</li>
+            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Domicilios y folios</li>
+            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Coordenadas de eventos reales</li>
+            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Cualquier fila del archivo</li>
+          </ul>
+        </div>
+        <p class="font-display text-lg font-semibold sm:col-span-2">Ante la duda, no lo comparta y pregunte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sesiones presenciales -->
+  <section id="sesiones" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 md:px-6">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Sesiones presenciales · 08:00 a 12:00</p>
+    <h2 class="mt-3 text-3xl font-semibold">Un mismo archivo, de la captura al mapa</h2>
+    <p class="mt-3 max-w-3xl text-base-content/70">El archivo que cada participante depura el Día 1 alimenta el tablero del Día 2 y el mapa del Día 3. No se introduce un conjunto de datos nuevo.</p>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {sesiones.map((s) => (
+        <article class:list={['card shadow-none border', s.disponible ? 'border-secondary/40' : 'border-base-content/10']}>
+          <div class="card-body gap-3">
+            <div class="flex items-center justify-between">
+              <span class="font-display text-4xl font-bold text-secondary">Día {s.dia}</span>
+              {s.disponible
+                ? <span class="badge badge-soft badge-success">Diapositivas listas</span>
+                : <span class="badge badge-soft">En preparación</span>}
+            </div>
+            <h3 class="font-display text-lg font-semibold">{s.titulo}</h3>
+            <p class="text-sm text-base-content/70"><strong class="text-base-content">Entregable:</strong> {s.entregable}</p>
+            <div class="card-actions mt-auto pt-2">
+              {s.disponible
+                ? <a href={`${base}/diapositivas/${s.slug}/`} class="btn btn-primary btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Abrir diapositivas</a>
+                : <button class="btn btn-sm" disabled>Próximamente</button>}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Temario -->
+  <section id="temario" class="scroll-mt-20 bg-base-200">
+    <div class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Temario</p>
+          <h2 class="mt-3 text-3xl font-semibold">Diez temas, {totalHoras} horas</h2>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {curso.herramientas.map((h) => <span class="badge badge-outline">{h}</span>)}
+        </div>
+      </div>
+
+      <div class="accordion accordion-bordered mt-8 divide-y divide-base-content/10 rounded-box bg-base-100" data-accordion-always-open="">
+        {temas.map((t, i) => (
+          <div class:list={['accordion-item', { active: i === 0 }]} id={`tema-${t.num}`}>
+            <button type="button" class="accordion-toggle inline-flex w-full items-center gap-4 text-start" aria-controls={`tema-${t.num}-body`} aria-expanded={i === 0 ? 'true' : 'false'}>
+              <span class="grid size-9 shrink-0 place-items-center rounded-md bg-primary font-display text-sm font-semibold text-primary-content">{t.num}</span>
+              <span class="flex-1 font-display font-medium">{t.titulo}</span>
+              <span class="badge badge-soft badge-secondary shrink-0">{t.horas} h</span>
+              <span class="icon-[tabler--chevron-down] accordion-item-active:rotate-180 size-5 shrink-0 transition-transform duration-300"></span>
+            </button>
+            <div id={`tema-${t.num}-body`} class:list={['accordion-content w-full overflow-hidden transition-[height] duration-300', { hidden: i !== 0 }]} role="region" aria-labelledby={`tema-${t.num}`}>
+              <div class="grid gap-4 px-5 pb-5 md:grid-cols-[2fr_1fr] md:ps-[4.25rem]">
+                <div class="space-y-3 text-base-content/80">
+                  <p>{t.contenido}</p>
+                  {t.ia && (
+                    <p class="flex gap-2"><span class="icon-[tabler--sparkles] mt-1 size-4 shrink-0 text-secondary"></span><span><strong class="text-base-content">Uso de IA:</strong> {t.ia}</span></p>
+                  )}
+                </div>
+                <div class="alert alert-soft alert-secondary h-fit items-start">
+                  <span class="icon-[tabler--package] size-5 shrink-0"></span>
+                  <div><p class="text-xs font-semibold uppercase tracking-wider">Producto</p><p>{t.producto}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Productos -->
+  <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Productos del curso</p>
+    <h2 class="mt-3 text-3xl font-semibold">Un sistema funcional al terminar</h2>
+    <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {productos.map((p) => (
+        <article class="card border border-base-content/10 shadow-none">
+          <div class="card-body gap-3">
+            <span class:list={[p.icon, 'size-8 text-secondary']}></span>
+            <h3 class="font-display font-semibold">{p.titulo}</h3>
+            <p class="text-sm text-base-content/70">{p.texto}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Requerimientos y acreditación -->
+  <section class="border-t border-base-content/10">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:px-6">
+      <div>
+        <h2 class="text-2xl font-semibold">Requerimientos técnicos</h2>
+        <ul class="mt-6 space-y-3">
+          {requerimientos.map((r) => (
+            <li class="flex gap-3 text-base-content/80"><span class="icon-[tabler--point-filled] mt-1 size-4 shrink-0 text-secondary"></span>{r}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-2xl font-semibold">Evaluación y acreditación</h2>
+        <div class="mt-6 space-y-3">
+          {acreditacion.map((a) => (
+            <div class="flex items-center gap-4 rounded-box border border-base-content/10 p-4">
+              <span class:list={[a.icon, 'size-6 shrink-0 text-secondary']}></span>
+              <span>{a.texto}</span>
+            </div>
+          ))}
+        </div>
+        <div class="alert alert-soft alert-info mt-6 items-start">
+          <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
+          <p>El cuestionario de diagnóstico se aplica al inicio del Día 1 y se repite al cierre del Día 3 para medir el aprendizaje. El inicial no cuenta para acreditar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

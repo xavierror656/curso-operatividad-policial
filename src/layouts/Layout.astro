@@ -1,0 +1,64 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Operatividad policial · Curso 3',
+  description = 'Herramientas tecnológicas orientadas a la operatividad policial: temario, sesiones y diapositivas del curso.',
+} = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const path = Astro.url.pathname
+---
+
+<!doctype html>
+<html lang="es-MX" data-theme="karsam">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <nav class="navbar sticky top-0 z-30 border-b border-base-content/10 bg-base-100/90 backdrop-blur max-md:px-4">
+      <div class="mx-auto flex w-full max-w-6xl items-center gap-4 md:px-6">
+        <a href={`${base}/`} class="flex items-center gap-3 no-underline">
+          <span class="grid size-9 place-items-center rounded-md bg-primary text-primary-content">
+            <span class="icon-[tabler--shield-check] size-5"></span>
+          </span>
+          <span class="font-display leading-tight">
+            <span class="block text-sm font-semibold">Operatividad policial</span>
+            <span class="block text-xs text-base-content/60">Curso 3 · SSPM Ciudad Juárez</span>
+          </span>
+        </a>
+        <ul class="menu menu-horizontal ms-auto gap-1 p-0 max-sm:hidden">
+          <li><a href={`${base}/#temario`}>Temario</a></li>
+          <li><a href={`${base}/#regla`}>Regla de oro</a></li>
+          <li><a href={`${base}/diapositivas/`} class:list={{ 'menu-active': path.includes('/diapositivas') }}>Diapositivas</a></li>
+        </ul>
+        <a href={`${base}/diapositivas/`} class="btn btn-secondary btn-sm max-sm:ms-auto">
+          <span class="icon-[tabler--presentation] size-4"></span>Presentar
+        </a>
+      </div>
+    </nav>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <footer class="bg-primary text-primary-content/70">
+      <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 text-sm md:flex-row md:justify-between md:px-6">
+        <span>Herramientas tecnológicas orientadas a la operatividad policial · Grupo Karsam</span>
+        <span>Ejercicios con datos sintéticos o anonimizados.</span>
+      </div>
+    </footer>
+
+    <script>
+      import 'flyonui/flyonui'
+    </script>
+  </body>
+</html>

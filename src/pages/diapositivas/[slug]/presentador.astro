@@ -1,0 +1,180 @@
+---
+import '../../../styles/global.css'
+import '../../../styles/slides.css'
+import Slide from '../../../components/slides/Slide.astro'
+import { decks } from '../../../data/decks'
+import type { Deck } from '../../../data/types'
+
+export function getStaticPaths() {
+  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+}
+
+const { deck } = Astro.props as { deck: Deck }
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+const total = deck.slides.length
+const data = {
+  notes: deck.slides.map((s) => s.notes),
+  titles: deck.slides.map((s) => s.title),
+  times: deck.slides.map((s) => s.time),
+  blocks: deck.slides.map((s) => s.block),
+  blockLabels: Object.fromEntries(deck.blocks.map((b) => [b.id, b.label])),
+}
+---
+
+<!doctype html>
+<html lang="es-MX" data-theme="karsam">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <title>{`Presentador · Día ${deck.day}`}</title>
+  </head>
+  <body class="presenter">
+    <header class="presenter-top">
+      <span class="badge badge-secondary" data-block></span>
+      <span class="text-sm text-white/70" data-planned></span>
+      <div class="ms-auto flex items-center gap-4">
+        <div class="text-end">
+          <div class="text-xs uppercase tracking-widest text-white/50">Transcurrido</div>
+          <div class="font-display text-2xl tabular-nums" data-elapsed>00:00:00</div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline border-white/30 text-white" data-elapsed-toggle>
+          <span class="icon-[tabler--player-play-filled] size-4"></span><span>Iniciar</span>
+        </button>
+        <button type="button" class="btn btn-sm btn-text btn-square text-white" data-elapsed-reset aria-label="Reiniciar tiempo transcurrido">
+          <span class="icon-[tabler--refresh] size-4"></span>
+        </button>
+        <div class="text-end">
+          <div class="text-xs uppercase tracking-widest text-white/50">Hora</div>
+          <div class="font-display text-2xl tabular-nums" data-clock>--:--</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="presenter-grid">
+      <section class="presenter-current">
+        <div class="presenter-label">Actual · <span data-counter>1 / {total}</span></div>
+        <div class="presenter-stage" data-stage="current" data-deck={deck.slug}>
+          {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
+        </div>
+      </section>
+
+      <section class="presenter-side">
+        <div>
+          <div class="presenter-label">Siguiente</div>
+          <div class="presenter-stage presenter-stage--next" data-stage="next">
+            {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
+          </div>
+          <p class="presenter-end" data-end hidden>Fin de la presentación</p>
+        </div>
+        <div class="presenter-notes">
+          <div class="presenter-label">Notas del instructor</div>
+          <p data-notes></p>
+        </div>
+        <div class="flex gap-2">
+          <button type="button" class="btn btn-outline flex-1 border-white/30 text-white" data-prev>
+            <span class="icon-[tabler--chevron-left] size-5"></span>Anterior
+          </button>
+          <button type="button" class="btn btn-secondary flex-1" data-next>
+            Siguiente<span class="icon-[tabler--chevron-right] size-5"></span>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script type="application/json" id="presenter-data" set:html={JSON.stringify(data)}></script>
+
+    <script>
+      import { initPresenter } from '../../../scripts/presenter'
+      initPresenter()
+    </script>
+
+    <style is:global>
+      .presenter {
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: #0e0f1c;
+        color: #fff;
+      }
+      .presenter-top {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem 1.25rem;
+        background: #191b2d;
+        border-bottom: 1px solid #2c2f49;
+      }
+      .presenter-grid {
+        flex: 1;
+        min-height: 0;
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr);
+        gap: 1.25rem;
+        padding: 1.25rem;
+      }
+      .presenter-current {
+        container-type: size;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .presenter-current .presenter-stage {
+        width: min(100cqw, calc((100cqh - 2rem) * 16 / 9));
+      }
+      .presenter-side {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-height: 0;
+      }
+      .presenter-label {
+        margin-bottom: 0.5rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgb(255 255 255 / 0.55);
+      }
+      .presenter-stage .slide:not(.is-active) {
+        display: none;
+      }
+      .presenter-end[hidden],
+      .presenter-stage[hidden] {
+        display: none;
+      }
+      .presenter-stage--next {
+        opacity: 0.85;
+      }
+      .presenter-end {
+        display: grid;
+        place-items: center;
+        aspect-ratio: 16 / 9;
+        border: 1px dashed #3a3d57;
+        color: rgb(255 255 255 / 0.5);
+      }
+      .presenter-notes {
+        flex: 1;
+        min-height: 0;
+        overflow: auto;
+        padding: 1rem 1.1rem;
+        border-radius: 0.75rem;
+        background: #191b2d;
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+      @media (max-width: 900px) {
+        .presenter-grid {
+          grid-template-columns: 1fr;
+          overflow: auto;
+        }
+        .presenter-current {
+          container-type: inline-size;
+        }
+        .presenter-current .presenter-stage {
+          width: 100%;
+        }
+      }
+    </style>
+  </body>
+</html>
