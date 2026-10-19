@@ -1,0 +1,209 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { href } from '../../lib/site'
+
+/**
+ * Plantillas de instrucciones para asistentes de IA. Los corchetes se sustituyen
+ * por la estructura del archivo propio (nombres y tipos de columnas). Nunca llevan datos.
+ */
+const grupos = [
+  {
+    id: 'eda',
+    titulo: 'EDA: análisis exploratorio',
+    icon: 'icon-[tabler--zoom-scan]',
+    intro: 'EDA (análisis exploratorio de datos) es la primera revisión del archivo: tamaño, tipos, nulos, duplicados, rangos y valores raros. Se hace antes de limpiar o graficar.',
+    prompts: [
+      {
+        titulo: 'Resumen general del archivo',
+        texto:
+          'Tengo un DataFrame de pandas llamado df con estas columnas: [columna1 (tipo), columna2 (tipo), ...]. Escribe código para un análisis exploratorio que muestre: número de filas y columnas, tipo de cada columna, nulos por columna en conteo y porcentaje, y número de filas duplicadas. Imprime solo conteos y porcentajes, nunca filas del archivo.',
+      },
+      {
+        titulo: 'Rangos y valores raros',
+        texto:
+          'En df, las columnas numéricas son [lista] y las de texto son [lista]. Escribe código que muestre mínimo, máximo y promedio de las numéricas, y la cantidad de valores distintos de cada columna de texto. Marca con un conteo las numéricas con valores negativos o fuera del rango [mín, máx]. No imprimas filas.',
+      },
+      {
+        titulo: 'Distribución por categoría',
+        texto:
+          'df tiene la columna [categoría] (texto). Escribe código que cuente cuántos registros hay por cada valor, ordenado de mayor a menor, con su porcentaje del total. Señala si hay valores que parecen el mismo escrito de forma distinta (mayúsculas, espacios, abreviaturas) sin mostrar filas.',
+      },
+    ],
+  },
+  {
+    id: 'limpieza',
+    titulo: 'Limpieza',
+    icon: 'icon-[tabler--wash-machine]',
+    intro: 'Pida siempre que se marque en lugar de borrar, y que la salida sean conteos. Después, verifique con un caso que usted conozca.',
+    prompts: [
+      {
+        titulo: 'Fechas y horas',
+        texto:
+          'df tiene fecha_evento (texto con formato DD/MM/AAAA) y hora (texto HH:MM). Escribe código pandas que convierta fecha_evento a fecha, marque en una columna nueva las fechas posteriores a hoy o anteriores al 1 de enero de 2020, y marque las horas inválidas. Devuelve solo cuántos registros se marcaron en cada caso.',
+      },
+      {
+        titulo: 'Texto contra un catálogo',
+        texto:
+          'df tiene la columna colonia (texto) y tengo una lista oficial en la variable catalogo_colonias. Escribe código que normalice colonia (quitar espacios sobrantes, unificar mayúsculas y acentos) y marque las que no existen en el catálogo. Devuelve el conteo de no coincidentes y los nombres distintos que no coinciden, no las filas.',
+      },
+      {
+        titulo: 'Duplicados',
+        texto:
+          'df tiene fecha_evento, hora, delito y colonia. Escribe código que identifique posibles duplicados cuando coincidan estas cuatro columnas, sin borrarlos: agrega una columna que los marque y devuelve cuántos hay. Explica en una frase qué riesgo tiene borrar automáticamente.',
+      },
+      {
+        titulo: 'Coordenadas',
+        texto:
+          'df tiene latitud y longitud (decimales). Escribe código que marque las coordenadas vacías, las que tienen latitud y longitud invertidas, y las que caen fuera del rectángulo de latitud [mín a máx] y longitud [mín a máx] del municipio. Devuelve el conteo de cada caso.',
+      },
+    ],
+  },
+  {
+    id: 'graficas',
+    titulo: 'Gráficas',
+    icon: 'icon-[tabler--chart-bar]',
+    intro: 'Una instrucción de gráfica lleva: columnas, tipo de gráfica, orden, qué resaltar, título con periodo y rótulos de ejes.',
+    prompts: [
+      {
+        titulo: 'Barras por categoría',
+        texto:
+          'df tiene sector (entero) y fecha (datetime). Con matplotlib haz barras horizontales del conteo de incidentes por sector, ordenadas de mayor a menor, un solo color, el sector con más incidentes resaltado, título que diga qué mide y el periodo, y ejes con rótulos. Entrega solo el código.',
+      },
+      {
+        titulo: 'Tendencia en el tiempo',
+        texto:
+          'df tiene fecha (datetime). Escribe código con matplotlib que cuente incidentes por semana y los grafique como línea, con la semana de mayor incidencia marcada y con su valor, título con el periodo y ejes rotulados. No uses datos de ejemplo: usa df.',
+      },
+      {
+        titulo: 'Mapa de calor día y hora',
+        texto:
+          'df tiene fecha (datetime) y hora (entero 0 a 23). Escribe código que cree una tabla de conteos con día de la semana en las filas y hora en las columnas, y la grafique como mapa de calor con escala de un solo color, rótulos en español y título que diga qué mide.',
+      },
+      {
+        titulo: 'Revisar una gráfica antes de presentarla',
+        texto:
+          'Te describo mi gráfica: barras de incidentes por sector, orden alfabético, eje Y sin título, 8 colores distintos. Dime qué problemas de lectura tiene para un mando que debe decidir en 10 segundos y cómo corregirlos. No incluyo ningún dato.',
+      },
+    ],
+  },
+  {
+    id: 'sql',
+    titulo: 'SQL y Metabase',
+    icon: 'icon-[tabler--database]',
+    intro: 'Comparta solo el esquema de las tablas. La consulta se verifica siempre contra un conteo de control que usted ya conozca.',
+    prompts: [
+      {
+        titulo: 'Consulta con conteo de control',
+        texto:
+          'Tengo la tabla incidentes(folio, fecha date, delito texto, colonia texto, sector entero). Escribe una consulta SQL que cuente incidentes por sector en [mes y año] y, aparte, otra consulta con el total general, para compararlo con un conteo de control. No uses uniones que dupliquen filas.',
+      },
+      {
+        titulo: 'Detectar una unión que duplica',
+        texto:
+          'Tengo incidentes(folio, fecha) y asignaciones(folio, unidad_id), y un folio puede tener varias unidades. Escribe la consulta que cuente incidentes por día sin inflar el conteo por esa relación, y explica por qué se duplicaría con un JOIN directo.',
+      },
+    ],
+  },
+  {
+    id: 'error',
+    titulo: 'Errores y revisión de código',
+    icon: 'icon-[tabler--bug]',
+    intro: 'El mensaje de error es estructura y se puede compartir tal cual. Una fila de datos no.',
+    prompts: [
+      {
+        titulo: 'Me salió un error',
+        texto:
+          'Al ejecutar mi código pandas me salió este error: [pega solo el mensaje de error, sin filas]. Mi df tiene las columnas [lista con tipos]. Explica qué significa en palabras sencillas y cómo corregirlo.',
+      },
+      {
+        titulo: 'Explicar un código línea por línea',
+        texto:
+          'Explícame este código línea por línea, en español sencillo, para saber qué hace antes de ejecutarlo. Dime si borra o modifica datos del archivo original: [pega el código, que no contiene datos].',
+      },
+    ],
+  },
+  {
+    id: 'mapas',
+    titulo: 'Mapas (PyQGIS)',
+    icon: 'icon-[tabler--map-2]',
+    intro: 'Describa las capas y los campos. Las coordenadas de eventos reales no se comparten.',
+    prompts: [
+      {
+        titulo: 'Cargar incidentes desde un CSV',
+        texto:
+          'Escribe un script de PyQGIS que cargue un archivo CSV como capa de puntos usando los campos latitud y longitud, con sistema de coordenadas EPSG:4326, y la agregue al proyecto con el nombre «Incidentes». Que avise con un mensaje si el archivo no existe. La ruta del archivo va en una variable que yo cambio.',
+      },
+      {
+        titulo: 'Contar puntos por colonia',
+        texto:
+          'Tengo una capa de puntos «Incidentes» y una capa de polígonos «Colonias» con el campo nombre. Escribe un script de PyQGIS que cuente cuántos puntos caen en cada colonia y guarde el resultado en un campo nuevo llamado total.',
+      },
+    ],
+  },
+]
+---
+
+<Layout title="Prompts para IA · Operatividad policial" description="Plantillas de instrucciones para análisis exploratorio, limpieza, gráficas, SQL y mapas con un asistente de IA.">
+  <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica · Asistentes de IA</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Prompts para IA</h1>
+    <p class="mt-3 max-w-3xl text-base-content/75">Plantillas para copiar y pegar. Sustituya lo que está entre corchetes por la <strong>estructura</strong> de su archivo: nombres y tipos de columnas. Nunca pegue filas, nombres, domicilios, folios, coordenadas reales ni resultados.</p>
+
+    <section class="mt-8 rounded-box border-2 border-secondary p-5" aria-labelledby="h-receta">
+      <h2 id="h-receta" class="font-display text-lg font-semibold">La receta de cuatro partes</h2>
+      <ol class="mt-3 grid gap-3 sm:grid-cols-2">
+        <li><strong>1. Contexto.</strong> Qué herramienta y qué objeto: «un DataFrame de pandas llamado df».</li>
+        <li><strong>2. Estructura.</strong> Columnas con su tipo. Sin datos.</li>
+        <li><strong>3. Tarea.</strong> Qué debe hacer, con la regla concreta y los límites.</li>
+        <li><strong>4. Salida.</strong> Qué quiere recibir: solo código, solo conteos, sin filas.</li>
+      </ol>
+      <p class="mt-3 text-sm text-base-content/75">Después: lea el código, ejecútelo y verifíquelo contra un resultado que usted ya conozca. La responsabilidad es de quien lo presenta.</p>
+    </section>
+
+    <nav class="mt-8 flex flex-wrap gap-2" aria-label="Categorías">
+      {grupos.map((g) => <a href={`#${g.id}`} class="btn btn-outline btn-sm"><span class={`${g.icon} size-4`}></span>{g.titulo}</a>)}
+    </nav>
+
+    <div class="mt-8 space-y-12">
+      {grupos.map((g) => (
+        <section id={g.id} class="scroll-mt-24">
+          <h2 class="flex items-center gap-3 text-2xl font-semibold"><span class={`${g.icon} size-7 text-secondary`}></span>{g.titulo}</h2>
+          <p class="mt-2 text-base-content/75">{g.intro}</p>
+          <div class="mt-5 space-y-4">
+            {g.prompts.map((p) => (
+              <article class="card border border-base-content/10 shadow-none">
+                <div class="card-body gap-3">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <h3 class="font-display font-semibold">{p.titulo}</h3>
+                    <button type="button" class="btn btn-secondary btn-sm" data-copy><span class="icon-[tabler--copy] size-4"></span><span>Copiar</span></button>
+                  </div>
+                  <pre class="whitespace-pre-wrap rounded-box bg-base-200 p-4 text-sm leading-relaxed" data-text>{p.texto}</pre>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class="mt-12 text-sm text-base-content/60">
+      Antes de pegar cualquier cosa, entrene con la <a class="link" href={href('/practica/regla-de-oro/')}>práctica de la regla de oro</a> y revise la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
+    </p>
+  </article>
+
+  <script>
+    document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) =>
+      btn.addEventListener('click', async () => {
+        const label = btn.querySelector('span:last-child')!
+        const text = btn.closest('article')!.querySelector('[data-text]')!.textContent ?? ''
+        try {
+          await navigator.clipboard.writeText(text)
+          label.textContent = 'Copiado'
+        } catch {
+          label.textContent = 'Selecciónelo a mano'
+        }
+        setTimeout(() => (label.textContent = 'Copiar'), 2500)
+      }),
+    )
+  </script>
+</Layout>

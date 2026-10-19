@@ -529,6 +529,65 @@ export const dia1: Deck = {
     },
     {
       block: '3A',
+      time: '10:34',
+      layout: 'cards',
+      kicker: 'Prompts para análisis · 1 de 3',
+      title: 'EDA: mirar los datos antes de limpiarlos o graficarlos',
+      lead: 'EDA es el análisis exploratorio de datos: un primer vistazo para saber qué hay y qué falla.',
+      cards: [
+        { icon: 'icon-[tabler--table]', title: 'Forma y tipos', text: 'Cuántas filas y columnas tiene y de qué tipo es cada una.' },
+        { icon: 'icon-[tabler--circle-dashed]', title: 'Nulos y duplicados', text: 'Cuánto falta y qué se repite, en conteo y en porcentaje.' },
+        { icon: 'icon-[tabler--chart-histogram]', title: 'Rangos y distribución', text: 'Mínimos, máximos y valores raros que no cuadran.' },
+        { icon: 'icon-[tabler--sparkles]', title: 'Con IA', text: 'Usted pide el código describiendo las columnas; usted lee el resultado.' },
+      ],
+      ruleReminder: true,
+      notes:
+        'Presente EDA como la revisión previa al vuelo: no se corrige ni se grafica nada sin antes mirar. Insista en que el asistente solo recibe el nombre y el tipo de las columnas, nunca filas. Los prompts completos están en la página Práctica > Prompts para IA, para copiar y pegar.',
+    },
+    {
+      block: '3A',
+      time: '10:36',
+      layout: 'compare',
+      kicker: 'Prompts para análisis · 2 de 3',
+      title: 'Para limpiar, describa las columnas y la regla, no los datos',
+      left: {
+        tone: 'bad',
+        label: 'Prompt que expone datos',
+        block: 'Límpiame este archivo:\n«[nombre], [domicilio], 14/03/2026, Bellavista …»',
+      },
+      right: {
+        tone: 'good',
+        label: 'Prompt que protege',
+        block:
+          'Tengo un DataFrame df con: fecha (texto DD/MM/AAAA), colonia (texto), latitud y longitud (decimales). Escribe código pandas que convierta fecha, marque las futuras, normalice colonia y marque coordenadas fuera del municipio. Devuelve solo conteos.',
+      },
+      ruleReminder: true,
+      notes:
+        'Receta de cuatro partes: contexto (qué es df), esquema (columnas y tipos), tarea (qué reglas) y formato de salida (solo conteos, sin filas). Pida marcar, no borrar. Lea el código devuelto antes de ejecutarlo.',
+    },
+    {
+      block: '3A',
+      time: '10:38',
+      layout: 'compare',
+      kicker: 'Prompts para análisis · 3 de 3',
+      title: 'Para graficar, diga qué mide la gráfica y cómo debe verse',
+      left: {
+        tone: 'bad',
+        label: 'Prompt vago',
+        block: 'Hazme una gráfica bonita de los delitos.',
+      },
+      right: {
+        tone: 'good',
+        label: 'Prompt que funciona',
+        block:
+          'df tiene fecha (datetime), delito (texto) y sector (entero). Con matplotlib haz barras horizontales del conteo de incidentes por sector, de mayor a menor, un solo color, el mayor resaltado, título que diga qué mide y el periodo, y ejes rotulados. Solo el código.',
+      },
+      ruleReminder: true,
+      notes:
+        'Una buena instrucción de gráfica trae: columnas, tipo de gráfica, orden, qué resaltar, título y rótulos. Verifique la gráfica contra un conteo que usted conozca. Más plantillas en Práctica > Prompts para IA.',
+    },
+    {
+      block: '3A',
       time: '10:40',
       layout: 'checklist',
       kicker: 'Qué se lleva del bloque',
