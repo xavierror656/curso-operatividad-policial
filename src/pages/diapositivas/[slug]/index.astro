@@ -246,6 +246,12 @@ const qr = await qrSvg(participantUrl)
         align-items: center;
         gap: 0.25rem;
         padding: 0.35rem 0.75rem;
+        /* En pantallas angostas la barra se desplaza en lugar de recortar botones */
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }
+      .deck-bar-row > * {
+        flex-shrink: 0;
       }
       .deck-progress {
         height: 3px;
