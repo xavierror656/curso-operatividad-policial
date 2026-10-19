@@ -2,8 +2,10 @@
 import '../../../styles/global.css'
 import '../../../styles/slides.css'
 import Slide from '../../../components/slides/Slide.astro'
+import Head from '../../../components/Head.astro'
 import { decks } from '../../../data/decks'
 import type { Deck } from '../../../data/types'
+import { absoluteUrl, qrSvg } from '../../../lib/site'
 
 export function getStaticPaths() {
   return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
@@ -14,22 +16,22 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const total = deck.slides.length
 const notes = deck.slides.map((s) => s.notes)
 const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
+const participantUrl = absoluteUrl(`/participante/${deck.slug}/`)
+const qr = await qrSvg(participantUrl)
 ---
 
 <!doctype html>
 <html lang="es-MX" data-theme="karsam">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-    <title>{`Día ${deck.day} · Diapositivas`}</title>
+    <Head title={`Día ${deck.day} · Diapositivas`} />
   </head>
   <body class="deck-body">
     <div class="deck-wrap">
-      <div class="deck-stage" data-deck={deck.slug}>
-        {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
+      <div class="deck-stage" data-deck={deck.slug} tabindex="-1">
+        {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} qr={qr} qrUrl={participantUrl} />)}
       </div>
     </div>
+    <p class="sr-only" aria-live="polite" data-live></p>
 
     <aside class="deck-notes no-print" data-notes-panel hidden>
       <div class="mx-auto flex max-w-5xl gap-3">
@@ -49,6 +51,9 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
         <button type="button" class="btn btn-text btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="deck-index" data-overlay="#deck-index" title="Índice (G)">
           <span class="icon-[tabler--list-numbers] size-5"></span><span class="max-sm:hidden">Índice</span>
         </button>
+        <button type="button" class="btn btn-text btn-sm" data-open-grid title="Vista de miniaturas (Esc u O)">
+          <span class="icon-[tabler--layout-grid] size-5"></span><span class="max-lg:hidden">Miniaturas</span>
+        </button>
         <span class="badge badge-soft badge-secondary max-md:hidden" data-block-badge></span>
 
         <div class="mx-auto flex items-center gap-1">
@@ -61,11 +66,17 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
           </button>
         </div>
 
+        <button type="button" class="btn btn-text btn-square btn-sm" data-toggle-reveal aria-pressed="true" aria-label="Revelar viñetas una por una" title="Viñetas una por una (R)">
+          <span class="icon-[tabler--list-details] size-5"></span>
+        </button>
         <button type="button" class="btn btn-text btn-square btn-sm" data-toggle-notes aria-pressed="false" aria-label="Notas del instructor" title="Notas (N)">
           <span class="icon-[tabler--notes] size-5"></span>
         </button>
         <a href={`${base}/diapositivas/${deck.slug}/presentador/`} target="deck-presentador" class="btn btn-text btn-square btn-sm" data-presenter aria-label="Abrir vista del presentador" title="Vista del presentador (P)">
           <span class="icon-[tabler--device-desktop-analytics] size-5"></span>
+        </a>
+        <a href={`${base}/diapositivas/${deck.slug}/guion/`} class="btn btn-text btn-square btn-sm max-sm:hidden" aria-label="Guion del instructor para imprimir" title="Guion del instructor">
+          <span class="icon-[tabler--script] size-5"></span>
         </a>
         <button type="button" class="btn btn-text btn-square btn-sm max-sm:hidden" data-print aria-label="Imprimir o guardar en PDF" title="Imprimir / PDF">
           <span class="icon-[tabler--printer] size-5"></span>
@@ -132,7 +143,9 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
                 <tr><td><kbd class="kbd kbd-sm">→</kbd> <kbd class="kbd kbd-sm">Espacio</kbd> <kbd class="kbd kbd-sm">AvPág</kbd></td><td>Siguiente</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">←</kbd> <kbd class="kbd kbd-sm">RePág</kbd></td><td>Anterior</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">Inicio</kbd> <kbd class="kbd kbd-sm">Fin</kbd></td><td>Primera / última</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">Esc</kbd> <kbd class="kbd kbd-sm">O</kbd></td><td>Miniaturas de todas las diapositivas</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">G</kbd></td><td>Índice con tiempos</td></tr>
+                <tr><td><kbd class="kbd kbd-sm">R</kbd></td><td>Viñetas una por una, o todas a la vez</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">N</kbd></td><td>Mostrar u ocultar notas</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">P</kbd></td><td>Vista del presentador (otra ventana)</td></tr>
                 <tr><td><kbd class="kbd kbd-sm">F</kbd></td><td>Pantalla completa</td></tr>
@@ -147,6 +160,17 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
     </div>
 
     <div class="deck-blackout" data-blackout hidden></div>
+
+    <!-- Miniaturas -->
+    <div class="deck-grid no-print" data-grid hidden role="dialog" aria-modal="true" aria-labelledby="deck-grid-title">
+      <div class="deck-grid-head">
+        <h2 id="deck-grid-title" class="font-display text-lg font-semibold">Día {deck.day} · {total} diapositivas</h2>
+        <button type="button" class="btn btn-text btn-sm text-white" data-close-grid>
+          <span class="icon-[tabler--x] size-5"></span>Cerrar <kbd class="kbd kbd-sm ms-1">Esc</kbd>
+        </button>
+      </div>
+      <div class="deck-grid-list" data-grid-list></div>
+    </div>
 
     <script type="application/json" id="deck-data" set:html={JSON.stringify({ notes, blockLabels })}></script>
 
@@ -221,6 +245,65 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
         border-radius: 0;
         transition: width 200ms;
       }
+      .deck-grid {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        overflow: auto;
+        background: #0e0f1c;
+        color: #fff;
+      }
+      .deck-grid-head {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1.25rem;
+        background: #0e0f1c;
+        border-bottom: 1px solid #23253d;
+      }
+      .deck-grid-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.1rem;
+        padding: 1.25rem;
+      }
+      .deck-thumb {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: start;
+        border-radius: 0.5rem;
+        outline-offset: 4px;
+        cursor: pointer;
+      }
+      .deck-thumb .slide {
+        border-radius: 0.375rem;
+        transition: transform 150ms;
+      }
+      .deck-thumb:hover .slide {
+        transform: translateY(-2px);
+      }
+      .deck-thumb[aria-current='true'] .slide {
+        outline: 3px solid #aa4545;
+        outline-offset: 2px;
+      }
+      .deck-thumb-num {
+        font-size: 0.8rem;
+        color: #a9abbd;
+        font-variant-numeric: tabular-nums;
+      }
+      .deck-stage:focus-visible {
+        outline: 3px solid #e08a8a;
+        outline-offset: 4px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .deck-stage .slide.is-active {
+          animation: none;
+        }
+      }
       .deck-blackout {
         position: fixed;
         inset: 0;
@@ -247,6 +330,13 @@ const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
         color: var(--color-base-content);
       }
       @media print {
+        @page {
+          size: 13.333in 7.5in;
+          margin: 0;
+        }
+        .deck-stage .slide {
+          break-after: page;
+        }
         .deck-body {
           display: block;
           height: auto;

@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{description && <meta name="description" content={description} />}
+<meta name="theme-color" content="#191b2d" />
+<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+<link rel="apple-touch-icon" href={`${base}/icon-192.png`} />
+<link rel="manifest" href={`${base}/manifest.webmanifest`} />
+<title>{title}</title>
+
+{import.meta.env.PROD && (
+  <script is:inline define:vars={{ sw: `${base}/sw.js`, scope: `${base}/` }}>
+    // Guarda el sitio en el navegador para que funcione sin internet en el aula
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => navigator.serviceWorker.register(sw, { scope }).catch(() => {}))
+    }
+  </script>
+)}

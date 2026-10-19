@@ -191,6 +191,13 @@ export const requerimientos = [
 
 export const acreditacion = [
   { icon: 'icon-[tabler--user-check]', texto: 'Asistencia mínima del 80% de las sesiones.' },
-  { icon: 'icon-[tabler--checklist]', texto: 'Entrega de los productos de cada tema.' },
-  { icon: 'icon-[tabler--presentation]', texto: 'Presentación del proyecto final integrador.' },
+  { icon: 'icon-[tabler--presentation]', texto: 'Entrega del producto integrador del Día 3.' },
+  { icon: 'icon-[tabler--checklist]', texto: 'Puntaje mínimo de 6 sobre 10 en la rúbrica del producto final.' },
+  { icon: 'icon-[tabler--shield-lock]', texto: 'Cero incidencias en el manejo seguro de la información.' },
 ]
+
+/**
+ * Día en que va el grupo, para la línea de avance de la portada.
+ * 0 = el curso no ha empezado; 4 = ya concluyó. Actualícelo al iniciar cada día.
+ */
+export const diaActual = 1

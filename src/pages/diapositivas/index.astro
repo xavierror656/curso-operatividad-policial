@@ -37,6 +37,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
                   <>
                     <a href={`${base}/diapositivas/${deck.slug}/`} class="btn btn-primary"><span class="icon-[tabler--player-play] size-5"></span>Presentar</a>
                     <a href={`${base}/diapositivas/${deck.slug}/presentador/`} class="btn btn-outline btn-secondary"><span class="icon-[tabler--device-desktop-analytics] size-5"></span>Vista del presentador</a>
+                    <a href={`${base}/diapositivas/${deck.slug}/guion/`} class="btn btn-outline"><span class="icon-[tabler--script] size-5"></span>Guion para imprimir</a>
+                    <a href={`${base}/participante/${deck.slug}/`} class="btn btn-outline"><span class="icon-[tabler--device-mobile] size-5"></span>Participante</a>
                   </>
                 ) : (
                   <button class="btn" disabled>Próximamente</button>
@@ -51,11 +53,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
     <div class="mt-10 grid gap-4 md:grid-cols-3">
       <div class="alert alert-soft items-start">
         <span class="icon-[tabler--keyboard] size-5 shrink-0"></span>
-        <p><strong>Teclado o control remoto.</strong> Flechas y AvPág/RePág avanzan. <kbd class="kbd kbd-sm">N</kbd> notas, <kbd class="kbd kbd-sm">G</kbd> índice, <kbd class="kbd kbd-sm">F</kbd> pantalla completa.</p>
+        <p><strong>Teclado o control remoto.</strong> Flechas y AvPág/RePág avanzan viñeta por viñeta. <kbd class="kbd kbd-sm">Esc</kbd> miniaturas, <kbd class="kbd kbd-sm">N</kbd> notas, <kbd class="kbd kbd-sm">R</kbd> todas las viñetas, <kbd class="kbd kbd-sm">F</kbd> pantalla completa.</p>
       </div>
       <div class="alert alert-soft items-start">
         <span class="icon-[tabler--printer] size-5 shrink-0"></span>
-        <p><strong>Respaldo en PDF.</strong> Desde la presentación, use el botón de imprimir y elija «Guardar como PDF».</p>
+        <p><strong>Funciona sin internet.</strong> Abra el sitio una vez con conexión y queda guardado en el navegador. De respaldo, imprima en PDF.</p>
       </div>
       <div class="alert alert-soft alert-warning items-start">
         <span class="icon-[tabler--photo-plus] size-5 shrink-0"></span>

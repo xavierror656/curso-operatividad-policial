@@ -1,0 +1,149 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+/** Casos ficticios. Los corchetes indican dónde iría un dato real. */
+const casos = [
+  { texto: 'Mi archivo tiene las columnas fecha_evento, colonia, latitud y longitud.', ok: true, porque: 'Son nombres de columnas: describen la estructura, no a nadie.' },
+  { texto: 'Me salió este error: KeyError: \'fecha_evento\'', ok: true, porque: 'El mensaje de error es estructura. Compártalo tal cual, sin filas.' },
+  { texto: '14/03/2026, Robo a transeúnte, [nombre de la víctima], Bellavista', ok: false, porque: 'Es una fila del archivo y trae el nombre de una persona.' },
+  { texto: 'En la columna latitud algunos decimales vienen con punto y otros con coma.', ok: true, porque: 'Describe un formato, no un dato. Es justo lo que el asistente necesita.' },
+  { texto: 'Este folio no cuadra con el sistema: [folio del parte informativo]', ok: false, porque: 'Los folios identifican un expediente real. Nunca se comparten.' },
+  { texto: 'Una captura de pantalla de la tabla con 20 registros para que vea el problema.', ok: false, porque: 'Una imagen con filas es lo mismo que pegar las filas. Describa el problema con palabras.' },
+  { texto: 'Necesito marcar las fechas posteriores a hoy o anteriores a 2020.', ok: true, porque: 'Describe lo que hay que validar, sin ningún registro.' },
+  { texto: 'Dime en qué colonia cae el robo de anoche: [latitud], [longitud]', ok: false, porque: 'Son coordenadas de un evento real. Ubíquelas usted con la capa de colonias.' },
+  { texto: 'Mi consulta da error: SELECT sector, COUNT(*) FROM incidentes GROUP BY sector', ok: true, porque: 'La consulta solo menciona tabla y columnas. No incluye resultados.' },
+  { texto: 'Te paso el total de incidentes por sector de este mes para que redactes el informe.', ok: false, porque: 'Los resultados también son información institucional. Pida una plantilla y llénela usted.' },
+]
+---
+
+<Layout title="Práctica: regla de oro · Operatividad policial" description="Diez casos para entrenar qué se puede compartir con un asistente de IA.">
+  <article class="mx-auto max-w-2xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica · Regla de oro</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">¿Esto se puede pegar en el asistente?</h1>
+    <p class="mt-3 text-base-content/75">Diez casos ficticios. Decida rápido, como lo haría frente a su equipo. Los corchetes marcan dónde iría un dato real.</p>
+
+    <div class="mt-6 flex items-center gap-3">
+      <div class="progress h-2 flex-1" role="progressbar" aria-label="Avance" aria-valuemin="0" aria-valuemax={casos.length} data-bar-wrap>
+        <div class="progress-bar progress-secondary" style="width:0%" data-bar></div>
+      </div>
+      <span class="text-sm tabular-nums text-base-content/70" data-count>1 / {casos.length}</span>
+    </div>
+
+    <div class="mt-6" data-game>
+      {casos.map((c, i) => (
+        <section class="caso" data-caso={i} data-ok={String(c.ok)} hidden={i !== 0} aria-labelledby={`caso-${i}`}>
+          <h2 id={`caso-${i}`} class="sr-only">Caso {i + 1}</h2>
+          <blockquote class="rounded-box border-s-4 border-primary bg-base-200 p-5 font-display text-lg leading-snug">{c.texto}</blockquote>
+          <div class="mt-5 grid grid-cols-2 gap-3" data-buttons>
+            <button type="button" class="btn btn-success btn-lg" data-answer="true"><span class="icon-[tabler--check] size-5"></span>Sí se puede</button>
+            <button type="button" class="btn btn-error btn-lg" data-answer="false"><span class="icon-[tabler--x] size-5"></span>No se pega</button>
+          </div>
+          <div class="alert mt-5 items-start" data-feedback hidden role="status">
+            <span class="size-6 shrink-0" data-fb-icon></span>
+            <div>
+              <p class="font-semibold" data-fb-title></p>
+              <p>{c.porque}</p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary mt-4 w-full" data-next hidden>
+            {i === casos.length - 1 ? 'Ver resultado' : 'Siguiente caso'}<span class="icon-[tabler--arrow-right] size-5"></span>
+          </button>
+        </section>
+      ))}
+
+      <section data-final hidden tabindex="-1">
+        <div class="card border border-secondary/40 shadow-none">
+          <div class="card-body items-start gap-3">
+            <p class="text-sm uppercase tracking-widest text-base-content/60">Resultado</p>
+            <p class="font-display text-5xl font-bold"><span data-score></span><span class="text-2xl text-base-content/50"> / {casos.length}</span></p>
+            <p data-verdict></p>
+            <p class="font-display text-lg font-semibold">Comparta la estructura, nunca los datos. Ante la duda, no lo comparta y pregunte.</p>
+            <button type="button" class="btn btn-outline mt-2" data-restart><span class="icon-[tabler--refresh] size-5"></span>Intentar de nuevo</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+
+  <script>
+    const casos = [...document.querySelectorAll<HTMLElement>('[data-caso]')]
+    const final = document.querySelector<HTMLElement>('[data-final]')!
+    const bar = document.querySelector<HTMLElement>('[data-bar]')!
+    const count = document.querySelector<HTMLElement>('[data-count]')!
+    let aciertos = 0
+
+    const show = (i: number) => {
+      casos.forEach((c, n) => (c.hidden = n !== i))
+      count.textContent = `${Math.min(i + 1, casos.length)} / ${casos.length}`
+      bar.style.width = `${(i / casos.length) * 100}%`
+    }
+
+    casos.forEach((caso, i) => {
+      const fb = caso.querySelector<HTMLElement>('[data-feedback]')!
+      const next = caso.querySelector<HTMLButtonElement>('[data-next]')!
+      caso.querySelectorAll<HTMLButtonElement>('[data-answer]').forEach((btn) =>
+        btn.addEventListener('click', () => {
+          const correcto = btn.dataset.answer === caso.dataset.ok
+          if (correcto) aciertos++
+          caso.querySelectorAll<HTMLButtonElement>('[data-answer]').forEach((b) => {
+            b.disabled = true
+            b.classList.toggle('btn-outline', b !== btn)
+            b.classList.toggle('elegido', b === btn)
+            b.setAttribute('aria-pressed', String(b === btn))
+          })
+          fb.hidden = false
+          fb.className = `alert mt-5 items-start ${correcto ? 'alert-soft alert-success' : 'alert-soft alert-error'}`
+          fb.querySelector('[data-fb-icon]')!.className = `size-6 shrink-0 ${correcto ? 'icon-[tabler--circle-check]' : 'icon-[tabler--alert-circle]'}`
+          fb.querySelector('[data-fb-title]')!.textContent = correcto
+            ? 'Correcto.'
+            : caso.dataset.ok === 'true'
+              ? 'Sí se podía compartir.'
+              : 'No se pega.'
+          next.hidden = false
+          next.focus()
+        }),
+      )
+      next.addEventListener('click', () => {
+        if (i < casos.length - 1) {
+          show(i + 1)
+          casos[i + 1].querySelector<HTMLButtonElement>('[data-answer]')?.focus()
+        } else {
+          casos.forEach((c) => (c.hidden = true))
+          bar.style.width = '100%'
+          final.hidden = false
+          final.querySelector('[data-score]')!.textContent = String(aciertos)
+          final.querySelector('[data-verdict]')!.textContent =
+            aciertos === casos.length
+              ? 'Aplicó la regla en todos los casos.'
+              : aciertos >= 8
+                ? 'Bien. Revise los casos en los que dudó: en el trabajo real, la duda se resuelve preguntando.'
+                : 'Repase la tarjeta de la regla de oro y vuelva a intentarlo.'
+          final.focus()
+        }
+      })
+    })
+
+    document.querySelector('[data-restart]')!.addEventListener('click', () => {
+      aciertos = 0
+      casos.forEach((caso) => {
+        caso.querySelectorAll<HTMLButtonElement>('[data-answer]').forEach((b) => {
+          b.disabled = false
+          b.classList.remove('btn-outline', 'elegido')
+          b.removeAttribute('aria-pressed')
+        })
+        caso.querySelector<HTMLElement>('[data-feedback]')!.hidden = true
+        caso.querySelector<HTMLElement>('[data-next]')!.hidden = true
+      })
+      final.hidden = true
+      show(0)
+    })
+  </script>
+
+  <style>
+    :global(.btn.elegido:disabled) {
+      opacity: 1;
+      outline: 3px solid var(--color-base-content);
+      outline-offset: 3px;
+    }
+  </style>
+</Layout>

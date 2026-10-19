@@ -6,9 +6,12 @@ interface Props {
   index: number
   total: number
   day: number
+  /** SVG del código QR a la página del participante; solo se muestra en la portada */
+  qr?: string
+  qrUrl?: string
 }
 
-const { slide: s, index, total, day } = Astro.props
+const { slide: s, index, total, day, qr, qrUrl } = Astro.props
 const dark = s.layout === 'cover' || s.layout === 'break' || s.layout === 'rule'
 const blockLabel = /^\d/.test(s.block) ? `Bloque ${s.block}` : s.block
 const cardCols = (s.cards?.length ?? 0) > 4 ? 3 : (s.cards?.length ?? 0) === 2 ? 2 : (s.cards?.length ?? 0)
@@ -52,17 +55,24 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
           <span>Secretaría de Seguridad Pública Municipal de Ciudad Juárez</span>
         </div>
       )}
+      {s.layout === 'cover' && qr && (
+        <div class="s-qr">
+          <div class="s-qr-code" set:html={qr} />
+          <span>Material del participante</span>
+          {qrUrl && <span class="s-qr-url">{qrUrl.replace(/^https?:\/\//, '')}</span>}
+        </div>
+      )}
 
       {/* Lista simple */}
       {s.layout === 'bullets' && (
-        <ul class="s-list">{s.bullets?.map((b) => <li>{b}</li>)}</ul>
+        <ul class="s-list">{s.bullets?.map((b) => <li data-step>{b}</li>)}</ul>
       )}
 
       {/* Qué vamos a lograr */}
       {s.layout === 'goal' && (
         <ol class="s-goal">
           {s.bullets?.map((b, i) => (
-            <li><span class="s-goal-num">{i + 1}</span><span>{b}</span></li>
+            <li data-step><span class="s-goal-num">{i + 1}</span><span>{b}</span></li>
           ))}
         </ol>
       )}
@@ -71,7 +81,7 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
       {(s.layout === 'takeaway' || s.layout === 'checklist') && (
         <ul class:list={['s-checks', { 's-checks--panel': s.layout === 'takeaway' }]}>
           {s.bullets?.map((b) => (
-            <li><span class:list={[s.layout === 'takeaway' ? 'icon-[tabler--arrow-badge-right-filled]' : 'icon-[tabler--square-check-filled]', 's-check-icon']}></span><span>{b}</span></li>
+            <li data-step><span class:list={[s.layout === 'takeaway' ? 'icon-[tabler--arrow-badge-right-filled]' : 'icon-[tabler--square-check-filled]', 's-check-icon']}></span><span>{b}</span></li>
           ))}
         </ul>
       )}
@@ -212,7 +222,7 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
               </svg>
             )}
           </figure>
-          {s.bullets && <ul class="s-chart-notes">{s.bullets.map((b) => <li>{b}</li>)}</ul>}
+          {s.bullets && <ul class="s-chart-notes">{s.bullets.map((b) => <li data-step>{b}</li>)}</ul>}
         </div>
       )}
 

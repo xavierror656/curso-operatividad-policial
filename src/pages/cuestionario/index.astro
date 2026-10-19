@@ -1,0 +1,222 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { reactivos, abiertas } from '../../data/cuestionario'
+import { href } from '../../lib/site'
+
+const letras = ['a', 'b', 'c', 'd']
+---
+
+<Layout title="Cuestionario · Operatividad policial" description="Cuestionario de diagnóstico y de cierre del curso.">
+  <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Evaluación</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Cuestionario de diagnóstico y de cierre</h1>
+    <p class="mt-3 text-base-content/75">
+      Diez preguntas, unos diez minutos. Se contesta igual al inicio del Día 1 y al cierre del Día 3, para medir cuánto avanzó el grupo. El diagnóstico inicial no cuenta para acreditar: conteste con lo que sabe hoy.
+    </p>
+
+    <form class="mt-8 space-y-8" data-quiz novalidate>
+      <fieldset class="card border border-base-content/10 shadow-none">
+        <div class="card-body gap-4">
+          <legend class="sr-only">Datos de la aplicación</legend>
+          <div>
+            <span class="label-text font-semibold">¿Cuándo lo contesta?</span>
+            <div class="mt-2 grid gap-2 sm:grid-cols-2">
+              <label class="flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-secondary has-checked:bg-secondary/5">
+                <input type="radio" name="modo" value="D" class="radio radio-secondary" checked />
+                <span><strong>Diagnóstico</strong><br /><span class="text-sm text-base-content/70">Inicio del Día 1</span></span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-secondary has-checked:bg-secondary/5">
+                <input type="radio" name="modo" value="C" class="radio radio-secondary" />
+                <span><strong>Cierre</strong><br /><span class="text-sm text-base-content/70">Final del Día 3</span></span>
+              </label>
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label class="label-text font-semibold" for="q-nombre">Nombre</label>
+              <input id="q-nombre" name="nombre" class="input mt-1" autocomplete="name" required />
+            </div>
+            <div>
+              <label class="label-text font-semibold" for="q-area">Área</label>
+              <input id="q-area" name="area" class="input mt-1" required />
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <ol class="space-y-6">
+        {reactivos.map((r, i) => (
+          <li>
+            <fieldset class="q-item" data-q={i}>
+              <legend class="font-display font-medium"><span class="text-secondary">{i + 1}.</span> {r.pregunta}</legend>
+              <div class="mt-3 grid gap-2">
+                {r.opciones.map((o, j) => (
+                  <label class="q-opt flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-primary has-checked:bg-base-200" data-opt={j}>
+                    <input type="radio" name={`r${i}`} value={j} class="radio radio-primary radio-sm" />
+                    <span><span class="me-1 text-base-content/60">{letras[j]})</span> {o}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </li>
+        ))}
+      </ol>
+
+      <section class="space-y-5" data-abiertas hidden>
+        <h2 class="text-xl font-semibold">Preguntas de aplicación</h2>
+        <p class="text-sm text-base-content/70">Respuesta breve. No escriba nombres, domicilios ni folios.</p>
+        {abiertas.map((a, i) => (
+          <div>
+            <label class="font-display font-medium" for={`ab${i}`}><span class="text-secondary">{11 + i}.</span> {a}</label>
+            <textarea id={`ab${i}`} name={`ab${i}`} class="textarea mt-2 w-full" rows="3"></textarea>
+          </div>
+        ))}
+      </section>
+
+      <div class="alert alert-soft alert-error" data-error hidden role="alert"></div>
+
+      <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto">
+        <span class="icon-[tabler--send] size-5"></span>Terminar y ver resultado
+      </button>
+    </form>
+
+    <section class="mt-10 space-y-6" data-result hidden tabindex="-1" aria-live="polite">
+      <div class="card border border-secondary/40 shadow-none">
+        <div class="card-body gap-2">
+          <p class="text-sm uppercase tracking-widest text-base-content/60" data-result-mode></p>
+          <p class="font-display text-5xl font-bold"><span data-score></span><span class="text-2xl text-base-content/50"> / {reactivos.length}</span></p>
+          <p class="text-base-content/80" data-compare></p>
+        </div>
+      </div>
+
+      <div class="card border border-base-content/10 shadow-none">
+        <div class="card-body gap-3">
+          <h2 class="font-display text-lg font-semibold">Entregue este resultado al instructor</h2>
+          <p class="text-sm text-base-content/70">Cópielo y envíelo por el medio que indique el instructor, o muéstrele la pantalla.</p>
+          <pre class="whitespace-pre-wrap rounded-box bg-base-200 p-4 text-sm" data-code></pre>
+          <button type="button" class="btn btn-secondary w-full sm:w-auto" data-copy>
+            <span class="icon-[tabler--copy] size-5"></span><span>Copiar resultado</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="text-sm text-base-content/60" data-review-note></p>
+      <button type="button" class="btn btn-outline" data-again>Contestar de nuevo</button>
+    </section>
+
+    <p class="mt-12 text-sm text-base-content/60">
+      ¿Es instructor? Junte los resultados del grupo en <a class="link" href={href('/cuestionario/resultados/')}>Resultados del grupo</a>.
+    </p>
+  </article>
+
+  <script type="application/json" id="quiz-key" set:html={JSON.stringify(reactivos.map((r) => r.correcta))}></script>
+
+  <script>
+    const key = JSON.parse(document.getElementById('quiz-key')!.textContent!) as number[]
+    const form = document.querySelector<HTMLFormElement>('[data-quiz]')!
+    const result = document.querySelector<HTMLElement>('[data-result]')!
+    const abiertas = form.querySelector<HTMLElement>('[data-abiertas]')!
+    const errorBox = form.querySelector<HTMLElement>('[data-error]')!
+    const $ = (sel: string) => result.querySelector<HTMLElement>(sel)!
+    const STORE = 'cuestionario-c3'
+
+    const modo = () => (new FormData(form).get('modo') as string) ?? 'D'
+    const syncModo = () => (abiertas.hidden = modo() !== 'C')
+    form.querySelectorAll('input[name="modo"]').forEach((r) => r.addEventListener('change', syncModo))
+    syncModo()
+
+    const clean = (s: string) => s.replace(/[|\n\r]/g, ' ').trim()
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const data = new FormData(form)
+      const nombre = clean(String(data.get('nombre') ?? ''))
+      const area = clean(String(data.get('area') ?? ''))
+      const respuestas = key.map((_, i) => data.get(`r${i}`))
+      const faltan = respuestas.map((r, i) => (r === null ? i + 1 : 0)).filter(Boolean)
+      if (!nombre || !area || faltan.length) {
+        errorBox.hidden = false
+        errorBox.textContent = !nombre || !area ? 'Escriba su nombre y su área.' : `Falta contestar: ${faltan.join(', ')}.`
+        return
+      }
+      errorBox.hidden = true
+
+      const bits = respuestas.map((r, i) => (Number(r) === key[i] ? '1' : '0')).join('')
+      const score = [...bits].filter((b) => b === '1').length
+      const m = modo()
+      const code = `C3|${m}|${bits}|${nombre}|${area}`
+      const abiertasTxt =
+        m === 'C'
+          ? [0, 1]
+              .map((i) => clean(String(data.get(`ab${i}`) ?? '')))
+              .map((t, i) => (t ? `\n${11 + i}. ${t}` : ''))
+              .join('')
+          : ''
+
+      // Se guarda en este dispositivo para comparar el cierre contra el diagnóstico
+      let saved: Record<string, number> = {}
+      try {
+        saved = JSON.parse(localStorage.getItem(STORE) ?? '{}')
+        saved[m] = score
+        localStorage.setItem(STORE, JSON.stringify(saved))
+      } catch {}
+
+      $('[data-result-mode]').textContent = m === 'D' ? 'Diagnóstico inicial' : 'Cierre del curso'
+      $('[data-score]').textContent = String(score)
+      $('[data-compare]').textContent =
+        m === 'C' && saved.D !== undefined
+          ? `Al inicio obtuvo ${saved.D} de ${key.length}. Avanzó ${score - saved.D >= 0 ? '+' : ''}${score - saved.D}.`
+          : m === 'D'
+            ? 'Este es su punto de partida. Al cierre del Día 3 lo contestará de nuevo.'
+            : ''
+      $('[data-code]').textContent = code + abiertasTxt
+      $('[data-review-note]').textContent =
+        m === 'D'
+          ? 'Las respuestas correctas no se muestran en el diagnóstico, para no afectar el cierre.'
+          : 'Las respuestas correctas quedan marcadas arriba en verde.'
+
+      // En el cierre se muestran aciertos y errores
+      form.querySelectorAll<HTMLElement>('[data-q]').forEach((q, i) => {
+        q.querySelectorAll<HTMLElement>('[data-opt]').forEach((o) => {
+          const j = Number(o.dataset.opt)
+          o.classList.toggle('q-correct', m === 'C' && j === key[i])
+          o.classList.toggle('q-wrong', m === 'C' && j === Number(respuestas[i]) && j !== key[i])
+        })
+      })
+
+      result.hidden = false
+      result.focus()
+      result.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+    })
+
+    $('[data-copy]').addEventListener('click', async () => {
+      const label = $('[data-copy]').querySelector('span:last-child')!
+      try {
+        await navigator.clipboard.writeText($('[data-code]').textContent ?? '')
+        label.textContent = 'Copiado'
+      } catch {
+        label.textContent = 'Selecciónelo y cópielo a mano'
+      }
+      setTimeout(() => (label.textContent = 'Copiar resultado'), 2500)
+    })
+
+    $('[data-again]').addEventListener('click', () => {
+      form.reset()
+      syncModo()
+      form.querySelectorAll('.q-correct, .q-wrong').forEach((o) => o.classList.remove('q-correct', 'q-wrong'))
+      result.hidden = true
+      form.scrollIntoView()
+    })
+  </script>
+
+  <style>
+    :global(.q-correct) {
+      border-color: var(--color-success) !important;
+      background: color-mix(in oklab, var(--color-success) 10%, transparent) !important;
+    }
+    :global(.q-wrong) {
+      border-color: var(--color-error) !important;
+      background: color-mix(in oklab, var(--color-error) 10%, transparent) !important;
+    }
+  </style>
+</Layout>

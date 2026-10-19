@@ -1,0 +1,167 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { reactivos } from '../../data/cuestionario'
+
+const cortas = [
+  'Colonia escrita de tres formas',
+  'Qué se puede compartir con la IA',
+  'Fecha 03/07/2026',
+  'Coordenadas invertidas',
+  'Tablero frente a reporte',
+  'Verificar la consulta del asistente',
+  'Variables críticas',
+  'Para qué sirve el mapa',
+  'Llamada capturada dos veces',
+  'Responsabilidad del dato',
+]
+---
+
+<Layout title="Resultados del grupo · Cuestionario" description="Compara el diagnóstico inicial contra el cierre del grupo.">
+  <article class="mx-auto max-w-5xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Uso del instructor</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Resultados del grupo</h1>
+    <p class="mt-3 max-w-3xl text-base-content/75">
+      Pegue los resultados que le entregaron los participantes, uno por línea. Todo se calcula en este navegador: nada se envía a ningún servidor.
+    </p>
+
+    <label class="mt-6 block font-semibold" for="codes">Resultados</label>
+    <textarea id="codes" class="textarea mt-2 h-40 w-full font-mono text-sm" placeholder="C3|D|1101011010|Nombre|Área" data-codes></textarea>
+    <div class="mt-3 flex flex-wrap gap-2">
+      <button type="button" class="btn btn-primary" data-calc><span class="icon-[tabler--calculator] size-5"></span>Calcular</button>
+      <button type="button" class="btn btn-outline" data-csv disabled><span class="icon-[tabler--download] size-5"></span>Descargar CSV</button>
+    </div>
+
+    <section class="mt-10 space-y-10" data-out hidden>
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-box border border-base-content/10 p-5">
+          <p class="text-sm text-base-content/60">Promedio al inicio</p>
+          <p class="font-display text-4xl font-bold" data-avg-d>–</p>
+        </div>
+        <div class="rounded-box border border-base-content/10 p-5">
+          <p class="text-sm text-base-content/60">Promedio al cierre</p>
+          <p class="font-display text-4xl font-bold" data-avg-c>–</p>
+        </div>
+        <div class="rounded-box border border-secondary/40 bg-secondary/5 p-5">
+          <p class="text-sm text-base-content/60">Avance del grupo</p>
+          <p class="font-display text-4xl font-bold text-secondary" data-gain>–</p>
+          <p class="text-xs text-base-content/60" data-gain-note></p>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex flex-wrap items-baseline justify-between gap-3">
+          <h2 class="text-xl font-semibold">Aciertos por pregunta</h2>
+          <p class="flex items-center gap-4 text-sm" aria-hidden="true">
+            <span class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-[#a9abbd]"></span>Inicio</span>
+            <span class="flex items-center gap-1.5"><span class="inline-block size-3 rounded-sm bg-primary"></span>Cierre</span>
+          </p>
+        </div>
+        <ul class="mt-4 space-y-3" data-bars></ul>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold">Por participante</h2>
+        <div class="mt-3 overflow-x-auto rounded-box border border-base-content/10">
+          <table class="table">
+            <thead><tr><th>Nombre</th><th>Área</th><th>Inicio</th><th>Cierre</th><th>Avance</th></tr></thead>
+            <tbody data-rows></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <script type="application/json" id="labels" set:html={JSON.stringify(cortas)}></script>
+  <script type="application/json" id="total" set:html={String(reactivos.length)}></script>
+
+  <script>
+    const labels = JSON.parse(document.getElementById('labels')!.textContent!) as string[]
+    const total = Number(document.getElementById('total')!.textContent)
+    const $ = <T extends HTMLElement = HTMLElement>(sel: string) => document.querySelector<T>(sel)!
+
+    interface Persona {
+      nombre: string
+      area: string
+      D?: string
+      C?: string
+    }
+    let personas: Persona[] = []
+
+    const score = (bits?: string) => (bits ? [...bits].filter((b) => b === '1').length : undefined)
+    const avg = (xs: number[]) => (xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : undefined)
+    const fmt = (n?: number) => (n === undefined ? '–' : n.toFixed(1))
+
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!)
+
+    $('[data-calc]').addEventListener('click', () => {
+      const map = new Map<string, Persona>()
+      for (const line of $<HTMLTextAreaElement>('[data-codes]').value.split(/\r?\n/)) {
+        const [tag, modo, bits, nombre = '', area = ''] = line.trim().split('|')
+        if (tag !== 'C3' || !/^[DC]$/.test(modo) || !new RegExp(`^[01]{${total}}$`).test(bits)) continue
+        const id = `${nombre.trim().toLowerCase()}|${area.trim().toLowerCase()}`
+        const p = map.get(id) ?? { nombre: nombre.trim(), area: area.trim() }
+        p[modo as 'D' | 'C'] = bits
+        map.set(id, p)
+      }
+      personas = [...map.values()].sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'))
+
+      const ds = personas.map((p) => score(p.D)).filter((n): n is number => n !== undefined)
+      const cs = personas.map((p) => score(p.C)).filter((n): n is number => n !== undefined)
+      const pares = personas.filter((p) => p.D && p.C)
+      const gain = avg(pares.map((p) => score(p.C)! - score(p.D)!))
+      $('[data-avg-d]').textContent = fmt(avg(ds))
+      $('[data-avg-c]').textContent = fmt(avg(cs))
+      $('[data-gain]').textContent = gain === undefined ? '–' : `${gain >= 0 ? '+' : ''}${gain.toFixed(1)}`
+      $('[data-gain-note]').textContent = `Puntos sobre ${total}, entre ${pares.length} participante${pares.length === 1 ? '' : 's'} con ambas aplicaciones.`
+
+      const pct = (modo: 'D' | 'C', q: number) => {
+        const conj = personas.filter((p) => p[modo])
+        return conj.length ? Math.round((conj.filter((p) => p[modo]![q] === '1').length / conj.length) * 100) : undefined
+      }
+      $('[data-bars]').innerHTML = labels
+        .map((label, q) => {
+          const d = pct('D', q)
+          const c = pct('C', q)
+          const bar = (v: number | undefined, color: string, name: string) =>
+            `<div class="flex items-center gap-2" title="${name}: ${v ?? '–'}%"><span class="h-3 rounded-e" style="width:${v ?? 0}%;background:${color};min-width:${v ? 2 : 0}px"></span><span class="text-xs tabular-nums text-base-content/70">${v === undefined ? '–' : v + '%'}</span></div>`
+          return `<li class="grid gap-1 sm:grid-cols-[16rem_1fr] sm:items-center"><span class="text-sm"><span class="text-base-content/50">${q + 1}.</span> ${esc(label)}</span><div class="grid gap-0.5">${bar(d, '#a9abbd', 'Inicio')}${bar(c, 'var(--color-primary)', 'Cierre')}</div></li>`
+        })
+        .join('')
+
+      $('[data-rows]').innerHTML = personas
+        .map((p) => {
+          const d = score(p.D)
+          const c = score(p.C)
+          const g = d !== undefined && c !== undefined ? c - d : undefined
+          return `<tr><td>${esc(p.nombre)}</td><td>${esc(p.area)}</td><td class="tabular-nums">${d ?? '–'}</td><td class="tabular-nums">${c ?? '–'}</td><td class="tabular-nums">${g === undefined ? '–' : (g >= 0 ? '+' : '') + g}</td></tr>`
+        })
+        .join('')
+
+      $('[data-out]').hidden = personas.length === 0
+      $<HTMLButtonElement>('[data-csv]').disabled = personas.length === 0
+    })
+
+    $('[data-csv]').addEventListener('click', () => {
+      const q = (s: string) => `"${s.replace(/"/g, '""')}"`
+      const head = ['Nombre', 'Área', 'Inicio', 'Cierre', 'Avance', ...labels.flatMap((_, i) => [`P${i + 1} inicio`, `P${i + 1} cierre`])]
+      const rows = personas.map((p) => {
+        const d = score(p.D)
+        const c = score(p.C)
+        return [
+          q(p.nombre),
+          q(p.area),
+          d ?? '',
+          c ?? '',
+          d !== undefined && c !== undefined ? c - d : '',
+          ...labels.flatMap((_, i) => [p.D?.[i] ?? '', p.C?.[i] ?? '']),
+        ].join(',')
+      })
+      const blob = new Blob(['﻿' + [head.map(q).join(','), ...rows].join('\n')], { type: 'text/csv;charset=utf-8' })
+      const a = document.createElement('a')
+      a.href = URL.createObjectURL(blob)
+      a.download = 'resultados-cuestionario-curso-3.csv'
+      a.click()
+      URL.revokeObjectURL(a.href)
+    })
+  </script>
+</Layout>

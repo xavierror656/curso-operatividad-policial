@@ -146,6 +146,10 @@
 .slide-body--cover .s-lead {
   font-size: 2.1cqw;
   margin-top: 2cqw;
+  max-width: 52cqw;
+}
+.slide-body--cover .s-title--xl {
+  max-width: 58cqw;
 }
 .s-cover-foot {
   position: absolute;
@@ -316,6 +320,7 @@
 .s-side-block {
   margin-top: 1.4cqw;
   white-space: pre-wrap;
+  font-family: inherit;
   font-size: 1.65cqw;
   line-height: 1.45;
   font-variant-numeric: tabular-nums;
@@ -864,12 +869,7 @@
 
 /* Impresión: una diapositiva por hoja */
 @media print {
-  @page {
-    size: 13.333in 7.5in;
-    margin: 0;
-  }
   .slide {
-    break-after: page;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -894,4 +894,55 @@
 .slide-body--takeaway .s-capture {
   margin-top: 2cqw;
   margin-bottom: 1.6cqw;
+}
+
+/* Revelado progresivo de viñetas */
+.slide [data-step] {
+  transition: opacity 220ms ease, translate 220ms ease;
+}
+.slide [data-step][data-hidden] {
+  opacity: 0;
+  translate: 0 0.6cqw;
+}
+@media (prefers-reduced-motion: reduce) {
+  .slide [data-step] {
+    transition: none;
+  }
+}
+@media print {
+  .slide [data-step][data-hidden] {
+    opacity: 1;
+    translate: none;
+  }
+}
+
+/* Código QR de la portada */
+.s-qr {
+  position: absolute;
+  right: 5cqw;
+  bottom: 4cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5cqw;
+  font-size: 0.95cqw;
+  color: #c8c9d6;
+  text-align: center;
+}
+.s-qr-code {
+  width: 11cqw;
+  padding: 0.7cqw;
+  border-radius: 0.8cqw;
+  background: #fff;
+}
+.s-qr-code svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.s-qr-url {
+  max-width: 18cqw;
+  font-size: 0.8cqw;
+  color: #8f91a6;
+  word-break: break-all;
 }

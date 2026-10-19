@@ -2,6 +2,7 @@
 import '../../../styles/global.css'
 import '../../../styles/slides.css'
 import Slide from '../../../components/slides/Slide.astro'
+import Head from '../../../components/Head.astro'
 import { decks } from '../../../data/decks'
 import type { Deck } from '../../../data/types'
 
@@ -24,15 +25,13 @@ const data = {
 <!doctype html>
 <html lang="es-MX" data-theme="karsam">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
-    <title>{`Presentador · Día ${deck.day}`}</title>
+    <Head title={`Presentador · Día ${deck.day}`} />
   </head>
   <body class="presenter">
     <header class="presenter-top">
       <span class="badge badge-secondary" data-block></span>
       <span class="text-sm text-white/70" data-planned></span>
+      <span class="badge badge-lg" data-pace hidden></span>
       <div class="ms-auto flex items-center gap-4">
         <div class="text-end">
           <div class="text-xs uppercase tracking-widest text-white/50">Transcurrido</div>
@@ -53,7 +52,7 @@ const data = {
 
     <main class="presenter-grid">
       <section class="presenter-current">
-        <div class="presenter-label">Actual · <span data-counter>1 / {total}</span></div>
+        <div class="presenter-label">Actual · <span data-counter>1 / {total}</span> <span class="ms-2 normal-case tracking-normal text-white/80" data-steps></span></div>
         <div class="presenter-stage" data-stage="current" data-deck={deck.slug}>
           {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
         </div>
@@ -142,6 +141,10 @@ const data = {
       .presenter-end[hidden],
       .presenter-stage[hidden] {
         display: none;
+      }
+      .presenter-current [data-step][data-hidden] {
+        opacity: 0.3;
+        translate: none;
       }
       .presenter-stage--next {
         opacity: 0.85;

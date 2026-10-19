@@ -1,0 +1,118 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import Slide from '../../../components/slides/Slide.astro'
+import '../../../styles/slides.css'
+import { decks } from '../../../data/decks'
+import type { Deck } from '../../../data/types'
+import { href } from '../../../lib/site'
+
+export function getStaticPaths() {
+  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+}
+
+const { deck } = Astro.props as { deck: Deck }
+const total = deck.slides.length
+const blockLabel = (id: string) => {
+  const b = deck.blocks.find((x) => x.id === id)
+  return `${/^\d/.test(id) ? `${id} · ` : ''}${b?.label ?? id}`
+}
+
+// Lista de revisión del prompt de diapositivas, apartado 4
+const revision = [
+  'Ninguna diapositiva contiene datos reales identificables.',
+  'La regla de oro aparece antes del primer ejercicio con asistente.',
+  'Los marcadores [CAPTURA] están sustituidos por pantallas reales.',
+  'Los tiempos suman las 4 horas, incluido el receso.',
+  'El entregable del día está en una diapositiva propia.',
+  'Todo término técnico nuevo se explica en la misma diapositiva.',
+]
+const capturas = deck.slides.map((s, i) => ({ s, i })).filter(({ s }) => s.capture)
+---
+
+<Layout title={`Guion del instructor · Día ${deck.day}`}>
+  <article class="guion mx-auto max-w-5xl px-4 py-10 md:px-6">
+    <header class="flex flex-wrap items-start justify-between gap-4 border-b border-base-content/10 pb-6">
+      <div>
+        <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Guion del instructor · Día {deck.day} · {deck.schedule}</p>
+        <h1 class="mt-2 text-3xl font-semibold text-balance">{deck.title}</h1>
+        <p class="mt-3 max-w-3xl text-base-content/75">{deck.objective}</p>
+      </div>
+      <div class="flex gap-2 print:hidden">
+        <a href={href(`/diapositivas/${deck.slug}/`)} class="btn btn-outline btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Presentar</a>
+        <button type="button" class="btn btn-primary btn-sm" onclick="window.print()"><span class="icon-[tabler--printer] size-4"></span>Imprimir</button>
+      </div>
+    </header>
+
+    <section class="mt-8 grid gap-6 md:grid-cols-2 print:grid-cols-2">
+      <div>
+        <h2 class="text-lg font-semibold">Revisión antes de impartir</h2>
+        <ul class="mt-3 space-y-2">
+          {revision.map((r) => (
+            <li class="flex items-start gap-2 text-sm"><span class="mt-0.5 inline-block size-4 shrink-0 rounded border border-base-content/40"></span>{r}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="text-lg font-semibold">Capturas pendientes ({capturas.length})</h2>
+        <ul class="mt-3 space-y-2 text-sm">
+          {capturas.map(({ s, i }) => (
+            <li class="flex gap-2"><span class="w-7 shrink-0 tabular-nums text-base-content/60">{i + 1}</span>{s.capture}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-lg font-semibold">Distribución del tiempo</h2>
+      <div class="mt-3 overflow-x-auto rounded-box border border-base-content/10">
+        <table class="table table-sm">
+          <thead><tr><th>#</th><th>Bloque</th><th>Minuto</th><th>Diapositiva</th></tr></thead>
+          <tbody>
+            {deck.slides.map((s, i) => (
+              <tr><td class="tabular-nums">{i + 1}</td><td class="whitespace-nowrap">{blockLabel(s.block)}</td><td class="tabular-nums">{s.time}</td><td>{s.title}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-10 break-before-page">
+      <h2 class="text-lg font-semibold">Diapositivas y notas</h2>
+      <ol class="mt-4 space-y-5">
+        {deck.slides.map((s, i) => (
+          <li class="guion-item grid gap-4 rounded-box border border-base-content/10 p-4 md:grid-cols-[320px_1fr] print:grid-cols-[260px_1fr]">
+            <div class="guion-thumb overflow-hidden rounded-md border border-base-content/10">
+              <Slide slide={s} index={i} total={total} day={deck.day} />
+            </div>
+            <div>
+              <p class="text-xs uppercase tracking-wider text-base-content/60">{i + 1} / {total} · {blockLabel(s.block)} · {s.time}</p>
+              <h3 class="mt-1 font-display text-lg font-semibold">{s.title}</h3>
+              <p class="mt-2 text-base-content/85">{s.notes}</p>
+              {s.capture && <p class="mt-2 text-sm text-warning"><strong>Captura pendiente:</strong> {s.capture}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </article>
+
+  <style>
+    .guion-thumb :global(.s-timer-actions) {
+      display: none;
+    }
+    @media print {
+      @page {
+        size: letter;
+        margin: 1.2cm;
+      }
+      .guion-item {
+        break-inside: avoid;
+      }
+      .guion :global(.slide) {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        break-after: auto;
+      }
+    }
+  </style>
+</Layout>

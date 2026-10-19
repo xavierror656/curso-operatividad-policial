@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import { curso, enfoque, sesiones, temas, productos, requerimientos, acreditacion } from '../data/curso'
+import ReglaDeOro from '../components/ReglaDeOro.astro'
+import { curso, enfoque, sesiones, temas, productos, requerimientos, acreditacion, diaActual } from '../data/curso'
+import { href } from '../lib/site'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
@@ -40,6 +42,60 @@ const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
     </div>
   </section>
 
+  <!-- Avance del curso -->
+  <section id="sesiones" class="scroll-mt-20 border-b border-base-content/10">
+    <div class="mx-auto max-w-6xl px-4 py-14 md:px-6">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <div>
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Sesiones presenciales · 08:00 a 12:00</p>
+          <h2 class="mt-3 text-3xl font-semibold">Un mismo archivo, de la captura al mapa</h2>
+          <p class="mt-3 max-w-3xl text-base-content/70">El archivo que se depura el Día 1 alimenta el tablero del Día 2 y el mapa del Día 3.</p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <a href={href('/practica/regla-de-oro/')} class="btn btn-outline btn-sm"><span class="icon-[tabler--shield-question] size-4"></span>Práctica de la regla</a>
+          <a href={href('/cuestionario/')} class="btn btn-outline btn-sm"><span class="icon-[tabler--checklist] size-4"></span>Cuestionario</a>
+        </div>
+      </div>
+
+      <ol class="timeline-curso mt-10 grid gap-6 md:grid-cols-3 md:gap-0">
+        {sesiones.map((s) => {
+          const estado = s.dia < diaActual ? 'hecho' : s.dia === diaActual ? 'actual' : 'proximo'
+          return (
+            <li class:list={['relative md:pe-6', `is-${estado}`]} aria-current={estado === 'actual' ? 'step' : undefined}>
+              <div class="flex items-center gap-3 md:mb-5">
+                <span class:list={['timeline-dot grid size-10 shrink-0 place-items-center rounded-full font-display font-semibold', {
+                  'bg-success text-success-content': estado === 'hecho',
+                  'bg-secondary text-secondary-content ring-4 ring-secondary/25': estado === 'actual',
+                  'border-2 border-base-content/20 text-base-content/60': estado === 'proximo',
+                }]}>
+                  {estado === 'hecho' ? <span class="icon-[tabler--check] size-5" aria-hidden="true"></span> : s.dia}
+                </span>
+                <span class="timeline-line hidden h-0.5 flex-1 bg-base-content/15 md:block" aria-hidden="true"></span>
+                <span class:list={['badge badge-soft md:hidden', { 'badge-success': estado === 'hecho', 'badge-secondary': estado === 'actual' }]}>
+                  {estado === 'hecho' ? 'Concluido' : estado === 'actual' ? 'En curso' : 'Próximo'}
+                </span>
+              </div>
+              <div class:list={['rounded-box border p-5', estado === 'actual' ? 'border-secondary/50 bg-secondary/5' : 'border-base-content/10']}>
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-display text-sm font-semibold uppercase tracking-widest text-base-content/60">Día {s.dia}</span>
+                  <span class:list={['badge badge-soft max-md:hidden', { 'badge-success': estado === 'hecho', 'badge-secondary': estado === 'actual' }]}>
+                    {estado === 'hecho' ? 'Concluido' : estado === 'actual' ? 'En curso' : 'Próximo'}
+                  </span>
+                </div>
+                <h3 class="mt-2 font-display text-lg font-semibold">{s.titulo}</h3>
+                <p class="mt-2 text-sm text-base-content/70"><strong class="text-base-content">Producto:</strong> {s.entregable}</p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <a href={href(`/diapositivas/${s.slug}/`)} class="btn btn-primary btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Diapositivas</a>
+                  <a href={href(`/participante/${s.slug}/`)} class="btn btn-outline btn-sm"><span class="icon-[tabler--device-mobile] size-4"></span>Participante</a>
+                </div>
+              </div>
+            </li>
+          )
+        })}
+      </ol>
+    </div>
+  </section>
+
   <!-- Objetivo y enfoque -->
   <section class="mx-auto max-w-6xl px-4 py-16 md:px-6">
     <div class="grid gap-10 md:grid-cols-[1fr_2fr]">
@@ -66,66 +122,8 @@ const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
   </section>
 
   <!-- Regla de oro -->
-  <section id="regla" class="scroll-mt-20 bg-primary text-primary-content">
-    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-[1fr_1.2fr] md:px-6">
-      <div>
-        <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-rojo-claro">Regla de oro</p>
-        <h2 class="mt-3 text-4xl font-semibold leading-tight">Comparta la estructura, nunca los datos.</h2>
-        <p class="mt-5 text-primary-content/70">
-          Se establece en la primera sesión y se recuerda cada vez que un asistente de IA aparece en pantalla. El asistente genera el código; los datos permanecen en el equipo del participante.
-        </p>
-      </div>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <div class="rounded-box border border-primary-content/10 bg-primary-content/5 p-6">
-          <p class="font-display text-xl font-bold text-verde">SÍ se comparte</p>
-          <ul class="mt-3 space-y-2 text-primary-content/85">
-            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Nombres de las columnas</li>
-            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Tipos de dato y formatos</li>
-            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>El mensaje de error que apareció</li>
-            <li class="flex gap-2"><span class="icon-[tabler--check] mt-1 size-4 shrink-0 text-verde"></span>Lo que se necesita validar</li>
-          </ul>
-        </div>
-        <div class="rounded-box border border-primary-content/10 bg-primary-content/5 p-6">
-          <p class="font-display text-xl font-bold text-rojo-claro">NO se comparte nunca</p>
-          <ul class="mt-3 space-y-2 text-primary-content/85">
-            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Nombres de personas</li>
-            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Domicilios y folios</li>
-            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Coordenadas de eventos reales</li>
-            <li class="flex gap-2"><span class="icon-[tabler--x] mt-1 size-4 shrink-0 text-rojo-claro"></span>Cualquier fila del archivo</li>
-          </ul>
-        </div>
-        <p class="font-display text-lg font-semibold sm:col-span-2">Ante la duda, no lo comparta y pregunte.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sesiones presenciales -->
-  <section id="sesiones" class="mx-auto max-w-6xl scroll-mt-20 px-4 py-16 md:px-6">
-    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Sesiones presenciales · 08:00 a 12:00</p>
-    <h2 class="mt-3 text-3xl font-semibold">Un mismo archivo, de la captura al mapa</h2>
-    <p class="mt-3 max-w-3xl text-base-content/70">El archivo que cada participante depura el Día 1 alimenta el tablero del Día 2 y el mapa del Día 3. No se introduce un conjunto de datos nuevo.</p>
-
-    <div class="mt-10 grid gap-5 md:grid-cols-3">
-      {sesiones.map((s) => (
-        <article class:list={['card shadow-none border', s.disponible ? 'border-secondary/40' : 'border-base-content/10']}>
-          <div class="card-body gap-3">
-            <div class="flex items-center justify-between">
-              <span class="font-display text-4xl font-bold text-secondary">Día {s.dia}</span>
-              {s.disponible
-                ? <span class="badge badge-soft badge-success">Diapositivas listas</span>
-                : <span class="badge badge-soft">En preparación</span>}
-            </div>
-            <h3 class="font-display text-lg font-semibold">{s.titulo}</h3>
-            <p class="text-sm text-base-content/70"><strong class="text-base-content">Entregable:</strong> {s.entregable}</p>
-            <div class="card-actions mt-auto pt-2">
-              {s.disponible
-                ? <a href={`${base}/diapositivas/${s.slug}/`} class="btn btn-primary btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Abrir diapositivas</a>
-                : <button class="btn btn-sm" disabled>Próximamente</button>}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+  <section id="regla" class="scroll-mt-20">
+    <ReglaDeOro />
   </section>
 
   <!-- Temario -->
@@ -210,9 +208,18 @@ const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
         </div>
         <div class="alert alert-soft alert-info mt-6 items-start">
           <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
-          <p>El cuestionario de diagnóstico se aplica al inicio del Día 1 y se repite al cierre del Día 3 para medir el aprendizaje. El inicial no cuenta para acreditar.</p>
+          <p>El cuestionario de diagnóstico se aplica al inicio del Día 1 y se repite al cierre del Día 3 para medir el aprendizaje. El inicial no cuenta para acreditar. <a class="link font-semibold" href={href('/cuestionario/')}>Contestarlo en línea</a>.</p>
         </div>
       </div>
     </div>
   </section>
+
+  <style>
+    .timeline-curso li:last-child .timeline-line {
+      visibility: hidden;
+    }
+    .timeline-curso li.is-hecho .timeline-line {
+      background: var(--color-success);
+    }
+  </style>
 </Layout>
