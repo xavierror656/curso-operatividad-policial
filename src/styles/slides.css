@@ -964,3 +964,103 @@
 [data-deck][data-contrast] .slide--dark { background: #000; color: #fff; }
 [data-deck][data-contrast] .slide--dark .s-kicker,
 [data-deck][data-contrast] .slide--dark .s-lead { color: #fff; }
+
+/* Modelo entidad-relación */
+.s-er-wrap {
+  margin-top: 1.4cqw;
+  display: flex;
+  flex-direction: column;
+  gap: 1cqw;
+  min-height: 0;
+}
+.s-er {
+  width: 100%;
+  height: auto;
+  max-height: 31cqw;
+}
+.er-box {
+  fill: #fff;
+  stroke: var(--navy);
+  stroke-width: 2;
+}
+.er-head {
+  fill: var(--navy);
+}
+.er-name {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  letter-spacing: 0.06em;
+  fill: #fff;
+}
+.er-sep {
+  stroke: var(--linea);
+  stroke-width: 1.5;
+}
+.er-col {
+  font-family: 'Questrial', sans-serif;
+  font-size: 20px;
+  fill: var(--navy);
+}
+.er-col.is-key {
+  font-weight: 700;
+}
+.er-col.is-bad {
+  fill: var(--rojo);
+  font-weight: 700;
+}
+.er-key {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+}
+.er-key--PK {
+  fill: var(--rojo);
+}
+.er-key--FK {
+  fill: var(--gris);
+}
+.er-link {
+  stroke: var(--navy);
+  stroke-width: 3;
+}
+.er-link.is-broken {
+  stroke: var(--rojo);
+  stroke-dasharray: 10 8;
+}
+.er-x {
+  font-size: 34px;
+  font-weight: 700;
+  fill: var(--rojo);
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 8px;
+}
+.er-card {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  fill: var(--rojo);
+}
+.er-label {
+  font-family: 'Questrial', sans-serif;
+  font-style: italic;
+  font-size: 19px;
+  fill: var(--gris);
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 6px;
+}
+.s-er-notes {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8cqw;
+}
+.s-er-notes li {
+  padding: 0.5cqw 1.1cqw;
+  border-left: 0.35cqw solid var(--rojo);
+  background: var(--fondo-suave);
+  font-size: calc(1.45cqw * var(--tz, 1));
+}

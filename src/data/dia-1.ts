@@ -269,6 +269,87 @@ export const dia1: Deck = {
     },
     {
       block: '2A',
+      time: '09:15',
+      layout: 'er',
+      kicker: 'Modelo entidad-relación · 1 de 3',
+      title: 'Un modelo entidad-relación muestra cómo se conectan los datos',
+      lead: 'Cada caja es una tabla y cada línea una regla: un delito se repite en muchos incidentes.',
+      er: {
+        entities: [
+          { id: 'delito', name: 'DELITO', x: 70, y: 40, cols: [{ name: 'delito_id', key: 'PK' }, { name: 'nombre' }, { name: 'categoria' }] },
+          { id: 'colonia', name: 'COLONIA', x: 70, y: 220, cols: [{ name: 'colonia_id', key: 'PK' }, { name: 'nombre_oficial' }, { name: 'sector' }] },
+          {
+            id: 'incidente',
+            name: 'INCIDENTE',
+            x: 670,
+            y: 40,
+            cols: [
+              { name: 'folio', key: 'PK' },
+              { name: 'fecha' },
+              { name: 'hora' },
+              { name: 'delito_id', key: 'FK' },
+              { name: 'colonia_id', key: 'FK' },
+              { name: 'latitud' },
+              { name: 'longitud' },
+            ],
+          },
+        ],
+        relations: [
+          { from: 'delito', to: 'incidente', fromCard: '1', toCard: 'N', label: 'clasifica a', fromCol: 0, toCol: 3 },
+          { from: 'colonia', to: 'incidente', fromCard: '1', toCard: 'N', label: 'ubica a', fromCol: 0, toCol: 4 },
+        ],
+      },
+      notes:
+        'Explique con calma la lectura: PK es la llave que identifica cada fila; FK es la llave que apunta a otra tabla. El 1 y la N dicen cuántos: una colonia tiene muchos incidentes, pero cada incidente ocurre en una sola colonia. Los nombres de tablas y columnas son ilustrativos; ajústelos al esquema real de la plataforma.',
+    },
+    {
+      block: '2A',
+      time: '09:19',
+      layout: 'er',
+      kicker: 'Modelo entidad-relación · 2 de 3',
+      title: 'Una colonia escrita a mano rompe la relación con el catálogo',
+      lead: 'Si el valor no existe en el catálogo, el incidente queda huérfano y no cuenta en su colonia.',
+      er: {
+        entities: [
+          { id: 'colonia', name: 'COLONIA (catálogo)', x: 70, y: 40, cols: [{ name: 'colonia_id = 118', key: 'PK' }, { name: 'Hacienda de las Torres' }] },
+          {
+            id: 'incidente',
+            name: 'INCIDENTE',
+            x: 670,
+            y: 40,
+            cols: [{ name: 'folio', key: 'PK' }, { name: 'fecha' }, { name: '«Hda. Las Torres»', bad: true }, { name: 'colonia_id = vacío', key: 'FK', bad: true }],
+          },
+        ],
+        relations: [{ from: 'colonia', to: 'incidente', fromCard: '1', toCard: 'N', label: 'no coincide', broken: true, fromCol: 0, toCol: 3 }],
+      },
+      bullets: ['Sin coincidencia, el incidente no suma a su colonia', 'Se corrige eligiendo del catálogo, no escribiendo a mano'],
+      notes:
+        'Conecte con el vicio de captura que verán en el Bloque 2B: la colonia con varias grafías. La llave foránea queda vacía porque el texto capturado no existe en el catálogo. Ejemplo ficticio; no use nombres de colonias de casos reales.',
+    },
+    {
+      block: '2A',
+      time: '09:22',
+      layout: 'er',
+      kicker: 'Modelo entidad-relación · 3 de 3',
+      title: 'Un incidente con dos unidades aparece dos veces al unir las tablas',
+      lead: 'La relación de muchos a muchos se resuelve con una tabla intermedia, y se verifica con un conteo de control.',
+      er: {
+        entities: [
+          { id: 'incidente', name: 'INCIDENTE', x: 0, y: 40, cols: [{ name: 'folio', key: 'PK' }, { name: 'fecha' }, { name: 'delito_id', key: 'FK' }] },
+          { id: 'asignacion', name: 'ASIGNACION', x: 380, y: 40, cols: [{ name: 'folio', key: 'FK' }, { name: 'unidad_id', key: 'FK' }, { name: 'hora_llegada' }] },
+          { id: 'unidad', name: 'UNIDAD', x: 760, y: 40, cols: [{ name: 'unidad_id', key: 'PK' }, { name: 'tipo' }, { name: 'sector' }] },
+        ],
+        relations: [
+          { from: 'incidente', to: 'asignacion', fromCard: '1', toCard: 'N', label: 'se atiende', fromCol: 0, toCol: 0 },
+          { from: 'unidad', to: 'asignacion', fromCard: '1', toCard: 'N', label: 'participa', fromCol: 0, toCol: 1 },
+        ],
+      },
+      bullets: ['Un folio con 2 unidades genera 2 filas al unir', 'Cuente folios distintos, no filas', 'Compare contra un conteo de control'],
+      notes:
+        'Adelante el caso del Día 2: una consulta generada con IA unía incidentes con unidades y el tablero mostró 412 en lugar de 268. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
+    },
+    {
+      block: '2A',
       time: '09:26',
       layout: 'takeaway',
       kicker: 'Qué se lleva del bloque',

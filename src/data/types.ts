@@ -16,6 +16,7 @@ export type Layout =
   | 'checklist'
   | 'chart'
   | 'dashboard'
+  | 'er'
 
 export interface Card {
   icon?: string
@@ -57,6 +58,36 @@ export interface Alert {
   label: string
 }
 
+export interface ErEntity {
+  id: string
+  /** Nombre de la tabla */
+  name: string
+  /** Posición en un lienzo de 1000 x 400 */
+  x: number
+  y: number
+  cols: { name: string; key?: 'PK' | 'FK'; bad?: boolean }[]
+}
+
+export interface ErRelation {
+  from: string
+  to: string
+  /** Cardinalidad en cada extremo */
+  fromCard: '1' | 'N'
+  toCard: '1' | 'N'
+  label?: string
+  /** Fila (columna de la tabla) donde se ancla cada extremo; por omisión, el centro de la caja */
+  fromCol?: number
+  toCol?: number
+  /** Relación rota: el valor no existe en la tabla de referencia */
+  broken?: boolean
+}
+
+/** Diagrama entidad-relación para layout 'er' */
+export interface Er {
+  entities: ErEntity[]
+  relations: ErRelation[]
+}
+
 export interface Slide {
   /** Bloque al que pertenece: 'Apertura', '1A', 'Receso', etc. */
   block: string
@@ -78,6 +109,8 @@ export interface Slide {
   alerts?: Alert[]
   table?: { head: string[]; rows: string[][] }
   chart?: Chart
+  /** Para layout 'er': tablas y sus relaciones */
+  er?: Er
   /** Minutos del cronómetro para layout 'timer' */
   minutes?: number
   /** Recordatorio de la regla de oro cuando aparece un asistente de IA en pantalla */

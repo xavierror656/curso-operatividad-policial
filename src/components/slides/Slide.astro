@@ -29,6 +29,38 @@ const pad = { l: 56, r: 16, t: 16, b: 44 }
 const x = (i: number) => pad.l + (i * (W - pad.l - pad.r)) / Math.max(1, (chart?.data.length ?? 1) - 1)
 const y = (v: number) => pad.t + (1 - v / top) * (H - pad.t - pad.b)
 const linePath = chart?.data.map((d, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(d.value).toFixed(1)}`).join(' ')
+// Diagrama entidad-relación: cada tabla es una caja y cada relación, una línea entre sus bordes
+const EW = 240
+const EHEAD = 40
+const EROW = 32
+const boxOf = (id: string) => {
+  const e = s.er!.entities.find((n) => n.id === id)!
+  return { e, x: e.x, y: e.y, w: EW, h: EHEAD + e.cols.length * EROW }
+}
+const links = (s.er?.relations ?? []).map((r) => {
+  const a = boxOf(r.from)
+  const b = boxOf(r.to)
+  const ay = a.y + (r.fromCol === undefined ? a.h / 2 : EHEAD + r.fromCol * EROW + EROW / 2)
+  const by = b.y + (r.toCol === undefined ? b.h / 2 : EHEAD + r.toCol * EROW + EROW / 2)
+  let x1: number, y1: number, x2: number, y2: number
+  if (a.x + a.w <= b.x) [x1, y1, x2, y2] = [a.x + a.w, ay, b.x, by]
+  else if (b.x + b.w <= a.x) [x1, y1, x2, y2] = [a.x, ay, b.x + b.w, by]
+  else if (a.y < b.y) [x1, y1, x2, y2] = [a.x + a.w / 2, a.y + a.h, b.x + b.w / 2, b.y]
+  else [x1, y1, x2, y2] = [a.x + a.w / 2, a.y, b.x + b.w / 2, b.y + b.h]
+  const len = Math.hypot(x2 - x1, y2 - y1) || 1
+  const ux = (x2 - x1) / len
+  const uy = (y2 - y1) / len
+  // Las marcas van a un lado de la línea, para no taparla
+  const px = uy * 16
+  const py = -ux * 16
+  return {
+    r,
+    line: { x1, y1, x2, y2 },
+    c1: { x: x1 + ux * 22 + px, y: y1 + uy * 22 + py },
+    c2: { x: x2 - ux * 22 + px, y: y2 - uy * 22 + py },
+    mid: { x: (x1 + x2) / 2 + px * 1.3, y: (y1 + y2) / 2 + py * 1.3 },
+  }
+})
 const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
 ---
 
@@ -236,6 +268,41 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
               {c.text && <span>{c.text}</span>}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Modelo entidad-relación */}
+      {s.layout === 'er' && s.er && (
+        <div class="s-er-wrap">
+          <svg class="s-er" viewBox="-4 0 1008 400" role="img" aria-label={s.title}>
+            {links.map((l) => (
+              <g>
+                <line x1={l.line.x1} y1={l.line.y1} x2={l.line.x2} y2={l.line.y2} class:list={['er-link', { 'is-broken': l.r.broken }]} />
+                {l.r.broken && <text x={(l.line.x1 + l.line.x2) / 2} y={(l.line.y1 + l.line.y2) / 2 + 9} text-anchor="middle" class="er-x">✕</text>}
+                <text x={l.c1.x} y={l.c1.y + 8} text-anchor="middle" class="er-card">{l.r.fromCard}</text>
+                <text x={l.c2.x} y={l.c2.y + 8} text-anchor="middle" class="er-card">{l.r.toCard}</text>
+                {l.r.label && <text x={l.mid.x} y={l.mid.y} text-anchor="middle" class="er-label">{l.r.label}</text>}
+              </g>
+            ))}
+            {s.er.entities.map((e) => {
+              const h = EHEAD + e.cols.length * EROW
+              return (
+                <g class="er-ent">
+                  <rect x={e.x} y={e.y} width={EW} height={h} rx="8" class="er-box" />
+                  <path d={`M${e.x},${e.y + EHEAD} V${e.y + 8} a8,8 0 0 1 8,-8 H${e.x + EW - 8} a8,8 0 0 1 8,8 V${e.y + EHEAD} Z`} class="er-head" />
+                  <text x={e.x + EW / 2} y={e.y + 27} text-anchor="middle" class="er-name">{e.name}</text>
+                  {e.cols.map((c, i) => (
+                    <g>
+                      {i > 0 && <line x1={e.x} x2={e.x + EW} y1={e.y + EHEAD + i * EROW} y2={e.y + EHEAD + i * EROW} class="er-sep" />}
+                      <text x={e.x + 14} y={e.y + EHEAD + i * EROW + 22} class:list={['er-col', { 'is-bad': c.bad, 'is-key': c.key === 'PK' }]}>{c.name}</text>
+                      {c.key && <text x={e.x + EW - 14} y={e.y + EHEAD + i * EROW + 22} text-anchor="end" class:list={['er-key', `er-key--${c.key}`]}>{c.key}</text>}
+                    </g>
+                  ))}
+                </g>
+              )
+            })}
+          </svg>
+          {s.bullets && <ul class="s-er-notes">{s.bullets.map((b) => <li data-step>{b}</li>)}</ul>}
         </div>
       )}
 
