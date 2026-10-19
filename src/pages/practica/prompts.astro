@@ -87,24 +87,6 @@ const grupos = [
     ],
   },
   {
-    id: 'sql',
-    titulo: 'SQL y Metabase',
-    icon: 'icon-[tabler--database]',
-    intro: 'Comparta solo el esquema de las tablas. La consulta se verifica siempre contra un conteo de control que usted ya conozca.',
-    prompts: [
-      {
-        titulo: 'Consulta con conteo de control',
-        texto:
-          'Tengo la tabla incidentes(folio, fecha date, delito texto, colonia texto, sector entero). Escribe una consulta SQL que cuente incidentes por sector en [mes y año] y, aparte, otra consulta con el total general, para compararlo con un conteo de control. No uses uniones que dupliquen filas.',
-      },
-      {
-        titulo: 'Detectar una unión que duplica',
-        texto:
-          'Tengo incidentes(folio, fecha) y asignaciones(folio, unidad_id), y un folio puede tener varias unidades. Escribe la consulta que cuente incidentes por día sin inflar el conteo por esa relación, y explica por qué se duplicaría con un JOIN directo.',
-      },
-    ],
-  },
-  {
     id: 'error',
     titulo: 'Errores y revisión de código',
     icon: 'icon-[tabler--bug]',
@@ -122,28 +104,10 @@ const grupos = [
       },
     ],
   },
-  {
-    id: 'mapas',
-    titulo: 'Mapas (PyQGIS)',
-    icon: 'icon-[tabler--map-2]',
-    intro: 'Describa las capas y los campos. Las coordenadas de eventos reales no se comparten.',
-    prompts: [
-      {
-        titulo: 'Cargar incidentes desde un CSV',
-        texto:
-          'Escribe un script de PyQGIS que cargue un archivo CSV como capa de puntos usando los campos latitud y longitud, con sistema de coordenadas EPSG:4326, y la agregue al proyecto con el nombre «Incidentes». Que avise con un mensaje si el archivo no existe. La ruta del archivo va en una variable que yo cambio.',
-      },
-      {
-        titulo: 'Contar puntos por colonia',
-        texto:
-          'Tengo una capa de puntos «Incidentes» y una capa de polígonos «Colonias» con el campo nombre. Escribe un script de PyQGIS que cuente cuántos puntos caen en cada colonia y guarde el resultado en un campo nuevo llamado total.',
-      },
-    ],
-  },
 ]
 ---
 
-<Layout title="Prompts para IA · Operatividad policial" description="Plantillas de instrucciones para análisis exploratorio, limpieza, gráficas, SQL y mapas con un asistente de IA.">
+<Layout title="Prompts para IA · Operatividad policial" description="Plantillas de instrucciones para análisis exploratorio, limpieza y gráficas con un asistente de IA.">
   <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica · Asistentes de IA</p>
     <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Prompts para IA</h1>
