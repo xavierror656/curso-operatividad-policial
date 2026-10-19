@@ -118,6 +118,24 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
     )}
 
     <section class="mt-10 grid gap-3 sm:grid-cols-2">
+      <a href={href(`/participante/${deck.slug}/resumen/`)} class="card border border-secondary/50 bg-secondary/5 shadow-none transition hover:border-secondary sm:col-span-2">
+        <div class="card-body flex-row items-center gap-4 p-5">
+          <span class="icon-[tabler--printer] size-8 shrink-0 text-secondary"></span>
+          <div><p class="font-semibold">Resumen de una página</p><p class="text-sm text-base-content/70">Para imprimir o guardar en PDF y llevar al servicio.</p></div>
+        </div>
+      </a>
+      <a href={href('/practica/hoja-de-verificacion/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
+        <div class="card-body flex-row items-center gap-4 p-5">
+          <span class="icon-[tabler--checklist] size-8 shrink-0 text-secondary"></span>
+          <div><p class="font-semibold">Hoja de verificación</p><p class="text-sm text-base-content/70">Revise su archivo, tablero o mapa antes de entregar.</p></div>
+        </div>
+      </a>
+      <a href={href('/practica/casos/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
+        <div class="card-body flex-row items-center gap-4 p-5">
+          <span class="icon-[tabler--file-description] size-8 shrink-0 text-secondary"></span>
+          <div><p class="font-semibold">Casos para analizar</p><p class="text-sm text-base-content/70">Errores frecuentes y la lección de cada uno.</p></div>
+        </div>
+      </a>
       <a href={href('/practica/regla-de-oro/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
         <div class="card-body flex-row items-center gap-4 p-5">
           <span class="icon-[tabler--shield-question] size-8 shrink-0 text-secondary"></span>

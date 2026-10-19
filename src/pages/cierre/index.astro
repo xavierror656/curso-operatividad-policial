@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { encuesta } from '../../data/recursos'
+import { reactivos } from '../../data/cuestionario'
+import { href } from '../../lib/site'
+---
+
+<Layout title="Cierre del curso · Operatividad policial" description="Compromiso individual y encuesta de satisfacción al terminar el curso.">
+  <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Cierre · Día 3</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Cierre del curso</h1>
+    <p class="mt-3 text-base-content/75">Tres pasos de cinco minutos cada uno: revise su avance, escriba su compromiso y califique el curso.</p>
+
+    <!-- 1. Avance -->
+    <section class="mt-10" aria-labelledby="h-avance">
+      <h2 id="h-avance" class="text-xl font-semibold"><span class="text-secondary">1.</span> Mi avance</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-box border border-base-content/10 p-5">
+          <p class="text-sm text-base-content/70">Diagnóstico inicial</p>
+          <p class="font-display text-4xl font-bold" data-d>–</p>
+        </div>
+        <div class="rounded-box border border-base-content/10 p-5">
+          <p class="text-sm text-base-content/70">Cierre</p>
+          <p class="font-display text-4xl font-bold" data-c>–</p>
+        </div>
+        <div class="rounded-box border border-secondary/40 bg-secondary/5 p-5">
+          <p class="text-sm text-base-content/70">Avance</p>
+          <p class="font-display text-4xl font-bold text-secondary" data-gain>–</p>
+        </div>
+      </div>
+      <p class="mt-3 text-sm text-base-content/70" data-avance-note></p>
+      <p class="mt-1 text-sm text-base-content/60">Los resultados salen de este dispositivo; si contestó en otro, no aparecerán. Total de preguntas: {reactivos.length}.</p>
+      <a href={href('/cuestionario/')} class="btn btn-outline btn-sm mt-3">Ir al cuestionario</a>
+    </section>
+
+    <!-- 2. Compromiso -->
+    <section class="mt-12" aria-labelledby="h-comp">
+      <h2 id="h-comp" class="text-xl font-semibold"><span class="text-secondary">2.</span> Mi compromiso para la próxima semana</h2>
+      <p class="mt-2 text-base-content/70">Escriba acciones concretas, con un dato o proceso de su trabajo y una fecha. No incluya nombres, folios ni datos reales.</p>
+      <form class="mt-4 space-y-4" data-compromiso>
+        <div>
+          <label class="label-text font-semibold" for="c-hare">Voy a hacer</label>
+          <textarea id="c-hare" name="hare" class="textarea mt-1 w-full" rows="2" placeholder="Ejemplo: validar las coordenadas del reporte semanal antes de enviarlo."></textarea>
+        </div>
+        <div>
+          <label class="label-text font-semibold" for="c-donde">Lo aplicaré en</label>
+          <input id="c-donde" name="donde" class="input mt-1 w-full" placeholder="Reporte, tablero o proceso de mi área" />
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label class="label-text font-semibold" for="c-fecha">Fecha límite</label>
+            <input id="c-fecha" name="fecha" type="date" class="input mt-1 w-full" />
+          </div>
+          <div>
+            <label class="label-text font-semibold" for="c-quien">Me ayudará a verificarlo</label>
+            <input id="c-quien" name="quien" class="input mt-1 w-full" placeholder="Rol, no nombre. Ejemplo: mi jefe de área" />
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 print:hidden">
+          <button type="submit" class="btn btn-primary"><span class="icon-[tabler--device-floppy] size-5"></span>Guardar</button>
+          <button type="button" class="btn btn-outline" data-print><span class="icon-[tabler--printer] size-5"></span>Imprimir mi compromiso</button>
+          <span class="text-sm text-base-content/70" data-comp-status role="status"></span>
+        </div>
+      </form>
+      <p class="mt-2 text-sm text-base-content/60">Se guarda solo en este dispositivo. Tómele una foto o imprímalo para llevarlo.</p>
+    </section>
+
+    <!-- 3. Encuesta -->
+    <section class="mt-12 print:hidden" aria-labelledby="h-enc">
+      <h2 id="h-enc" class="text-xl font-semibold"><span class="text-secondary">3.</span> Encuesta de satisfacción</h2>
+      <p class="mt-2 text-base-content/70">Anónima. 1 es «muy en desacuerdo» y 5 es «muy de acuerdo». Sirve para mejorar la siguiente edición.</p>
+      <form class="mt-4 space-y-5" data-encuesta novalidate>
+        {encuesta.map((q) => (
+          <fieldset>
+            <legend class="font-display font-medium">{q.texto}</legend>
+            <div class="mt-2 flex gap-2">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <label class="flex size-12 cursor-pointer items-center justify-center rounded-box border border-base-content/20 font-display text-lg has-checked:border-secondary has-checked:bg-secondary has-checked:text-secondary-content">
+                  <input type="radio" name={q.id} value={n} class="sr-only" />{n}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+        <div>
+          <label class="font-display font-medium" for="e-mejora">¿Qué cambiaría del curso? (opcional)</label>
+          <textarea id="e-mejora" name="mejora" class="textarea mt-2 w-full" rows="3"></textarea>
+        </div>
+        <div class="alert alert-soft alert-error" data-enc-error hidden role="alert"></div>
+        <button type="submit" class="btn btn-primary"><span class="icon-[tabler--send] size-5"></span>Generar mi respuesta</button>
+      </form>
+
+      <div class="card mt-6 border border-secondary/40 shadow-none" data-enc-result hidden tabindex="-1">
+        <div class="card-body gap-3">
+          <h3 class="font-display text-lg font-semibold">Gracias. Entregue esta línea al instructor</h3>
+          <pre class="whitespace-pre-wrap rounded-box bg-base-200 p-4 text-sm" data-enc-code></pre>
+          <button type="button" class="btn btn-secondary w-full sm:w-auto" data-enc-copy><span class="icon-[tabler--copy] size-5"></span><span>Copiar</span></button>
+        </div>
+      </div>
+    </section>
+
+    <p class="mt-12 text-sm text-base-content/60 print:hidden">
+      ¿Es instructor? Junte las respuestas en <a class="link" href={href('/cierre/resultados/')}>Resultados de la encuesta</a>.
+    </p>
+  </article>
+
+  <script type="application/json" id="enc-ids" set:html={JSON.stringify(encuesta.map((q) => q.id))}></script>
+  <script type="application/json" id="total-q" set:html={String(reactivos.length)}></script>
+
+  <script>
+    const $ = <T extends HTMLElement = HTMLElement>(s: string) => document.querySelector<T>(s)!
+    const ids = JSON.parse($('#enc-ids').textContent!) as string[]
+    const total = Number($('#total-q').textContent)
+
+    // 1. Avance
+    try {
+      const s = JSON.parse(localStorage.getItem('cuestionario-c3') ?? '{}') as { D?: number; C?: number }
+      if (s.D !== undefined) $('[data-d]').textContent = `${s.D}/${total}`
+      if (s.C !== undefined) $('[data-c]').textContent = `${s.C}/${total}`
+      if (s.D !== undefined && s.C !== undefined) {
+        const g = s.C - s.D
+        $('[data-gain]').textContent = `${g >= 0 ? '+' : ''}${g}`
+        $('[data-avance-note]').textContent = g > 0 ? 'Mejoró su resultado. Es el avance que el curso busca.' : g === 0 ? 'Mantuvo su resultado. Repase las preguntas que falló en el modo repaso.' : 'Bajó su resultado. Use el modo repaso del cuestionario para reforzar.'
+      } else {
+        $('[data-avance-note]').textContent = 'Falta contestar el diagnóstico o el cierre en este dispositivo.'
+      }
+    } catch {
+      $('[data-avance-note]').textContent = 'No se pudo leer el avance guardado.'
+    }
+
+    // 2. Compromiso
+    const form = $<HTMLFormElement>('[data-compromiso]')
+    const status = $('[data-comp-status]')
+    try {
+      const saved = JSON.parse(localStorage.getItem('compromiso-c3') ?? '{}') as Record<string, string>
+      for (const [k, v] of Object.entries(saved)) {
+        const el = form.elements.namedItem(k) as HTMLInputElement | null
+        if (el) el.value = v
+      }
+    } catch {}
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const data = Object.fromEntries(new FormData(form)) as Record<string, string>
+      try {
+        localStorage.setItem('compromiso-c3', JSON.stringify(data))
+        status.textContent = 'Guardado en este dispositivo.'
+      } catch {
+        status.textContent = 'No se pudo guardar. Imprímalo o tómele una foto.'
+      }
+    })
+    $('[data-print]').addEventListener('click', () => print())
+
+    // 3. Encuesta: genera una línea que se entrega al instructor, sin enviar nada
+    const enc = $<HTMLFormElement>('[data-encuesta]')
+    const encError = $('[data-enc-error]')
+    enc.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const d = new FormData(enc)
+      const vals = ids.map((id) => d.get(id))
+      const faltan = ids.filter((_, i) => vals[i] === null).length
+      if (faltan) {
+        encError.hidden = false
+        encError.textContent = `Falta contestar ${faltan} pregunta${faltan === 1 ? '' : 's'}.`
+        return
+      }
+      encError.hidden = true
+      const mejora = String(d.get('mejora') ?? '').replace(/[|\n\r]/g, ' ').trim()
+      $('[data-enc-code]').textContent = `C3S|${vals.join('')}|${mejora}`
+      const box = $('[data-enc-result]')
+      box.hidden = false
+      box.focus()
+    })
+    $('[data-enc-copy]').addEventListener('click', async () => {
+      const label = $('[data-enc-copy]').querySelector('span:last-child')!
+      try {
+        await navigator.clipboard.writeText($('[data-enc-code]').textContent ?? '')
+        label.textContent = 'Copiado'
+      } catch {
+        label.textContent = 'Selecciónelo y cópielo a mano'
+      }
+      setTimeout(() => (label.textContent = 'Copiar'), 2500)
+    })
+  </script>
+</Layout>

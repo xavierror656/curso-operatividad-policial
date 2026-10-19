@@ -7,6 +7,9 @@ const toMinutes = (hhmm: string) => {
   return h * 60 + m
 }
 
+/** Segundos de sesión continua tras los cuales se recomienda una pausa activa */
+const PAUSE_EVERY = 50 * 60
+
 /** Vista del presentador: sigue y controla la ventana del público. */
 export function initPresenter() {
   const current = document.querySelector<HTMLElement>('[data-stage="current"]')!
@@ -96,13 +99,17 @@ export function initPresenter() {
     } else {
       running = window.setInterval(() => {
         elapsed++
+        // Cada 50 minutos seguidos se sugiere una pausa activa de 5 minutos
+        if (elapsed % PAUSE_EVERY === 0) $('[data-pause]').hidden = false
         renderElapsed()
       }, 1000)
     }
     renderElapsed()
   })
+  $('[data-pause-close]').addEventListener('click', () => ($('[data-pause]').hidden = true))
   $('[data-elapsed-reset]').addEventListener('click', () => {
     elapsed = 0
+    $('[data-pause]').hidden = true
     renderElapsed()
   })
   const tick = () => ($('[data-clock]').textContent = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }))

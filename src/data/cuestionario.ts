@@ -82,3 +82,17 @@ export const abiertas = [
   'Mencione un error de captura que haya detectado en su propia área de trabajo durante el curso.',
   '¿Qué va a hacer distinto a partir de la próxima semana con la información que captura o consulta?',
 ]
+
+/** Explicación de cada respuesta correcta y el día del curso donde se repasa. Mismo orden que `reactivos`. */
+export const explicaciones: { porque: string; dia: 1 | 2 | 3 }[] = [
+  { porque: 'La misma colonia escrita de varias formas es un problema de consistencia: no se puede contar ni agrupar.', dia: 1 },
+  { porque: 'Se comparte la estructura (nombres y tipos de columnas), nunca filas, coordenadas ni folios reales.', dia: 1 },
+  { porque: 'Día/mes contra mes/día es un formato invertido. Se resuelve fijando un solo formato y validando el rango.', dia: 1 },
+  { porque: 'Con latitud y longitud al revés, el punto cae fuera del municipio, en otra región del mundo.', dia: 3 },
+  { porque: 'El tablero se consulta de forma recurrente para decidir; un reporte es una fotografía de un periodo.', dia: 2 },
+  { porque: 'Que una consulta corra no significa que cuente bien. Se compara contra un conteo de control conocido.', dia: 2 },
+  { porque: 'Fecha, hora, tipo de delito, colonia, sector y coordenadas son las variables mínimas para analizar y mapear.', dia: 1 },
+  { porque: 'El mapa de concentración muestra dónde se acumulan los incidentes; no identifica responsables.', dia: 3 },
+  { porque: 'Dos capturas del mismo evento son un duplicado que infla las cifras.', dia: 1 },
+  { porque: 'Quien presenta el resultado responde por él, aunque lo haya generado un asistente.', dia: 3 },
+]

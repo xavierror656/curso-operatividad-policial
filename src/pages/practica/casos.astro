@@ -1,0 +1,48 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { casos } from '../../data/recursos'
+import { href } from '../../lib/site'
+---
+
+<Layout title="Casos para analizar · Operatividad policial" description="Errores frecuentes de captura y análisis, explicados paso a paso.">
+  <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica · Casos</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Casos para analizar</h1>
+    <p class="mt-3 text-base-content/75">
+      Antes de leer qué falló, contéstese la pregunta de cada caso. Después abra el análisis y compare.
+    </p>
+    <div class="alert alert-soft alert-warning mt-5 items-start">
+      <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
+      <p>Son casos <strong>ilustrativos</strong>, construidos a partir de errores frecuentes. No corresponden a hechos reales de la Secretaría ni contienen datos de nadie.</p>
+    </div>
+
+    <div class="mt-8 space-y-6">
+      {casos.map((c, i) => (
+        <section class="card border border-base-content/10 shadow-none" id={`caso-${i + 1}`}>
+          <div class="card-body gap-4">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="badge badge-soft badge-secondary">Día {c.dia}</span>
+              <h2 class="font-display text-xl font-semibold">{c.titulo}</h2>
+            </div>
+            <p>{c.paso}</p>
+            <p class="rounded-box border-s-4 border-primary bg-base-200 p-4 font-display font-medium">{c.pregunta}</p>
+            <details>
+              <summary class="btn btn-outline btn-sm cursor-pointer list-none">
+                <span class="icon-[tabler--eye] size-4"></span>Ver el análisis
+              </summary>
+              <dl class="mt-4 space-y-3">
+                <div><dt class="text-xs font-semibold uppercase tracking-wider text-base-content/60">Qué falló</dt><dd>{c.error}</dd></div>
+                <div><dt class="text-xs font-semibold uppercase tracking-wider text-base-content/60">Consecuencia</dt><dd>{c.consecuencia}</dd></div>
+                <div class="alert alert-soft alert-success items-start"><span class="icon-[tabler--bulb] size-5 shrink-0"></span><p><strong>Lección:</strong> {c.leccion}</p></div>
+              </dl>
+            </details>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class="mt-10 text-sm text-base-content/60">
+      Siguiente: <a class="link" href={href('/practica/detecta-errores/')}>detecte las capturas inconsistentes</a> o revise la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
+    </p>
+  </article>
+</Layout>

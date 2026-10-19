@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import { reactivos, abiertas } from '../../data/cuestionario'
+import { reactivos, abiertas, explicaciones } from '../../data/cuestionario'
 import { href } from '../../lib/site'
 
 const letras = ['a', 'b', 'c', 'd']
@@ -20,7 +20,7 @@ const letras = ['a', 'b', 'c', 'd']
           <legend class="sr-only">Datos de la aplicación</legend>
           <div>
             <span class="label-text font-semibold">¿Cuándo lo contesta?</span>
-            <div class="mt-2 grid gap-2 sm:grid-cols-2">
+            <div class="mt-2 grid gap-2 sm:grid-cols-3">
               <label class="flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-secondary has-checked:bg-secondary/5">
                 <input type="radio" name="modo" value="D" class="radio radio-secondary" checked />
                 <span><strong>Diagnóstico</strong><br /><span class="text-sm text-base-content/70">Inicio del Día 1</span></span>
@@ -28,6 +28,10 @@ const letras = ['a', 'b', 'c', 'd']
               <label class="flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-secondary has-checked:bg-secondary/5">
                 <input type="radio" name="modo" value="C" class="radio radio-secondary" />
                 <span><strong>Cierre</strong><br /><span class="text-sm text-base-content/70">Final del Día 3</span></span>
+              </label>
+              <label class="flex cursor-pointer items-center gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-secondary has-checked:bg-secondary/5">
+                <input type="radio" name="modo" value="P" class="radio radio-secondary" />
+                <span><strong>Repaso</strong><br /><span class="text-sm text-base-content/70">Respuesta al instante, sin calificación</span></span>
               </label>
             </div>
           </div>
@@ -57,6 +61,10 @@ const letras = ['a', 'b', 'c', 'd']
                   </label>
                 ))}
               </div>
+              <div class="q-exp alert alert-soft alert-info mt-3 items-start" data-exp hidden role="status">
+                <span class="icon-[tabler--bulb] size-5 shrink-0"></span>
+                <p>{explicaciones[i].porque} <a class="link font-semibold" href={href(`/diapositivas/dia-${explicaciones[i].dia}/`)}>Repasar en el Día {explicaciones[i].dia}</a></p>
+              </div>
             </fieldset>
           </li>
         ))}
@@ -75,6 +83,10 @@ const letras = ['a', 'b', 'c', 'd']
 
       <div class="alert alert-soft alert-error" data-error hidden role="alert"></div>
 
+      <p class="text-sm text-base-content/70" data-practice-note hidden>
+        En modo repaso cada respuesta se califica al marcarla. No se guarda ni se entrega nada.
+      </p>
+
       <button type="submit" class="btn btn-primary btn-lg w-full sm:w-auto">
         <span class="icon-[tabler--send] size-5"></span>Terminar y ver resultado
       </button>
@@ -89,7 +101,7 @@ const letras = ['a', 'b', 'c', 'd']
         </div>
       </div>
 
-      <div class="card border border-base-content/10 shadow-none">
+      <div class="card border border-base-content/10 shadow-none" data-deliver>
         <div class="card-body gap-3">
           <h2 class="font-display text-lg font-semibold">Entregue este resultado al instructor</h2>
           <p class="text-sm text-base-content/70">Cópielo y envíelo por el medio que indique el instructor, o muéstrele la pantalla.</p>
@@ -121,7 +133,31 @@ const letras = ['a', 'b', 'c', 'd']
     const STORE = 'cuestionario-c3'
 
     const modo = () => (new FormData(form).get('modo') as string) ?? 'D'
-    const syncModo = () => (abiertas.hidden = modo() !== 'C')
+    const practiceNote = form.querySelector<HTMLElement>('[data-practice-note]')!
+    const items = [...form.querySelectorAll<HTMLElement>('[data-q]')]
+
+    /** Marca aciertos y errores de una pregunta y muestra su explicación */
+    const reveal = (i: number, on: boolean) => {
+      const chosen = new FormData(form).get(`r${i}`)
+      items[i].querySelectorAll<HTMLElement>('[data-opt]').forEach((o) => {
+        const j = Number(o.dataset.opt)
+        o.classList.toggle('q-correct', on && j === key[i])
+        o.classList.toggle('q-wrong', on && chosen !== null && j === Number(chosen) && j !== key[i])
+      })
+      items[i].querySelector<HTMLElement>('[data-exp]')!.hidden = !on
+    }
+    const syncModo = () => {
+      abiertas.hidden = modo() !== 'C'
+      practiceNote.hidden = modo() !== 'P'
+      items.forEach((_, i) => reveal(i, false))
+      result.hidden = true
+    }
+    // En repaso la retroalimentación es inmediata
+    items.forEach((q, i) =>
+      q.addEventListener('change', () => {
+        if (modo() === 'P') reveal(i, true)
+      }),
+    )
     form.querySelectorAll('input[name="modo"]').forEach((r) => r.addEventListener('change', syncModo))
     syncModo()
 
@@ -134,9 +170,10 @@ const letras = ['a', 'b', 'c', 'd']
       const area = clean(String(data.get('area') ?? ''))
       const respuestas = key.map((_, i) => data.get(`r${i}`))
       const faltan = respuestas.map((r, i) => (r === null ? i + 1 : 0)).filter(Boolean)
-      if (!nombre || !area || faltan.length) {
+      const practica = modo() === 'P'
+      if ((!practica && (!nombre || !area)) || faltan.length) {
         errorBox.hidden = false
-        errorBox.textContent = !nombre || !area ? 'Escriba su nombre y su área.' : `Falta contestar: ${faltan.join(', ')}.`
+        errorBox.textContent = !practica && (!nombre || !area) ? 'Escriba su nombre y su área.' : `Falta contestar: ${faltan.join(', ')}.`
         return
       }
       errorBox.hidden = true
@@ -157,32 +194,31 @@ const letras = ['a', 'b', 'c', 'd']
       let saved: Record<string, number> = {}
       try {
         saved = JSON.parse(localStorage.getItem(STORE) ?? '{}')
-        saved[m] = score
-        localStorage.setItem(STORE, JSON.stringify(saved))
+        if (m !== 'P') {
+          saved[m] = score
+          localStorage.setItem(STORE, JSON.stringify(saved))
+        }
       } catch {}
 
-      $('[data-result-mode]').textContent = m === 'D' ? 'Diagnóstico inicial' : 'Cierre del curso'
+      $('[data-result-mode]').textContent = m === 'D' ? 'Diagnóstico inicial' : m === 'C' ? 'Cierre del curso' : 'Repaso'
+      $('[data-deliver]').hidden = m === 'P'
       $('[data-score]').textContent = String(score)
       $('[data-compare]').textContent =
         m === 'C' && saved.D !== undefined
           ? `Al inicio obtuvo ${saved.D} de ${key.length}. Avanzó ${score - saved.D >= 0 ? '+' : ''}${score - saved.D}.`
           : m === 'D'
             ? 'Este es su punto de partida. Al cierre del Día 3 lo contestará de nuevo.'
-            : ''
+            : m === 'P'
+              ? 'Repase las explicaciones de las preguntas que falló.'
+              : ''
       $('[data-code]').textContent = code + abiertasTxt
       $('[data-review-note]').textContent =
         m === 'D'
           ? 'Las respuestas correctas no se muestran en el diagnóstico, para no afectar el cierre.'
-          : 'Las respuestas correctas quedan marcadas arriba en verde.'
+          : 'Las respuestas correctas y su explicación quedan marcadas arriba.'
 
-      // En el cierre se muestran aciertos y errores
-      form.querySelectorAll<HTMLElement>('[data-q]').forEach((q, i) => {
-        q.querySelectorAll<HTMLElement>('[data-opt]').forEach((o) => {
-          const j = Number(o.dataset.opt)
-          o.classList.toggle('q-correct', m === 'C' && j === key[i])
-          o.classList.toggle('q-wrong', m === 'C' && j === Number(respuestas[i]) && j !== key[i])
-        })
-      })
+      // En el cierre y el repaso se muestran aciertos, errores y explicación
+      items.forEach((_, i) => reveal(i, m !== 'D'))
 
       result.hidden = false
       result.focus()
@@ -203,7 +239,6 @@ const letras = ['a', 'b', 'c', 'd']
     $('[data-again]').addEventListener('click', () => {
       form.reset()
       syncModo()
-      form.querySelectorAll('.q-correct, .q-wrong').forEach((o) => o.classList.remove('q-correct', 'q-wrong'))
       result.hidden = true
       form.scrollIntoView()
     })

@@ -1,0 +1,106 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import { decks } from '../../../data/decks'
+import { casos } from '../../../data/recursos'
+import type { Deck } from '../../../data/types'
+import { href } from '../../../lib/site'
+
+export function getStaticPaths() {
+  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+}
+
+// Tarjeta de una página para imprimir o guardar como PDF y llevar al servicio
+const { deck } = Astro.props as { deck: Deck }
+const logro = deck.slides.find((s) => s.kicker === 'Qué se logra hoy')
+const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
+const llevas = deck.slides.filter((s) => s.layout === 'takeaway')
+const caso = casos.find((c) => c.dia === deck.day)
+---
+
+<Layout title={`Resumen del Día ${deck.day} · Operatividad policial`} description={`Resumen de una página del Día ${deck.day}.`}>
+  <article class="resumen mx-auto max-w-3xl px-4 py-8 md:py-12">
+    <div class="flex flex-wrap items-center justify-between gap-3 print:hidden">
+      <nav class="flex gap-2" aria-label="Resumen por día">
+        {decks.map((d) => (
+          <a href={href(`/participante/${d.slug}/resumen/`)} class:list={['btn btn-sm', d.slug === deck.slug ? 'btn-primary' : 'btn-outline']} aria-current={d.slug === deck.slug ? 'page' : undefined}>Día {d.day}</a>
+        ))}
+      </nav>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="print()"><span class="icon-[tabler--printer] size-4"></span>Imprimir o guardar PDF</button>
+    </div>
+
+    <header class="mt-6 border-b-2 border-primary pb-3 print:mt-0">
+      <p class="font-display text-xs font-semibold uppercase tracking-[0.18em] text-secondary">Resumen · Día {deck.day} · {deck.schedule}</p>
+      <h1 class="mt-1 text-2xl font-semibold text-balance">{deck.title}</h1>
+      <p class="mt-1 text-sm text-base-content/75">{deck.objective}</p>
+    </header>
+
+    <div class="mt-4 grid gap-5 text-sm md:grid-cols-2">
+      {logro && (
+        <section>
+          <h2 class="font-display text-base font-semibold">{logro.title}</h2>
+          <ul class="mt-2 space-y-1">
+            {logro.bullets?.map((b) => <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-secondary">▸</span>{b}</li>)}
+          </ul>
+        </section>
+      )}
+
+      <section class="rounded-box border-2 border-secondary p-3">
+        <h2 class="font-display text-base font-semibold">Regla de oro con la IA</h2>
+        <p class="mt-1">Comparta la <strong>estructura</strong> (nombres de columnas, tipos, mensaje de error). <strong>Nunca</strong> datos: filas, nombres, domicilios, folios, coordenadas ni resultados. Ante la duda, no lo comparta y pregunte.</p>
+      </section>
+
+      {llevas.length > 0 && (
+        <section class="md:col-span-2">
+          <h2 class="font-display text-base font-semibold">Puntos críticos del día</h2>
+          <div class="mt-2 grid gap-x-6 gap-y-3 md:grid-cols-2">
+            {llevas.map((t) => (
+              <div class="break-inside-avoid">
+                <p class="font-semibold">{t.title}</p>
+                <ul class="mt-1 space-y-0.5">
+                  {t.bullets?.slice(0, 3).map((b) => <li class="flex gap-2"><span class="mt-0.5 shrink-0 text-success">✓</span>{b}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {entregable && (
+        <section>
+          <h2 class="font-display text-base font-semibold">{entregable.title}</h2>
+          <ul class="mt-2 space-y-1">
+            {entregable.cards?.map((c) => <li><strong>{c.title}.</strong> {c.text}</li>)}
+          </ul>
+        </section>
+      )}
+
+      {caso && (
+        <section class="rounded-box border border-base-content/20 p-3">
+          <h2 class="font-display text-base font-semibold">Para recordar: {caso.titulo}</h2>
+          <p class="mt-1"><strong>Lección:</strong> {caso.leccion}</p>
+        </section>
+      )}
+    </div>
+
+    <section class="mt-5 text-sm">
+      <h2 class="font-display text-base font-semibold">Mis notas y mi compromiso</h2>
+      <div class="mt-2 h-24 rounded-box border border-dashed border-base-content/30"></div>
+    </section>
+
+    <p class="mt-4 text-xs text-base-content/60">Curso 3 · Herramientas tecnológicas orientadas a la operatividad policial · Ejercicios con datos sintéticos o anonimizados.</p>
+  </article>
+
+  <style is:global>
+    @media print {
+      @page {
+        size: letter;
+        margin: 1.2cm;
+      }
+      .resumen {
+        max-width: none;
+        padding: 0;
+        font-size: 10.5pt;
+      }
+    }
+  </style>
+</Layout>

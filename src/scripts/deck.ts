@@ -73,6 +73,20 @@ export function initDeck() {
   const goTo = (index: number) => render({ index, step: stepsOf(slides[Math.max(0, Math.min(slides.length - 1, index))]).length })
   const move = (dir: 1 | -1) => render(advance(slides, state, dir, reveal))
 
+  /** Modos de proyección que se recuerdan en este navegador: 'large' (texto grande) y 'contrast' (alto contraste) */
+  const toggleMode = (mode: 'large' | 'contrast', on = stage.toggleAttribute(`data-${mode}`)) => {
+    stage.toggleAttribute(`data-${mode}`, on)
+    try {
+      localStorage.setItem(`deck-${mode}`, on ? '1' : '0')
+    } catch {}
+    live.textContent = `${mode === 'large' ? 'Texto grande' : 'Alto contraste'} ${on ? 'activado' : 'desactivado'}`
+  }
+  for (const mode of ['large', 'contrast'] as const) {
+    try {
+      if (localStorage.getItem(`deck-${mode}`) === '1') toggleMode(mode, true)
+    } catch {}
+  }
+
   const setBlackout = (on: boolean, broadcast = true) => {
     blackout.hidden = !on
     if (broadcast) post({ type: 'blackout', on })
@@ -271,6 +285,14 @@ export function initDeck() {
           timers.apply(state.index, 'toggle')
           post({ type: 'timer', index: state.index, action: 'toggle' })
         }
+        break
+      case 'l':
+      case 'L':
+        toggleMode('large')
+        break
+      case 'c':
+      case 'C':
+        toggleMode('contrast')
         break
       case 'g':
       case 'G':

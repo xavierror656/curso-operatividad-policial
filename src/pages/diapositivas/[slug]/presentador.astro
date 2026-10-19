@@ -50,6 +50,12 @@ const data = {
       </div>
     </header>
 
+    <div class="presenter-pause" data-pause hidden role="alert">
+      <span class="icon-[tabler--armchair] size-5 shrink-0"></span>
+      <p class="flex-1"><strong>Pausa activa.</strong> Van 50 minutos seguidos. Haga un descanso de 5 minutos: estirarse, caminar y tomar agua.</p>
+      <button type="button" class="btn btn-sm btn-outline border-white/40 text-white" data-pause-close>Entendido</button>
+    </div>
+
     <main class="presenter-grid">
       <section class="presenter-current">
         <div class="presenter-label">Actual · <span data-counter>1 / {total}</span> <span class="ms-2 normal-case tracking-normal text-white/80" data-steps></span></div>
@@ -104,6 +110,17 @@ const data = {
         padding: 0.75rem 1.25rem;
         background: #191b2d;
         border-bottom: 1px solid #2c2f49;
+      }
+      .presenter-pause {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.6rem 1.25rem;
+        background: #b7791f;
+        color: #fff;
+      }
+      .presenter-pause[hidden] {
+        display: none;
       }
       .presenter-grid {
         flex: 1;

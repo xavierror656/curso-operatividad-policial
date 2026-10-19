@@ -1,0 +1,73 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { escenarios } from '../../data/recursos'
+import { href } from '../../lib/site'
+---
+
+<Layout title="Escenarios de decisión · Operatividad policial" description="Situaciones del trabajo diario para practicar decisiones con datos.">
+  <article class="mx-auto max-w-2xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica · Escenarios</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">¿Qué haría usted?</h1>
+    <p class="mt-3 text-base-content/75">Cuatro situaciones del trabajo diario. Elija una opción y vea por qué funciona o no. Se puede trabajar en parejas y discutir antes de elegir.</p>
+
+    <p class="mt-6 text-sm tabular-nums text-base-content/70" aria-live="polite">Mejores decisiones: <strong data-score>0</strong> de {escenarios.length}</p>
+
+    <div class="mt-4 space-y-8">
+      {escenarios.map((e, i) => (
+        <section class="card border border-base-content/10 shadow-none" data-esc={i}>
+          <div class="card-body gap-4">
+            <h2 class="font-display text-lg font-semibold"><span class="text-secondary">{i + 1}.</span> {e.situacion}</h2>
+            <div class="grid gap-2">
+              {e.opciones.map((o, j) => (
+                <button type="button" class="opt btn btn-outline h-auto justify-start whitespace-normal py-3 text-start font-normal" data-mejor={String(!!o.mejor)} data-opt={j}>
+                  {o.texto}
+                </button>
+              ))}
+            </div>
+            <div class="space-y-2" data-fb hidden aria-live="polite">
+              {e.opciones.map((o, j) => (
+                <p class:list={['alert items-start', o.mejor ? 'alert-soft alert-success' : 'alert-soft alert-error']} data-why={j} hidden>
+                  <span class:list={[o.mejor ? 'icon-[tabler--circle-check]' : 'icon-[tabler--alert-circle]', 'size-5 shrink-0']}></span>
+                  <span><strong>{o.mejor ? 'Mejor decisión. ' : 'No es la mejor. '}</strong>{o.porque}</span>
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p class="mt-10 text-sm text-base-content/60">
+      Ver también <a class="link" href={href('/practica/casos/')}>los casos para analizar</a> y la <a class="link" href={href('/practica/hoja-de-verificacion/')}>hoja de verificación</a>.
+    </p>
+  </article>
+
+  <script>
+    const score = document.querySelector<HTMLElement>('[data-score]')!
+    let buenas = 0
+    document.querySelectorAll<HTMLElement>('[data-esc]').forEach((esc) => {
+      const fb = esc.querySelector<HTMLElement>('[data-fb]')!
+      const botones = [...esc.querySelectorAll<HTMLButtonElement>('.opt')]
+      botones.forEach((b) =>
+        b.addEventListener('click', () => {
+          // Se muestra la razón de la opción elegida y la de la mejor decisión
+          const mejor = botones.find((x) => x.dataset.mejor === 'true')!
+          fb.hidden = false
+          for (const x of new Set([b, mejor])) fb.querySelector<HTMLElement>(`[data-why="${x.dataset.opt}"]`)!.hidden = false
+          botones.forEach((x) => {
+            x.disabled = true
+            x.classList.toggle('btn-success', x === mejor)
+            x.classList.toggle('btn-error', x === b && b !== mejor)
+          })
+          if (b === mejor) score.textContent = String(++buenas)
+        }),
+      )
+    })
+  </script>
+
+  <style>
+    :global(.opt:disabled) {
+      opacity: 1;
+    }
+  </style>
+</Layout>

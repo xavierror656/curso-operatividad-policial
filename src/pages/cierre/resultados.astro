@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { encuesta, versiones } from '../../data/recursos'
+---
+
+<Layout title="Resultados de la encuesta · Operatividad policial" description="Resumen de la encuesta de satisfacción y registro de versiones del curso.">
+  <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
+    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Uso del instructor</p>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Resultados de la encuesta</h1>
+    <p class="mt-3 max-w-3xl text-base-content/75">
+      Pegue las líneas que entregaron los participantes, una por línea. Todo se calcula en este navegador. Use el resumen para decidir qué ajustar en la siguiente edición y regístrelo abajo.
+    </p>
+
+    <label class="mt-6 block font-semibold" for="lineas">Respuestas</label>
+    <textarea id="lineas" class="textarea mt-2 h-36 w-full font-mono text-sm" placeholder="C3S|45432|Más práctica de QGIS" data-lineas></textarea>
+    <button type="button" class="btn btn-primary mt-3" data-calc><span class="icon-[tabler--calculator] size-5"></span>Calcular</button>
+
+    <section class="mt-10 space-y-8" data-out hidden>
+      <p class="text-sm text-base-content/70" data-n></p>
+      <ul class="space-y-4" data-bars></ul>
+      <div>
+        <h2 class="text-xl font-semibold">Qué cambiarían</h2>
+        <ul class="mt-3 list-disc space-y-2 ps-6" data-comentarios></ul>
+      </div>
+    </section>
+
+    <section class="mt-16 border-t border-base-content/10 pt-10" aria-labelledby="h-ver">
+      <h2 id="h-ver" class="text-2xl font-semibold">Registro de versiones del curso</h2>
+      <p class="mt-2 text-base-content/70">Cada edición anota qué cambió, para que la mejora sea continua y quede rastro de las decisiones. Agregue una entrada en <code>src/data/recursos.ts</code> después de cada edición.</p>
+      <ol class="mt-6 space-y-5">
+        {versiones.map((v) => (
+          <li class="rounded-box border border-base-content/10 p-5">
+            <div class="flex items-center gap-3">
+              <span class="badge badge-secondary">v{v.version}</span>
+              <span class="text-sm text-base-content/70">{v.fecha}</span>
+            </div>
+            <ul class="mt-3 list-disc space-y-1 ps-6">
+              {v.cambios.map((c) => <li>{c}</li>)}
+            </ul>
+          </li>
+        ))}
+      </ol>
+    </section>
+  </article>
+
+  <script type="application/json" id="enc" set:html={JSON.stringify(encuesta.map((q) => ({ id: q.id, corta: q.corta, texto: q.texto })))}></script>
+
+  <script>
+    const preguntas = JSON.parse(document.getElementById('enc')!.textContent!) as { id: string; corta: string; texto: string }[]
+    const $ = (s: string) => document.querySelector<HTMLElement>(s)!
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!)
+
+    $('[data-calc]').addEventListener('click', () => {
+      const re = new RegExp(`^[1-5]{${preguntas.length}}$`)
+      const filas: { v: string; mejora: string }[] = []
+      for (const l of ($('[data-lineas]') as HTMLTextAreaElement).value.split(/\r?\n/)) {
+        const [tag, v = '', ...resto] = l.trim().split('|')
+        if (tag === 'C3S' && re.test(v)) filas.push({ v, mejora: resto.join('|').trim() })
+      }
+      $('[data-out]').hidden = filas.length === 0
+      $('[data-n]').textContent = `${filas.length} respuesta${filas.length === 1 ? '' : 's'} válida${filas.length === 1 ? '' : 's'}.`
+      $('[data-bars]').innerHTML = preguntas
+        .map((q, i) => {
+          const prom = filas.reduce((a, f) => a + Number(f.v[i]), 0) / (filas.length || 1)
+          const baja = prom < 3.5
+          return `<li class="grid gap-1 sm:grid-cols-[18rem_1fr] sm:items-center"><span class="text-sm"><strong>${esc(q.corta)}.</strong> ${esc(q.texto)}</span><div class="flex items-center gap-2"><span class="h-3 rounded-e ${baja ? 'bg-error' : 'bg-primary'}" style="width:${(prom / 5) * 100}%"></span><span class="text-sm tabular-nums">${prom.toFixed(1)} / 5${baja ? ' · por mejorar' : ''}</span></div></li>`
+        })
+        .join('')
+      $('[data-comentarios]').innerHTML =
+        filas
+          .filter((f) => f.mejora)
+          .map((f) => `<li>${esc(f.mejora)}</li>`)
+          .join('') || '<li class="list-none text-base-content/60">Sin comentarios.</li>'
+    })
+  </script>
+</Layout>
