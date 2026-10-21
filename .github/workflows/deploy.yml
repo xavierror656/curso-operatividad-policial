@@ -30,7 +30,7 @@ jobs:
       - run: npm ci
       # Falla si hay tiempos, cuestionario o datos de práctica incoherentes
       - run: npm run verificar
-      - uses: withastro/action@v3
+      - uses: withastro/action@v6
         with:
           node-version: 24
 
