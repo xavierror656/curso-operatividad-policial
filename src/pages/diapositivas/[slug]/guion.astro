@@ -2,12 +2,12 @@
 import Layout from '../../../layouts/Layout.astro'
 import Slide from '../../../components/slides/Slide.astro'
 import '../../../styles/slides.css'
-import { decks } from '../../../data/decks'
+import { decksAbiertos } from '../../../data/decks'
 import type { Deck } from '../../../data/types'
 import { href } from '../../../lib/site'
 
 export function getStaticPaths() {
-  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+  return decksAbiertos.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
 }
 
 const { deck } = Astro.props as { deck: Deck }

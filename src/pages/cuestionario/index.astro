@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro'
 import { reactivos, abiertas, explicaciones } from '../../data/cuestionario'
 import { href } from '../../lib/site'
+import { abierto } from '../../data/decks'
 
 const letras = ['a', 'b', 'c', 'd']
 ---
@@ -63,7 +64,7 @@ const letras = ['a', 'b', 'c', 'd']
               </div>
               <div class="q-exp alert alert-soft alert-info mt-3 items-start" data-exp hidden role="status">
                 <span class="icon-[tabler--bulb] size-5 shrink-0"></span>
-                <p>{explicaciones[i].porque} <a class="link font-semibold" href={href(`/diapositivas/dia-${explicaciones[i].dia}/`)}>Repasar en el Día {explicaciones[i].dia}</a></p>
+                <p>{explicaciones[i].porque} {abierto(`dia-${explicaciones[i].dia}`) ? <a class="link font-semibold" href={href(`/diapositivas/dia-${explicaciones[i].dia}/`)}>Repasar en el Día {explicaciones[i].dia}</a> : <span class="font-semibold">Se ve en el Día {explicaciones[i].dia}.</span>}</p>
               </div>
             </fieldset>
           </li>

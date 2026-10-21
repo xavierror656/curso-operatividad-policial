@@ -45,6 +45,7 @@ export const dia3: Deck = {
         'Día 2: tablero con tres vistas y un filtro',
         'Día 2: cifras verificadas con conteo de control',
       ],
+      material: ['datos'],
       notes: 'Una sola diapositiva de repaso. Las coordenadas que se validaron el Día 1 son las que hoy se dibujan.',
     },
     {
@@ -122,6 +123,7 @@ export const dia3: Deck = {
           ['Medir en grados', 'Radios y áreas sin sentido', 'Concentración mal calculada'],
         ],
       },
+      material: ['casos'],
       notes:
         'El primero ya se atacó el Día 1 en el archivo; aquí puede reaparecer al indicar las columnas en QGIS. El tercero es silencioso: el mapa se ve bien y las medidas están mal.',
     },
@@ -149,6 +151,7 @@ export const dia3: Deck = {
         { label: 'Elegir sistema', detail: 'WGS84, EPSG:4326' },
         { label: 'Contar puntos', detail: 'Debe dar 928' },
       ],
+      material: ['datos'],
       notes:
         'X es longitud y Y es latitud: es el error más común de todo el día. El conteo de puntos es el mismo control del Día 2: si no da 928, se perdieron registros.',
     },
@@ -322,6 +325,7 @@ export const dia3: Deck = {
           'En QGIS tengo una capa de puntos llamada incidentes, en EPSG:4326. Escribe un script de PyQGIS que la reproyecte a EPSG:32613 y genere un mapa de calor con radio de 300 metros.',
       },
       ruleReminder: true,
+      material: ['regla-de-oro'],
       notes: 'El script trabaja con la capa que está en el equipo. Las coordenadas nunca salen de QGIS.',
     },
     {
@@ -374,6 +378,7 @@ export const dia3: Deck = {
       title: 'Un mapa de concentración se verifica antes de enviarse',
       bullets: ['Calor para ver dónde, conteo para decir cuánto', 'Concentración es un patrón que se repite', 'Todo script se revisa antes de ejecutarse'],
       ruleReminder: true,
+      material: ['hoja-mapa'],
       notes: 'Pida que tengan su PDF exportado antes del taller final.',
     },
 
@@ -390,6 +395,7 @@ export const dia3: Deck = {
         { label: 'Mapa de concentración', detail: 'Día 3' },
         { label: 'Recomendación', detail: 'Qué haría distinto el mando' },
       ],
+      material: ['hoja-entrega'],
       notes: 'Forme equipos de cuatro o cinco personas y dé cuatro minutos para armar la presentación con lo que ya tienen. No se construye nada nuevo.',
     },
     {
@@ -436,6 +442,7 @@ export const dia3: Deck = {
       title: 'Quien firma el resultado responde por él',
       bullets: ['Toda cifra se verifica contra un control', 'Todo script se revisa antes de ejecutarse', 'Ningún dato real se comparte con el asistente'],
       ruleReminder: true,
+      material: ['escenarios'],
       notes: 'Última mención de la regla de oro. Entregue la tarjeta impresa a quien no la tenga.',
     },
     {
@@ -446,6 +453,7 @@ export const dia3: Deck = {
       title: 'El cuestionario de cierre mide cuánto avanzó el grupo',
       minutes: 10,
       bullets: ['Las mismas diez preguntas del Día 1', 'Elija «Cierre» y conteste sin consultar', 'Entregue su código al instructor'],
+      material: ['cuestionario'],
       notes:
         'Es el mismo cuestionario del inicio del Día 1, para comparar el punto de partida contra el de llegada. Recoja los códigos (C3|C|...) y las dos preguntas de aplicación.',
     },
@@ -461,6 +469,7 @@ export const dia3: Deck = {
         { icon: 'icon-[tabler--route]', title: 'Siguiente paso', text: 'Revise esta semana un archivo real de su área.' },
         { icon: 'icon-[tabler--flag-check]', title: 'Compromiso y encuesta', text: 'En la sección Cierre del sitio: cinco minutos. Si no alcanza, queda de tarea.' },
       ],
+      material: ['cierre', 'hoja-entrega'],
       notes:
         'Recuerde los criterios de acreditación: 80% de asistencia, productos de cada tema y proyecto integrador. Al aplicar lo aprendido a un archivo real, la regla de oro aplica con más razón.',
     },

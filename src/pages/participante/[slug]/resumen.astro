@@ -1,12 +1,12 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import { decks } from '../../../data/decks'
+import { abierto, decks, decksAbiertos } from '../../../data/decks'
 import { casos } from '../../../data/recursos'
 import type { Deck } from '../../../data/types'
 import { href } from '../../../lib/site'
 
 export function getStaticPaths() {
-  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+  return decksAbiertos.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
 }
 
 // Tarjeta de una página para imprimir o guardar como PDF y llevar al servicio
@@ -21,8 +21,10 @@ const caso = casos.find((c) => c.dia === deck.day)
   <article class="resumen mx-auto max-w-3xl px-4 py-8 md:py-12">
     <div class="flex flex-wrap items-center justify-between gap-3 print:hidden">
       <nav class="flex gap-2" aria-label="Resumen por día">
-        {decks.map((d) => (
+        {decks.map((d) => abierto(d.slug) ? (
           <a href={href(`/participante/${d.slug}/resumen/`)} class:list={['btn btn-sm', d.slug === deck.slug ? 'btn-primary' : 'btn-outline']} aria-current={d.slug === deck.slug ? 'page' : undefined}>Día {d.day}</a>
+        ) : (
+          <span class="btn btn-sm btn-disabled" title={`Se abre el Día ${d.day}`}><span class="icon-[tabler--lock] size-4" aria-hidden="true"></span>Día {d.day}</span>
         ))}
       </nav>
       <button type="button" class="btn btn-secondary btn-sm" onclick="print()"><span class="icon-[tabler--printer] size-4"></span>Imprimir o guardar PDF</button>

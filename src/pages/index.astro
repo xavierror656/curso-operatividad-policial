@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro'
 import ReglaDeOro from '../components/ReglaDeOro.astro'
 import { curso, enfoque, sesiones, temas, productos, requerimientos, acreditacion, diaActual } from '../data/curso'
+import { abierto } from '../data/decks'
 import { href } from '../lib/site'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
@@ -87,8 +88,14 @@ const totalHoras = temas.reduce((n, t) => n + t.horas, 0)
                 <h3 class="mt-2 font-display text-lg font-semibold">{s.titulo}</h3>
                 <p class="mt-2 text-sm text-base-content/70"><strong class="text-base-content">Producto:</strong> {s.entregable}</p>
                 <div class="mt-4 flex flex-wrap gap-2">
-                  <a href={href(`/diapositivas/${s.slug}/`)} class="btn btn-primary btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Diapositivas</a>
-                  <a href={href(`/participante/${s.slug}/`)} class="btn btn-outline btn-sm"><span class="icon-[tabler--device-mobile] size-4"></span>Participante</a>
+                  {abierto(s.slug) ? (
+                    <>
+                      <a href={href(`/diapositivas/${s.slug}/`)} class="btn btn-primary btn-sm"><span class="icon-[tabler--player-play] size-4"></span>Diapositivas</a>
+                      <a href={href(`/participante/${s.slug}/`)} class="btn btn-outline btn-sm"><span class="icon-[tabler--device-mobile] size-4"></span>Participante</a>
+                    </>
+                  ) : (
+                    <span class="btn btn-sm btn-disabled"><span class="icon-[tabler--lock] size-4" aria-hidden="true"></span>Se abre el Día {s.dia}</span>
+                  )}
                 </div>
               </div>
             </li>

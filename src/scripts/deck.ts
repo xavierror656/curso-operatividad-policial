@@ -188,7 +188,7 @@ export function initDeck() {
     a.addEventListener('click', (e) => {
       e.preventDefault()
       goTo(Number(a.dataset.goto))
-      overlay()?.close('#deck-index')
+      overlay()?.close(a.closest<HTMLElement>('.overlay') ?? '#deck-index')
     }),
   )
 

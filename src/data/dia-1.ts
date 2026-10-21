@@ -64,6 +64,7 @@ export const dia1: Deck = {
         { icon: 'icon-[tabler--map-pin]', title: 'Su experiencia', text: 'Usted conoce el territorio: úselo para detectar errores.' },
         { icon: 'icon-[tabler--message-question]', title: 'Sus dudas', text: 'Se resuelven en voz alta: le sirven a todo el grupo.' },
       ],
+      material: ['datos'],
       notes:
         'Cada archivo es distinto, así que copiar al compañero no funciona. Aclare que los datos son sintéticos: se parecen a los reales pero no corresponden a ninguna persona ni evento.',
     },
@@ -77,6 +78,7 @@ export const dia1: Deck = {
       title: 'Diez preguntas para saber de dónde parte el grupo',
       minutes: 10,
       bullets: ['Abra el sitio del curso y entre a «Cuestionario»', 'Elija «Diagnóstico» y conteste sin consultar', 'No cuenta para acreditar. Entregue su código al instructor'],
+      material: ['cuestionario'],
       notes:
         'Es el punto de partida que se compara contra el cierre del Día 3. Pida contestar sin buscar y sin comentar. Al terminar, recoja los códigos (C3|D|...) y guárdelos para la pantalla de resultados del grupo. Para ganar tiempo, el bloque 1A se imparte en versión corta.',
     },
@@ -148,6 +150,7 @@ export const dia1: Deck = {
         'Fecha, hora, delito, colonia, sector y coordenadas',
         'Cada error de captura tiene un costo en calle',
       ],
+      material: ['casos'],
       notes: 'Cierre breve. Pregunte cuál de las cuatro dimensiones creen que falla más en su área.',
     },
 
@@ -195,6 +198,7 @@ export const dia1: Deck = {
         items: ['Nombres, domicilios y folios', 'Coordenadas de eventos reales', 'Cualquier fila del archivo'],
       },
       lead: 'Ante la duda, no lo comparta y pregunte.',
+      material: ['regla-de-oro'],
       notes:
         'Lea la regla en voz alta y pida que el grupo la repita. Es la misma que está en la tarjeta impresa y en el fondo de pantalla. El asistente genera la regla o el código; los datos se quedan en el equipo.',
     },
@@ -230,6 +234,7 @@ export const dia1: Deck = {
       yes: 'No lo pegue. Describa solo la estructura.',
       no: 'Puede compartirlo con el asistente.',
       ruleReminder: true,
+      material: ['regla-de-oro', 'hoja-ia'],
       notes:
         'Este es el hábito que queremos instalar: tres preguntas, cinco segundos, antes de cada pegado. Si una sola respuesta es «sí», no se pega.',
     },
@@ -398,6 +403,7 @@ export const dia1: Deck = {
         'Puntos fuera del municipio',
         'Duplicados por doble captura',
       ],
+      material: ['detecta-errores'],
       notes: 'Una diapositiva por vicio. En cada una, pida que lo busquen en su propio archivo antes de pasar a la siguiente.',
     },
     {
@@ -472,6 +478,7 @@ export const dia1: Deck = {
         ],
       },
       right: { label: 'Qué se hace', items: ['Misma fecha, tipo y colonia', 'Minutos de diferencia entre capturas', 'Se conserva uno; el otro se marca'] },
+      material: ['detecta-errores'],
       notes:
         'Registros ficticios. Advierta que no todo parecido es duplicado: dos eventos reales pueden coincidir. Ante la duda se marca, no se borra.',
     },
@@ -568,6 +575,7 @@ export const dia1: Deck = {
         { icon: 'icon-[tabler--sparkles]', title: 'Con IA', text: 'Usted pide el código describiendo las columnas; usted lee el resultado.' },
       ],
       ruleReminder: true,
+      material: ['prompts-eda'],
       notes:
         'Presente EDA como la revisión previa al vuelo: no se corrige ni se grafica nada sin antes mirar. Insista en que el asistente solo recibe el nombre y el tipo de las columnas, nunca filas. Los prompts completos están en la página Práctica > Prompts para IA, para copiar y pegar.',
     },
@@ -589,6 +597,7 @@ export const dia1: Deck = {
           'Tengo un DataFrame df con: fecha (texto DD/MM/AAAA), colonia (texto), latitud y longitud (decimales). Escribe código pandas que convierta fecha, marque las futuras, normalice colonia y marque coordenadas fuera del municipio. Devuelve solo conteos.',
       },
       ruleReminder: true,
+      material: ['prompts-limpieza'],
       notes:
         'Receta de cuatro partes: contexto (qué es df), esquema (columnas y tipos), tarea (qué reglas) y formato de salida (solo conteos, sin filas). Pida marcar, no borrar. Lea el código devuelto antes de ejecutarlo.',
     },
@@ -610,6 +619,7 @@ export const dia1: Deck = {
           'df tiene fecha (datetime), delito (texto) y sector (entero). Con matplotlib haz barras horizontales del conteo de incidentes por sector, de mayor a menor, un solo color, el mayor resaltado, título que diga qué mide y el periodo, y ejes rotulados. Solo el código.',
       },
       ruleReminder: true,
+      material: ['prompts-graficas'],
       notes:
         'Una buena instrucción de gráfica trae: columnas, tipo de gráfica, orden, qué resaltar, título y rótulos. Verifique la gráfica contra un conteo que usted conozca. Más plantillas en Práctica > Prompts para IA.',
     },
@@ -703,6 +713,7 @@ export const dia1: Deck = {
         'Resuelva o marque cada hallazgo',
         'Exporte el archivo depurado',
       ],
+      material: ['datos'],
       notes:
         'Cada archivo tiene errores distintos. Recorra el aula; ayude con preguntas, no con respuestas. Si falla la conectividad, use el respaldo local de los archivos.',
     },
@@ -718,6 +729,7 @@ export const dia1: Deck = {
         'Duplicados resueltos y documentados',
         'Ningún dato del archivo compartido con el asistente',
       ],
+      material: ['hoja-depurado'],
       notes: 'Deje esta diapositiva visible un momento para que la fotografíen o la anoten.',
     },
     {
@@ -756,6 +768,7 @@ export const dia1: Deck = {
         'Mi archivo de práctica se queda en mi equipo',
       ],
       ruleReminder: true,
+      material: ['hoja-ia'],
       notes: 'Pida que levanten la mano quienes cumplen los cuatro puntos. Si alguien duda en uno, revíselo en privado, sin exponerlo.',
     },
     {

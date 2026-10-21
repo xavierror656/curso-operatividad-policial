@@ -22,7 +22,7 @@ import { verificacion } from '../../data/recursos'
 
     <div class="mt-8 space-y-6">
       {verificacion.map((g) => (
-        <section class="card border border-base-content/10 shadow-none" data-grupo={g.id}>
+        <section id={g.id} class="card scroll-mt-24 border border-base-content/10 shadow-none" data-grupo={g.id}>
           <div class="card-body gap-3">
             <h2 class="flex items-center gap-3 font-display text-lg font-semibold">
               <span class={`${g.icon} size-6 text-secondary`}></span>{g.titulo}

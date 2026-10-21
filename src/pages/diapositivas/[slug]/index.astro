@@ -3,12 +3,13 @@ import '../../../styles/global.css'
 import '../../../styles/slides.css'
 import Slide from '../../../components/slides/Slide.astro'
 import Head from '../../../components/Head.astro'
-import { decks } from '../../../data/decks'
+import { decksAbiertos } from '../../../data/decks'
 import type { Deck } from '../../../data/types'
-import { absoluteUrl, qrSvg } from '../../../lib/site'
+import { absoluteUrl, href, qrSvg } from '../../../lib/site'
+import { materialesDe } from '../../../data/materiales'
 
 export function getStaticPaths() {
-  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+  return decksAbiertos.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
 }
 
 const { deck } = Astro.props as { deck: Deck }
@@ -18,6 +19,12 @@ const notes = deck.slides.map((s) => s.notes)
 const blockLabels = Object.fromEntries(deck.blocks.map((b) => [b.id, b.label]))
 const participantUrl = absoluteUrl(`/participante/${deck.slug}/`)
 const qr = await qrSvg(participantUrl)
+const material = materialesDe(deck.slides)
+const general = [
+  { label: 'Material del participante', texto: 'Objetivos, pasos y lista de revisión del día.', path: `/participante/${deck.slug}/`, icon: 'icon-[tabler--book]' },
+  { label: 'Resumen imprimible', texto: 'Una página con lo esencial del día.', path: `/participante/${deck.slug}/resumen/`, icon: 'icon-[tabler--printer]' },
+  { label: 'Práctica', texto: 'Todas las actividades del curso.', path: '/practica/', icon: 'icon-[tabler--pencil]' },
+]
 ---
 
 <!doctype html>
@@ -53,6 +60,9 @@ const qr = await qrSvg(participantUrl)
         </a>
         <button type="button" class="btn btn-text btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="deck-index" data-overlay="#deck-index" title="Índice (G)">
           <span class="icon-[tabler--list-numbers] size-5"></span><span class="max-sm:hidden">Índice</span>
+        </button>
+        <button type="button" class="btn btn-text btn-sm" aria-haspopup="dialog" aria-expanded="false" aria-controls="deck-material" data-overlay="#deck-material" title="Material del día">
+          <span class="icon-[tabler--books] size-5"></span><span class="max-sm:hidden">Material</span>
         </button>
         <button type="button" class="btn btn-text btn-sm" data-open-grid title="Vista de miniaturas (Esc u O)">
           <span class="icon-[tabler--layout-grid] size-5"></span><span class="max-lg:hidden">Miniaturas</span>
@@ -133,6 +143,45 @@ const qr = await qrSvg(participantUrl)
             </section>
           )
         })}
+      </div>
+    </div>
+
+    <!-- Material del sitio que acompaña al día, con la diapositiva donde se usa -->
+    <div id="deck-material" class="overlay overlay-open:translate-x-0 drawer drawer-end hidden max-w-md no-print" role="dialog" tabindex="-1" aria-labelledby="deck-material-title">
+      <div class="drawer-header">
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-secondary">Día {deck.day} · Material</p>
+          <h3 id="deck-material-title" class="drawer-title">Lo que acompaña a estas diapositivas</h3>
+        </div>
+        <button type="button" class="btn btn-text btn-circle btn-sm absolute end-3 top-3" aria-label="Cerrar" data-overlay="#deck-material">
+          <span class="icon-[tabler--x] size-5"></span>
+        </button>
+      </div>
+      <div class="drawer-body">
+        <h4 class="mb-2 text-sm font-semibold">Para el participante</h4>
+        <ul class="mb-5 space-y-2">
+          {general.map((m) => (
+            <li>
+              <a href={href(m.path)} target="_blank" rel="noopener" class="flex items-center gap-3 rounded-box border border-base-content/10 p-3 hover:border-secondary">
+                <span class={`${m.icon} size-6 shrink-0 text-secondary`}></span>
+                <span class="flex-1"><strong class="block text-sm">{m.label}</strong><span class="text-xs text-base-content/70">{m.texto}</span></span>
+                <span class="icon-[tabler--external-link] size-4 text-base-content/50"></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <h4 class="mb-2 text-sm font-semibold">En el transcurso del día</h4>
+        <ul class="space-y-2">
+          {material.map((m) => (
+            <li class="flex items-center gap-2 rounded-box border border-base-content/10 p-2 ps-3">
+              <span class={`${m.icon} size-5 shrink-0 text-secondary`}></span>
+              <a href={href(m.path)} target="_blank" rel="noopener" class="link link-hover flex-1 text-sm font-medium">{m.label}</a>
+              <a href={`#${m.slide + 1}`} data-goto={m.slide} class="btn btn-text btn-xs tabular-nums" title={deck.slides[m.slide].title}>
+                Diap. {m.slide + 1} · {deck.slides[m.slide].time}
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
 
@@ -343,6 +392,7 @@ const qr = await qrSvg(participantUrl)
         opacity: 1;
       }
       #deck-index,
+      #deck-material,
       #deck-help {
         color: var(--color-base-content);
       }

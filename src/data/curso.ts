@@ -36,6 +36,11 @@ export const enfoque = [
   },
 ]
 
+/**
+ * `disponible: false` bloquea el día: sus diapositivas, guion, vista del presentador y material
+ * del participante no se publican y en el sitio aparece «Se abre el Día N». Cámbielo a true
+ * y vuelva a publicar al iniciar el día. Con `astro dev` se ven todos, para preparar la sesión.
+ */
 export const sesiones = [
   {
     dia: 1,
@@ -49,14 +54,14 @@ export const sesiones = [
     slug: 'dia-2',
     titulo: 'Business Intelligence y tableros de mando',
     entregable: 'Tablero con tres vistas y un filtro de periodo.',
-    disponible: true,
+    disponible: false,
   },
   {
     dia: 3,
     slug: 'dia-3',
     titulo: 'Cartografía, análisis espacial y proyecto integrador',
     entregable: 'Mapa de concentración y proyecto integrador.',
-    disponible: true,
+    disponible: false,
   },
 ]
 

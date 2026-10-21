@@ -6,6 +6,7 @@ import { dia2 } from '../src/data/dia-2.ts'
 import { dia3 } from '../src/data/dia-3.ts'
 import { reactivos, explicaciones } from '../src/data/cuestionario.ts'
 import { temas } from '../src/data/curso.ts'
+import { materiales } from '../src/data/materiales.ts'
 import { readFileSync } from 'node:fs'
 
 const decks = [dia1, dia2, dia3]
@@ -37,6 +38,7 @@ for (const deck of decks) {
       for (const r of s.er?.relations ?? []) if (!ids.has(r.from) || !ids.has(r.to)) falla(`Relación ER con entidad inexistente: ${id}`)
     }
     if (!s.notes) falla(`Sin notas del instructor: ${id}`)
+    for (const m of s.material ?? []) if (!materiales[m]) falla(`Material inexistente «${m}»: ${id}`)
   })
 }
 

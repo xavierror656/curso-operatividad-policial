@@ -1,12 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import ReglaDeOro from '../../components/ReglaDeOro.astro'
-import { decks } from '../../data/decks'
+import { abierto, decks, decksAbiertos } from '../../data/decks'
 import type { Deck } from '../../data/types'
 import { href } from '../../lib/site'
+import { materialesDe } from '../../data/materiales'
 
 export function getStaticPaths() {
-  return decks.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
+  return decksAbiertos.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
 }
 
 // Versión para el participante: lo que necesita a la mano, sin notas del instructor
@@ -16,7 +17,13 @@ const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
 const taller = deck.slides.find((s) => s.layout === 'checklist' && /se revisa|cada presentación/i.test(s.title))
 const flujos = deck.slides.filter((s) => s.layout === 'flow' && !s.kicker?.startsWith('Puente'))
 const llevas = deck.slides.filter((s) => s.layout === 'takeaway')
-const otros = decks.filter((d) => d.slug !== deck.slug)
+const otros = decksAbiertos.filter((d) => d.slug !== deck.slug)
+const material = materialesDe(deck.slides)
+const momento = (i: number) => {
+  const s = deck.slides[i]
+  const bloque = deck.blocks.find((b) => b.id === s.block)
+  return `${/^\d/.test(s.block) ? `Bloque ${s.block}` : bloque?.label ?? s.block} · ${s.time}`
+}
 ---
 
 <Layout title={`Día ${deck.day} · Material del participante`} description={`Material del participante del Día ${deck.day}: ${deck.title}.`}>
@@ -26,8 +33,10 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
     <p class="mt-3 text-base-content/75">{deck.objective}</p>
 
     <nav class="mt-6 flex flex-wrap gap-2" aria-label="Días del curso">
-      {decks.map((d) => (
+      {decks.map((d) => abierto(d.slug) ? (
         <a href={href(`/participante/${d.slug}/`)} class:list={['btn btn-sm', d.slug === deck.slug ? 'btn-primary' : 'btn-outline']} aria-current={d.slug === deck.slug ? 'page' : undefined}>Día {d.day}</a>
+      ) : (
+        <span class="btn btn-sm btn-disabled" title={`Se abre el Día ${d.day}`}><span class="icon-[tabler--lock] size-4" aria-hidden="true"></span>Día {d.day}</span>
       ))}
     </nav>
 
@@ -117,37 +126,26 @@ const otros = decks.filter((d) => d.slug !== deck.slug)
       </section>
     )}
 
-    <section class="mt-10 grid gap-3 sm:grid-cols-2">
+    <section class="mt-10">
+      <h2 class="text-xl font-semibold">Material del día</h2>
+      <p class="mt-1 text-sm text-base-content/70">Las páginas que se usan en las diapositivas de hoy, en el orden en que aparecen.</p>
+    </section>
+
+    <section class="mt-4 grid gap-3 sm:grid-cols-2">
       <a href={href(`/participante/${deck.slug}/resumen/`)} class="card border border-secondary/50 bg-secondary/5 shadow-none transition hover:border-secondary sm:col-span-2">
         <div class="card-body flex-row items-center gap-4 p-5">
           <span class="icon-[tabler--printer] size-8 shrink-0 text-secondary"></span>
           <div><p class="font-semibold">Resumen de una página</p><p class="text-sm text-base-content/70">Para imprimir o guardar en PDF y llevar al servicio.</p></div>
         </div>
       </a>
-      <a href={href('/practica/hoja-de-verificacion/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
-        <div class="card-body flex-row items-center gap-4 p-5">
-          <span class="icon-[tabler--checklist] size-8 shrink-0 text-secondary"></span>
-          <div><p class="font-semibold">Hoja de verificación</p><p class="text-sm text-base-content/70">Revise su archivo, tablero o mapa antes de entregar.</p></div>
-        </div>
-      </a>
-      <a href={href('/practica/casos/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
-        <div class="card-body flex-row items-center gap-4 p-5">
-          <span class="icon-[tabler--file-description] size-8 shrink-0 text-secondary"></span>
-          <div><p class="font-semibold">Casos para analizar</p><p class="text-sm text-base-content/70">Errores frecuentes y la lección de cada uno.</p></div>
-        </div>
-      </a>
-      <a href={href('/practica/regla-de-oro/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
-        <div class="card-body flex-row items-center gap-4 p-5">
-          <span class="icon-[tabler--shield-question] size-8 shrink-0 text-secondary"></span>
-          <div><p class="font-semibold">Práctica: ¿se puede pegar?</p><p class="text-sm text-base-content/70">Diez casos para entrenar la regla de oro.</p></div>
-        </div>
-      </a>
-      <a href={href('/cuestionario/')} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
-        <div class="card-body flex-row items-center gap-4 p-5">
-          <span class="icon-[tabler--checklist] size-8 shrink-0 text-secondary"></span>
-          <div><p class="font-semibold">Cuestionario</p><p class="text-sm text-base-content/70">Diagnóstico al inicio y cierre al final.</p></div>
-        </div>
-      </a>
+      {material.map((m) => (
+        <a href={href(m.path)} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
+          <div class="card-body flex-row items-center gap-4 p-5">
+            <span class:list={[m.icon, 'size-8 shrink-0 text-secondary']}></span>
+            <div><p class="font-semibold">{m.label}</p><p class="text-sm text-base-content/70">{momento(m.slide)}</p></div>
+          </div>
+        </a>
+      ))}
     </section>
 
     {otros.length > 0 && (

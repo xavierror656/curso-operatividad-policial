@@ -1,3 +1,5 @@
+import type { MaterialId } from './materiales'
+
 export type Layout =
   | 'cover'
   | 'goal'
@@ -114,6 +116,8 @@ export interface Slide {
   minutes?: number
   /** Recordatorio de la regla de oro cuando aparece un asistente de IA en pantalla */
   ruleReminder?: boolean
+  /** Páginas del sitio que acompañan la diapositiva; se enlazan en el pie */
+  material?: MaterialId[]
   notes: string
 }
 

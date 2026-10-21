@@ -91,6 +91,46 @@
   font-weight: 500;
 }
 
+/* Enlaces al material del sitio que acompaña la diapositiva */
+.s-material {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6cqw;
+  min-width: 0;
+}
+.s-reminder + .s-material {
+  margin-left: 0;
+}
+.s-material-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85em;
+}
+.s-material-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45cqw;
+  padding: 0.35cqw 0.9cqw;
+  border: 1px solid var(--linea);
+  border-radius: 99cqw;
+  background: var(--fondo-suave);
+  color: var(--navy);
+  font-family: 'Lexend', sans-serif;
+  font-weight: 500;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.s-material-link:hover {
+  border-color: var(--rojo);
+  color: var(--rojo);
+}
+.slide--dark .s-material-link {
+  border-color: #3a3d5c;
+  background: var(--navy-2);
+  color: #fff;
+}
+
 .slide-body {
   flex: 1;
   min-height: 0;

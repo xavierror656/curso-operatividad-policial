@@ -1,5 +1,7 @@
 ---
 import type { Slide } from '../../data/types'
+import { materiales } from '../../data/materiales'
+import { href } from '../../lib/site'
 
 interface Props {
   slide: Slide
@@ -62,6 +64,7 @@ const links = (s.er?.relations ?? []).map((r) => {
   }
 })
 const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
+const material = (s.material ?? []).map((id) => materiales[id])
 ---
 
 <section class:list={['slide', { 'slide--dark': dark }]} data-index={index} data-block={s.block} data-time={s.time} data-layout={s.layout} aria-label={`Diapositiva ${index + 1}: ${s.title}`}>
@@ -342,6 +345,16 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
         <span>Operatividad policial · Día {day}</span>
         {s.ruleReminder && (
           <span class="s-reminder"><span class="icon-[tabler--shield-lock]"></span>Regla de oro: estructura sí, datos nunca</span>
+        )}
+        {material.length > 0 && (
+          <span class="s-material">
+            <span class="s-material-label">Material</span>
+            {material.map((m) => (
+              <a href={href(m.path)} target="_blank" rel="noopener" class="s-material-link" title={`Abrir «${m.label}» en otra pestaña`}>
+                <span class={m.icon} aria-hidden="true"></span>{m.label}
+              </a>
+            ))}
+          </span>
         )}
         <span class="slide-num">{index + 1} / {total}</span>
       </footer>

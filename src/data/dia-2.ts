@@ -48,6 +48,7 @@ export const dia2: Deck = {
         'Colonias con el nombre del catálogo oficial',
         'Duplicados resueltos y documentados',
       ],
+      material: ['datos'],
       notes:
         'Una sola diapositiva de repaso. Pregunte qué error fue el más frecuente en su archivo; sirve para anticipar qué cifras del tablero pueden salir raras.',
     },
@@ -158,6 +159,7 @@ export const dia2: Deck = {
         { label: 'Revisar tipos', detail: 'Fecha, número y texto' },
         { label: 'Contar registros', detail: 'Debe coincidir con su archivo' },
       ],
+      material: ['datos'],
       notes:
         'El conteo de registros es el primer control del día: si su archivo tiene 928 registros, la tabla en Metabase debe tener 928. Si no coincide, algo se perdió en la carga. Antes de la sesión confirme con TI que la instancia de Metabase permita subir CSV; si no, cargue la tabla de práctica con antelación.',
     },
@@ -396,6 +398,7 @@ export const dia2: Deck = {
           'Tengo una tabla incidentes con columnas fecha_evento (fecha), sector (entero) y tipo_delito (texto). Escribe una consulta SQL que cuente los robos por sector en marzo de 2026.',
       },
       ruleReminder: true,
+      material: ['regla-de-oro'],
       notes:
         'El asistente no necesita ver datos para escribir SQL: le basta el nombre de la tabla y de las columnas. El resultado de la consulta tampoco se pega de vuelta en el asistente.',
     },
@@ -411,6 +414,7 @@ export const dia2: Deck = {
         { label: 'Decidir', detail: 'Si no coincide, no se usa' },
       ],
       ruleReminder: true,
+      material: ['hoja-tablero'],
       notes:
         'Conteo de control: una cifra que ya se sabe correcta, como el total de registros del archivo depurado (928) o el total de un sector contado a mano. Si la suma de la consulta por sector no da 928, la consulta tiene un error.',
     },
@@ -427,6 +431,7 @@ export const dia2: Deck = {
         label: 'Consulta verificada',
         items: ['La suma cuadra con el control: 928', 'Cuauhtémoc tiene 214 registros', 'El despliegue responde a la incidencia real'],
       },
+      material: ['casos'],
       notes:
         'Ejemplo ficticio pero frecuente: al unir la tabla con un catálogo que tiene nombres repetidos, cada registro se cuenta dos veces. La consulta funciona, no marca error, y la cifra es falsa.',
     },
@@ -442,6 +447,7 @@ export const dia2: Deck = {
         'Toda consulta del asistente pasa el conteo de control',
       ],
       ruleReminder: true,
+      material: ['escenarios'],
       notes: 'Prepare al grupo para el taller: ahora cada quien arma su tablero.',
     },
 
@@ -473,6 +479,7 @@ export const dia2: Deck = {
         'El total cuadra con el conteo de control',
         'Ningún dato pegado en el asistente',
       ],
+      material: ['hoja-tablero'],
       notes: 'Deje la diapositiva visible un momento para que la anoten.',
     },
     {
@@ -509,6 +516,7 @@ export const dia2: Deck = {
         'Mi tablero usa solo el archivo de práctica',
       ],
       ruleReminder: true,
+      material: ['hoja-ia'],
       notes: 'Pida que levanten la mano quienes cumplen los cuatro puntos. Si alguien duda en uno, revíselo en privado.',
     },
     {

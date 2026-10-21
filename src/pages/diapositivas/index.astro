@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import { sesiones } from '../../data/curso'
-import { getDeck } from '../../data/decks'
+import { abierto, getDeck } from '../../data/decks'
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 ---
@@ -17,6 +17,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
     <div class="mt-10 grid gap-6">
       {sesiones.map((s) => {
         const deck = getDeck(s.slug)
+        const libre = abierto(s.slug)
         return (
           <article class="card card-side border border-base-content/10 shadow-none max-md:flex-col">
             <div class="grid place-items-center bg-primary p-8 text-primary-content md:w-56">
@@ -28,12 +29,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
             <div class="card-body gap-3">
               <div class="flex flex-wrap items-center gap-2">
                 <h2 class="card-title font-display text-xl">{s.titulo}</h2>
-                {deck ? <span class="badge badge-soft badge-success">{deck.slides.length} diapositivas</span> : <span class="badge badge-soft">En preparación</span>}
+                {!libre ? <span class="badge badge-soft"><span class="icon-[tabler--lock] size-3.5"></span>Bloqueado</span> : deck ? <span class="badge badge-soft badge-success">{deck.slides.length} diapositivas</span> : <span class="badge badge-soft">En preparación</span>}
               </div>
               {deck && <p class="text-base-content/70">{deck.objective}</p>}
               <p class="text-sm"><strong>Entregable:</strong> {s.entregable}</p>
               <div class="card-actions mt-2">
-                {deck ? (
+                {deck && libre ? (
                   <>
                     <a href={`${base}/diapositivas/${deck.slug}/`} class="btn btn-primary"><span class="icon-[tabler--player-play] size-5"></span>Presentar</a>
                     <a href={`${base}/diapositivas/${deck.slug}/presentador/`} class="btn btn-outline btn-secondary"><span class="icon-[tabler--device-desktop-analytics] size-5"></span>Vista del presentador</a>
@@ -41,7 +42,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
                     <a href={`${base}/participante/${deck.slug}/`} class="btn btn-outline"><span class="icon-[tabler--device-mobile] size-5"></span>Participante</a>
                   </>
                 ) : (
-                  <button class="btn" disabled>Próximamente</button>
+                  <button class="btn" disabled>{deck ? <><span class="icon-[tabler--lock] size-5"></span>Se abre el Día {s.dia}</> : 'Próximamente'}</button>
                 )}
               </div>
             </div>
