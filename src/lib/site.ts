@@ -1,6 +1,6 @@
 import QRCode from 'qrcode'
 
-/** Ruta interna con el prefijo del sitio (GitHub Pages publica bajo /curso-operatividad-policial). */
+/** Ruta interna con el prefijo configurado en Astro (raíz en el dominio personalizado). */
 export const href = (path: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}${path}`
 
 /** URL pública completa, para códigos QR. */

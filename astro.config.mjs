@@ -6,9 +6,8 @@ import offline from './integrations/offline.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-  // Publicado en GitHub Pages: https://xavierror656.github.io/curso-operatividad-policial/
-  site: 'https://xavierror656.github.io',
-  base: '/curso-operatividad-policial',
+  // GitHub Pages publica este proyecto desde la raíz del dominio personalizado.
+  site: 'https://cruz.floresjavier.com',
   integrations: [offline({ name: 'Operatividad policial · Curso 3', shortName: 'Curso 3' })],
   vite: {
     plugins: [tailwindcss()]
