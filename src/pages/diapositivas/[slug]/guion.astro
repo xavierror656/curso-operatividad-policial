@@ -26,7 +26,7 @@ const revision = [
   'El entregable del día está en una diapositiva propia.',
   'Todo término técnico nuevo se explica en la misma diapositiva.',
 ]
-const capturas = deck.slides.map((s, i) => ({ s, i })).filter(({ s }) => s.capture)
+const capturas = deck.slides.map((s, i) => ({ s, i })).filter(({ s }) => s.capture && !s.captureImage)
 ---
 
 <Layout title={`Guion del instructor · Día ${deck.day}`}>

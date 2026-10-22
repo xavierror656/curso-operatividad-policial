@@ -107,6 +107,8 @@ export interface Slide {
   yes?: string
   no?: string
   capture?: string
+  /** Ruta pública de la captura, cuando ya está disponible. */
+  captureImage?: string
   alerts?: Alert[]
   table?: { head: string[]; rows: string[][] }
   chart?: Chart

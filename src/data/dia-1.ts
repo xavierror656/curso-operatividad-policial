@@ -12,7 +12,7 @@ export const dia1: Deck = {
   subtitle: 'Día 1',
   schedule: '08:00 a 12:00',
   objective:
-    'Que el participante reconozca los vicios de captura más frecuentes, aplique reglas de validación sobre la plataforma web institucional y obtenga un archivo depurado, bajo un protocolo claro de manejo de información sensible.',
+    'Que el participante reconozca los vicios de captura más frecuentes, ubique la exportación de vistas en la plataforma institucional y aplique reglas de validación al CSV sintético del curso para obtener un archivo depurado, bajo un protocolo claro de manejo de información sensible.',
   blocks: [
     { id: 'Apertura', label: 'Apertura', range: '08:00' },
     { id: '1A', label: 'Decisiones basadas en evidencia', range: '08:00 – 08:30' },
@@ -45,7 +45,7 @@ export const dia1: Deck = {
       title: 'Al mediodía usted entrega un archivo listo para el tablero',
       bullets: [
         'Reconoce los seis vicios de captura más frecuentes',
-        'Aplica reglas de validación en la plataforma web',
+        'Ubica las vistas exportables y valida el CSV de práctica',
         'Usa un asistente de IA sin exponer información sensible',
         'Entrega su archivo depurado y su diagnóstico de calidad',
       ],
@@ -66,7 +66,7 @@ export const dia1: Deck = {
       ],
       material: ['datos'],
       notes:
-        'Cada archivo es distinto, así que copiar al compañero no funciona. Aclare que los datos son sintéticos: se parecen a los reales pero no corresponden a ninguna persona ni evento.',
+        'Todos usan el CSV sintético del curso, pero deben explicar sus propias decisiones de depuración. Aclare que los datos se parecen a los reales sin corresponder a ninguna persona ni evento.',
     },
 
     // ───────────── Bloque 1A ─────────────
@@ -245,11 +245,11 @@ export const dia1: Deck = {
       time: '09:00',
       layout: 'goal',
       kicker: 'Bloque 2 · 09:00 a 09:30',
-      title: 'En esta media hora usted carga su archivo en la plataforma',
+      title: 'En esta media hora conoce cómo se exportan las vistas',
       bullets: [
         'Ingresar con su cuenta y ubicar los menús',
-        'Cargar el archivo de práctica',
-        'Conocer los cuatro catálogos institucionales',
+        'Ubicar Exportar reportes y Exportar vistas',
+        'Descargar el CSV sintético del curso para practicar',
       ],
       notes: 'Verifique que todos tengan la sesión abierta antes de avanzar. Resuelva accesos en este momento.',
     },
@@ -257,16 +257,34 @@ export const dia1: Deck = {
       block: '2A',
       time: '09:03',
       layout: 'flow',
-      title: 'Cargar un archivo toma cuatro pasos y un minuto',
+      title: 'La plataforma permite seleccionar una vista y exportarla como CSV',
       steps: [
-        { label: 'Ingresar', detail: 'Con la cuenta asignada' },
-        { label: 'Cargar archivo', detail: 'CSV o Excel' },
-        { label: 'Revisar vista previa', detail: 'Columnas y primeras filas' },
-        { label: 'Confirmar', detail: 'Esperar el resumen' },
+        { label: 'Abrir Reportes', detail: 'Entrar a Exportar vistas' },
+        { label: 'Elegir vista', detail: 'Seleccionar una colección disponible' },
+        { label: 'Aplicar filtros', detail: 'Periodo y, según la vista, distrito' },
+        { label: 'Revisar y exportar', detail: 'Vista previa y descarga CSV' },
       ],
-      capture: 'Pantalla de carga de la plataforma con el archivo de práctica seleccionado.',
+      capture: 'Formulario de Exportar vistas, sin registros seleccionados.',
+      captureImage: '/capturas/exportar-vistas.jpg',
       notes:
-        'Haga el recorrido en vivo en el proyector mientras el grupo lo repite en su equipo. Explique que CSV es un archivo de texto con columnas separadas por comas, que se abre en Excel.',
+        'Muestre el formulario sin abrir filas operativas. La plataforma ofrece vistas para exportar; no se carga aquí el archivo de práctica ni se validan sus errores. Después de descargar, compruebe en el CSV las columnas, el periodo y el distrito: la vista previa no sustituye esta verificación. Para los ejercicios, descarguen el CSV sintético del sitio del curso.',
+    },
+    {
+      block: '2A',
+      time: '09:08',
+      layout: 'table',
+      title: 'Las vistas y el consolidado sirven para preguntas distintas',
+      lead: 'Encabezados observados en CSV de SSPM; aquí no se muestran filas operativas.',
+      table: {
+        head: ['Exportación', 'Columnas útiles', 'Qué se revisa en el curso'],
+        rows: [
+          ['ubicaciones', 'fecha_evento, hora_evento, distrito, sector, colonia, latitud, longitud', 'Fechas, territorio y coordenadas'],
+          ['clasificacion-hechos', 'folio, fecha_evento, distrito, colonia, nombre_delito', 'Delitos, colonias y posibles duplicados'],
+          ['Consolidados por folio', 'Folio, Fecha, Hora, Distrito, Delito primario, Detenidos, Armas, Drogas, Filas', 'Un folio por fila y conteos asociados'],
+        ],
+      },
+      notes:
+        'Las vistas contienen más columnas que las mostradas. En Consolidados por folio, Filas indica cuántas filas de origen se agruparon en cada folio; el consolidado no equivale a la vista de detalle. El CSV sintético del curso usa hora y delito como nombres simplificados; compare encabezados antes de reutilizar una regla. Nunca proyecte folios ni filas reales de los CSV exportados.',
     },
     {
       block: '2A',
@@ -279,7 +297,8 @@ export const dia1: Deck = {
         { icon: 'icon-[tabler--building-community]', title: 'Colonias oficiales', text: 'La única forma válida de escribir una colonia.' },
         { icon: 'icon-[tabler--list-details]', title: 'Catálogo unificado de delitos', text: 'Un solo nombre para cada tipo de delito.' },
       ],
-      capture: 'Vista de los catálogos institucionales dentro de la plataforma.',
+      capture: 'Ejemplo del catálogo de distritos dentro de la plataforma.',
+      captureImage: '/capturas/catalogo-distritos.jpg',
       notes:
         'Pida a alguien con experiencia en calle que explique al grupo la diferencia entre cuadrante y sector en su operación diaria. Confirme los nombres contra el catálogo vigente de la Secretaría.',
     },
@@ -376,16 +395,16 @@ export const dia1: Deck = {
         { label: 'Cargar', detail: 'Dejar el archivo íntegro y disponible' },
       ],
       notes:
-        'ETL son las siglas en inglés de extract, transform, load. Hoy se hace con la plataforma; en los siguientes días el archivo cargado alimenta el tablero y el mapa. Es el tema 2 del temario: aquí solo se nombra y se ubica.',
+        'ETL son las siglas en inglés de extract, transform, load. La plataforma permite exportar vistas (extracción). La transformación se practica con el CSV sintético del curso; la carga corresponde a la herramienta analítica que se use después. Es el tema 2 del temario.',
     },
     {
       block: '2A',
       time: '09:26',
       layout: 'takeaway',
       kicker: 'Qué se lleva del bloque',
-      title: 'La plataforma compara su archivo contra los catálogos oficiales',
-      bullets: ['Su archivo ya está cargado y visible', 'Los catálogos son la verdad de referencia', 'Lo que no coincide, se revisa'],
-      notes: 'Antes de pasar al siguiente bloque, confirme que todos ven la vista previa de su archivo.',
+      title: 'La exportación y la validación son pasos distintos',
+      bullets: ['SSPM ofrece vistas para exportar en CSV', 'Después de exportar, se verifican columnas y filtros en el archivo', 'La práctica de depuración usa el CSV sintético del curso'],
+      notes: 'Antes de pasar al siguiente bloque, confirme que todos localizaron Exportar vistas y descargaron el CSV sintético de práctica.',
     },
 
     // ───────────── Bloque 2B ─────────────
@@ -646,25 +665,24 @@ export const dia1: Deck = {
       time: '10:45',
       layout: 'goal',
       kicker: 'Bloque 3 · 10:45 a 11:15',
-      title: 'En esta media hora la plataforma le dice qué está mal',
-      bullets: ['Ejecutar las reglas sobre su archivo', 'Leer las tarjetas de alerta', 'Decidir qué hacer con cada hallazgo'],
-      notes: 'Todos ejecutan al mismo tiempo. Espere a que el grupo tenga sus tarjetas en pantalla antes de avanzar.',
+      title: 'En esta media hora usted diagnostica el CSV de práctica',
+      bullets: ['Aplicar las reglas al archivo sintético', 'Contar los hallazgos por tipo', 'Decidir qué hacer con cada hallazgo'],
+      notes: 'Trabajen sobre el CSV descargado del sitio del curso. Los conteos de la siguiente diapositiva son un resumen didáctico del archivo sintético, no alertas generadas por SSPM.',
     },
     {
       block: '3B',
       time: '10:48',
       layout: 'alerts',
-      title: 'Las tarjetas de alerta le dicen cuánto y dónde revisar',
-      lead: 'Archivo de práctica de 1,058 registros. Cifras ficticias.',
+      title: 'El diagnóstico resume qué errores debe revisar',
+      lead: 'Archivo sintético de práctica: 1,058 registros. Conteos didácticos.',
       alerts: [
         { tone: 'error', icon: 'icon-[tabler--calendar-x]', value: '38', label: 'Fechas inválidas' },
         { tone: 'error', icon: 'icon-[tabler--map-pin-off]', value: '21', label: 'Coordenadas fuera del municipio' },
         { tone: 'warning', icon: 'icon-[tabler--home-question]', value: '54', label: 'Colonias sin coincidencia' },
         { tone: 'warning', icon: 'icon-[tabler--copy]', value: '17', label: 'Posibles duplicados' },
       ],
-      capture: 'Tarjetas de alerta y tabla de inconsistencias tras ejecutar las reglas.',
       notes:
-        'Cada tarjeta lleva a su tabla de inconsistencias. Muestre cómo pasar de la tarjeta a las filas afectadas. Las cifras de cada participante serán distintas. Conciliación de la práctica: 1,058 registros menos los 130 marcados que se excluyen del archivo depurado dejan los 928 que se usan en los Días 2 y 3.',
+        'Estas tarjetas son una visualización del material de práctica, no una pantalla de SSPM. Pida al grupo identificar las filas afectadas en su CSV. Conciliación: 1,058 registros menos 130 marcados que se excluyen dejan 928 para los Días 2 y 3.',
     },
     {
       block: '3B',
@@ -694,7 +712,7 @@ export const dia1: Deck = {
       bullets: [
         'Toda corrección queda registrada en el diagnóstico',
         'Lo que no puede verificar, se marca, no se adivina',
-        'La tarjeta de alerta es el inicio, no el final',
+        'El conteo de hallazgos es el inicio, no el final',
       ],
       notes: 'Prepare al grupo para el taller: ahora lo harán solos con su archivo.',
     },
@@ -707,15 +725,15 @@ export const dia1: Deck = {
       kicker: 'Bloque 4 · 11:15 a 11:45 · Taller',
       title: 'Ahora usted depura su propio archivo, de principio a fin',
       bullets: [
-        'Cargue el archivo que le entregó el instructor',
+        'Abra el CSV sintético que descargó del sitio del curso',
         'Ejecute las reglas de fechas y coordenadas',
         'Revise las colonias contra el catálogo oficial',
         'Resuelva o marque cada hallazgo',
-        'Exporte el archivo depurado',
+        'Guarde una copia del archivo depurado',
       ],
       material: ['datos'],
       notes:
-        'Cada archivo tiene errores distintos. Recorra el aula; ayude con preguntas, no con respuestas. Si falla la conectividad, use el respaldo local de los archivos.',
+        'Todos parten del mismo CSV sintético, pero deben documentar sus propias decisiones. Recorra el aula; ayude con preguntas, no con respuestas. Si falla la conectividad, use el respaldo local de los archivos.',
     },
     {
       block: '4A',
@@ -738,7 +756,7 @@ export const dia1: Deck = {
       layout: 'timer',
       title: 'Tiene 25 minutos para entregar su archivo depurado',
       minutes: 25,
-      bullets: ['11:25 · Reglas ejecutadas', '11:35 · Hallazgos resueltos', '11:43 · Archivo exportado'],
+      bullets: ['11:25 · Reglas aplicadas', '11:35 · Hallazgos resueltos', '11:43 · Archivo guardado'],
       notes: 'Inicie el cronómetro con el botón o la tecla T. Avise a los diez y a los cinco minutos.',
     },
 

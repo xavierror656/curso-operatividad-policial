@@ -331,8 +331,12 @@ const material = (s.material ?? []).map((id) => materiales[id])
         </div>
       )}
 
-      {/* Marcador de captura pendiente */}
-      {s.capture && (
+      {/* Captura de la interfaz o marcador pendiente */}
+      {s.captureImage ? (
+        <figure class="s-capture s-capture--image">
+          <img src={href(s.captureImage)} alt={s.capture ?? 'Pantalla de la plataforma'} loading="lazy" />
+        </figure>
+      ) : s.capture && (
         <div class="s-capture" role="note">
           <span class="icon-[tabler--photo-plus]"></span>
           <span><strong>[CAPTURA</strong>: {s.capture}<strong>]</strong></span>

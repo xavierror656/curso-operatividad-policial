@@ -899,6 +899,17 @@
   width: 2.4cqw;
   height: 2.4cqw;
 }
+.s-capture--image {
+  padding: 0.4cqw;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #d8d8e0;
+}
+.s-capture--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 .slide-body--flow .s-capture,
 .slide-body--alerts .s-capture,
 .slide-body--cards .s-capture {

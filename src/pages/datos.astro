@@ -23,16 +23,41 @@ const archivos = [
   { nombre: 'incidentes_practica_sucio.csv', detalle: '1,058 registros con 130 errores sembrados. Es el archivo del Día 1.' },
   { nombre: 'incidentes_practica_depurado.csv', detalle: '928 registros ya depurados. Es el archivo de los Días 2 y 3.' },
 ]
+const exportaciones = [
+  { nombre: 'ubicaciones-centro-2026.csv', detalle: '746 registros · ubicaciones y coordenadas' },
+  { nombre: 'clasificacion-hechos-centro-2026.csv', detalle: '386 registros · clasificación de hechos' },
+  { nombre: 'consolidados-centro-2026.csv', detalle: '730 folios · conteos consolidados' },
+]
 ---
 
-<Layout title="Datos de práctica · Operatividad policial" description="Archivos CSV sintéticos del curso, con su diccionario de datos y los errores sembrados.">
+<Layout title="Datos de práctica · Operatividad policial" description="CSV sintéticos de práctica y exportaciones cifradas de SSPM para el curso.">
   <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Material del curso</p>
     <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Datos de práctica</h1>
     <div class="alert alert-soft alert-warning mt-5 items-start">
       <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
-      <p>Los datos son <strong>100 % sintéticos</strong>: no hay hechos, personas, colonias ni coordenadas reales de eventos. Los totales por delito, distrito, hora y día de la semana coinciden con las gráficas del Día 2.</p>
+      <p>Los archivos de práctica son <strong>100 % sintéticos</strong>: no hay hechos, personas, colonias ni coordenadas reales de eventos. Sus totales coinciden con las gráficas del Día 2.</p>
     </div>
+
+    <section class="mt-12 rounded-box border border-base-content/15 bg-base-200/40 p-5 md:p-6" aria-labelledby="exportaciones-sspm">
+      <h2 id="exportaciones-sspm" class="text-2xl font-semibold">Exportaciones de SSPM · 2026 acumulado</h2>
+      <p class="mt-2 text-base-content/75">Datos operativos reales del distrito CENTRO, del 1 de enero al 21 de octubre de 2026. Estas descargas requieren la clave que entrega el instructor. El navegador descifra el CSV y lo guarda en su equipo; la clave no se envía al sitio.</p>
+      <label for="clave-exportaciones" class="label mt-5">Clave de descarga</label>
+      <input id="clave-exportaciones" type="password" autocomplete="off" class="input w-full max-w-md" placeholder="Escriba la clave del instructor" />
+      <p id="estado-exportaciones" class="mt-2 min-h-6 text-sm" role="status" aria-live="polite"></p>
+      <div class="mt-3 grid gap-3 sm:grid-cols-3">
+        {exportaciones.map((a) => (
+          <div class="card border border-base-content/10 bg-base-100 shadow-none">
+            <div class="card-body gap-2 p-4">
+              <span class="icon-[tabler--file-spreadsheet] size-7 text-secondary" aria-hidden="true"></span>
+              <h3 class="font-display text-sm font-semibold break-all">{a.nombre}</h3>
+              <p class="text-xs text-base-content/70">{a.detalle}</p>
+              <button type="button" class="btn btn-secondary btn-sm mt-auto w-fit" data-descarga-cifrada data-url={href(`/datos-protegidos/${a.nombre}.c3e`)} data-nombre={a.nombre}>Descargar CSV</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
 
     <div class="mt-8 grid gap-4 sm:grid-cols-2">
       {archivos.map((a) => (
@@ -55,6 +80,21 @@ const archivos = [
       </table>
     </div>
 
+    <h2 class="mt-12 text-2xl font-semibold">Cómo se relaciona con las vistas de SSPM</h2>
+    <p class="mt-2 text-base-content/75">SSPM permite exportar vistas en CSV. El archivo de este curso es sintético y usa algunos nombres de columna simplificados; no se carga en SSPM. Antes de aplicar una regla a otra exportación, compare sus encabezados.</p>
+    <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Correspondencia entre columnas de SSPM y del curso">
+      <table class="table">
+        <thead><tr><th scope="col">Vista de SSPM</th><th scope="col">Columna exportada</th><th scope="col">En el CSV del curso</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">ubicaciones</th><td><code>fecha_evento</code></td><td><code>fecha_evento</code></td></tr>
+          <tr><th scope="row">ubicaciones</th><td><code>hora_evento</code></td><td><code>hora</code></td></tr>
+          <tr><th scope="row">ubicaciones</th><td><code>latitud</code>, <code>longitud</code></td><td><code>latitud</code>, <code>longitud</code></td></tr>
+          <tr><th scope="row">clasificacion-hechos</th><td><code>nombre_delito</code></td><td><code>delito</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-sm text-base-content/70">«Consolidados por folio» ofrece otra granularidad: una fila por folio con fecha, distrito, delito primario y conteos de detenidos, armas y drogas. Sirve para contrastar totales; no sustituye las vistas de detalle ni el CSV sintético de práctica.</p>
+
     <h2 class="mt-12 text-2xl font-semibold">Errores sembrados en el archivo del Día 1</h2>
     <p class="mt-2 text-base-content/75">130 registros marcados que se excluyen del archivo depurado: 1,058 menos 130 dejan 928.</p>
     <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Errores sembrados, se desplaza horizontalmente">
@@ -67,4 +107,57 @@ const archivos = [
     <h2 class="mt-12 text-2xl font-semibold">Cómo se generaron</h2>
     <p class="mt-2 text-base-content/75">Con el script <code>datos/generar.py</code> del repositorio, con semilla fija: se obtienen siempre los mismos archivos. Si cambian las cifras del Día 2, se ajusta el script y se vuelven a generar.</p>
   </article>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#clave-exportaciones')
+  const estado = document.querySelector<HTMLElement>('#estado-exportaciones')
+  const encoder = new TextEncoder()
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-descarga-cifrada]')) {
+    button.addEventListener('click', async () => {
+      const clave = input?.value ?? ''
+      if (!clave) {
+        if (estado) estado.textContent = 'Escriba la clave que le dio el instructor.'
+        input?.focus()
+        return
+      }
+      button.disabled = true
+      if (estado) estado.textContent = `Preparando ${button.dataset.nombre}…`
+      try {
+        const response = await fetch(button.dataset.url ?? '')
+        if (!response.ok) throw new Error('No se pudo descargar el archivo cifrado.')
+        const bytes = new Uint8Array(await response.arrayBuffer())
+        if (bytes.length < 49 || new TextDecoder().decode(bytes.subarray(0, 4)) !== 'C3E1') {
+          throw new Error('El archivo cifrado no tiene el formato esperado.')
+        }
+        const material = await crypto.subtle.importKey('raw', encoder.encode(clave), 'PBKDF2', false, ['deriveKey'])
+        const key = await crypto.subtle.deriveKey(
+          { name: 'PBKDF2', salt: bytes.subarray(4, 20), iterations: 400_000, hash: 'SHA-256' },
+          material,
+          { name: 'AES-GCM', length: 256 },
+          false,
+          ['decrypt'],
+        )
+        const plain = await crypto.subtle.decrypt(
+          { name: 'AES-GCM', iv: bytes.subarray(20, 32) },
+          key,
+          bytes.subarray(32),
+        )
+        const url = URL.createObjectURL(new Blob([plain], { type: 'text/csv;charset=utf-8' }))
+        const link = document.createElement('a')
+        link.href = url
+        link.download = button.dataset.nombre ?? 'exportacion.csv'
+        document.body.append(link)
+        link.click()
+        link.remove()
+        setTimeout(() => URL.revokeObjectURL(url), 60_000)
+        if (estado) estado.textContent = `Descarga lista: ${button.dataset.nombre}`
+      } catch {
+        if (estado) estado.textContent = 'No se pudo abrir el CSV. Revise la clave o la conexión e inténtelo de nuevo.'
+      } finally {
+        button.disabled = false
+      }
+    })
+  }
+</script>
 </Layout>
