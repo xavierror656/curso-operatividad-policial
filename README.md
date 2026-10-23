@@ -1,6 +1,6 @@
 # Curso 3 · Herramientas tecnológicas orientadas a la operatividad policial
 
-Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material del participante, práctica, cuestionario y cierre. Se publica en GitHub Pages y funciona sin conexión.
+Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material del participante, práctica, cuestionarios y cierre. Se publica en GitHub Pages y funciona sin conexión.
 
 ## Comandos
 
@@ -17,6 +17,7 @@ Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material d
 - **Día en que va el grupo** (línea de avance de la portada): `diaActual` en `src/data/curso.ts`.
 - **Diapositivas**: `src/data/dia-1.ts`, `dia-2.ts`, `dia-3.ts`. Cada una lleva bloque, hora, layout y notas del instructor.
 - **Cuestionario**: `src/data/cuestionario.ts` (reactivos, clave y explicaciones). Si cambia el número de reactivos, actualice `cortas` en `src/pages/cuestionario/resultados.astro`.
+- **Cuestionarios por día**: `src/data/cuestionarios-practica.ts` (repasos de QGIS del Día 2 y Metabase del Día 3).
 - **Casos, escenarios, hoja de verificación, encuesta y versiones**: `src/data/recursos.ts`.
 - **Datos de práctica**: `datos/generar.py` (semilla fija).
 

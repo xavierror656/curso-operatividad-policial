@@ -15,6 +15,24 @@ const letras = ['a', 'b', 'c', 'd']
       Diez preguntas, unos diez minutos. Se contesta igual al inicio del Día 1 y al cierre del Día 3, para medir cuánto avanzó el grupo. Es un instrumento formativo: ni el diagnóstico ni el cierre condicionan la acreditación, que depende de la rúbrica del producto final. Conteste con lo que sabe hoy. No se guarda su nombre; vea el <a class="link" href={href('/privacidad/')}>aviso de privacidad</a>.
     </p>
 
+    <section class="mt-8" aria-labelledby="repasos-por-dia">
+      <h2 id="repasos-por-dia" class="text-xl font-semibold">Dos cuestionarios breves por tema</h2>
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
+        <a href={href('/cuestionario/dia-2/')} class="card border border-base-content/15 shadow-none transition hover:border-secondary">
+          <div class="card-body gap-2 p-5">
+            <span class="font-display text-lg font-semibold">Día 2 · QGIS básico</span>
+            <span class="text-sm text-base-content/70">Teselas, GeoJSON, puntos y un filtro · 5 preguntas</span>
+          </div>
+        </a>
+        <a href={href('/cuestionario/dia-3/')} class="card border border-base-content/15 shadow-none transition hover:border-secondary">
+          <div class="card-body gap-2 p-5">
+            <span class="font-display text-lg font-semibold">Día 3 · Metabase</span>
+            <span class="text-sm text-base-content/70">Vistas, gráficas y tablero · 5 preguntas</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <form class="mt-8 space-y-8" data-quiz novalidate>
       <fieldset class="card border border-base-content/10 shadow-none">
         <div class="card-body gap-4">

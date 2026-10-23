@@ -5,6 +5,7 @@ import { dia1 } from '../src/data/dia-1.ts'
 import { dia2 } from '../src/data/dia-2.ts'
 import { dia3 } from '../src/data/dia-3.ts'
 import { reactivos, explicaciones } from '../src/data/cuestionario.ts'
+import { cuestionariosPractica } from '../src/data/cuestionarios-practica.ts'
 import { temas } from '../src/data/curso.ts'
 import { materiales } from '../src/data/materiales.ts'
 import { readFileSync } from 'node:fs'
@@ -47,6 +48,14 @@ if (reactivos.length !== explicaciones.length) falla(`Hay ${reactivos.length} re
 reactivos.forEach((r, i) => {
   if (!Number.isInteger(r.correcta) || r.correcta < 0 || r.correcta >= r.opciones.length) falla(`Reactivo ${i + 1}: «correcta» fuera de rango`)
 })
+for (const quiz of Object.values(cuestionariosPractica)) {
+  if (quiz.preguntas.length !== 5) falla(`Cuestionario del Día ${quiz.dia}: se esperaban 5 preguntas`)
+  quiz.preguntas.forEach((r, i) => {
+    if (r.opciones.length !== 4 || !Number.isInteger(r.correcta) || r.correcta < 0 || r.correcta > 3 || !r.explicacion) {
+      falla(`Cuestionario del Día ${quiz.dia}, pregunta ${i + 1}: opciones, clave o explicación incompletas`)
+    }
+  })
+}
 
 // 4. Temario: 37 horas
 const horas = temas.reduce((n, t) => n + t.horas, 0)

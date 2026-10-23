@@ -41,6 +41,8 @@ const momento = (i: number) => {
       ))}
     </nav>
 
+    {deck.day > 1 && <a href={href(`/cuestionario/dia-${deck.day}/`)} class="btn btn-outline btn-sm mt-4"><span class="icon-[tabler--checklist] size-4"></span>Contestar el cuestionario del Día {deck.day}</a>}
+
     {usaIA && <div class="mt-8"><ReglaDeOro compact /></div>}
 
     {logro && (
