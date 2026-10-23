@@ -53,7 +53,11 @@ export default function offline({ name, shortName, themeColor = '#191b2d' }) {
           const rel = relative(root, f).split(sep).join('/')
           if (rel === 'sw.js') continue
           hash.update(rel).update(await readFile(f))
-          urls.push(base + rel.replace(/(^|\/)index\.html$/, '$1'))
+          // Las descargas portátiles se guardan cuando se piden; no ralentizan
+          // la instalación sin conexión para quienes solo consultan el curso.
+          if (!/^herramientas\/visor-html-sspm-juarez\.(exe|zip)$/.test(rel)) {
+            urls.push(base + rel.replace(/(^|\/)index\.html$/, '$1'))
+          }
         }
         const version = `curso3-${hash.digest('hex').slice(0, 12)}`
 

@@ -98,6 +98,26 @@ const exportaciones = [
       <a href={href('/participante/dia-2/#capas-geojson')} class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-secondary underline underline-offset-4 hover:text-primary">Ver instrucciones paso a paso <span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></a>
     </section>
 
+    <section id="visor-html" class="mt-8 scroll-mt-24 overflow-hidden rounded-box border border-secondary/35 bg-base-100" aria-labelledby="titulo-visor-html">
+      <div class="grid gap-5 p-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-8 md:p-7">
+        <div>
+          <div class="flex flex-wrap items-center gap-3">
+            <h2 id="titulo-visor-html" class="text-2xl font-semibold md:text-3xl">Visor HTML para Windows</h2>
+            <span class="badge badge-soft badge-secondary">Material extra</span>
+          </div>
+          <p class="mt-3 max-w-2xl text-sm leading-relaxed text-base-content/75 md:text-base">Abra en su equipo los mapas y páginas HTML que use en clase. El visor acepta arrastrar y soltar y no requiere escribir comandos.</p>
+        </div>
+        <div class="flex flex-col gap-2 sm:flex-row md:flex-col">
+          <a href={href('/herramientas/visor-html-sspm-juarez.zip')} download="Visor HTML SSPM Juárez.zip" class="btn btn-secondary justify-center"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar ZIP con instrucciones</a>
+          <a href={href('/herramientas/visor-html-sspm-juarez.exe')} download="Visor HTML SSPM Juárez.exe" class="btn btn-outline justify-center"><span class="icon-[tabler--device-desktop-down] size-5" aria-hidden="true"></span>Descargar solo EXE</a>
+        </div>
+      </div>
+      <div class="border-t border-base-content/10 bg-base-200/45 px-5 py-4 text-sm leading-relaxed md:px-7">
+        <p><strong>Cómo usarlo:</strong> descomprima el ZIP si eligió esa opción, abra el EXE con doble clic, arrastre su archivo <code>.html</code> al visor y pulse <strong>Servir y abrir</strong>.</p>
+        <p class="mt-2 text-base-content/70">Mantenga las carpetas de imágenes y archivos del mapa junto al HTML. Las calles de OpenStreetMap requieren internet.</p>
+      </div>
+    </section>
+
     <section class="mt-12 rounded-box border border-base-content/15 bg-base-200/40 p-5 md:p-6" aria-labelledby="exportaciones-sspm">
       <h2 id="exportaciones-sspm" class="text-2xl font-semibold">Exportaciones de SSPM · 2026 acumulado</h2>
       <p class="mt-2 text-base-content/75">Datos operativos reales del distrito CENTRO, del 1 de enero al 21 de octubre de 2026. Estas descargas requieren la clave que entrega el instructor. El navegador descifra el CSV y lo guarda en su equipo; la clave no se envía al sitio.</p>
