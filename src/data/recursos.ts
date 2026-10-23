@@ -196,6 +196,7 @@ export const verificacion: GrupoVerificacion[] = [
     icon: 'icon-[tabler--map-2]',
     items: [
       'Añadí un mapa base de teselas debajo de las capas de datos.',
+      'Cargué las capas GeoJSON de colonias y cuadrantes proporcionadas para el curso.',
       'Dibujé un polígono sencillo y lo guardé como GeoJSON.',
       'Grafiqué los puntos del archivo sintético y apliqué un filtro que puedo explicar.',
     ],
@@ -233,7 +234,7 @@ export const versiones = [
       'Auditoría: cifras unificadas (428 contra 214; 1,058 menos 130 igual 928), cuestionario de diagnóstico programado en el Día 1 y cierre del Día 3 reorganizado por equipos.',
       'Día 1: diapositiva de ETL, cuestionario de diagnóstico y seis vicios de captura completos. Día 3: práctica cronometrada de exportación.',
       'Modelo ER, prompts de EDA, limpieza y gráficas, y nuevos distractores en el cuestionario.',
-      'Datos sintéticos descargables con diccionario, aviso de privacidad con borrado de datos, y materiales del instructor (rúbrica, asistencia, protocolo de incidente y plan B).',
+      'CSV sintéticos y capas GeoJSON descargables, exportaciones cifradas con clave, aviso de privacidad con borrado de datos, y materiales del instructor (rúbrica, asistencia, protocolo de incidente y plan B).',
       'Diapositivas: botones de texto grande y alto contraste, letra mínima mayor y teclado corregido. Sitio sin conexión que muestra la versión más reciente.',
       'Verificación automática del contenido antes de publicar.',
     ],

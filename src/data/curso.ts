@@ -53,7 +53,7 @@ export const sesiones = [
     dia: 2,
     slug: 'dia-2',
     titulo: 'Primeros pasos en QGIS: teselas, GeoJSON y puntos',
-    entregable: 'Proyecto de QGIS con mapa base de teselas, un GeoJSON dibujado y puntos filtrados.',
+    entregable: 'Proyecto de QGIS con capas GeoJSON de colonias y cuadrantes, un polígono propio y puntos de práctica filtrados.',
     disponible: true,
   },
   {
@@ -111,11 +111,11 @@ export const temas: Tema[] = [
   },
   {
     num: 5,
-    titulo: 'Añadir un mapa base y dibujar un GeoJSON en QGIS',
+    titulo: 'Añadir mapa base y capas GeoJSON en QGIS',
     horas: 3,
     contenido:
-      'Recorrido breve de QGIS. Añadir un mapa base de teselas, dibujar un polígono sencillo encima y guardarlo como GeoJSON.',
-    producto: 'Proyecto de QGIS con mapa base de teselas y GeoJSON dibujado.',
+      'Recorrido breve de QGIS. Añadir un mapa base de teselas, cargar las capas proporcionadas de colonias y cuadrantes, dibujar un polígono sencillo y guardarlo como GeoJSON.',
+    producto: 'Proyecto de QGIS con mapa base, dos capas GeoJSON proporcionadas y un polígono dibujado.',
   },
   {
     num: 6,
@@ -176,7 +176,7 @@ export const productos = [
   {
     icon: 'icon-[tabler--map-2]',
     titulo: 'Mapa básico de incidentes en QGIS',
-    texto: 'Mapa base de teselas, GeoJSON dibujado y puntos filtrados.',
+    texto: 'Mapa base, capas proporcionadas de colonias y cuadrantes, GeoJSON dibujado y puntos filtrados.',
   },
   {
     icon: 'icon-[tabler--file-analytics]',

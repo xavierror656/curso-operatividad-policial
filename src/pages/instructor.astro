@@ -5,7 +5,7 @@ import { href } from '../lib/site'
 const rubrica = [
   { criterio: 'Archivo depurado', c2: 'Documenta los errores hallados y cómo se resolvieron; conteo antes y después que cuadra.', c1: 'Depura, pero no documenta o el conteo no se explica.', c0: 'No entrega archivo depurado.' },
   { criterio: 'Tablero de mando', c2: 'Tres vistas y filtro de periodo; cifras verificadas contra un conteo de control.', c1: 'Vistas completas, sin verificación o sin filtro.', c0: 'No presenta tablero.' },
-  { criterio: 'Mapa básico en QGIS', c2: 'Mapa base de teselas añadido, GeoJSON dibujado y puntos graficados con un filtro aplicado.', c1: 'Completa dos de las tres tareas o el filtro no funciona.', c0: 'No presenta el proyecto o no logra mostrar los puntos.' },
+  { criterio: 'Mapa básico en QGIS', c2: 'Mapa base, capas proporcionadas de colonias y cuadrantes, GeoJSON propio y puntos de práctica con filtro aplicado.', c1: 'Falta una capa, el polígono propio o el filtro no funciona.', c0: 'No presenta el proyecto o no logra mostrar los puntos.' },
   { criterio: 'Recomendación operativa', c2: 'Decisión concreta apoyada en la evidencia de su propio tablero y mapa.', c1: 'Recomendación general, poco ligada a la evidencia.', c0: 'No recomienda.' },
   { criterio: 'Uso seguro de la IA', c2: 'Ningún dato compartido; verificó lo que generó el asistente.', c1: 'Verificó, pero compartió más de lo debido sin consecuencias.', c0: 'Compartió datos reales o no verificó.' },
 ]
@@ -17,8 +17,8 @@ const incidente = [
   'Registre el incidente y lo aprendido. Se reconoce al participante que avisa a tiempo.',
 ]
 const planB = [
-  ['Sin internet', 'El sitio queda guardado en el navegador si se abrió una vez con conexión. Las teselas de OpenStreetMap necesitan red; si falla, continúe la práctica de QGIS con el GeoJSON y el CSV sin mapa base. De respaldo para el sitio: guion, resumen del día y hoja de verificación impresos en PDF.'],
-  ['No autorizan instalar Python o QGIS', 'Equipo preinstalado o máquina virtual, Jupyter local en memoria USB, QGIS portable. Google Colab solo con los datos sintéticos de este sitio, nunca con datos reales, porque los sube a un tercero.'],
+  ['Sin internet', 'El sitio queda guardado en el navegador si se abrió una vez con conexión. Las teselas de OpenStreetMap necesitan red; si falla, continúe la práctica de QGIS con los GeoJSON descargados y el CSV sin mapa base. De respaldo para el sitio: guion, resumen del día y hoja de verificación impresos en PDF.'],
+  ['No autorizan instalar Python o QGIS', 'Equipo preinstalado o máquina virtual, Jupyter local en memoria USB, QGIS portable. Google Colab solo con los CSV sintéticos de este sitio, nunca con las capas GeoJSON reales ni exportaciones institucionales, porque los sube a un tercero.'],
   ['Metabase sin permiso para subir CSV', 'Cargue la tabla de práctica en la base de datos antes de la sesión. Confirme con TI.'],
   ['No hay asistente de IA autorizado', 'Demostración con la pantalla del instructor, con instrucciones ya preparadas en la página de prompts.'],
   ['Falla el proyector', 'Guion del instructor y resumen del día impresos; ejercicios en las páginas de práctica desde los equipos.'],
@@ -87,7 +87,7 @@ const planB = [
         <div class="rounded-box border border-base-content/10 p-5">
           <h3 class="font-display font-semibold">Condiciones del aula (se llena al inicio)</h3>
           <ul class="mt-2 space-y-1">
-            {['Cada participante tiene equipo con sesión abierta', 'La red funciona y el sitio se abrió una vez con conexión', 'Proyector legible desde la última fila (probar teclas L y C)', 'Datos de práctica descargados en cada equipo', 'Instancia de Metabase y QGIS verificados'].map((t) => <li><label class="flex items-start gap-3 p-1"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5" /><span>{t}</span></label></li>)}
+            {['Cada participante tiene equipo con sesión abierta', 'La red funciona y el sitio se abrió una vez con conexión', 'Proyector legible desde la última fila (probar teclas L y C)', 'CSV sintéticos y capas GeoJSON descargados en cada equipo', 'Instancia de Metabase y QGIS verificados'].map((t) => <li><label class="flex items-start gap-3 p-1"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5" /><span>{t}</span></label></li>)}
           </ul>
         </div>
         <div class="rounded-box border border-base-content/10 p-5">

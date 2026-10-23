@@ -23,6 +23,14 @@ const archivos = [
   { nombre: 'incidentes_practica_sucio.csv', detalle: '1,058 registros con 130 errores sembrados. Es el archivo del Día 1.' },
   { nombre: 'incidentes_practica_depurado.csv', detalle: '928 registros ya depurados. Es el archivo de los Días 2 y 3.' },
 ]
+const capasGeojson = [
+  { nombre: 'colonias.geojson', titulo: 'Colonias', detalle: '1,126 polígonos de colonias; incluye atributos de conteos.' },
+  { nombre: 'cuadrantes.geojson', titulo: 'Cuadrantes', detalle: '22 polígonos de cuadrantes.' },
+  { nombre: 'distritos.geojson', titulo: 'Distritos', detalle: '7 polígonos de distritos.' },
+  { nombre: 'juarez-distritos.geojson', titulo: 'Juárez · distritos', detalle: 'Otra versión de los 7 distritos; se superpone con distritos.geojson.' },
+  { nombre: 'municipios.geojson', titulo: 'Municipio', detalle: '1 polígono municipal con atributos demográficos agregados.' },
+  { nombre: 'sectores.geojson', titulo: 'Sectores', detalle: '172 polígonos de sectores.' },
+]
 const exportaciones = [
   { nombre: 'ubicaciones-centro-2026.csv', detalle: '746 registros · ubicaciones y coordenadas' },
   { nombre: 'clasificacion-hechos-centro-2026.csv', detalle: '386 registros · clasificación de hechos' },
@@ -30,16 +38,25 @@ const exportaciones = [
 ]
 ---
 
-<Layout title="Datos de práctica · Operatividad policial" description="CSV sintéticos de práctica y exportaciones cifradas de SSPM para el curso.">
+<Layout title="Archivos del curso · Operatividad policial" description="CSV de práctica, seis capas GeoJSON y exportaciones cifradas de SSPM para el curso.">
   <article class="mx-auto max-w-4xl px-4 py-8 md:py-12">
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Material del curso</p>
-    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Datos de práctica</h1>
+    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">Archivos del curso</h1>
     <div class="alert alert-soft alert-warning mt-5 items-start">
       <span class="icon-[tabler--info-circle] size-5 shrink-0"></span>
-      <p>Los archivos de práctica son <strong>100 % sintéticos</strong>: no hay hechos, personas, colonias ni coordenadas reales de eventos. Sus totales coinciden con las gráficas del Día 3.</p>
+      <p>Los dos CSV de incidentes son <strong>sintéticos</strong>. Las seis capas GeoJSON son archivos geográficos proporcionados para el curso e incluyen nombres y límites reales; <code>colonias.geojson</code> también contiene conteos agregados. Los nombres «Colonia Demo» del CSV no coinciden con los de esa capa.</p>
     </div>
 
-    <section id="archivo-dia-2" class="mt-8 scroll-mt-24 overflow-hidden rounded-box bg-primary text-primary-content" aria-labelledby="titulo-archivo-dia-2">
+    <section class="mt-8 rounded-box border border-secondary/35 bg-secondary/10 p-5 md:flex md:items-center md:justify-between md:gap-7 md:p-7" aria-labelledby="titulo-paquete-practica">
+      <div>
+        <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Archivos de trabajo para los tres días</p>
+        <h2 id="titulo-paquete-practica" class="mt-1 text-2xl font-semibold">Descargue el paquete de práctica</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Incluye los dos CSV de práctica, los seis GeoJSON proporcionados, <code>.gitignore</code> y un LEEME. Extraiga el ZIP antes de abrir los archivos en QGIS; <code>.gitignore</code> no es una capa. Las tres exportaciones institucionales se descargan con clave más abajo.</p>
+      </div>
+      <a href={href('/datos/paquete_practica_completo.zip')} download class="btn btn-secondary mt-5 w-full shrink-0 justify-center md:mt-0 md:w-auto"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar paquete · ZIP</a>
+    </section>
+
+    <section id="archivo-dia-2" class="mt-6 scroll-mt-24 overflow-hidden rounded-box bg-primary text-primary-content" aria-labelledby="titulo-archivo-dia-2">
       <div class="grid gap-6 p-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-8">
         <div>
           <h2 id="titulo-archivo-dia-2" class="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Archivo para QGIS · Día 2</h2>
@@ -53,6 +70,32 @@ const exportaciones = [
         <div class="bg-primary px-6 py-4 md:px-8"><dt class="text-xs font-semibold uppercase tracking-wide text-white/70">Campo Y</dt><dd class="mt-1 font-display text-lg font-semibold">latitud</dd></div>
         <div class="bg-primary px-6 py-4 md:px-8"><dt class="text-xs font-semibold uppercase tracking-wide text-white/70">SRC de la geometría</dt><dd class="mt-1 font-display text-lg font-semibold">EPSG:4326</dd></div>
       </dl>
+    </section>
+
+    <section id="capas-geojson-dia-2" class="mt-6 scroll-mt-24 rounded-box border border-base-content/15 bg-base-100 p-5 md:p-7" aria-labelledby="titulo-capas-geojson">
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Capas para QGIS · Día 2</p>
+          <h2 id="titulo-capas-geojson" class="mt-1 text-2xl font-semibold md:text-3xl">Las seis capas GeoJSON</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Descargue todas en un ZIP o cada una por separado. En clase comenzaremos con <strong>colonias</strong> y <strong>cuadrantes</strong>; las demás permiten explorar distritos, sectores y el municipio.</p>
+        </div>
+        <a href={href('/datos/paquete_capas_geojson.zip')} download class="btn btn-secondary btn-sm w-full justify-center sm:w-auto"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Descargar las seis capas · ZIP</a>
+      </div>
+      <div class="mt-5 grid gap-3 sm:grid-cols-2">
+        {capasGeojson.map((capa) => (
+          <a href={href(`/datos/capas-sspm/${capa.nombre}`)} download class="group flex flex-col rounded-xl border border-base-content/15 bg-base-200/50 p-4 transition-colors hover:border-secondary hover:bg-base-200">
+            <span class="icon-[tabler--map-2] size-6 text-secondary" aria-hidden="true"></span>
+            <strong class="mt-2 font-display text-base">{capa.titulo}</strong>
+            <span class="mt-1 grow text-sm text-base-content/70">{capa.detalle}</span>
+            <span class="mt-3 inline-flex items-center gap-2 break-all text-sm font-semibold text-secondary"><span class="icon-[tabler--download] size-4 shrink-0" aria-hidden="true"></span>{capa.nombre}</span>
+          </a>
+        ))}
+      </div>
+      <div class="mt-5 rounded-lg bg-info/10 px-4 py-4 text-sm leading-relaxed">
+        <strong>Cómo ponerlos:</strong> extraiga el ZIP o guarde los GeoJSON sueltos, abra QGIS y arrastre los archivos <code>.geojson</code> desde el Explorador al panel <strong>Capas</strong>. También puede usar <strong>Capa → Añadir capa → Añadir capa vectorial…</strong>. QGIS los abre como coordenadas de longitud y latitud WGS84; coloque OpenStreetMap debajo de los polígonos. Si ocultan las calles, reduzca la opacidad de su símbolo.
+      </div>
+      <p class="mt-3 text-xs leading-relaxed text-base-content/65">Para visualizar basta con cargarlas. Dos objetos de los archivos originales tienen geometría inválida para ciertos procesos espaciales; si después va a hacer operaciones geométricas, trabaje sobre una copia y revise o repare esas geometrías.</p>
+      <a href={href('/participante/dia-2/#capas-geojson')} class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-secondary underline underline-offset-4 hover:text-primary">Ver instrucciones paso a paso <span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></a>
     </section>
 
     <section class="mt-12 rounded-box border border-base-content/15 bg-base-200/40 p-5 md:p-6" aria-labelledby="exportaciones-sspm">

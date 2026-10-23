@@ -7,6 +7,12 @@ const { deck } = Astro.props as { deck: Deck }
 const preparacion = deck.slides.find((s) => s.block === 'Apertura' && s.layout === 'checklist')
 const revisionFinal = deck.slides.find((s) => s.block === '4' && s.layout === 'checklist')
 const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
+const capasComplementarias = [
+  { nombre: 'Distritos', archivo: 'distritos.geojson' },
+  { nombre: 'Distritos de Juárez', archivo: 'juarez-distritos.geojson' },
+  { nombre: 'Municipios', archivo: 'municipios.geojson' },
+  { nombre: 'Sectores', archivo: 'sectores.geojson' },
+]
 const etapas = [
   { id: 'mapa-base', block: '1', numero: '1', nombre: 'Mapa base' },
   { id: 'zona-geojson', block: '2', numero: '2', nombre: 'Zona GeoJSON' },
@@ -40,18 +46,19 @@ const etapas = [
           <span class="inline-flex items-center gap-2"><span class="icon-[tabler--database] size-5" aria-hidden="true"></span>CSV de práctica sintético</span>
         </div>
         <div class="mt-7 flex flex-wrap gap-3">
-          <a href={href('/datos/incidentes_practica_depurado.csv')} download class="btn btn-secondary"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar CSV del Día 2</a>
+          <a href={href('/datos/paquete_practica_completo.zip')} download class="btn btn-secondary"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar todos los archivos de práctica</a>
           <a href="#preparar" class="btn border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20"><span class="icon-[tabler--arrow-down] size-5" aria-hidden="true"></span>Empezar la guía</a>
         </div>
       </div>
       <figure class="rounded-xl bg-white/10 p-5 ring-1 ring-white/20">
-        <figcaption class="mb-4 text-sm font-semibold text-white/85">Las tres piezas del mapa</figcaption>
+        <figcaption class="mb-4 text-sm font-semibold text-white/85">Capas del mapa de práctica</figcaption>
         <div class="space-y-2 text-sm">
           <div class="flex items-center gap-3 rounded-lg bg-white px-3 py-3 text-primary shadow-[0_8px_16px_-12px_rgba(0,0,0,0.65)]"><span class="icon-[tabler--map-pin] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">Puntos del CSV</strong><span class="text-primary/75">Filtrados por delito</span></span></div>
           <div class="flex items-center gap-3 rounded-lg bg-white/90 px-3 py-3 text-primary"><span class="icon-[tabler--polygon] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">Zona GeoJSON</strong><span class="text-primary/75">Polígono de práctica</span></span></div>
+          <div class="flex items-center gap-3 rounded-lg bg-white/85 px-3 py-3 text-primary"><span class="icon-[tabler--map-2] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">Colonias y cuadrantes</strong><span class="text-primary/75">Capas listas para cargar</span></span></div>
           <div class="flex items-center gap-3 rounded-lg bg-white/80 px-3 py-3 text-primary"><span class="icon-[tabler--map] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">OpenStreetMap</strong><span class="text-primary/75">Calles de fondo</span></span></div>
         </div>
-        <p class="mt-4 text-xs leading-relaxed text-white/80">Las capas de datos se ven encima del mapa base. La zona es un dibujo para practicar, no un límite oficial.</p>
+        <p class="mt-4 text-xs leading-relaxed text-white/80">Las capas GeoJSON provienen de los archivos proporcionados para el curso. El polígono que dibuje en clase sí es un ejercicio.</p>
       </figure>
     </header>
 
@@ -62,6 +69,7 @@ const etapas = [
           <ol class="mt-2 flex flex-wrap gap-1 lg:block">
             <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#preparar">Antes de empezar</a></li>
             <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#sistemas-de-coordenadas">Qué SRC usar</a></li>
+            <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#capas-geojson">Colonias y cuadrantes</a></li>
             {etapas.map((etapa) => <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href={`#${etapa.id}`}>{etapa.numero}. {etapa.nombre}</a></li>)}
             <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#entrega">Revisar y entregar</a></li>
           </ol>
@@ -72,7 +80,7 @@ const etapas = [
       <div class="min-w-0 space-y-12">
         <section id="preparar" class="scroll-mt-24 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 sm:p-7" aria-labelledby="preparar-titulo">
           <div class="flex flex-wrap items-start justify-between gap-3">
-            <div><h2 id="preparar-titulo" class="text-2xl font-semibold text-balance">Antes de abrir el mapa</h2><p class="mt-2 max-w-[68ch] text-base-content/75">Tenga QGIS, el CSV depurado y una carpeta para guardar los archivos del ejercicio.</p></div>
+            <div><h2 id="preparar-titulo" class="text-2xl font-semibold text-balance">Antes de abrir el mapa</h2><p class="mt-2 max-w-[68ch] text-base-content/75">Tenga QGIS, el CSV depurado, las capas GeoJSON y una carpeta para guardar los archivos del ejercicio.</p></div>
             <span class="badge badge-soft badge-secondary text-xs">Preparación</span>
           </div>
           <ul class="mt-5 grid gap-2 sm:grid-cols-2" data-checklist="preparar-dia-2">
@@ -105,6 +113,47 @@ const etapas = [
             <div class="rounded-lg bg-base-200/70 p-4"><dt class="font-semibold">SRC del proyecto</dt><dd class="mt-2 text-sm leading-relaxed text-base-content/75">Puede cambiar la visualización del mapa <strong class="text-base-content">sin modificar el CSV</strong>.</dd></div>
           </dl>
           <a class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-secondary underline underline-offset-4 hover:text-primary" href="https://documentation.qgis.org/3.44/en/docs/user_manual/working_with_projections/working_with_projections.html">Consultar el manual oficial de proyecciones de QGIS <span class="icon-[tabler--external-link] size-4" aria-hidden="true"></span></a>
+        </section>
+
+        <section id="capas-geojson" class="scroll-mt-24 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 sm:p-7" aria-labelledby="capas-geojson-titulo">
+          <h2 id="capas-geojson-titulo" class="text-2xl font-semibold text-balance">Capas de colonias y cuadrantes</h2>
+          <p class="mt-2 max-w-[68ch] text-base-content/75">Cargue las seis capas GeoJSON proporcionadas para el curso. Comience con <strong class="text-base-content">colonias y cuadrantes</strong>; use las otras cuatro para explorar el territorio. Sus coordenadas son longitud/latitud (CRS84), que QGIS abre de forma compatible con <strong class="text-base-content">EPSG:4326</strong>.</p>
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-primary px-4 py-4 text-primary-content sm:px-5">
+            <p class="max-w-[48ch] text-sm leading-relaxed"><strong class="block text-base">Todos los archivos de práctica</strong>El paquete completo contiene dos CSV, seis GeoJSON y un archivo .gitignore. También puede descargar solo las capas.</p>
+            <div class="flex flex-wrap gap-2"><a href={href('/datos/paquete_practica_completo.zip')} download class="btn btn-secondary btn-sm"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Descargar todos los archivos</a><a href={href('/datos/paquete_capas_geojson.zip')} download class="btn btn-sm border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Solo seis capas GeoJSON</a></div>
+          </div>
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="flex flex-col items-start rounded-lg bg-base-200/70 p-4">
+              <strong class="text-base">Colonias</strong>
+              <p class="mt-1 flex-1 text-sm leading-relaxed text-base-content/75">Polígonos y nombres de colonias del archivo proporcionado.</p>
+              <a href={href('/datos/capas-sspm/colonias.geojson')} download class="btn btn-secondary btn-sm mt-4"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Descargar colonias</a>
+              <span class="mt-2 break-all text-xs text-base-content/65">colonias.geojson</span>
+            </div>
+            <div class="flex flex-col items-start rounded-lg bg-base-200/70 p-4">
+              <strong class="text-base">Cuadrantes</strong>
+              <p class="mt-1 flex-1 text-sm leading-relaxed text-base-content/75">Divisiones de cuadrantes del archivo proporcionado.</p>
+              <a href={href('/datos/capas-sspm/cuadrantes.geojson')} download class="btn btn-secondary btn-sm mt-4"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Descargar cuadrantes</a>
+              <span class="mt-2 break-all text-xs text-base-content/65">cuadrantes.geojson</span>
+            </div>
+          </div>
+          <div class="mt-5 border-t border-base-content/10 pt-5">
+            <h3 class="font-semibold">Otras capas disponibles</h3>
+            <p class="mt-1 text-sm leading-relaxed text-base-content/70">Descárguelas por separado o use el ZIP de seis capas. <strong>Distritos</strong> y <strong>Distritos de Juárez</strong> se superponen: active una de las dos para compararlas con claridad.</p>
+            <ul class="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+              {capasComplementarias.map((capa) => <li><a href={href(`/datos/capas-sspm/${capa.archivo}`)} download class="flex min-h-10 items-center justify-between gap-2 rounded-lg px-2 py-1 text-sm font-semibold text-secondary hover:bg-base-200"><span>{capa.nombre} <small class="block font-normal text-base-content/60">{capa.archivo}</small></span><span class="icon-[tabler--download] size-4 shrink-0" aria-hidden="true"></span></a></li>)}
+            </ul>
+          </div>
+          <p class="mt-4 text-sm text-base-content/75">Si prefiere bajar los CSV por separado: <a href={href('/datos/incidentes_practica_sucio.csv')} download class="link link-secondary font-semibold">CSV sin depurar</a> · <a href={href('/datos/incidentes_practica_depurado.csv')} download class="link link-secondary font-semibold">CSV depurado</a>.</p>
+          <h3 class="mt-7 font-semibold">Cómo ponerlos en QGIS 3.44</h3>
+          <ol class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+            <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-content" aria-hidden="true">1</span><span><strong class="block">Extraiga el ZIP</strong><span class="mt-0.5 block text-sm leading-relaxed text-base-content/75">Guarde y descomprima el paquete en la carpeta del proyecto. Cargue los archivos <strong>.geojson</strong>; <strong>.gitignore</strong> no es una capa de QGIS.</span></span></li>
+            <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-content" aria-hidden="true">2</span><span><strong class="block">Arrastre las seis capas</strong><span class="mt-0.5 block text-sm leading-relaxed text-base-content/75">Desde el Explorador de archivos, arrastre cada GeoJSON al lienzo o al panel <strong>Capas</strong>. También puede usar <strong>Capa → Añadir capa → Añadir capa vectorial…</strong> y elegir cada archivo.</span></span></li>
+            <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-content" aria-hidden="true">3</span><span><strong class="block">Ordene y muestre lo necesario</strong><span class="mt-0.5 block text-sm leading-relaxed text-base-content/75">En <strong>Capas</strong>, deje OpenStreetMap abajo, cuadrantes encima, colonias sobre cuadrantes y puntos del CSV arriba. La zona que dibuje también va sobre las capas de límites. Apague temporalmente las otras capas si se tapan.</span></span></li>
+            <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-primary text-sm font-semibold text-primary-content" aria-hidden="true">4</span><span><strong class="block">Encuéntrelas y ajuste el relleno</strong><span class="mt-0.5 block text-sm leading-relaxed text-base-content/75">Clic derecho en una capa → <strong>Zoom a la capa</strong>. Si una tapa otra, abra <strong>Propiedades → Simbología</strong> y reduzca la opacidad del relleno.</span></span></li>
+          </ol>
+          <p class="mt-6 flex items-start gap-2 rounded-lg bg-info/10 px-3 py-3 text-sm leading-relaxed"><span class="icon-[tabler--info-circle] mt-0.5 size-5 shrink-0 text-info" aria-hidden="true"></span><span>El CSV de incidentes es <strong>sintético</strong>: sus nombres «Colonia Demo...» <strong>no coinciden por nombre</strong> con las colonias del GeoJSON. No los use para vincular registros. Las seis capas GeoJSON sí son los archivos proporcionados para el curso.</span></p>
+          <p class="mt-3 text-sm leading-relaxed text-base-content/70"><strong>Nota de geometría:</strong> colonias.geojson y juarez-distritos.geojson contienen una geometría inválida cada uno. Se pueden visualizar en esta práctica; no haremos intersecciones ni otras operaciones geométricas con ellos.</p>
+          <p class="mt-3 text-sm leading-relaxed text-base-content/70">Estas seis capas son de descarga pública. Otras exportaciones institucionales del curso están <a href={href('/datos/')} class="link link-secondary font-semibold">aparte en Datos</a> y requieren la clave que proporciona el instructor.</p>
         </section>
 
         {etapas.map((etapa) => (

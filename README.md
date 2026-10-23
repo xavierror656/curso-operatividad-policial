@@ -10,7 +10,8 @@ Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material d
 | `npm run dev` | Servidor local en `localhost:4321` |
 | `npm run verificar` | Revisa tiempos, cuestionario, temario y datos de práctica |
 | `npm run build` | Genera `dist/` y el modo sin conexión |
-| `python datos/generar.py` | Regenera los datos sintéticos de `public/datos/` |
+| `python datos/generar.py` | Regenera los dos CSV sintéticos de `public/datos/` |
+| `python datos/empaquetar_practica.py` | Reúne los dos CSV y las seis capas GeoJSON en dos paquetes ZIP |
 
 ## Dónde cambiar cada cosa
 
@@ -19,11 +20,11 @@ Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material d
 - **Cuestionario**: `src/data/cuestionario.ts` (reactivos, clave y explicaciones). Si cambia el número de reactivos, actualice `cortas` en `src/pages/cuestionario/resultados.astro`.
 - **Cuestionarios por día**: `src/data/cuestionarios-practica.ts` (repasos de QGIS del Día 2 y Metabase del Día 3).
 - **Casos, escenarios, hoja de verificación, encuesta y versiones**: `src/data/recursos.ts`.
-- **Datos de práctica**: `datos/generar.py` (semilla fija).
+- **Datos de práctica**: `datos/generar.py` (CSV con semilla fija) y `datos/empaquetar_practica.py` (ZIP de descarga). Los seis GeoJSON copiados de SSPM están en `public/datos/capas-sspm/`; regenerar los ZIP después de cambiar cualquier archivo.
 
 ## Política de datos
 
-El sitio es público. **No debe contener datos reales** de la Secretaría: nombres, domicilios, folios, coordenadas de eventos ni cifras operativas. Todo ejemplo es ficticio o sintético. El sitio no envía nada a servidores ni usa analítica; vea `/privacidad/`. Lleva `noindex` para no aparecer en buscadores.
+El sitio es público. Los dos CSV de incidentes son sintéticos. Las seis capas GeoJSON proporcionadas por el usuario se descargan sin clave e incluyen límites geográficos reales; `colonias.geojson` contiene conteos agregados de incidentes. Los nombres «Colonia Demo» de los CSV no se pueden unir por nombre a las colonias reales. Las tres exportaciones CSV institucionales se ofrecen por separado en forma cifrada y requieren la clave del instructor. El sitio no envía datos del participante a servidores ni usa analítica; vea `/privacidad/`. Lleva `noindex` para no aparecer en buscadores.
 
 ## Pendientes de confirmar con la Secretaría y Grupo Karsam
 
