@@ -8,7 +8,7 @@ Salida en public/datos/:
   incidentes_practica_sucio.csv     1,058 registros: los 928 anteriores más 130 con errores sembrados
 
 Los totales por tipo de delito, distrito, hora y día de la semana coinciden con las gráficas
-del Día 2. Los nombres de colonia son inventados a propósito («Colonia Demo»): no existe
+del Día 3. Los nombres de colonia son inventados a propósito («Colonia Demo»): no existe
 ninguna colonia ni hecho real en estos archivos.
 """
 import csv

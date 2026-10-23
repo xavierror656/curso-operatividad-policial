@@ -50,7 +50,7 @@ export const dia1: Deck = {
         'Entrega su archivo depurado y su diagnóstico de calidad',
       ],
       notes:
-        'Insista en que el producto es concreto y se entrega hoy. Ese archivo se usa mañana en el tablero: si sale mal hoy, el tablero de mañana sale mal.',
+        'Insista en que el producto es concreto y se entrega hoy. Ese archivo se usa mañana en QGIS: si sale mal hoy, el mapa de mañana sale mal.',
     },
     {
       block: 'Apertura',
@@ -381,7 +381,7 @@ export const dia1: Deck = {
       },
       bullets: ['Un folio con 2 unidades genera 2 filas al unir', 'Cuente folios distintos, no filas', 'Compare contra un conteo de control'],
       notes:
-        'Adelante el caso del Día 2: una consulta generada con IA unía incidentes con unidades y el tablero mostró 428 registros en un distrito que tenía 214. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
+        'Adelante el caso del Día 3: una consulta generada con IA unía incidentes con unidades y el tablero mostró 428 registros en un distrito que tenía 214. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
     },
     {
       block: '2A',
@@ -481,7 +481,7 @@ export const dia1: Deck = {
         items: ['Latitud entre 31.0 y 31.8', 'Longitud entre -107.0 y -106.1', 'Lo que queda fuera, se marca'],
       },
       notes:
-        'El rango es de práctica para el curso. El rango oficial lo define la capa del límite municipal, que se trabaja en el Día 3.',
+        'El rango es de práctica para el curso. El rango oficial lo define la capa del límite municipal, que se trabaja en el Día 2.',
     },
     {
       block: '2B',
@@ -794,15 +794,15 @@ export const dia1: Deck = {
       time: '11:55',
       layout: 'flow',
       kicker: 'Puente al Día 2',
-      title: 'Su archivo de hoy es el tablero de mañana',
+      title: 'Su archivo de hoy será el mapa de mañana',
       lead: 'No hay datos nuevos: la calidad de hoy decide la utilidad de mañana.',
       steps: [
         { label: 'Día 1', detail: 'Archivo depurado' },
-        { label: 'Día 2', detail: 'Tablero de mando' },
-        { label: 'Día 3', detail: 'Mapa de concentración' },
+        { label: 'Día 2', detail: 'Mapa de concentración' },
+        { label: 'Día 3', detail: 'Tablero de mando' },
       ],
       notes:
-        'Cierre con el hilo del curso. Mañana se construye un tablero de mando (dashboard): una pantalla que el mando consulta todos los días para decidir. Lo alimenta el archivo de hoy.',
+        'Cierre con el hilo del curso. Mañana se construye en QGIS un mapa de concentración con el archivo depurado de hoy.',
     },
   ],
 }

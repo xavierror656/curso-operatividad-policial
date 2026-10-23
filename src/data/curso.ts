@@ -52,16 +52,16 @@ export const sesiones = [
   {
     dia: 2,
     slug: 'dia-2',
-    titulo: 'Business Intelligence y tableros de mando',
-    entregable: 'Tablero con tres vistas y un filtro de periodo.',
-    disponible: false,
+    titulo: 'Cartografía y análisis espacial con QGIS',
+    entregable: 'Mapa de concentración en PDF y proyecto de QGIS.',
+    disponible: true,
   },
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'Cartografía, análisis espacial y proyecto integrador',
-    entregable: 'Mapa de concentración y proyecto integrador.',
-    disponible: false,
+    titulo: 'Business Intelligence, tableros de mando y proyecto integrador',
+    entregable: 'Tablero con tres vistas, un filtro de periodo y proyecto integrador.',
+    disponible: true,
   },
 ]
 
@@ -111,24 +111,6 @@ export const temas: Tema[] = [
   },
   {
     num: 5,
-    titulo: 'Business Intelligence con Metabase y SQL asistido',
-    horas: 4,
-    contenido:
-      'Conceptos de Business Intelligence, interfaz de Metabase, conexión a bases de datos institucionales, navegación y construcción de preguntas.',
-    ia: 'Consultas SQL a partir solo del esquema de tablas. Verificación obligatoria contra un conteo de control conocido.',
-    producto: 'Colección de preguntas guardadas y verificadas.',
-  },
-  {
-    num: 6,
-    titulo: 'Visualización y dashboards en Metabase',
-    horas: 4,
-    contenido:
-      'Gráficas, tablas y series temporales. Filtros y parámetros. Diseño de tableros institucionales orientados a la decisión de mando.',
-    ia: 'Definición de indicadores y jerarquía visual del tablero a partir del perfil del usuario final.',
-    producto: 'Tablero de mando por sector, hora del día y día de la semana.',
-  },
-  {
-    num: 7,
     titulo: 'Introducción a QGIS y automatización con PyQGIS',
     horas: 3,
     contenido:
@@ -137,13 +119,31 @@ export const temas: Tema[] = [
     producto: 'Mapa de puntos de incidentes y script de carga automatizada.',
   },
   {
-    num: 8,
+    num: 6,
     titulo: 'Mapas temáticos y análisis espacial básico',
     horas: 3,
     contenido:
       'Unión de atributos con colonias o sectores, mapas coropléticos por cortes naturales y cuantiles, mapas de densidad, conteo de puntos en polígono y composición de impresión.',
     ia: 'Scripts de geoprocesamiento y exportación de mapas en lote.',
     producto: 'Generador de mapas de concentración en PDF.',
+  },
+  {
+    num: 7,
+    titulo: 'Business Intelligence con Metabase y SQL asistido',
+    horas: 4,
+    contenido:
+      'Conceptos de Business Intelligence, interfaz de Metabase, conexión a bases de datos institucionales, navegación y construcción de preguntas.',
+    ia: 'Consultas SQL a partir solo del esquema de tablas. Verificación obligatoria contra un conteo de control conocido.',
+    producto: 'Colección de preguntas guardadas y verificadas.',
+  },
+  {
+    num: 8,
+    titulo: 'Visualización y dashboards en Metabase',
+    horas: 4,
+    contenido:
+      'Gráficas, tablas y series temporales. Filtros y parámetros. Diseño de tableros institucionales orientados a la decisión de mando.',
+    ia: 'Definición de indicadores y jerarquía visual del tablero a partir del perfil del usuario final.',
+    producto: 'Tablero de mando por sector, hora del día y día de la semana.',
   },
   {
     num: 9,
@@ -207,4 +207,4 @@ export const acreditacion = [
  * Día en que va el grupo, para la línea de avance de la portada.
  * 0 = el curso no ha empezado; 4 = ya concluyó. Actualícelo al iniciar cada día.
  */
-export const diaActual = 1
+export const diaActual = 3
