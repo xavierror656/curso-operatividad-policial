@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import { href } from '../../lib/site'
+import { cuestionariosPractica } from '../../data/cuestionarios-practica'
 
 const actividades = [
   { ruta: '/practica/regla-de-oro/', icon: 'icon-[tabler--shield-question]', titulo: '¿Se puede pegar?', texto: 'Diez casos para entrenar la regla de oro con asistentes de IA.', min: '5 min' },
@@ -9,9 +10,6 @@ const actividades = [
   { ruta: '/practica/escenarios/', icon: 'icon-[tabler--route]', titulo: 'Escenarios de decisión', texto: 'Cuatro situaciones del trabajo diario. Elija qué haría y vea por qué.', min: '10 min' },
   { ruta: '/practica/casos/', icon: 'icon-[tabler--file-description]', titulo: 'Casos para analizar', texto: 'Errores frecuentes explicados paso a paso: qué pasó, qué falló y qué lección deja.', min: '15 min' },
   { ruta: '/practica/hoja-de-verificacion/', icon: 'icon-[tabler--checklist]', titulo: 'Hoja de verificación', texto: 'Lista para revisar un archivo, un tablero o un mapa antes de entregarlo. Sirve también en el trabajo.', min: 'Uso continuo' },
-  { ruta: '/cuestionario/', icon: 'icon-[tabler--bulb]', titulo: 'Cuestionario con repaso', texto: 'Modo repaso con respuesta inmediata, además del diagnóstico y el cierre.', min: '10 min' },
-  { ruta: '/cuestionario/dia-2/', icon: 'icon-[tabler--map-2]', titulo: 'Cuestionario del Día 2', texto: 'Cinco preguntas de QGIS básico: teselas, GeoJSON y puntos filtrados.', min: '5 min' },
-  { ruta: '/cuestionario/dia-3/', icon: 'icon-[tabler--layout-dashboard]', titulo: 'Cuestionario del Día 3', texto: 'Cinco preguntas de Metabase, vistas y tablero.', min: '5 min' },
 ]
 ---
 
@@ -36,5 +34,36 @@ const actividades = [
         </a>
       ))}
     </div>
+
+    <section class="mt-14 rounded-2xl bg-primary p-5 text-primary-content shadow-[0_18px_38px_-26px_rgba(25,27,45,0.65)] sm:p-8" aria-labelledby="repasos-practica">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 id="repasos-practica" class="text-2xl font-semibold tracking-[-0.025em]">Cuestionarios por día</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/80">Dos repasos breves para comprobar lo aprendido antes de pasar al siguiente tema.</p>
+        </div>
+        <span class="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/90"><span class="icon-[tabler--clock] size-4" aria-hidden="true"></span>5 minutos cada uno</span>
+      </div>
+      <div class="mt-6 grid gap-3 md:grid-cols-2">
+        <a href={href('/cuestionario/dia-2/')} class="group flex flex-col rounded-xl bg-white p-5 text-base-content shadow-[0_10px_24px_-18px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_18px_30px_-18px_rgba(0,0,0,0.55)] sm:p-6">
+          <span class="flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.12em] text-secondary"><span class="icon-[tabler--map-2] size-5" aria-hidden="true"></span>Día 2</span>
+          <h3 class="mt-5 font-display text-xl font-semibold tracking-[-0.025em]">QGIS básico</h3>
+          <p class="mt-2 grow text-sm leading-relaxed text-base-content/75">Seis preguntas sobre teselas, GeoJSON, SRC y puntos filtrados.</p>
+          <div class="mt-6 flex items-center justify-between gap-3 border-t border-base-content/10 pt-4">
+            <span class="text-xs font-semibold text-base-content/70">{cuestionariosPractica.dia2.preguntas.length} preguntas</span>
+            <span class="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-secondary">Comenzar repaso<span class="icon-[tabler--arrow-up-right] size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></span></span>
+          </div>
+        </a>
+        <a href={href('/cuestionario/dia-3/')} class="group flex flex-col rounded-xl bg-white p-5 text-base-content shadow-[0_10px_24px_-18px_rgba(0,0,0,0.5)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_18px_30px_-18px_rgba(0,0,0,0.55)] sm:p-6">
+          <span class="flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.12em] text-secondary"><span class="icon-[tabler--layout-dashboard] size-5" aria-hidden="true"></span>Día 3</span>
+          <h3 class="mt-5 font-display text-xl font-semibold tracking-[-0.025em]">Metabase</h3>
+          <p class="mt-2 grow text-sm leading-relaxed text-base-content/75">Cinco preguntas sobre vistas, gráficas y tablero.</p>
+          <div class="mt-6 flex items-center justify-between gap-3 border-t border-base-content/10 pt-4">
+            <span class="text-xs font-semibold text-base-content/70">{cuestionariosPractica.dia3.preguntas.length} preguntas</span>
+            <span class="inline-flex items-center gap-1.5 font-display text-sm font-semibold text-secondary">Comenzar repaso<span class="icon-[tabler--arrow-up-right] size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></span></span>
+          </div>
+        </a>
+      </div>
+      <p class="mt-6 text-sm leading-relaxed text-white/80">Para diagnóstico, cierre o práctica con respuesta inmediata, abra el <a class="font-semibold text-white underline decoration-[#e8a1a1] decoration-2 underline-offset-4 hover:decoration-white" href={href('/cuestionario/')}>cuestionario general</a> (10 min).</p>
+    </section>
   </section>
 </Layout>

@@ -5,6 +5,7 @@ import Slide from '../../../components/slides/Slide.astro'
 import Head from '../../../components/Head.astro'
 import { decksAbiertos } from '../../../data/decks'
 import type { Deck } from '../../../data/types'
+import { href } from '../../../lib/site'
 
 export function getStaticPaths() {
   return decksAbiertos.map((deck) => ({ params: { slug: deck.slug }, props: { deck } }))
@@ -13,6 +14,7 @@ export function getStaticPaths() {
 const { deck } = Astro.props as { deck: Deck }
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const total = deck.slides.length
+const isDay2 = deck.day === 2
 const data = {
   notes: deck.slides.map((s) => s.notes),
   titles: deck.slides.map((s) => s.title),
@@ -27,12 +29,29 @@ const data = {
   <head>
     <Head title={`Presentador · Día ${deck.day}`} />
   </head>
-  <body class="presenter">
+  <body class:list={['presenter', { 'presenter--day2': isDay2 }]}>
+    {isDay2 && (
+      <div class="presenter-coursebar">
+        <div class="presenter-identity">
+          <span class="presenter-mark" aria-hidden="true"><span class="icon-[tabler--map-pin] size-5"></span></span>
+          <div>
+            <span class="presenter-identity-name">Día 2 · Vista del instructor</span>
+            <strong>Primeros pasos en QGIS</strong>
+          </div>
+        </div>
+        <div class="presenter-links">
+          <a href={href(`/diapositivas/${deck.slug}/guion/`)} target="_blank" rel="noopener" class="presenter-link"><span class="icon-[tabler--script] size-4" aria-hidden="true"></span>Guion</a>
+          <a href={href(`/diapositivas/${deck.slug}/`)} target="_blank" rel="noopener" class="presenter-link"><span class="icon-[tabler--presentation] size-4" aria-hidden="true"></span>Proyección</a>
+        </div>
+      </div>
+    )}
     <header class="presenter-top">
-      <span class="badge badge-secondary" data-block></span>
-      <span class="text-sm text-white/70" data-planned></span>
-      <span class="badge badge-lg" data-pace hidden></span>
-      <div class="ms-auto flex items-center gap-4">
+      <div class="presenter-top-context">
+        <span class="badge badge-secondary" data-block></span>
+        <span class="text-sm text-white/70" data-planned></span>
+        <span class="badge badge-lg" data-pace hidden></span>
+      </div>
+      <div class="presenter-top-tools">
         <div class="text-end">
           <div class="text-xs uppercase tracking-widest text-white/50">Transcurrido</div>
           <div class="font-display text-2xl tabular-nums" data-elapsed>00:00:00</div>
@@ -50,6 +69,23 @@ const data = {
       </div>
     </header>
 
+    {isDay2 && (
+      <div class="presenter-route">
+        <div class="presenter-progress" role="progressbar" aria-label="Avance de la presentación" aria-valuemin="1" aria-valuemax={total} aria-valuenow="1" data-presenter-progress>
+          <span data-presenter-progress-fill></span>
+        </div>
+        <nav class="presenter-blocks" aria-label="Ir a un bloque del Día 2">
+          {deck.blocks.map((block) => {
+            const first = deck.slides.findIndex((slide) => slide.block === block.id)
+            return <button type="button" data-block-goto={first} data-block-id={block.id} aria-current={first === 0 ? 'step' : undefined}>
+              <span>{/^\d/.test(block.id) ? `${block.id} · ` : ''}{block.label}</span>
+              <small>{block.range}</small>
+            </button>
+          })}
+        </nav>
+      </div>
+    )}
+
     <div class="presenter-pause" data-pause hidden role="alert">
       <span class="icon-[tabler--armchair] size-5 shrink-0"></span>
       <p class="flex-1"><strong>Pausa activa.</strong> Van 50 minutos seguidos. Haga un descanso de 5 minutos: estirarse, caminar y tomar agua.</p>
@@ -58,7 +94,17 @@ const data = {
 
     <main class="presenter-grid">
       <section class="presenter-current">
-        <div class="presenter-label">Actual · <span data-counter>1 / {total}</span> <span class="ms-2 normal-case tracking-normal text-white/80" data-steps></span></div>
+        {isDay2 ? (
+          <div class="presenter-slide-heading">
+            <div class="presenter-heading-copy">
+              <span class="presenter-label">En pantalla <span class="normal-case tracking-normal text-white/70" data-steps></span></span>
+              <p class="presenter-current-title" data-current-title>{deck.slides[0].title}</p>
+            </div>
+            <strong class="presenter-slide-count" data-counter>1 / {total}</strong>
+          </div>
+        ) : (
+          <div class="presenter-label">Actual · <span data-counter>1 / {total}</span> <span class="ms-2 normal-case tracking-normal text-white/80" data-steps></span></div>
+        )}
         <div class="presenter-stage" data-stage="current" data-deck={deck.slug}>
           {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
         </div>
@@ -66,26 +112,34 @@ const data = {
 
       <section class="presenter-side">
         <div>
-          <div class="presenter-label">Siguiente</div>
-          <div class="presenter-stage presenter-stage--next" data-stage="next">
+          {isDay2 ? (
+            <div class="presenter-next-heading">
+              <div><span class="presenter-label">Después</span><h2 data-next-title>{deck.slides[1]?.title ?? 'Fin de la presentación'}</h2></div>
+              <span data-next-time>{deck.slides[1]?.time ?? ''}</span>
+            </div>
+          ) : <div class="presenter-label">Siguiente</div>}
+          <div class="presenter-stage presenter-stage--next" data-stage="next" inert={isDay2} aria-hidden={isDay2 ? 'true' : undefined}>
             {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} />)}
           </div>
           <p class="presenter-end" data-end hidden>Fin de la presentación</p>
         </div>
         <div class="presenter-notes">
-          <div class="presenter-label">Notas del instructor</div>
+          <div class="presenter-label">{isDay2 ? 'Qué decir y comprobar' : 'Notas del instructor'}</div>
           <p data-notes></p>
         </div>
-        <div class="flex gap-2">
+        {isDay2 && <p class="presenter-shortcuts"><kbd>←</kbd><kbd>→</kbd> Cambiar diapositiva <span aria-hidden="true">·</span> <kbd>T</kbd> Cronómetro <span aria-hidden="true">·</span> <kbd>B</kbd> Oscurecer</p>}
+        <div class="presenter-actions">
           <button type="button" class="btn btn-outline flex-1 border-white/30 text-white" data-prev>
             <span class="icon-[tabler--chevron-left] size-5"></span>Anterior
           </button>
+          {isDay2 && <button type="button" class="btn btn-outline presenter-blackout" data-blackout-toggle aria-pressed="false" title="Oscurecer o mostrar la proyección (B)"><span class="icon-[tabler--device-desktop-off] size-5" aria-hidden="true"></span><span data-blackout-label>Oscurecer</span></button>}
           <button type="button" class="btn btn-secondary flex-1" data-next>
             Siguiente<span class="icon-[tabler--chevron-right] size-5"></span>
           </button>
         </div>
       </section>
     </main>
+    {isDay2 && <p class="sr-only" aria-live="polite" data-presenter-live></p>}
 
     <script type="application/json" id="presenter-data" set:html={JSON.stringify(data)}></script>
 
@@ -110,6 +164,19 @@ const data = {
         padding: 0.75rem 1.25rem;
         background: #191b2d;
         border-bottom: 1px solid #2c2f49;
+      }
+      .presenter-top-context,
+      .presenter-top-tools,
+      .presenter-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .presenter-top-tools {
+        margin-left: auto;
+      }
+      .presenter-actions {
+        gap: 0.5rem;
       }
       body[data-blackout='1'] .presenter-current {
         opacity: 0.3;
@@ -187,16 +254,327 @@ const data = {
         font-size: 1.3rem;
         line-height: 1.5;
       }
+      .presenter--day2 {
+        background: #0c101a;
+        color: #f4f4f8;
+      }
+      .presenter--day2 .presenter-coursebar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        min-height: 4.5rem;
+        padding: 0.75rem 1.5rem;
+        background: #171b2b;
+      }
+      .presenter-identity,
+      .presenter-links,
+      .presenter-link {
+        display: flex;
+        align-items: center;
+      }
+      .presenter-identity {
+        gap: 0.85rem;
+        min-width: 0;
+      }
+      .presenter-mark {
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.75rem;
+        background: #aa4545;
+        color: #fff;
+      }
+      .presenter-identity-name {
+        display: block;
+        margin-bottom: 0.1rem;
+        color: #bfc4d6;
+        font-size: 0.75rem;
+      }
+      .presenter-identity strong {
+        display: block;
+        font-family: 'Lexend', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+      .presenter-links {
+        flex: none;
+        gap: 0.4rem;
+      }
+      .presenter-link {
+        gap: 0.45rem;
+        min-height: 2.5rem;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.5rem;
+        color: #dfe2ee;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+      .presenter-link:hover {
+        background: #292e42;
+        color: #fff;
+      }
+      .presenter--day2 .presenter-top {
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        padding: 0.6rem 1.5rem;
+        background: #202438;
+      }
+      .presenter--day2 .presenter-top-context {
+        flex-wrap: wrap;
+        gap: 0.45rem 0.75rem;
+      }
+      .presenter--day2 .presenter-top-tools {
+        gap: 0.75rem;
+      }
+      .presenter--day2 .presenter-top-tools > .text-end:first-child {
+        min-width: 6rem;
+      }
+      .presenter--day2 .presenter-top-tools .text-white\/50 {
+        color: #bfc4d6;
+      }
+      .presenter--day2 .presenter-top-tools .text-white\/70 {
+        color: #dfe2ee;
+      }
+      .presenter-route {
+        background: #151a29;
+        border-bottom: 1px solid #30364b;
+      }
+      .presenter-progress {
+        height: 3px;
+        background: #343a4f;
+      }
+      .presenter-progress span {
+        display: block;
+        width: 0;
+        height: 100%;
+        background: #d97b7b;
+        transition: width 240ms ease-out;
+      }
+      .presenter-blocks {
+        display: flex;
+        gap: 0.4rem;
+        overflow-x: auto;
+        padding: 0.55rem 1.25rem;
+        scrollbar-color: #697087 transparent;
+        scrollbar-width: thin;
+      }
+      .presenter-blocks button {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        flex: none;
+        min-height: 2.4rem;
+        padding: 0.4rem 0.7rem;
+        border-radius: 0.45rem;
+        color: #c3c8d8;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background-color 160ms ease, color 160ms ease;
+      }
+      .presenter-blocks button:hover {
+        background: #292f43;
+        color: #fff;
+      }
+      .presenter-blocks button[aria-current='step'] {
+        background: #f4e4e4;
+        color: #702c2c;
+        font-weight: 600;
+      }
+      .presenter-blocks small {
+        color: inherit;
+        opacity: 0.8;
+        font-size: 0.7rem;
+        white-space: nowrap;
+      }
+      .presenter--day2 .presenter-grid {
+        gap: clamp(1rem, 2vw, 1.7rem);
+        padding: clamp(0.9rem, 1.5vw, 1.5rem);
+      }
+      .presenter-slide-heading,
+      .presenter-next-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 1rem;
+        min-width: 0;
+        margin-bottom: 0.75rem;
+      }
+      .presenter-heading-copy,
+      .presenter-next-heading > div {
+        min-width: 0;
+      }
+      .presenter-slide-heading .presenter-label,
+      .presenter-next-heading .presenter-label {
+        display: block;
+        margin-bottom: 0.25rem;
+        color: #bfc4d6;
+      }
+      .presenter-current-title,
+      .presenter-next-heading h2 {
+        overflow: hidden;
+        color: #fff;
+        font-family: 'Lexend', sans-serif;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .presenter-current-title {
+        font-size: clamp(1.05rem, 1.5vw, 1.45rem);
+      }
+      .presenter-next-heading h2 {
+        font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+      }
+      .presenter-slide-count,
+      .presenter-next-heading > span {
+        flex: none;
+        color: #d6d9e5;
+        font-size: 0.85rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .presenter--day2 .presenter-stage {
+        box-shadow: 0 15px 34px rgb(0 0 0 / 0.3);
+      }
+      .presenter--day2 .presenter-stage--next {
+        width: min(100%, calc(22dvh * 16 / 9));
+      }
+      .presenter--day2 .presenter-notes {
+        padding: 1.15rem 1.3rem 1.3rem;
+        border: 1px solid #353a4d;
+        background: #1a1f30;
+        font-size: clamp(1.04rem, 1.25vw, 1.2rem);
+        line-height: 1.55;
+        scrollbar-color: #697087 transparent;
+        scrollbar-width: thin;
+      }
+      .presenter--day2 .presenter-notes .presenter-label {
+        color: #e08a8a;
+      }
+      .presenter--day2 .presenter-notes p {
+        max-width: 67ch;
+      }
+      .presenter-shortcuts {
+        color: #bfc4d6;
+        font-size: 0.75rem;
+        line-height: 1.4;
+      }
+      .presenter-shortcuts kbd {
+        display: inline-grid;
+        place-items: center;
+        min-width: 1.4rem;
+        min-height: 1.3rem;
+        margin-right: 0.2rem;
+        padding: 0 0.2rem;
+        border: 1px solid #646a80;
+        border-radius: 0.25rem;
+        color: #fff;
+        font-family: inherit;
+      }
+      .presenter--day2 .presenter-actions .btn {
+        min-height: 2.9rem;
+      }
+      .presenter--day2 .presenter-actions .presenter-blackout {
+        flex: none;
+        border-color: #767d93;
+        color: #fff;
+      }
+      .presenter--day2 .presenter-blackout[aria-pressed='true'] {
+        border-color: #e08a8a;
+        background: #4c2732;
+      }
+      .presenter--day2[data-blackout='1'] .presenter-current {
+        opacity: 1;
+        outline: none;
+      }
+      .presenter--day2[data-blackout='1'] .presenter-current .presenter-stage {
+        filter: grayscale(1) brightness(0.15);
+        outline: 3px solid #e08a8a;
+        outline-offset: 3px;
+      }
+      .presenter--day2[data-blackout='1'] .presenter-current .presenter-slide-heading::after {
+        content: 'Proyección oscurecida';
+        flex: none;
+        color: #ffd4d4;
+        font-size: 0.75rem;
+      }
       @media (max-width: 900px) {
         .presenter-grid {
           grid-template-columns: 1fr;
           overflow: auto;
         }
+        .presenter--day2 .presenter-grid {
+          display: block;
+          overflow-y: auto;
+          scrollbar-color: #697087 transparent;
+          scrollbar-width: thin;
+        }
         .presenter-current {
           container-type: inline-size;
         }
+        .presenter--day2 .presenter-current {
+          min-height: auto;
+          margin-bottom: 1.5rem;
+        }
         .presenter-current .presenter-stage {
           width: 100%;
+        }
+        .presenter--day2 .presenter-stage--next {
+          width: min(100%, 28rem);
+        }
+        .presenter--day2 .presenter-side {
+          min-height: auto;
+        }
+        .presenter--day2 .presenter-notes {
+          min-height: 12rem;
+          max-height: 18rem;
+          flex: none;
+        }
+      }
+      @media (max-width: 680px) {
+        .presenter--day2 .presenter-coursebar {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 0.4rem;
+          padding: 0.65rem 1rem;
+        }
+        .presenter--day2 .presenter-links {
+          align-self: stretch;
+        }
+        .presenter--day2 .presenter-link {
+          min-height: 2.75rem;
+        }
+        .presenter--day2 .presenter-top {
+          padding: 0.65rem 1rem;
+        }
+        .presenter--day2 .presenter-top-context {
+          width: 100%;
+        }
+        .presenter--day2 .presenter-top-tools {
+          justify-content: space-between;
+          width: 100%;
+          margin-left: 0;
+        }
+        .presenter--day2 .presenter-top-tools .font-display {
+          font-size: 1.15rem;
+        }
+        .presenter-blocks {
+          padding-inline: 0.7rem;
+        }
+        .presenter-current-title {
+          white-space: normal;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        .presenter-shortcuts {
+          display: none;
+        }
+        .presenter--day2 .presenter-blackout [data-blackout-label] {
+          display: none;
         }
       }
     </style>

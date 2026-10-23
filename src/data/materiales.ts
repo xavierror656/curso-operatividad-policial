@@ -19,6 +19,7 @@ export const materiales = {
   'hoja-mapa': { label: 'Verificación · Mapa', path: '/practica/hoja-de-verificacion/#mapa', icon: 'icon-[tabler--checklist]' },
   'hoja-entrega': { label: 'Verificación · Entrega', path: '/practica/hoja-de-verificacion/#entrega', icon: 'icon-[tabler--checklist]' },
   datos: { label: 'Datos de práctica', path: '/datos/', icon: 'icon-[tabler--database]' },
+  'datos-qgis': { label: 'CSV para QGIS · Día 2', path: '/datos/#archivo-dia-2', icon: 'icon-[tabler--file-spreadsheet]' },
   cierre: { label: 'Cierre del curso', path: '/cierre/', icon: 'icon-[tabler--flag-check]' },
 } satisfies Record<string, { label: string; path: string; icon: string }>
 

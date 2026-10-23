@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro'
+import Dia2Participante from '../../components/Dia2Participante.astro'
 import ReglaDeOro from '../../components/ReglaDeOro.astro'
 import { abierto, decks, decksAbiertos } from '../../data/decks'
 import type { Deck } from '../../data/types'
@@ -28,6 +29,8 @@ const momento = (i: number) => {
 ---
 
 <Layout title={`Día ${deck.day} · Material del participante`} description={`Material del participante del Día ${deck.day}: ${deck.title}.`}>
+  {deck.day === 2 && <Dia2Participante deck={deck} />}
+  {deck.day !== 2 && (
   <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Día {deck.day} · {deck.schedule}</p>
     <h1 class="mt-2 text-3xl font-semibold text-balance md:text-4xl">{deck.title}</h1>
@@ -157,6 +160,7 @@ const momento = (i: number) => {
       </p>
     )}
   </article>
+  )}
 
   <script>
     // Lista del taller: cada participante marca su avance en su propio dispositivo

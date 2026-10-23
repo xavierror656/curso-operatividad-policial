@@ -1125,3 +1125,295 @@
   --rojo: #ffb3b3;
   --rojo-claro: #fff;
 }
+
+/* Día 2: lenguaje visual cartográfico para la secuencia de QGIS. */
+.slide[data-day='2'] {
+  --navy: #17263a;
+  --navy-2: #23374a;
+  --rojo: #a94249;
+  --gris: #4d5b68;
+  --verde: #276b59;
+  --linea: #d7e0de;
+  --fondo-suave: #f0f5f2;
+  background: #fbfcf9;
+}
+.slide[data-day='2'].slide--dark {
+  background: #17263a;
+}
+.slide[data-day='2']:not(.slide--dark)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 42cqw;
+  height: 32cqw;
+  pointer-events: none;
+  background-image: linear-gradient(#b9cdc7 1px, transparent 1px), linear-gradient(90deg, #b9cdc7 1px, transparent 1px);
+  background-size: 5cqw 5cqw;
+  opacity: 0.16;
+  mask-image: linear-gradient(225deg, #000, transparent 80%);
+}
+.slide[data-day='2'] .slide-bar {
+  width: 0.42cqw;
+}
+.slide[data-day='2'] .slide-inner {
+  padding: 5cqw 6.5cqw 3.7cqw 7cqw;
+}
+.slide[data-day='2'] .slide-meta {
+  color: #43576a;
+  font-family: 'Lexend', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.slide[data-day='2'] .s-title {
+  letter-spacing: -0.025em;
+  max-width: 84cqw;
+}
+.slide[data-day='2'] .s-kicker {
+  letter-spacing: 0.06em;
+}
+.slide[data-day='2']:not(.slide--dark) .s-kicker {
+  display: none;
+}
+.slide[data-day='2'] .s-lead {
+  color: #495d69;
+}
+.slide[data-day='2'] .slide-foot {
+  color: #475b68;
+  border-top: 1px solid #d7e0de;
+  padding-top: 0.9cqw;
+  bottom: 1.2cqw;
+}
+
+/* La portada ilustra las tres capas que el participante construye. */
+.slide[data-day='2'][data-layout='cover'] .slide-body--cover {
+  padding-left: 0;
+  padding-bottom: 5cqw;
+}
+.slide[data-day='2'][data-layout='cover'] .s-title--xl {
+  max-width: 46cqw;
+  font-size: calc(4.7cqw * var(--tz, 1));
+  line-height: 1.08;
+}
+.slide[data-day='2'][data-layout='cover'] .s-lead {
+  max-width: 43cqw;
+  color: #d5e0e5;
+  font-size: calc(1.9cqw * var(--tz, 1));
+}
+.slide[data-day='2'][data-layout='cover'] .s-kicker {
+  color: #e9a8aa;
+  font-size: calc(1.28cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-cover-foot {
+  bottom: 2.7cqw;
+  max-width: 67cqw;
+  color: #b8cbd2;
+}
+.slide[data-day='2'] .s-qr {
+  color: #e4eeeb;
+}
+.slide[data-day='2'] .s-qr-url {
+  color: #c7d5d9;
+}
+.slide[data-day='2'] .s-map-preview {
+  position: absolute;
+  right: 6.5cqw;
+  top: 6.5cqw;
+  width: 32cqw;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.2cqw;
+  background: #f1f5ef;
+  color: #17263a;
+  box-shadow: 0 2.2cqw 4cqw rgb(2 11 22 / 0.42);
+}
+.slide[data-day='2'] .s-map-preview-head,
+.slide[data-day='2'] .s-map-preview figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1cqw;
+  padding: 0.85cqw 1.1cqw;
+  font-family: 'Lexend', sans-serif;
+  font-size: calc(1.05cqw * var(--tz, 1));
+  font-weight: 600;
+}
+.slide[data-day='2'] .s-map-preview-head {
+  background: #e4eee9;
+}
+.slide[data-day='2'] .s-map-preview-coords {
+  color: #426453;
+  font-variant-numeric: tabular-nums;
+}
+.slide[data-day='2'] .s-map-preview svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.slide[data-day='2'] .s-map-ground { fill: #e8efe8; }
+.slide[data-day='2'] .s-map-street-wide { fill: none; stroke: #fff; stroke-width: 18; }
+.slide[data-day='2'] .s-map-street { fill: none; stroke: #fff; stroke-width: 8; }
+.slide[data-day='2'] .s-map-diagonal { fill: none; stroke: #d1dcd6; stroke-width: 7; }
+.slide[data-day='2'] .s-map-zone { fill: rgb(52 130 99 / 0.26); stroke: #237452; stroke-width: 4; stroke-linejoin: round; }
+.slide[data-day='2'] .s-map-point { fill: #aa4545; stroke: #fff; stroke-width: 3; }
+.slide[data-day='2'] .s-map-north { fill: #17263a; }
+.slide[data-day='2'] .s-map-north-label { fill: #17263a; font: 700 12px 'Lexend', sans-serif; }
+.slide[data-day='2'] .s-map-preview figcaption {
+  justify-content: flex-start;
+  padding: 0.8cqw 1.1cqw 1cqw;
+  background: #fff;
+  font-size: calc(0.9cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-map-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4cqw;
+  white-space: nowrap;
+}
+.slide[data-day='2'] .s-map-key::before {
+  content: '';
+  width: 0.8cqw;
+  height: 0.8cqw;
+  border-radius: 50%;
+  background: #aa4545;
+}
+.slide[data-day='2'] .s-map-key--zone::before {
+  border-radius: 0.15cqw;
+  background: #318b66;
+}
+
+/* Secuencias de trabajo legibles desde el fondo del salón. */
+.slide[data-day='2'] .s-goal {
+  gap: 0;
+  max-width: 75cqw;
+}
+.slide[data-day='2'] .s-goal li {
+  gap: 1.8cqw;
+  padding: 1.1cqw 0;
+  border: 0;
+  border-bottom: 1px solid #ccd9d3;
+  border-radius: 0;
+  background: transparent;
+}
+.slide[data-day='2'] .s-goal-num {
+  color: var(--verde);
+  min-width: 3cqw;
+  font-size: calc(2.4cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow {
+  gap: 1.1cqw;
+}
+.slide[data-day='2'] .slide-body--flow:not(:has(.s-capture)),
+.slide[data-day='2'] .slide-body--checklist,
+.slide[data-day='2'] .slide-body--takeaway {
+  justify-content: center;
+  padding-bottom: 3cqw;
+}
+.slide[data-day='2'] .s-flow-step {
+  gap: 0.8cqw;
+  padding: 1.5cqw 1cqw 1.4cqw;
+  border: 0;
+  border-bottom: 2px solid #a9c1b7;
+  border-radius: 0;
+  background: transparent;
+}
+.slide[data-day='2'] .s-flow-num {
+  color: var(--verde);
+  font-size: calc(1.6cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow-step strong {
+  font-size: calc(1.65cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow-step > span:last-child {
+  color: #435765;
+  font-size: calc(1.4cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow-arrow {
+  color: var(--verde);
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.3cqw 3cqw;
+  margin-top: 2.3cqw;
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) .s-flow-arrow {
+  display: none;
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) .s-flow-step {
+  display: grid;
+  grid-template-columns: 3.2cqw minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-content: center;
+  column-gap: 1.1cqw;
+  min-height: 9cqw;
+  padding: 1.1cqw 1cqw;
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) .s-flow-num {
+  grid-row: 1 / 3;
+  align-self: start;
+  font-size: calc(2.25cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) .s-flow-step strong {
+  font-size: calc(1.8cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-flow:has(> .s-flow-step:nth-child(7)) .s-flow-step > span:last-child {
+  font-size: calc(1.5cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-checks:not(.s-checks--panel) li {
+  align-items: center;
+  padding: 0.45cqw 0;
+}
+.slide[data-day='2'] .s-checks:not(.s-checks--panel) .s-check-icon {
+  color: var(--verde);
+}
+.slide[data-day='2'] .s-checks--panel {
+  background: #1d3b48;
+}
+.slide[data-day='2'] .s-checks--panel .s-check-icon {
+  color: #9cdbc0;
+}
+.slide[data-day='2'] .s-side--neutral {
+  background: #eff5f1;
+  border-color: #cbded4;
+}
+.slide[data-day='2'] .s-timer-clock {
+  color: var(--verde);
+}
+.slide[data-day='2'] .s-timer-marks li {
+  border-left: 1px solid #6da78d;
+  padding-left: 1.2cqw;
+}
+.slide[data-day='2'] .s-cards {
+  gap: 2cqw;
+  margin-top: 2.6cqw;
+}
+.slide[data-day='2'] .slide-body--cards:not(:has(.s-capture)) {
+  justify-content: center;
+  padding-bottom: 3cqw;
+}
+.slide[data-day='2'] .s-card {
+  background: #f0f5f2;
+  border-color: #cbded4;
+}
+.slide[data-day='2'] .s-card .card-body {
+  gap: 0.9cqw;
+  padding: 2cqw;
+}
+.slide[data-day='2'] .s-card-title {
+  font-size: calc(1.85cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-card-text {
+  color: #435765;
+  font-size: calc(1.55cqw * var(--tz, 1));
+}
+.slide[data-day='2'] .s-card-icon {
+  color: var(--verde);
+  background: #d9e9df;
+}
+
+@media print {
+  .slide[data-day='2']:not(.slide--dark)::before {
+    opacity: 0.12;
+  }
+}

@@ -1,0 +1,98 @@
+---
+import type { Deck } from '../data/types'
+import { href } from '../lib/site'
+
+const { deck } = Astro.props as { deck: Deck }
+const revision = deck.slides.find((s) => s.block === '4' && s.layout === 'checklist')
+const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
+---
+
+<div class="bg-base-200/50 px-4 py-7 print:bg-white print:p-0 md:py-12">
+  <div class="mx-auto mb-5 flex max-w-4xl flex-wrap items-center justify-between gap-3 print:hidden">
+    <a href={href(`/participante/${deck.slug}/`)} class="btn btn-outline btn-sm"><span class="icon-[tabler--arrow-left] size-4" aria-hidden="true"></span>Volver a la guía del Día 2</a>
+    <button type="button" class="btn btn-secondary btn-sm" onclick="print()"><span class="icon-[tabler--printer] size-4" aria-hidden="true"></span>Imprimir o guardar PDF</button>
+  </div>
+
+  <article class="resumen qgis-summary mx-auto max-w-4xl rounded-xl bg-base-100 px-5 py-7 shadow-[0_18px_50px_-38px_rgba(25,27,45,0.6)] sm:px-9 sm:py-9 print:rounded-none print:p-0 print:shadow-none" aria-labelledby="resumen-dia2-titulo">
+    <header class="border-b-2 border-primary pb-5 print:pb-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-semibold text-secondary">
+        <span>Curso 3 · Día 2</span><span class="tabular-nums">{deck.schedule}</span>
+      </div>
+      <h1 id="resumen-dia2-titulo" class="mt-2 text-2xl font-semibold tracking-[-0.025em] text-balance sm:text-3xl print:mt-1 print:text-2xl">{deck.title}</h1>
+      <p class="mt-2 max-w-[72ch] text-sm leading-relaxed text-base-content/75 print:mt-1">Un mapa base, una zona inventada en GeoJSON y puntos del CSV sintético filtrados. Esta hoja acompaña la práctica; conserve los archivos de trabajo.</p>
+    </header>
+
+    <div class="qgis-summary-grid mt-5 grid gap-5 md:grid-cols-2 print:mt-3 print:grid-cols-2 print:gap-4">
+      <div class="space-y-5 print:space-y-3">
+        <section class="rounded-lg bg-base-200/75 p-4 print:p-3" aria-labelledby="resumen-preparar">
+          <h2 id="resumen-preparar" class="text-base font-semibold">Antes de empezar</h2>
+          <p class="mt-1 text-sm leading-relaxed">Abra QGIS y descargue <strong class="break-words">incidentes_practica_depurado.csv</strong> (928 registros ficticios). Prepare una carpeta para el GeoJSON y el proyecto.</p>
+          <p class="mt-2 text-xs leading-relaxed text-base-content/75"><strong>SRC:</strong> CSV geográfico EPSG:4326 (longitud/latitud); teselas proyectadas EPSG:3857; UTM 13N EPSG:32613 en metros, opcional para el proyecto. Cambiar el SRC del proyecto no cambia el CSV.</p>
+          <a href={href('/datos/incidentes_practica_depurado.csv')} download class="link link-secondary mt-2 inline-flex items-center gap-1 text-sm font-semibold print:hidden"><span class="icon-[tabler--download] size-4" aria-hidden="true"></span>Descargar el CSV correcto</a>
+        </section>
+
+        <section class="qgis-summary-section" aria-labelledby="resumen-fondo">
+          <h2 id="resumen-fondo" class="flex items-center gap-3 text-base font-semibold"><span class="grid size-7 shrink-0 place-items-center rounded-md bg-primary text-sm text-primary-content">1</span>Calles de fondo</h2>
+          <ol class="mt-2 space-y-1 ps-10 text-sm leading-relaxed">
+            <li>En <strong>Navegador</strong>, abra <strong>Teselas XYZ</strong>.</li>
+            <li>Añada <strong>OpenStreetMap</strong> y acerque el mapa a Ciudad Juárez.</li>
+            <li>Déjelo <strong>debajo</strong> de las capas de datos en el panel Capas.</li>
+          </ol>
+        </section>
+
+        <section class="qgis-summary-section" aria-labelledby="resumen-zona">
+          <h2 id="resumen-zona" class="flex items-center gap-3 text-base font-semibold"><span class="grid size-7 shrink-0 place-items-center rounded-md bg-primary text-sm text-primary-content">2</span>Zona de práctica</h2>
+          <ol class="mt-2 space-y-1 ps-10 text-sm leading-relaxed">
+            <li>Cree una <strong>capa temporal</strong> de tipo <strong>Polígono</strong> y use <strong>EPSG:4326</strong>.</li>
+            <li>Active la edición, añada un polígono de cuatro esquinas y termine con clic derecho.</li>
+            <li>Guarde los cambios, desactive la edición y <strong>exporte</strong> la capa como <strong class="break-all">zona_ejercicio.geojson</strong>.</li>
+          </ol>
+          <p class="mt-2 ps-10 text-xs text-base-content/70">Compruebe que el archivo GeoJSON existe en la carpeta: la capa temporal se pierde al cerrar QGIS.</p>
+        </section>
+      </div>
+
+      <div class="space-y-5 print:space-y-3">
+        <section class="qgis-summary-section" aria-labelledby="resumen-puntos">
+          <h2 id="resumen-puntos" class="flex items-center gap-3 text-base font-semibold"><span class="grid size-7 shrink-0 place-items-center rounded-md bg-primary text-sm text-primary-content">3</span>Puntos y filtro</h2>
+          <ol class="mt-2 space-y-1 ps-10 text-sm leading-relaxed">
+            <li>Cargue el CSV como <strong>texto delimitado</strong>, con separador de coma.</li>
+            <li>Para las coordenadas de punto: <strong>X = longitud</strong>, <strong>Y = latitud</strong>, <strong>EPSG:4326</strong>.</li>
+            <li>Verifique que aparecen <strong>928 puntos</strong>; si no los ve, use «Zoom a la capa».</li>
+            <li>En la <strong>capa de puntos</strong>, abra «Filtrar…» y aplique:</li>
+          </ol>
+          <code class="mt-2 block w-fit max-w-full overflow-x-auto rounded-md bg-primary px-3 py-2 font-mono text-sm text-primary-content print:mt-1">&quot;delito&quot; = &apos;Robo a comercio&apos;</code>
+          <p class="mt-2 text-sm leading-relaxed">El filtro deja <strong>76 puntos</strong>. Al quitarlo, vuelven los <strong>928</strong>; el CSV original no cambia.</p>
+        </section>
+
+        <section class="qgis-summary-section rounded-lg bg-secondary/8 p-4 print:p-3" aria-labelledby="resumen-revisar">
+          <h2 id="resumen-revisar" class="text-base font-semibold">Antes de entregar</h2>
+          <ul class="mt-2 space-y-1 text-sm leading-relaxed">
+            {revision?.bullets?.map((punto) => <li class="flex gap-2"><span class="mt-0.5 grid size-4 shrink-0 place-items-center rounded-sm border border-secondary" aria-hidden="true"></span><span>{punto}</span></li>)}
+          </ul>
+        </section>
+
+        <section class="qgis-summary-section" aria-labelledby="resumen-guardar">
+          <h2 id="resumen-guardar" class="text-base font-semibold">Guarde estos archivos</h2>
+          <ul class="mt-2 space-y-1 text-sm leading-relaxed">
+            {entregable?.cards?.map((archivo) => <li><strong class="break-all">{archivo.title}</strong> · {archivo.text}</li>)}
+          </ul>
+          <p class="mt-2 text-xs text-base-content/70">Conserve el CSV original en la ubicación desde la que lo cargó al proyecto.</p>
+        </section>
+      </div>
+    </div>
+
+    <footer class="mt-5 border-t border-base-content/15 pt-3 print:mt-3">
+      <p class="text-xs leading-relaxed text-base-content/70">Las teselas de OpenStreetMap necesitan conexión. Si no cargan, continúe con el GeoJSON y el CSV y avise al instructor. Ejercicio con datos sintéticos; el polígono no representa un límite operativo oficial.</p>
+      <div class="mt-3 border-t border-dashed border-base-content/25 pt-2 print:mt-2"><p class="text-xs font-semibold">Nota de práctica</p><div class="mt-2 h-12 print:h-8"></div></div>
+    </footer>
+  </article>
+</div>
+
+<style is:global>
+  @media print {
+    @page { size: letter; margin: 1.15cm; }
+    .qgis-summary { max-width: none; font-size: 9.5pt; }
+    .qgis-summary p, .qgis-summary li { line-height: 1.3; }
+    .qgis-summary-section { break-inside: avoid; }
+  }
+</style>

@@ -32,10 +32,11 @@ const general = [
   <head>
     <Head title={`Día ${deck.day} · Diapositivas`} />
   </head>
-  <body class="deck-body">
+  <body class="deck-body" data-day={deck.day}>
     <div class="deck-wrap">
       <p class="deck-mobile-note" role="note">
-        Las diapositivas están hechas para proyectar. En el celular lea mejor el <a href={`${base}/participante/${deck.slug}/`}>material del participante</a>.
+        {deck.day === 2 ? 'Para seguir los pasos de QGIS en el celular, abra la guía del día. ' : 'Las diapositivas están hechas para proyectar. En el celular lea mejor el '}
+        <a href={`${base}/participante/${deck.slug}/`}>{deck.day === 2 ? 'Abrir guía del Día 2' : 'material del participante'}</a>{deck.day === 2 ? '' : '.'}
       </p>
       <div class="deck-stage" data-deck={deck.slug} tabindex="-1">
         {deck.slides.map((slide, i) => <Slide slide={slide} index={i} total={total} day={deck.day} qr={qr} qrUrl={participantUrl} />)}
@@ -441,6 +442,97 @@ const general = [
       @media (max-width: 700px) {
         .deck-mobile-note {
           display: block;
+        }
+      }
+      .deck-body[data-day='2'] {
+        background: #0d1b2b;
+        color: #e5efef;
+      }
+      .deck-body[data-day='2'] .deck-stage {
+        box-shadow: 0 1.5rem 4rem rgb(1 12 20 / 0.55);
+      }
+      .deck-body[data-day='2'] .deck-bar {
+        background: #12283b;
+        border-top-color: #34504f;
+      }
+      .deck-body[data-day='2'] .deck-bar-row {
+        gap: 0.3rem;
+        padding: 0.5rem 0.9rem;
+        scrollbar-color: #638d81 #12283b;
+      }
+      .deck-body[data-day='2'] .deck-bar-row .btn-sm {
+        min-height: 2.5rem;
+        border-radius: 0.6rem;
+      }
+      .deck-body[data-day='2'] .deck-bar .btn-text,
+      .deck-body[data-day='2'] .deck-bar [data-counter] {
+        color: #edf5f3;
+      }
+      .deck-body[data-day='2'] .deck-bar .btn-text:hover,
+      .deck-body[data-day='2'] .deck-bar .btn-text[aria-pressed='true'] {
+        background: #2a514c;
+        color: #fff;
+      }
+      .deck-body[data-day='2'] .deck-bar .btn-text:focus-visible,
+      .deck-body[data-day='2'] .deck-thumb:focus-visible {
+        outline: 2px solid #a8dfc9;
+        outline-offset: 2px;
+      }
+      .deck-body[data-day='2'] .deck-progress {
+        height: 4px;
+        background: #294443;
+      }
+      .deck-body[data-day='2'] .deck-progress .progress-bar {
+        background: #9cdbc0;
+      }
+      .deck-body[data-day='2'] .deck-notes {
+        background: #1c3a48;
+        border-top-color: #42605e;
+      }
+      .deck-body[data-day='2'] .deck-grid {
+        background: #0d1b2b;
+      }
+      .deck-body[data-day='2'] .deck-grid-head {
+        background: #102337;
+        border-bottom-color: #34504f;
+      }
+      .deck-body[data-day='2'] .deck-thumb[aria-current='true'] .slide {
+        outline-color: #9cdbc0;
+      }
+      .deck-body[data-day='2'] .deck-mobile-note {
+        background: #1c3a48;
+        color: #f0f6f2;
+      }
+      .deck-body[data-day='2'] .deck-mobile-note a {
+        color: #fff;
+        text-underline-offset: 3px;
+      }
+      @media (max-width: 700px) {
+        .deck-body[data-day='2'] .deck-wrap {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: flex-start;
+          gap: 1rem;
+          padding: 1rem 0.75rem;
+        }
+        .deck-body[data-day='2'] .deck-mobile-note {
+          margin: 0;
+          border-radius: 0.75rem;
+          padding: 0.9rem 1rem;
+          line-height: 1.45;
+        }
+        .deck-body[data-day='2'] .deck-stage {
+          width: 100%;
+        }
+      }
+      .deck-body[data-day='2'] ::selection {
+        background: #9cdbc0;
+        color: #102337;
+      }
+      @media print {
+        .deck-body[data-day='2'] .deck-stage {
+          box-shadow: none;
         }
       }
     </style>

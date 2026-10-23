@@ -17,7 +17,7 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
   dia2: {
     dia: 2,
     titulo: 'Cuestionario del Día 2 · QGIS básico',
-    descripcion: 'Cinco preguntas para repasar el mapa base, el GeoJSON, los puntos y el filtro.',
+    descripcion: 'Seis preguntas para repasar el mapa base, el GeoJSON, los SRC, los puntos y el filtro.',
     preguntas: [
       {
         pregunta: '¿Qué añade las calles como fondo del mapa en QGIS?',
@@ -36,6 +36,12 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
         opciones: ['X = latitud; Y = longitud', 'X = fecha; Y = hora', 'X = longitud; Y = latitud', 'X = colonia; Y = sector'],
         correcta: 2,
         explicacion: 'X corresponde a longitud y Y a latitud; en la práctica se usa EPSG:4326.',
+      },
+      {
+        pregunta: 'El proyecto muestra EPSG:3857 por el mapa base. ¿Qué SRC se asigna al CSV de longitud y latitud al cargarlo?',
+        opciones: ['EPSG:3857, para que coincida con el proyecto', 'EPSG:4326, porque sus coordenadas están en grados', 'EPSG:32613, porque Ciudad Juárez está en UTM 13N', 'Cualquiera: QGIS los trata igual'],
+        correcta: 1,
+        explicacion: 'El CSV está en EPSG:4326. QGIS lo muestra junto al mapa base mediante la transformación del proyecto; no hay que cambiar el SRC de origen del CSV.',
       },
       {
         pregunta: 'Al cargar completo el CSV sintético depurado, ¿cuántos puntos debe mostrar la tabla de atributos?',

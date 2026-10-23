@@ -39,6 +39,22 @@ const exportaciones = [
       <p>Los archivos de práctica son <strong>100 % sintéticos</strong>: no hay hechos, personas, colonias ni coordenadas reales de eventos. Sus totales coinciden con las gráficas del Día 3.</p>
     </div>
 
+    <section id="archivo-dia-2" class="mt-8 scroll-mt-24 overflow-hidden rounded-box bg-primary text-primary-content" aria-labelledby="titulo-archivo-dia-2">
+      <div class="grid gap-6 p-6 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:p-8">
+        <div>
+          <h2 id="titulo-archivo-dia-2" class="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Archivo para QGIS · Día 2</h2>
+          <p class="mt-3 max-w-2xl text-sm leading-relaxed text-white/85 md:text-base">Descargue <strong>incidentes_practica_depurado.csv</strong> para cargar los 928 puntos sintéticos. Este archivo no requiere clave.</p>
+          <a href={href('/participante/dia-2/')} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white underline underline-offset-4 hover:text-white/80">Ver instrucciones de QGIS <span class="icon-[tabler--arrow-up-right] size-4" aria-hidden="true"></span></a>
+        </div>
+        <a href={href('/datos/incidentes_practica_depurado.csv')} download class="btn btn-secondary w-full justify-center md:w-auto"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar CSV del Día 2</a>
+      </div>
+      <dl class="grid gap-px bg-white/15 sm:grid-cols-3">
+        <div class="bg-primary px-6 py-4 md:px-8"><dt class="text-xs font-semibold uppercase tracking-wide text-white/70">Campo X</dt><dd class="mt-1 font-display text-lg font-semibold">longitud</dd></div>
+        <div class="bg-primary px-6 py-4 md:px-8"><dt class="text-xs font-semibold uppercase tracking-wide text-white/70">Campo Y</dt><dd class="mt-1 font-display text-lg font-semibold">latitud</dd></div>
+        <div class="bg-primary px-6 py-4 md:px-8"><dt class="text-xs font-semibold uppercase tracking-wide text-white/70">SRC de la geometría</dt><dd class="mt-1 font-display text-lg font-semibold">EPSG:4326</dd></div>
+      </dl>
+    </section>
+
     <section class="mt-12 rounded-box border border-base-content/15 bg-base-200/40 p-5 md:p-6" aria-labelledby="exportaciones-sspm">
       <h2 id="exportaciones-sspm" class="text-2xl font-semibold">Exportaciones de SSPM · 2026 acumulado</h2>
       <p class="mt-2 text-base-content/75">Datos operativos reales del distrito CENTRO, del 1 de enero al 21 de octubre de 2026. Estas descargas requieren la clave que entrega el instructor. El navegador descifra el CSV y lo guarda en su equipo; la clave no se envía al sitio.</p>

@@ -18,101 +18,294 @@ type Quiz = {
 }
 const { quiz } = Astro.props as { quiz: Quiz }
 const otroDia = quiz.dia === 2 ? 3 : 2
-const letras = ['a', 'b', 'c', 'd']
+const tema = quiz.dia === 2 ? 'QGIS básico' : 'Metabase y tablero'
+const icono = quiz.dia === 2 ? 'icon-[tabler--map-2]' : 'icon-[tabler--layout-dashboard]'
+const letras = ['A', 'B', 'C', 'D']
 ---
 
 <Layout title={`${quiz.titulo} · Operatividad policial`} description={quiz.descripcion}>
-  <article class="mx-auto max-w-3xl px-4 py-8 md:py-12">
-    <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Cuestionario de repaso · Día {quiz.dia}</p>
-    <h1 class="mt-2 text-3xl font-semibold md:text-4xl">{quiz.titulo}</h1>
-    <p class="mt-3 text-base-content/75">{quiz.descripcion}</p>
-    <p class="mt-2 text-sm text-base-content/70">{quiz.preguntas.length} preguntas · unos 5 minutos · resultado inmediato. No se pide nombre ni se guardan respuestas.</p>
+  <div class="quiz-shell">
+    <article class="quiz-wrap">
+      <nav class="quiz-nav" aria-label="Navegación de cuestionarios">
+        <a href={href('/cuestionario/')}><span class="icon-[tabler--arrow-left] size-4" aria-hidden="true"></span>Todos los cuestionarios</a>
+        <a href={href(`/cuestionario/dia-${otroDia}/`)}>Ir al Día {otroDia}<span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></a>
+      </nav>
 
-    <nav class="mt-6 flex flex-wrap gap-2" aria-label="Otros cuestionarios">
-      <a class="btn btn-outline btn-sm" href={href('/cuestionario/')}>Diagnóstico y cierre</a>
-      <a class="btn btn-outline btn-sm" href={href(`/cuestionario/dia-${otroDia}/`)}>Repaso del Día {otroDia}</a>
-    </nav>
+      <header class="quiz-hero">
+        <div class="quiz-hero-content">
+          <h1>{tema}</h1>
+          <p>{quiz.descripcion}</p>
+          <ul class="quiz-meta" aria-label="Detalles del cuestionario">
+            <li><span class="icon-[tabler--calendar] size-4" aria-hidden="true"></span>Día {quiz.dia}</li>
+            <li><span class="icon-[tabler--list-check] size-4" aria-hidden="true"></span>{quiz.preguntas.length} preguntas</li>
+            <li><span class="icon-[tabler--clock] size-4" aria-hidden="true"></span>5 minutos</li>
+          </ul>
+        </div>
+        <div class="quiz-hero-symbol" aria-hidden="true"><span class={`${icono} quiz-hero-icon`}></span><span class="quiz-hero-day">0{quiz.dia}</span></div>
+      </header>
 
-    <form class="mt-8 space-y-6" data-quiz-practica novalidate>
-      <ol class="space-y-6">
-        {quiz.preguntas.map((item, i) => (
-          <li>
-            <fieldset class="rounded-box border border-base-content/15 p-5" data-pregunta data-correcta={item.correcta}>
-              <legend class="px-1 font-display font-semibold"><span class="text-secondary">{i + 1}.</span> {item.pregunta}</legend>
-              <div class="mt-2 grid gap-2">
-                {item.opciones.map((opcion, j) => (
-                  <label class="flex cursor-pointer items-start gap-3 rounded-box border border-base-content/15 p-3 has-checked:border-primary has-checked:bg-base-200" data-opcion={j}>
-                    <input type="radio" name={`q${i}`} value={j} class="radio radio-primary radio-sm mt-0.5" />
-                    <span><span class="me-1 text-base-content/60">{letras[j]})</span> {opcion}</span>
-                  </label>
-                ))}
-              </div>
-              <p class="mt-3 rounded-box bg-base-200 p-3 text-sm" data-explicacion hidden>
-                <strong data-estado></strong> {item.explicacion}
-              </p>
-            </fieldset>
-          </li>
-        ))}
-      </ol>
-      <p class="alert alert-soft alert-error" data-error role="alert" hidden></p>
-      <button type="submit" class="btn btn-primary btn-lg">Revisar respuestas</button>
-    </form>
+      <div class="quiz-workspace">
+        <div class="quiz-main">
+          <div class="quiz-intro">
+            <h2>Compruebe lo aprendido</h2>
+            <p>Elija una respuesta por pregunta. Al terminar verá sus aciertos y una explicación breve de cada tema.</p>
+          </div>
 
-    <section class="mt-8 rounded-box border border-secondary/40 bg-secondary/5 p-5" data-resultado hidden tabindex="-1" aria-live="polite">
-      <h2 class="font-display text-xl font-semibold">Resultado: <span data-puntaje></span> de {quiz.preguntas.length}</h2>
-      <p class="mt-2 text-sm text-base-content/75">Revise las explicaciones marcadas arriba. Este repaso no cambia la calificación del curso.</p>
-      <div class="mt-4 flex flex-wrap gap-2">
-        <button type="button" class="btn btn-outline btn-sm" data-repetir>Intentarlo de nuevo</button>
-        <a class="btn btn-secondary btn-sm" href={href(`/diapositivas/dia-${quiz.dia}/`)}>Repasar las diapositivas</a>
+          <form data-quiz-practica novalidate>
+            <p class="quiz-error" data-error role="alert" tabindex="-1" hidden></p>
+            <ol class="quiz-questions">
+              {quiz.preguntas.map((item, i) => (
+                <li>
+                  <fieldset class="quiz-question" data-pregunta data-correcta={item.correcta} tabindex="-1">
+                    <legend class="sr-only">Pregunta {i + 1}: {item.pregunta}</legend>
+                    <div class="quiz-question-heading" aria-hidden="true"><span class="quiz-number">{String(i + 1).padStart(2, '0')}</span><h3>{item.pregunta}</h3></div>
+                    <div class="quiz-options">
+                      {item.opciones.map((opcion, j) => (
+                        <label class="quiz-option" data-opcion={j}>
+                          <input type="radio" name={`q${i}`} value={j} />
+                          <span class="quiz-letter" aria-hidden="true">{letras[j]}</span>
+                          <span class="quiz-option-copy">{opcion}<span class="quiz-option-feedback" data-feedback hidden></span></span>
+                        </label>
+                      ))}
+                    </div>
+                    <div class="quiz-explanation" data-explicacion hidden><span class="icon-[tabler--bulb] size-5 shrink-0" aria-hidden="true"></span><p><strong data-estado></strong> {item.explicacion}</p></div>
+                  </fieldset>
+                </li>
+              ))}
+            </ol>
+
+            <div class="quiz-submit-row">
+              <p>Sus respuestas se revisan aquí mismo; no se pide nombre ni se guardan.</p>
+              <button type="submit" class="quiz-submit">Revisar respuestas<span class="icon-[tabler--arrow-right] size-5" aria-hidden="true"></span></button>
+            </div>
+          </form>
+
+          <section class="quiz-result" data-resultado hidden tabindex="-1" aria-live="polite">
+            <div>
+              <h2>Resultado del repaso</h2>
+              <p class="quiz-result-score"><span data-puntaje></span><span> / {quiz.preguntas.length}</span></p>
+              <p class="quiz-result-description">Las respuestas correctas y sus explicaciones aparecen junto a cada pregunta. Este repaso no cambia la calificación del curso.</p>
+            </div>
+            <div class="quiz-result-actions">
+              <button type="button" class="quiz-result-primary" data-ver-explicaciones><span class="icon-[tabler--arrow-up] size-4" aria-hidden="true"></span>Ver explicaciones</button>
+              <button type="button" class="quiz-result-secondary" data-repetir>Intentarlo de nuevo</button>
+              <a class="quiz-result-secondary" href={href(`/diapositivas/dia-${quiz.dia}/`)}>Repasar diapositivas<span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="quiz-aside" aria-label="Avance del cuestionario">
+          <div class="quiz-progress-card">
+            <div class="quiz-progress-top"><span>Su avance</span><span data-contador>0 de {quiz.preguntas.length}</span></div>
+            <progress class="quiz-progress" max={quiz.preguntas.length} value="0" aria-label="Preguntas respondidas"></progress>
+            <p>Puede cambiar sus respuestas antes de revisar el resultado.</p>
+          </div>
+        </aside>
       </div>
-    </section>
-  </article>
+    </article>
+  </div>
 
   <script>
     const form = document.querySelector<HTMLFormElement>('[data-quiz-practica]')!
     const preguntas = [...form.querySelectorAll<HTMLElement>('[data-pregunta]')]
     const error = form.querySelector<HTMLElement>('[data-error]')!
     const resultado = document.querySelector<HTMLElement>('[data-resultado]')!
+    const contador = document.querySelector<HTMLElement>('[data-contador]')!
+    const progreso = document.querySelector<HTMLProgressElement>('.quiz-progress')!
+    const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    const actualizarAvance = () => {
+      const respuestas = new FormData(form)
+      const respondidas = preguntas.filter((_, i) => respuestas.get(`q${i}`) !== null).length
+      contador.textContent = `${respondidas} de ${preguntas.length}`
+      progreso.value = respondidas
+    }
+
+    const limpiarRevision = () => {
+      if (form.dataset.revisado !== 'true') return
+      delete form.dataset.revisado
+      preguntas.forEach((pregunta) => {
+        delete pregunta.dataset.acierto
+        pregunta.querySelector<HTMLElement>('[data-explicacion]')!.hidden = true
+        pregunta.querySelectorAll<HTMLElement>('[data-opcion]').forEach((opcion) => {
+          delete opcion.dataset.opcionEstado
+          const etiqueta = opcion.querySelector<HTMLElement>('[data-feedback]')!
+          etiqueta.hidden = true
+          etiqueta.textContent = ''
+        })
+      })
+      resultado.hidden = true
+    }
+
+    form.addEventListener('change', () => {
+      limpiarRevision()
+      preguntas.forEach((pregunta) => delete pregunta.dataset.faltante)
+      error.hidden = true
+      actualizarAvance()
+    })
 
     form.addEventListener('submit', (event) => {
       event.preventDefault()
       const respuestas = new FormData(form)
-      const faltante = preguntas.findIndex((_, i) => respuestas.get(`q${i}`) === null)
-      if (faltante >= 0) {
-        error.textContent = `Conteste la pregunta ${faltante + 1} antes de revisar.`
+      const faltantes = preguntas.map((_, i) => (respuestas.get(`q${i}`) === null ? i : -1)).filter((i) => i >= 0)
+      if (faltantes.length) {
+        error.textContent = `Falta responder ${faltantes.length === 1 ? `la pregunta ${faltantes[0] + 1}` : `las preguntas ${faltantes.map((i) => i + 1).join(', ')}`}. Seleccione una opción en cada una.`
         error.hidden = false
-        preguntas[faltante].querySelector<HTMLInputElement>('input')?.focus()
+        preguntas.forEach((pregunta, i) => {
+          if (i === faltantes[0]) pregunta.dataset.faltante = 'true'
+          else delete pregunta.dataset.faltante
+        })
+        error.focus()
         return
       }
+
       error.hidden = true
       let puntaje = 0
       preguntas.forEach((pregunta, i) => {
+        delete pregunta.dataset.faltante
         const correcta = Number(pregunta.dataset.correcta)
         const elegida = Number(respuestas.get(`q${i}`))
         const acierto = correcta === elegida
+        pregunta.dataset.acierto = String(acierto)
         if (acierto) puntaje++
         pregunta.querySelectorAll<HTMLElement>('[data-opcion]').forEach((opcion) => {
           const indice = Number(opcion.dataset.opcion)
-          opcion.classList.toggle('border-success', indice === correcta)
-          opcion.classList.toggle('border-error', indice === elegida && !acierto)
+          const etiqueta = opcion.querySelector<HTMLElement>('[data-feedback]')!
+          if (indice === correcta) {
+            opcion.dataset.opcionEstado = 'correcta'
+            etiqueta.textContent = acierto ? 'Su respuesta · correcta' : 'Respuesta correcta'
+            etiqueta.hidden = false
+          } else if (indice === elegida) {
+            opcion.dataset.opcionEstado = 'incorrecta'
+            etiqueta.textContent = 'Su respuesta'
+            etiqueta.hidden = false
+          }
         })
-        pregunta.querySelector<HTMLElement>('[data-estado]')!.textContent = acierto ? 'Correcto.' : `La respuesta correcta es ${'abcd'[correcta]}).`
+        pregunta.querySelector<HTMLElement>('[data-estado]')!.textContent = acierto ? 'Acertó.' : 'Para repasar.'
         pregunta.querySelector<HTMLElement>('[data-explicacion]')!.hidden = false
       })
+      form.dataset.revisado = 'true'
       resultado.querySelector<HTMLElement>('[data-puntaje]')!.textContent = String(puntaje)
       resultado.hidden = false
       resultado.focus()
     })
 
+    resultado.querySelector<HTMLButtonElement>('[data-ver-explicaciones]')!.addEventListener('click', () => {
+      const destino = preguntas.find((pregunta) => pregunta.dataset.acierto === 'false') ?? preguntas[0]
+      destino.focus({ preventScroll: true })
+      destino.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' })
+    })
+
     resultado.querySelector<HTMLButtonElement>('[data-repetir]')!.addEventListener('click', () => {
       form.reset()
-      preguntas.forEach((pregunta) => {
-        pregunta.querySelector<HTMLElement>('[data-explicacion]')!.hidden = true
-        pregunta.querySelectorAll<HTMLElement>('[data-opcion]').forEach((opcion) => opcion.classList.remove('border-success', 'border-error'))
-      })
-      resultado.hidden = true
+      limpiarRevision()
       error.hidden = true
-      form.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+      preguntas.forEach((pregunta) => delete pregunta.dataset.faltante)
+      actualizarAvance()
+      preguntas[0].querySelector<HTMLInputElement>('input')?.focus()
     })
   </script>
+
+  <style>
+    .quiz-shell { background: #f5f6f8; min-height: 100%; padding-bottom: 5rem; }
+    .quiz-wrap { width: min(100% - 2rem, 70rem); margin-inline: auto; }
+    .quiz-nav { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; font-size: .875rem; font-weight: 600; }
+    .quiz-nav a { display: inline-flex; align-items: center; gap: .45rem; color: #30344e; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .25rem; transition: color .18s ease, text-decoration-color .18s ease; }
+    .quiz-nav a:hover { color: #aa4545; text-decoration-color: currentColor; }
+    .quiz-hero { position: relative; isolation: isolate; display: flex; align-items: center; min-height: 18rem; overflow: hidden; border-radius: 1rem; background: #191b2d; color: white; padding: clamp(1.75rem, 4vw, 3.25rem); }
+    .quiz-hero::before { content: ''; position: absolute; z-index: -1; inset: 0 0 0 48%; background-image: linear-gradient(#ffffff12 1px, transparent 1px), linear-gradient(90deg, #ffffff12 1px, transparent 1px); background-size: 2.25rem 2.25rem; mask-image: linear-gradient(90deg, transparent, black); }
+    .quiz-hero::after { content: ''; position: absolute; z-index: -1; right: -4.5rem; bottom: -10rem; width: 28rem; height: 28rem; border: 1px solid #ffffff2b; border-radius: 50%; box-shadow: 0 0 0 3.5rem #ffffff08, 0 0 0 7rem #ffffff06; }
+    .quiz-hero-content { position: relative; max-width: 39rem; }
+    .quiz-hero h1 { font-size: clamp(2.4rem, 5vw, 4.15rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.07; text-wrap: balance; }
+    .quiz-hero p { max-width: 37rem; margin-top: 1rem; color: #e0e1e9; font-size: 1.0625rem; line-height: 1.55; }
+    .quiz-meta { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.75rem; padding: 0; list-style: none; }
+    .quiz-meta li { display: inline-flex; align-items: center; gap: .45rem; min-height: 2rem; border: 1px solid #ffffff52; border-radius: 999px; padding: .3rem .75rem; color: #f2f2f6; font-size: .82rem; font-weight: 600; }
+    .quiz-hero-symbol { position: absolute; top: 50%; right: 5%; display: grid; place-items: center; width: 13rem; height: 13rem; transform: translateY(-50%) rotate(-8deg); border: 1px solid #ffffff4d; border-radius: 1.75rem; background: #ffffff0b; }
+    .quiz-hero-icon { width: 5rem; height: 5rem; color: #ffffffde; }
+    .quiz-hero-day { position: absolute; right: 1rem; bottom: .7rem; color: #ffffffa8; font-family: var(--font-display); font-size: .9rem; font-weight: 700; letter-spacing: .12em; }
+    .quiz-workspace { display: grid; grid-template-columns: minmax(0, 1fr) 15rem; align-items: start; gap: 2rem; padding-top: 2.75rem; }
+    .quiz-main { min-width: 0; }
+    .quiz-intro { margin-bottom: 1.75rem; }
+    .quiz-intro h2 { font-size: 1.55rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+    .quiz-intro p { max-width: 65ch; margin-top: .55rem; color: #50546a; line-height: 1.5; }
+    .quiz-questions { display: grid; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
+    .quiz-question { min-width: 0; margin: 0; border: 0; border-radius: 1rem; background: white; padding: clamp(1.25rem, 3vw, 2rem); box-shadow: 0 17px 40px -32px #191b2d72; scroll-margin-top: 6.5rem; }
+    .quiz-question:focus { outline: none; }
+    .quiz-question:focus-visible { outline: 3px solid #aa4545; outline-offset: 3px; }
+    .quiz-question[data-faltante='true'] { outline: 2px solid #aa4545; }
+    .quiz-question-heading { display: flex; align-items: flex-start; gap: 1rem; }
+    .quiz-number { display: grid; flex: 0 0 2.4rem; place-items: center; height: 2.4rem; border-radius: .65rem; background: #e9eaf0; color: #191b2d; font-family: var(--font-display); font-size: .85rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .quiz-question h3 { padding-top: .2rem; font-size: clamp(1.15rem, 2.5vw, 1.32rem); font-weight: 600; line-height: 1.35; letter-spacing: -.015em; }
+    .quiz-options { display: grid; gap: .65rem; margin-top: 1.5rem; }
+    .quiz-option { display: grid; grid-template-columns: 2.1rem minmax(0, 1fr) 1.2rem; align-items: center; gap: .85rem; min-height: 3.5rem; border: 1px solid #cbd0da; border-radius: .8rem; padding: .7rem .9rem; cursor: pointer; background: #fff; transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
+    .quiz-option:hover { border-color: #777e93; background: #f9f9fb; }
+    .quiz-option:focus-within { outline: 3px solid #aa4545; outline-offset: 2px; }
+    .quiz-option:has(input:checked) { border-color: #191b2d; background: #f0f1f5; }
+    .quiz-option input { grid-column: 3; grid-row: 1; width: 1.2rem; height: 1.2rem; margin: 0; accent-color: #191b2d; cursor: pointer; }
+    .quiz-letter { display: grid; grid-column: 1; grid-row: 1; place-items: center; width: 2.1rem; height: 2.1rem; border-radius: .55rem; background: #f0f1f5; color: #343850; font-family: var(--font-display); font-size: .8rem; font-weight: 700; }
+    .quiz-option:has(input:checked) .quiz-letter { background: #191b2d; color: #fff; }
+    .quiz-option-copy { grid-column: 2; grid-row: 1; line-height: 1.35; }
+    .quiz-option-feedback { display: block; margin-top: .2rem; font-size: .78rem; font-weight: 700; }
+    .quiz-option[data-opcion-estado='correcta'], .quiz-option[data-opcion-estado='correcta']:has(input:checked) { border-color: #3e7d56; background: #edf7f0; }
+    .quiz-option[data-opcion-estado='correcta'] .quiz-letter, .quiz-option[data-opcion-estado='correcta']:has(input:checked) .quiz-letter { background: #3e7d56; color: white; }
+    .quiz-option[data-opcion-estado='correcta'] .quiz-option-feedback { color: #265f3b; }
+    .quiz-option[data-opcion-estado='incorrecta'], .quiz-option[data-opcion-estado='incorrecta']:has(input:checked) { border-color: #aa4545; background: #fcf0f0; }
+    .quiz-option[data-opcion-estado='incorrecta'] .quiz-letter, .quiz-option[data-opcion-estado='incorrecta']:has(input:checked) .quiz-letter { background: #aa4545; color: white; }
+    .quiz-option[data-opcion-estado='incorrecta'] .quiz-option-feedback { color: #8d3030; }
+    .quiz-explanation { display: flex; align-items: flex-start; gap: .7rem; margin-top: 1.1rem; border-radius: .75rem; background: #eaf1f8; padding: .9rem 1rem; color: #244968; font-size: .9rem; line-height: 1.5; }
+    .quiz-explanation strong { font-weight: 700; }
+    .quiz-error { margin-bottom: 1.5rem; border-radius: .7rem; background: #fcf0f0; padding: 1rem 1.1rem; color: #892f2f; font-weight: 600; scroll-margin-top: 6.5rem; }
+    .quiz-submit-row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; }
+    .quiz-submit-row p { max-width: 26ch; color: #50546a; font-size: .85rem; line-height: 1.45; }
+    .quiz-submit { display: inline-flex; align-items: center; justify-content: center; gap: .8rem; min-height: 3.25rem; border: 0; border-radius: .7rem; background: #191b2d; padding: .8rem 1.25rem; color: white; font-family: var(--font-display); font-size: .92rem; font-weight: 600; cursor: pointer; transition: background-color .18s ease, transform .18s ease; }
+    .quiz-submit:hover { background: #303550; transform: translateY(-2px); }
+    .quiz-submit:active { transform: translateY(0); }
+    .quiz-progress-card { position: sticky; top: 6rem; border-radius: .85rem; background: white; padding: 1.3rem; box-shadow: 0 17px 40px -32px #191b2d72; }
+    .quiz-progress-top { display: flex; justify-content: space-between; gap: .7rem; font-family: var(--font-display); font-size: .85rem; font-weight: 600; }
+    .quiz-progress-top span:last-child { color: #aa4545; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .quiz-progress { display: block; width: 100%; height: .5rem; margin-top: 1rem; overflow: hidden; border: 0; border-radius: 999px; background: #e9eaf0; }
+    .quiz-progress::-webkit-progress-bar { border-radius: 999px; background: #e9eaf0; }
+    .quiz-progress::-webkit-progress-value { border-radius: 999px; background: #aa4545; transition: width .18s ease; }
+    .quiz-progress::-moz-progress-bar { border-radius: 999px; background: #aa4545; }
+    .quiz-progress-card p { margin-top: 1rem; color: #50546a; font-size: .82rem; line-height: 1.45; }
+    .quiz-result { display: flex; justify-content: space-between; gap: 2rem; margin-top: 2rem; border-radius: 1rem; background: #191b2d; padding: clamp(1.5rem, 3vw, 2.25rem); color: white; box-shadow: 0 20px 35px -28px #191b2daa; }
+    .quiz-result h2 { font-size: 1.3rem; font-weight: 600; }
+    .quiz-result-score { margin-top: .65rem; font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; }
+    .quiz-result-score span:last-child { color: #d4d7e6; font-size: 1.5rem; }
+    .quiz-result-description { max-width: 42ch; margin-top: .8rem; color: #dfe1ec; font-size: .9rem; line-height: 1.5; }
+    .quiz-result-actions { display: flex; flex: 0 0 13rem; flex-direction: column; justify-content: center; gap: .6rem; }
+    .quiz-result-actions :is(button, a) { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 2.65rem; border-radius: .55rem; padding: .5rem .75rem; font-size: .82rem; font-weight: 700; line-height: 1.2; text-align: center; cursor: pointer; transition: background-color .18s ease; }
+    .quiz-result-primary { border: 0; background: white; color: #191b2d; }
+    .quiz-result-primary:hover { background: #e9eaf0; }
+    .quiz-result-secondary { border: 1px solid #ffffff75; background: transparent; color: white; }
+    .quiz-result-secondary:hover { background: #ffffff1e; }
+    .quiz-result :is(button, a):focus-visible { outline-color: #e08a8a; }
+    .quiz-shell [hidden] { display: none !important; }
+    @media (max-width: 900px) {
+      .quiz-workspace { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+      .quiz-aside { grid-row: 1; }
+      .quiz-progress-card { position: static; }
+      .quiz-progress-card p { display: none; }
+    }
+    @media (max-width: 640px) {
+      .quiz-wrap { width: min(100% - 1.25rem, 70rem); }
+      .quiz-nav { padding-block: 1rem; font-size: .75rem; }
+      .quiz-hero { min-height: 0; padding: 1.65rem 1.35rem; }
+      .quiz-hero::before { inset-inline-start: 20%; }
+      .quiz-hero-symbol { display: none; }
+      .quiz-hero h1 { font-size: 2.3rem; }
+      .quiz-hero p { font-size: .98rem; }
+      .quiz-meta { gap: .45rem; margin-top: 1.3rem; }
+      .quiz-meta li { font-size: .73rem; }
+      .quiz-workspace { padding-top: 1.5rem; }
+      .quiz-question-heading { gap: .7rem; }
+      .quiz-question h3 { font-size: 1.12rem; }
+      .quiz-option { grid-template-columns: 2rem minmax(0, 1fr) 1.15rem; gap: .6rem; padding: .72rem; }
+      .quiz-submit-row { align-items: stretch; flex-direction: column; }
+      .quiz-submit-row p { max-width: none; }
+      .quiz-submit { width: 100%; }
+      .quiz-result { flex-direction: column; gap: 1.5rem; }
+      .quiz-result-actions { flex-basis: auto; }
+    }
+  </style>
 </Layout>

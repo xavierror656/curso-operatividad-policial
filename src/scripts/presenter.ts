@@ -47,6 +47,22 @@ export function initPresenter() {
       const block = data.blocks[i]
       $('[data-block]').textContent = `${/^\d/.test(block) ? `Bloque ${block} · ` : ''}${data.blockLabels[block] ?? block}`
       $('[data-planned]').textContent = `Minuto previsto: ${data.times[i]}`
+      const currentTitle = document.querySelector<HTMLElement>('[data-current-title]')
+      if (currentTitle) currentTitle.textContent = data.titles[i]
+      const nextTitle = document.querySelector<HTMLElement>('[data-next-title]')
+      if (nextTitle) nextTitle.textContent = data.titles[i + 1] ?? 'Fin de la presentación'
+      const nextTime = document.querySelector<HTMLElement>('[data-next-time]')
+      if (nextTime) nextTime.textContent = data.times[i + 1] ?? ''
+      const progress = document.querySelector<HTMLElement>('[data-presenter-progress]')
+      if (progress) progress.setAttribute('aria-valuenow', String(i + 1))
+      const progressFill = document.querySelector<HTMLElement>('[data-presenter-progress-fill]')
+      if (progressFill) progressFill.style.width = `${((i + 1) / currentSlides.length) * 100}%`
+      document.querySelectorAll<HTMLButtonElement>('[data-block-goto]').forEach((button) => {
+        if (button.dataset.blockId === block) button.setAttribute('aria-current', 'step')
+        else button.removeAttribute('aria-current')
+      })
+      const live = document.querySelector<HTMLElement>('[data-presenter-live]')
+      if (live && state.index !== -1) live.textContent = `Diapositiva ${i + 1} de ${currentSlides.length}: ${data.titles[i]}`
       history.replaceState(null, '', `#${i + 1}`)
     }
     state = { index: i, step: target.step }
@@ -112,12 +128,32 @@ export function initPresenter() {
     $('[data-pause]').hidden = true
     renderElapsed()
   })
-  const tick = () => ($('[data-clock]').textContent = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }))
+  const clockFormat: Intl.DateTimeFormatOptions = document.body.classList.contains('presenter--day2')
+    ? { hour: '2-digit', minute: '2-digit', hour12: false }
+    : { hour: '2-digit', minute: '2-digit' }
+  const tick = () => ($('[data-clock]').textContent = new Date().toLocaleTimeString('es-MX', clockFormat))
   tick()
   setInterval(tick, 10_000)
 
   $('[data-prev]').addEventListener('click', () => move(-1))
   $('[data-next]').addEventListener('click', () => move(1))
+  document.querySelectorAll<HTMLButtonElement>('[data-block-goto]').forEach((button) => {
+    button.addEventListener('click', () => goTo(Number(button.dataset.blockGoto)))
+  })
+
+  const setBlackout = (on: boolean, broadcast = true) => {
+    document.body.dataset.blackout = on ? '1' : ''
+    const button = document.querySelector<HTMLButtonElement>('[data-blackout-toggle]')
+    if (button) button.setAttribute('aria-pressed', String(on))
+    const label = document.querySelector<HTMLElement>('[data-blackout-label]')
+    if (label) label.textContent = on ? 'Mostrar' : 'Oscurecer'
+    const live = document.querySelector<HTMLElement>('[data-presenter-live]')
+    if (live) live.textContent = on ? 'Proyección oscurecida' : 'Proyección visible'
+    if (broadcast) post({ type: 'blackout', on })
+  }
+  document.querySelector<HTMLButtonElement>('[data-blackout-toggle]')?.addEventListener('click', () => {
+    setBlackout(document.body.dataset.blackout !== '1')
+  })
 
   document.addEventListener('keydown', (e) => {
     if (isTypingTarget(e)) return
@@ -129,9 +165,7 @@ export function initPresenter() {
       timers.apply(state.index, 'toggle')
       post({ type: 'timer', index: state.index, action: 'toggle' })
     } else if (e.key === 'b' || e.key === 'B' || e.key === '.') {
-      const on = !document.body.dataset.blackout
-      document.body.dataset.blackout = on ? '1' : ''
-      post({ type: 'blackout', on })
+      setBlackout(document.body.dataset.blackout !== '1')
     } else return
     e.preventDefault()
   })
@@ -139,7 +173,7 @@ export function initPresenter() {
   channel.addEventListener('message', ({ data: msg }: MessageEvent<DeckMessage>) => {
     if (msg.type === 'go') render({ index: msg.index, step: msg.step }, false)
     else if (msg.type === 'timer') timers.apply(msg.index, msg.action)
-    else if (msg.type === 'blackout') document.body.dataset.blackout = msg.on ? '1' : ''
+    else if (msg.type === 'blackout') setBlackout(msg.on, false)
   })
 
   // La tecla R en la ventana del público cambia el modo de revelado para ambas

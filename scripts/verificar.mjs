@@ -49,7 +49,8 @@ reactivos.forEach((r, i) => {
   if (!Number.isInteger(r.correcta) || r.correcta < 0 || r.correcta >= r.opciones.length) falla(`Reactivo ${i + 1}: «correcta» fuera de rango`)
 })
 for (const quiz of Object.values(cuestionariosPractica)) {
-  if (quiz.preguntas.length !== 5) falla(`Cuestionario del Día ${quiz.dia}: se esperaban 5 preguntas`)
+  const esperadas = quiz.dia === 2 ? 6 : 5
+  if (quiz.preguntas.length !== esperadas) falla(`Cuestionario del Día ${quiz.dia}: se esperaban ${esperadas} preguntas`)
   quiz.preguntas.forEach((r, i) => {
     if (r.opciones.length !== 4 || !Number.isInteger(r.correcta) || r.correcta < 0 || r.correcta > 3 || !r.explicacion) {
       falla(`Cuestionario del Día ${quiz.dia}, pregunta ${i + 1}: opciones, clave o explicación incompletas`)

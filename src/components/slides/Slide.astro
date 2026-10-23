@@ -67,7 +67,7 @@ const isHi = (label: string) => chart?.highlight?.includes(label) ?? false
 const material = (s.material ?? []).map((id) => materiales[id])
 ---
 
-<section class:list={['slide', { 'slide--dark': dark }]} data-index={index} data-block={s.block} data-time={s.time} data-layout={s.layout} aria-label={`Diapositiva ${index + 1}: ${s.title}`}>
+<section class:list={['slide', { 'slide--dark': dark }]} data-day={day} data-index={index} data-block={s.block} data-time={s.time} data-layout={s.layout} aria-label={`Diapositiva ${index + 1}: ${s.title}`}>
   <div class="slide-inner">
     <span class="slide-bar" aria-hidden="true"></span>
 
@@ -82,6 +82,31 @@ const material = (s.material ?? []).map((id) => materiales[id])
       {s.kicker && <p class="s-kicker">{s.kicker}</p>}
       {s.layout === 'cover' ? <h1 class="s-title s-title--xl">{s.title}</h1> : <h2 class:list={['s-title', { 's-title--xl': s.layout === 'break' }]}>{s.title}</h2>}
       {s.lead && s.layout !== 'rule' && <p class="s-lead">{s.lead}</p>}
+
+      {/* Esquema didáctico del flujo del Día 2; no representa una zona real. */}
+      {day === 2 && s.layout === 'cover' && (
+        <figure class="s-map-preview" aria-label="Esquema ilustrativo: teselas, zona GeoJSON y puntos de práctica">
+          <div class="s-map-preview-head">
+            <span>Vista de práctica</span>
+            <span class="s-map-preview-coords">QGIS · DÍA 2</span>
+          </div>
+          <svg viewBox="0 0 480 310" role="img" aria-label="Mapa esquemático con calles, una zona dibujada y puntos sintéticos">
+            <rect class="s-map-ground" width="480" height="310" />
+            <path class="s-map-street-wide" d="M-25 68H505M-25 172H505M86-20V330M243-20V330M403-20V330" />
+            <path class="s-map-street" d="M-20 24H500M-20 118H500M-20 235H500M-20 276H500M34-20V330M157-20V330M324-20V330M457-20V330" />
+            <path class="s-map-diagonal" d="M-15 301 214 26 498 142" />
+            <path class="s-map-zone" d="M134 68 291 51 362 144 313 236 188 248 108 159Z" />
+            <circle class="s-map-point" cx="185" cy="109" r="8" />
+            <circle class="s-map-point" cx="273" cy="92" r="8" />
+            <circle class="s-map-point" cx="318" cy="172" r="8" />
+            <circle class="s-map-point" cx="229" cy="198" r="8" />
+            <circle class="s-map-point" cx="149" cy="169" r="8" />
+            <path class="s-map-north" d="M449 24 440 44h18Z" />
+            <text class="s-map-north-label" x="449" y="18" text-anchor="middle">N</text>
+          </svg>
+          <figcaption><span class="s-map-key s-map-key--zone">Zona GeoJSON</span><span class="s-map-key s-map-key--point">Puntos sintéticos</span></figcaption>
+        </figure>
+      )}
 
       {/* Portada */}
       {s.layout === 'cover' && (

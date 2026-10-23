@@ -1,0 +1,198 @@
+---
+import { abierto, decks } from '../data/decks'
+import type { Deck } from '../data/types'
+import { href } from '../lib/site'
+
+const { deck } = Astro.props as { deck: Deck }
+const preparacion = deck.slides.find((s) => s.block === 'Apertura' && s.layout === 'checklist')
+const revisionFinal = deck.slides.find((s) => s.block === '4' && s.layout === 'checklist')
+const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
+const etapas = [
+  { id: 'mapa-base', block: '1', numero: '1', nombre: 'Mapa base' },
+  { id: 'zona-geojson', block: '2', numero: '2', nombre: 'Zona GeoJSON' },
+  { id: 'puntos-y-filtro', block: '3', numero: '3', nombre: 'Puntos y filtro' },
+].map((etapa) => ({
+  ...etapa,
+  horario: deck.blocks.find((b) => b.id === etapa.block)?.range,
+  objetivo: deck.slides.find((s) => s.block === etapa.block && s.layout === 'goal'),
+  flujos: deck.slides.filter((s) => s.block === etapa.block && s.layout === 'flow'),
+  comprobacion: deck.slides.find((s) => s.block === etapa.block && s.layout === 'checklist'),
+  resultado: deck.slides.find((s) => s.block === etapa.block && s.layout === 'takeaway'),
+}))
+---
+
+<article class="bg-base-200/45 pb-16">
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-6 md:pt-9">
+    <nav class="mb-5 flex flex-wrap items-center gap-2" aria-label="Días del curso">
+      {decks.map((d) => abierto(d.slug) ? (
+        <a href={href(`/participante/${d.slug}/`)} class:list={['btn btn-sm', d.slug === deck.slug ? 'btn-primary' : 'btn-outline bg-base-100']} aria-current={d.slug === deck.slug ? 'page' : undefined}>Día {d.day}</a>
+      ) : (
+        <span class="btn btn-sm btn-disabled" title={`Se abre el Día ${d.day}`}><span class="icon-[tabler--lock] size-4" aria-hidden="true"></span>Día {d.day}</span>
+      ))}
+    </nav>
+
+    <header class="grid gap-8 overflow-hidden rounded-2xl bg-primary px-6 py-8 text-primary-content md:grid-cols-[minmax(0,1.3fr)_minmax(16rem,0.7fr)] md:items-center md:px-10 md:py-11">
+      <div>
+        <h1 class="max-w-[15ch] text-balance text-3xl font-semibold leading-tight tracking-[-0.025em] md:text-5xl">{deck.title}</h1>
+        <p class="mt-4 max-w-[65ch] text-base leading-relaxed text-white/85 md:text-lg">{deck.objective}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-white/80">
+          <span class="inline-flex items-center gap-2"><span class="icon-[tabler--calendar-time] size-5" aria-hidden="true"></span>Día 2 · {deck.schedule}</span>
+          <span class="inline-flex items-center gap-2"><span class="icon-[tabler--database] size-5" aria-hidden="true"></span>CSV de práctica sintético</span>
+        </div>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href={href('/datos/incidentes_practica_depurado.csv')} download class="btn btn-secondary"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar CSV del Día 2</a>
+          <a href="#preparar" class="btn border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20"><span class="icon-[tabler--arrow-down] size-5" aria-hidden="true"></span>Empezar la guía</a>
+        </div>
+      </div>
+      <figure class="rounded-xl bg-white/10 p-5 ring-1 ring-white/20">
+        <figcaption class="mb-4 text-sm font-semibold text-white/85">Las tres piezas del mapa</figcaption>
+        <div class="space-y-2 text-sm">
+          <div class="flex items-center gap-3 rounded-lg bg-white px-3 py-3 text-primary shadow-[0_8px_16px_-12px_rgba(0,0,0,0.65)]"><span class="icon-[tabler--map-pin] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">Puntos del CSV</strong><span class="text-primary/75">Filtrados por delito</span></span></div>
+          <div class="flex items-center gap-3 rounded-lg bg-white/90 px-3 py-3 text-primary"><span class="icon-[tabler--polygon] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">Zona GeoJSON</strong><span class="text-primary/75">Polígono de práctica</span></span></div>
+          <div class="flex items-center gap-3 rounded-lg bg-white/80 px-3 py-3 text-primary"><span class="icon-[tabler--map] size-5 shrink-0 text-secondary" aria-hidden="true"></span><span><strong class="block">OpenStreetMap</strong><span class="text-primary/75">Calles de fondo</span></span></div>
+        </div>
+        <p class="mt-4 text-xs leading-relaxed text-white/80">Las capas de datos se ven encima del mapa base. La zona es un dibujo para practicar, no un límite oficial.</p>
+      </figure>
+    </header>
+
+    <div class="mt-9 grid items-start gap-9 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
+      <aside class="lg:sticky lg:top-24">
+        <nav aria-label="Recorrido del Día 2" class="rounded-xl bg-base-100 p-4 ring-1 ring-base-content/10">
+          <p class="px-2 text-sm font-semibold text-base-content/70">En esta guía</p>
+          <ol class="mt-2 flex flex-wrap gap-1 lg:block">
+            <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#preparar">Antes de empezar</a></li>
+            <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#sistemas-de-coordenadas">Qué SRC usar</a></li>
+            {etapas.map((etapa) => <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href={`#${etapa.id}`}>{etapa.numero}. {etapa.nombre}</a></li>)}
+            <li><a class="block rounded-lg px-2 py-2 text-sm font-medium hover:bg-base-200" href="#entrega">Revisar y entregar</a></li>
+          </ol>
+        </nav>
+        <a href={href(`/participante/${deck.slug}/resumen/`)} class="mt-3 hidden items-center gap-3 rounded-xl bg-base-100 p-4 text-sm font-medium ring-1 ring-base-content/10 transition-colors hover:text-secondary lg:flex"><span class="icon-[tabler--printer] size-5 shrink-0 text-secondary" aria-hidden="true"></span>Resumen para imprimir<span class="icon-[tabler--arrow-up-right] ms-auto size-4" aria-hidden="true"></span></a>
+      </aside>
+
+      <div class="min-w-0 space-y-12">
+        <section id="preparar" class="scroll-mt-24 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 sm:p-7" aria-labelledby="preparar-titulo">
+          <div class="flex flex-wrap items-start justify-between gap-3">
+            <div><h2 id="preparar-titulo" class="text-2xl font-semibold text-balance">Antes de abrir el mapa</h2><p class="mt-2 max-w-[68ch] text-base-content/75">Tenga QGIS, el CSV depurado y una carpeta para guardar los archivos del ejercicio.</p></div>
+            <span class="badge badge-soft badge-secondary text-xs">Preparación</span>
+          </div>
+          <ul class="mt-5 grid gap-2 sm:grid-cols-2" data-checklist="preparar-dia-2">
+            {preparacion?.bullets?.map((punto, i) => (
+              <li><label class="flex min-h-12 cursor-pointer items-start gap-3 rounded-lg bg-base-200/65 px-3 py-3 transition-colors hover:bg-base-200"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5 shrink-0" data-check={i} /><span>{punto}</span></label></li>
+            ))}
+          </ul>
+          <div class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-base-content/10 pt-4 text-sm">
+            <p class="text-base-content/70">Las marcas se guardan solo en este dispositivo.</p>
+            <a href={href('/datos/incidentes_practica_depurado.csv')} download class="link link-secondary font-semibold">Descargar incidentes_practica_depurado.csv <span class="icon-[tabler--download] inline-block size-4 align-[-0.2em]" aria-hidden="true"></span></a>
+          </div>
+          <p class="mt-4 flex items-start gap-2 rounded-lg bg-info/10 px-3 py-3 text-sm text-base-content"><span class="icon-[tabler--info-circle] mt-0.5 size-5 shrink-0 text-info" aria-hidden="true"></span><span>Si no cargan las calles por falta de conexión, continúe con el GeoJSON y el CSV; el mapa base necesita internet.</span></p>
+          <div class="mt-4 rounded-lg bg-base-200/65 p-4">
+            <h3 class="flex items-center gap-2 text-sm font-semibold"><span class="icon-[tabler--lifebuoy] size-5 text-secondary" aria-hidden="true"></span>Si no aparece la opción en QGIS</h3>
+            <dl class="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+              <div><dt class="font-semibold">Panel Navegador</dt><dd class="mt-1 text-base-content/75">Ver → Paneles → Navegador. Atajo: <kbd class="kbd kbd-sm">Ctrl+2</kbd>.</dd></div>
+              <div><dt class="font-semibold">Cargar el CSV</dt><dd class="mt-1 text-base-content/75">Administrador de fuentes de datos (<kbd class="kbd kbd-sm">Ctrl+L</kbd>) → Texto delimitado.</dd></div>
+            </dl>
+            <p class="mt-3 text-xs text-base-content/65">Rutas comprobadas en QGIS 3.44.15 LTR (interfaz en español).</p>
+          </div>
+        </section>
+
+        <section id="sistemas-de-coordenadas" class="scroll-mt-24 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 sm:p-7" aria-labelledby="src-titulo">
+          <h2 id="src-titulo" class="text-2xl font-semibold text-balance">Qué SRC usar en cada parte</h2>
+          <p class="mt-2 max-w-[68ch] text-base-content/75">El sistema de referencia de coordenadas (SRC) indica cómo ubicar cada capa en el mapa. Aquí conviven uno geográfico y dos proyectados.</p>
+          <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+            <div class="rounded-lg bg-base-200/70 p-4"><dt class="font-semibold">CSV · geográfico</dt><dd class="mt-2 text-sm leading-relaxed text-base-content/75"><strong class="text-base-content">EPSG:4326</strong>. X es <strong>longitud</strong> y Y es <strong>latitud</strong>, expresadas en grados.</dd></div>
+            <div class="rounded-lg bg-base-200/70 p-4"><dt class="font-semibold">Teselas · proyectado</dt><dd class="mt-2 text-sm leading-relaxed text-base-content/75"><strong class="text-base-content">EPSG:3857</strong>. OpenStreetMap usa este SRC para las calles de fondo.</dd></div>
+            <div class="rounded-lg bg-base-200/70 p-4"><dt class="font-semibold">UTM 13N · proyectado</dt><dd class="mt-2 text-sm leading-relaxed text-base-content/75"><strong class="text-base-content">EPSG:32613</strong>. Opción para visualizar el proyecto en metros.</dd></div>
+            <div class="rounded-lg bg-base-200/70 p-4"><dt class="font-semibold">SRC del proyecto</dt><dd class="mt-2 text-sm leading-relaxed text-base-content/75">Puede cambiar la visualización del mapa <strong class="text-base-content">sin modificar el CSV</strong>.</dd></div>
+          </dl>
+          <a class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-secondary underline underline-offset-4 hover:text-primary" href="https://documentation.qgis.org/3.44/en/docs/user_manual/working_with_projections/working_with_projections.html">Consultar el manual oficial de proyecciones de QGIS <span class="icon-[tabler--external-link] size-4" aria-hidden="true"></span></a>
+        </section>
+
+        {etapas.map((etapa) => (
+          <section id={etapa.id} class="scroll-mt-24" aria-labelledby={`${etapa.id}-titulo`}>
+            <div class="flex flex-wrap items-start gap-x-4 gap-y-2 border-b border-base-content/15 pb-5">
+              <span class="grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-lg font-semibold text-primary-content" aria-hidden="true">{etapa.numero}</span>
+              <div class="min-w-0 flex-1">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"><h2 id={`${etapa.id}-titulo`} class="text-2xl font-semibold text-balance md:text-3xl">{etapa.nombre}</h2><span class="text-sm tabular-nums text-base-content/65">{etapa.horario}</span></div>
+                <p class="mt-2 max-w-[70ch] text-base-content/75">{etapa.objetivo?.title}</p>
+              </div>
+            </div>
+
+            <div class="mt-6 space-y-7">
+              {etapa.flujos.map((flujo) => (
+                <div class="rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 sm:p-7">
+                  <h3 class="text-lg font-semibold text-balance">{flujo.title}</h3>
+                  <ol class="mt-5 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+                    {flujo.steps?.map((paso, i) => (
+                      <li class="flex gap-3"><span class="grid size-7 shrink-0 place-items-center rounded-full bg-base-200 text-sm font-semibold text-primary" aria-hidden="true">{i + 1}</span><span class="min-w-0"><strong class="block font-semibold">{paso.label}</strong>{paso.detail && <span class="mt-0.5 block text-sm leading-relaxed text-base-content/70">{paso.detail}</span>}</span></li>
+                    ))}
+                  </ol>
+                  {etapa.block === '3' && /Filtre/i.test(flujo.title) && (
+                    <div class="mt-5 flex flex-wrap items-center gap-3 rounded-lg bg-primary px-4 py-3 text-primary-content">
+                      <div class="min-w-0 flex-1"><p class="text-xs font-medium text-white/75">Expresión para el filtro de la capa</p><code class="mt-1 block overflow-x-auto whitespace-nowrap font-mono text-sm text-white sm:text-base">&quot;delito&quot; = &apos;Robo a comercio&apos;</code></div>
+                      <button type="button" class="btn btn-sm border-white/45 bg-white/10 text-white hover:border-white hover:bg-white/20" data-copy-filter data-expression={`"delito" = 'Robo a comercio'`}><span class="icon-[tabler--copy] size-4" aria-hidden="true"></span><span data-copy-label>Copiar</span></button>
+                      <span class="sr-only" role="status" aria-live="polite" data-copy-status></span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {etapa.comprobacion && (
+              <div class="mt-6 rounded-xl bg-secondary/8 p-5 sm:p-6">
+                <h3 class="flex items-center gap-2 font-semibold"><span class="icon-[tabler--list-check] size-5 text-secondary" aria-hidden="true"></span>{etapa.comprobacion.title}</h3>
+                <ul class="mt-3 grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
+                  {etapa.comprobacion.bullets?.map((punto) => <li class="flex gap-2"><span class="icon-[tabler--check] mt-0.5 size-4 shrink-0 text-secondary" aria-hidden="true"></span><span>{punto}</span></li>)}
+                </ul>
+              </div>
+            )}
+
+            {etapa.resultado && (
+              <div class="mt-5 flex items-start gap-3 text-sm"><span class="icon-[tabler--circle-check-filled] mt-0.5 size-5 shrink-0 text-success" aria-hidden="true"></span><div><p class="font-semibold">{etapa.resultado.title}</p><p class="mt-1 text-base-content/70">{etapa.resultado.bullets?.join(' · ')}</p></div></div>
+            )}
+          </section>
+        ))}
+
+        <section id="entrega" class="scroll-mt-24 rounded-xl bg-primary px-5 py-7 text-primary-content sm:px-8 sm:py-9" aria-labelledby="entrega-titulo">
+          <h2 id="entrega-titulo" class="text-2xl font-semibold text-balance md:text-3xl">Revise el mapa y guarde su trabajo</h2>
+          <p class="mt-2 max-w-[68ch] text-white/85">Compruebe las tres tareas en QGIS antes de cerrar el proyecto.</p>
+          <ul class="mt-6 grid gap-2 sm:grid-cols-2" data-checklist="taller-dia-2">
+            {revisionFinal?.bullets?.map((punto, i) => (
+              <li><label class="flex min-h-14 cursor-pointer items-start gap-3 rounded-lg bg-white/10 px-3 py-3 transition-colors hover:bg-white/20"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5 shrink-0 border-white/75 bg-white" data-check={i} /><span>{punto}</span></label></li>
+            ))}
+          </ul>
+          <div class="mt-7 border-t border-white/25 pt-6">
+            <h3 class="font-semibold">Archivos que debe conservar</h3>
+            <div class="mt-3 grid gap-3 sm:grid-cols-2">
+              {entregable?.cards?.map((archivo) => <div class="rounded-lg bg-white px-4 py-4 text-primary"><span class:list={[archivo.icon, 'mb-2 block size-6 text-secondary']} aria-hidden="true"></span><strong class="block break-all font-display text-sm">{archivo.title}</strong><p class="mt-1 text-sm text-primary/75">{archivo.text}</p></div>)}
+            </div>
+            <p class="mt-3 text-sm text-white/80">Conserve también el CSV original en la misma ubicación que usó al cargarlo en QGIS.</p>
+          </div>
+        </section>
+
+        <section class="grid gap-3 sm:grid-cols-3" aria-label="Continuar y repasar">
+          <a href={href(`/participante/${deck.slug}/resumen/`)} class="group flex flex-col gap-2 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-16px_rgba(25,27,45,0.5)]"><span class="icon-[tabler--printer] size-6 text-secondary" aria-hidden="true"></span><strong class="font-display">Resumen para imprimir</strong><span class="text-sm text-base-content/70">Lleve las instrucciones y la verificación en una página.</span><span class="mt-auto flex items-center gap-1 pt-2 text-sm font-semibold text-secondary">Abrir resumen <span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></span></a>
+          <a href={href('/practica/hoja-de-verificacion/#mapa')} class="group flex flex-col gap-2 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-16px_rgba(25,27,45,0.5)]"><span class="icon-[tabler--checklist] size-6 text-secondary" aria-hidden="true"></span><strong class="font-display">Verificación del mapa</strong><span class="text-sm text-base-content/70">Use la lista para revisar el archivo antes de entregarlo.</span><span class="mt-auto flex items-center gap-1 pt-2 text-sm font-semibold text-secondary">Abrir lista <span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></span></a>
+          <a href={href('/cuestionario/dia-2/')} class="group flex flex-col gap-2 rounded-xl bg-base-100 p-5 ring-1 ring-base-content/10 transition-[box-shadow,transform] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-16px_rgba(25,27,45,0.5)]"><span class="icon-[tabler--clipboard-check] size-6 text-secondary" aria-hidden="true"></span><strong class="font-display">Cuestionario del Día 2</strong><span class="text-sm text-base-content/70">Repase las tres tareas después de la práctica.</span><span class="mt-auto flex items-center gap-1 pt-2 text-sm font-semibold text-secondary">Contestar <span class="icon-[tabler--arrow-right] size-4" aria-hidden="true"></span></span></a>
+        </section>
+      </div>
+    </div>
+  </div>
+</article>
+
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-filter]')) {
+    button.addEventListener('click', async () => {
+      const label = button.querySelector<HTMLElement>('[data-copy-label]')
+      const status = button.parentElement?.querySelector<HTMLElement>('[data-copy-status]')
+      try {
+        await navigator.clipboard.writeText(button.dataset.expression ?? '')
+        if (label) label.textContent = 'Copiado'
+        if (status) status.textContent = 'Expresión copiada. Péguela en el filtro de la capa.'
+      } catch {
+        if (label) label.textContent = 'No se pudo copiar'
+        if (status) status.textContent = 'No se pudo copiar. Seleccione la expresión y cópiela manualmente.'
+      }
+      window.setTimeout(() => { if (label) label.textContent = 'Copiar' }, 2500)
+    })
+  }
+</script>

@@ -1,5 +1,6 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
+import Dia2Resumen from '../../../components/Dia2Resumen.astro'
 import { abierto, decks, decksAbiertos } from '../../../data/decks'
 import { casos } from '../../../data/recursos'
 import type { Deck } from '../../../data/types'
@@ -19,6 +20,8 @@ const usaIA = deck.slides.some((s) => s.ruleReminder)
 ---
 
 <Layout title={`Resumen del Día ${deck.day} · Operatividad policial`} description={`Resumen de una página del Día ${deck.day}.`}>
+  {deck.day === 2 && <Dia2Resumen deck={deck} />}
+  {deck.day !== 2 && (
   <article class="resumen mx-auto max-w-3xl px-4 py-8 md:py-12">
     <div class="flex flex-wrap items-center justify-between gap-3 print:hidden">
       <nav class="flex gap-2" aria-label="Resumen por día">
@@ -92,6 +95,7 @@ const usaIA = deck.slides.some((s) => s.ruleReminder)
 
     <p class="mt-4 text-xs text-base-content/70">Curso 3 · Herramientas tecnológicas orientadas a la operatividad policial · Ejercicios con datos sintéticos o anonimizados.</p>
   </article>
+  )}
 
   <style is:global>
     @media print {
