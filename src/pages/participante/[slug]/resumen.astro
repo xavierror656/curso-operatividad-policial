@@ -15,6 +15,7 @@ const logro = deck.slides.find((s) => s.kicker === 'Qué se logra hoy')
 const entregable = deck.slides.find((s) => s.kicker === 'Entregable del día')
 const llevas = deck.slides.filter((s) => s.layout === 'takeaway')
 const caso = casos.find((c) => c.dia === deck.day)
+const usaIA = deck.slides.some((s) => s.ruleReminder)
 ---
 
 <Layout title={`Resumen del Día ${deck.day} · Operatividad policial`} description={`Resumen de una página del Día ${deck.day}.`}>
@@ -46,10 +47,10 @@ const caso = casos.find((c) => c.dia === deck.day)
         </section>
       )}
 
-      <section class="rounded-box border-2 border-secondary p-3">
+      {usaIA && <section class="rounded-box border-2 border-secondary p-3">
         <h2 class="font-display text-base font-semibold">Regla de oro con la IA</h2>
         <p class="mt-1">Comparta la <strong>estructura</strong> (nombres de columnas, tipos, mensaje de error). <strong>Nunca</strong> datos: filas, nombres, domicilios, folios, coordenadas ni resultados. Ante la duda, no lo comparta y pregunte.</p>
-      </section>
+      </section>}
 
       {llevas.length > 0 && (
         <section class="md:col-span-2">

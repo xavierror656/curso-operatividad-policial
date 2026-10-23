@@ -481,7 +481,7 @@ export const dia1: Deck = {
         items: ['Latitud entre 31.0 y 31.8', 'Longitud entre -107.0 y -106.1', 'Lo que queda fuera, se marca'],
       },
       notes:
-        'El rango es de práctica para el curso. El rango oficial lo define la capa del límite municipal, que se trabaja en el Día 2.',
+        'El rango es de práctica para el curso. El polígono que se dibujará en QGIS el Día 2 también será ilustrativo; no sustituye un límite municipal oficial.',
     },
     {
       block: '2B',
@@ -798,11 +798,11 @@ export const dia1: Deck = {
       lead: 'No hay datos nuevos: la calidad de hoy decide la utilidad de mañana.',
       steps: [
         { label: 'Día 1', detail: 'Archivo depurado' },
-        { label: 'Día 2', detail: 'Mapa de concentración' },
+        { label: 'Día 2', detail: 'Teselas, GeoJSON y puntos filtrados' },
         { label: 'Día 3', detail: 'Tablero de mando' },
       ],
       notes:
-        'Cierre con el hilo del curso. Mañana se construye en QGIS un mapa de concentración con el archivo depurado de hoy.',
+        'Cierre con el hilo del curso. Mañana se añade un mapa base de teselas, se dibuja un GeoJSON y se grafican y filtran en QGIS los puntos del archivo depurado de hoy.',
     },
   ],
 }

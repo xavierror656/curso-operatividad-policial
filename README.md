@@ -30,4 +30,4 @@ El sitio es público. **No debe contener datos reales** de la Secretaría: nombr
 - Regla de asistencia (80 %), rúbrica del producto final y protocolo de incidente (`/instructor/`).
 - Responsable y aviso de privacidad integral.
 - Si las notas del instructor y los resultados pueden ser públicos.
-- Prompts de Metabase y PyQGIS: se dejaron para una segunda etapa.
+- Prompts de Metabase: se dejaron para una segunda etapa.

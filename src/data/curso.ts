@@ -13,7 +13,7 @@ export const curso = {
     'Conocimientos básicos de estadística, cartografía y hojas de cálculo. No se requiere experiencia previa en programación.',
   herramientas: ['Python con Jupyter', 'Metabase', 'QGIS', 'Asistentes de IA'],
   objetivo:
-    'Que el participante sea capaz de tomar información operativa de la Secretaría, depurarla, analizarla y convertirla en productos que apoyen la toma de decisiones: tableros de mando, mapas de concentración de incidentes y reportes periódicos, empleando software libre y asistentes de inteligencia artificial bajo criterios de seguridad de la información.',
+    'Que el participante sea capaz de tomar información operativa de la Secretaría, depurarla, analizarla y convertirla en productos que apoyen la toma de decisiones: tableros de mando, mapas de puntos filtrados y reportes periódicos, empleando software libre y asistentes de inteligencia artificial bajo criterios de seguridad de la información.',
 }
 
 export const enfoque = [
@@ -21,13 +21,13 @@ export const enfoque = [
     icon: 'icon-[tabler--database]',
     titulo: 'Un solo conjunto de datos',
     texto:
-      'Todos los temas trabajan sobre el mismo conjunto de incidentes: el resultado de cada tema es el insumo del siguiente.',
+      'El archivo sintético de incidentes acompaña las tres sesiones: se depura, se muestra como puntos y se usa en un tablero.',
   },
   {
     icon: 'icon-[tabler--sparkles]',
-    titulo: 'La IA dentro de cada herramienta',
+    titulo: 'La IA como apoyo en Python y SQL',
     texto:
-      'El participante dirige un asistente para generar Python, SQL y PyQGIS, y verifica lo que devuelve. Se resuelven problemas con criterio, no se memoriza código.',
+      'El participante dirige un asistente para generar Python y SQL, y verifica lo que devuelve. Se resuelven problemas con criterio, no se memoriza código.',
   },
   {
     icon: 'icon-[tabler--package]',
@@ -52,8 +52,8 @@ export const sesiones = [
   {
     dia: 2,
     slug: 'dia-2',
-    titulo: 'Cartografía y análisis espacial con QGIS',
-    entregable: 'Mapa de concentración en PDF y proyecto de QGIS.',
+    titulo: 'Primeros pasos en QGIS: teselas, GeoJSON y puntos',
+    entregable: 'Proyecto de QGIS con mapa base de teselas, un GeoJSON dibujado y puntos filtrados.',
     disponible: true,
   },
   {
@@ -111,21 +111,19 @@ export const temas: Tema[] = [
   },
   {
     num: 5,
-    titulo: 'Introducción a QGIS y automatización con PyQGIS',
+    titulo: 'Añadir un mapa base y dibujar un GeoJSON en QGIS',
     horas: 3,
     contenido:
-      'Interfaz y paneles, sistemas de coordenadas WGS84 y UTM zona 13N, capas vectoriales, georreferenciación de incidentes desde CSV, simbología y mapas base.',
-    ia: 'Scripts de PyQGIS para carga automática de capas y georreferenciación por lotes.',
-    producto: 'Mapa de puntos de incidentes y script de carga automatizada.',
+      'Recorrido breve de QGIS. Añadir un mapa base de teselas, dibujar un polígono sencillo encima y guardarlo como GeoJSON.',
+    producto: 'Proyecto de QGIS con mapa base de teselas y GeoJSON dibujado.',
   },
   {
     num: 6,
-    titulo: 'Mapas temáticos y análisis espacial básico',
+    titulo: 'Graficar y filtrar puntos en QGIS',
     horas: 3,
     contenido:
-      'Unión de atributos con colonias o sectores, mapas coropléticos por cortes naturales y cuantiles, mapas de densidad, conteo de puntos en polígono y composición de impresión.',
-    ia: 'Scripts de geoprocesamiento y exportación de mapas en lote.',
-    producto: 'Generador de mapas de concentración en PDF.',
+      'Cargar el archivo sintético de incidentes como puntos con longitud y latitud, comprobar que aparecen en el lugar esperado y aplicar un filtro sencillo para mostrar solo los registros elegidos.',
+    producto: 'Proyecto de QGIS con puntos graficados y un filtro aplicado.',
   },
   {
     num: 7,
@@ -168,7 +166,7 @@ export const productos = [
   {
     icon: 'icon-[tabler--layout-dashboard]',
     titulo: 'Tablero de incidencia delictiva',
-    texto: 'Depura, carga, alimenta el tablero y genera el mapa con una sola ejecución.',
+    texto: 'Organiza las cifras del archivo depurado en vistas y filtros para consultar la incidencia.',
   },
   {
     icon: 'icon-[tabler--zoom-exclamation]',
@@ -177,8 +175,8 @@ export const productos = [
   },
   {
     icon: 'icon-[tabler--map-2]',
-    titulo: 'Generador de mapas de concentración',
-    texto: 'Por periodo, con exportación lista para impresión.',
+    titulo: 'Mapa básico de incidentes en QGIS',
+    texto: 'Mapa base de teselas, GeoJSON dibujado y puntos filtrados.',
   },
   {
     icon: 'icon-[tabler--file-analytics]',
@@ -190,7 +188,7 @@ export const productos = [
 export const requerimientos = [
   'Equipo por participante con privilegios de instalación y 8 GB de RAM como mínimo.',
   'Python con Jupyter, o Google Colab si no se autoriza la instalación local.',
-  'QGIS LTR, misma versión para todo el grupo, con QuickMapServices.',
+  'QGIS LTR, misma versión para todo el grupo, con acceso a un mapa base de teselas.',
   'Instancia de Metabase conectada a una base de datos de práctica.',
   'Acceso a internet y a los asistentes de IA definidos para el curso.',
   'Conjunto de datos sintético o anonimizado, proporcionado por el instructor.',

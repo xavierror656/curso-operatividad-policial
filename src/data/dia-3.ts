@@ -46,7 +46,7 @@ export const dia3: Deck = {
         'Fechas válidas y en un solo formato',
         'Coordenadas dentro del municipio, o marcadas',
         'Colonias con el nombre del catálogo oficial',
-        'Mapa de concentración y PDF guardados el Día 2',
+        'Proyecto de QGIS con teselas, GeoJSON y puntos filtrados guardado el Día 2',
       ],
       material: ['datos'],
       notes:
@@ -464,14 +464,14 @@ export const dia3: Deck = {
       block: '4', time: '10:47', layout: 'timer',
       title: 'Tiene 25 minutos para armar y verificar su tablero', minutes: 25,
       bullets: ['10:55 · Vistas acomodadas', '11:05 · Filtro conectado', '11:12 · Cifras verificadas'],
-      notes: 'Inicie el cronómetro. El mapa ya está listo desde ayer; aquí se termina el tablero.',
+      notes: 'Inicie el cronómetro. El proyecto básico de QGIS ya está listo desde ayer; aquí se termina el tablero.',
     },
     {
       block: '4', time: '11:13', layout: 'flow',
       title: 'Su producto final une los tres días en una sola historia',
       steps: [
         { label: 'Archivo depurado', detail: 'Día 1' },
-        { label: 'Mapa de concentración', detail: 'Día 2' },
+        { label: 'Mapa de puntos filtrados', detail: 'Día 2' },
         { label: 'Tablero de mando', detail: 'Día 3' },
         { label: 'Recomendación', detail: 'Qué haría distinto el mando' },
       ],
@@ -481,7 +481,7 @@ export const dia3: Deck = {
     {
       block: '4', time: '11:17', layout: 'checklist',
       title: 'Cada equipo responde cuatro puntos en cinco minutos',
-      bullets: ['Qué errores corrigió en el archivo', 'Dónde se concentra la incidencia en el mapa', 'Qué muestra el tablero y cómo verificó las cifras', 'Qué decisión operativa recomienda al mando'],
+      bullets: ['Qué errores corrigió en el archivo', 'Qué puntos muestra el mapa después del filtro', 'Qué muestra el tablero y cómo verificó las cifras', 'Qué decisión operativa recomienda al mando'],
       notes: 'Con cuatro equipos, las presentaciones ocupan de 11:20 a 11:40. Con más equipos, continúe en una sesión adicional.',
     },
     {

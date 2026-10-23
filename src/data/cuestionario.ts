@@ -56,12 +56,12 @@ export const reactivos: Reactivo[] = [
     correcta: 2,
   },
   {
-    pregunta: 'Un mapa de concentración de eventos sirve para:',
+    pregunta: 'En QGIS, ¿para qué sirve filtrar una capa de puntos?',
     opciones: [
-      'Sustituir el análisis estadístico',
-      'Identificar dónde se acumulan los incidentes',
-      'Determinar quién cometió el delito',
-      'Calcular el presupuesto del área',
+      'Cambiar las coordenadas de todos los puntos',
+      'Mostrar solo los registros que cumplen una condición',
+      'Dibujar calles automáticamente',
+      'Crear nuevos registros de incidentes',
     ],
     correcta: 1,
   },
@@ -92,7 +92,7 @@ export const explicaciones: { porque: string; dia: 1 | 2 | 3 }[] = [
   { porque: 'El tablero se consulta de forma recurrente para decidir; un reporte es una fotografía de un periodo.', dia: 3 },
   { porque: 'Que una consulta corra no significa que cuente bien. Se compara contra un conteo de control conocido.', dia: 3 },
   { porque: 'Fecha, hora, tipo de delito, colonia, sector y coordenadas son las variables mínimas para analizar y mapear.', dia: 1 },
-  { porque: 'El mapa de concentración muestra dónde se acumulan los incidentes; no identifica responsables.', dia: 2 },
+  { porque: 'Un filtro muestra solo los puntos que cumplen una condición, por ejemplo un tipo de incidente; no modifica los registros originales.', dia: 2 },
   { porque: 'Dos capturas del mismo evento son un duplicado que infla las cifras.', dia: 1 },
   { porque: 'Quien presenta el resultado responde por él, aunque lo haya generado un asistente.', dia: 3 },
 ]

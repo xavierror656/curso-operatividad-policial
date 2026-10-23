@@ -62,6 +62,16 @@ for (const [archivo, esperado] of [['incidentes_practica_depurado.csv', 928], ['
   }
 }
 
+// El ejercicio del Día 2 usa este filtro exacto; el conteo visible debe corresponder al CSV.
+try {
+  const filas = readFileSync(new URL('../public/datos/incidentes_practica_depurado.csv', import.meta.url), 'utf8').trim().split(/\r?\n/)
+  const columnaDelito = filas[0].split(',').indexOf('delito')
+  const robosComercio = filas.slice(1).filter((fila) => fila.split(',')[columnaDelito] === 'Robo a comercio').length
+  if (robosComercio !== 76) falla(`El filtro del Día 2 devuelve ${robosComercio} robos a comercio, se esperaban 76`)
+} catch {
+  falla('No se pudo verificar el filtro del Día 2 en el CSV depurado')
+}
+
 if (errores.length) {
   console.error(`✗ ${errores.length} problema${errores.length === 1 ? '' : 's'}:\n` + errores.map((e) => `  - ${e}`).join('\n'))
   process.exit(1)

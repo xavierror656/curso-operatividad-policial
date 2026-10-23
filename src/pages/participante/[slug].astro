@@ -19,6 +19,7 @@ const flujos = deck.slides.filter((s) => s.layout === 'flow' && !s.kicker?.start
 const llevas = deck.slides.filter((s) => s.layout === 'takeaway')
 const otros = decksAbiertos.filter((d) => d.slug !== deck.slug)
 const material = materialesDe(deck.slides)
+const usaIA = deck.slides.some((s) => s.ruleReminder)
 const momento = (i: number) => {
   const s = deck.slides[i]
   const bloque = deck.blocks.find((b) => b.id === s.block)
@@ -40,7 +41,7 @@ const momento = (i: number) => {
       ))}
     </nav>
 
-    <div class="mt-8"><ReglaDeOro compact /></div>
+    {usaIA && <div class="mt-8"><ReglaDeOro compact /></div>}
 
     {logro && (
       <section class="mt-10">

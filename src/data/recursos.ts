@@ -35,7 +35,7 @@ export const casos: Caso[] = [
     pregunta: '¿Cómo detectaría el problema sin revisar fila por fila?',
   },
   {
-    dia: 2,
+    dia: 3,
     titulo: 'La consulta que contó de más',
     paso: 'Un asistente de IA generó una consulta SQL que unía incidentes con una tabla de unidades. El tablero mostró 428 registros para un distrito que en realidad tenía 214.',
     error: 'La unión duplicaba las filas con más de una unidad asignada y nadie comparó contra el conteo de control (214).',
@@ -44,12 +44,12 @@ export const casos: Caso[] = [
     pregunta: '¿Qué conteo de control habría usado?',
   },
   {
-    dia: 3,
+    dia: 2,
     titulo: 'El punto que cayó fuera del mapa',
-    paso: 'Al cargar el CSV en QGIS, catorce puntos aparecieron lejos del municipio, y el mapa de densidad marcó una concentración que no existía.',
+    paso: 'Al graficar el CSV en QGIS, catorce puntos aparecieron lejos del municipio.',
     error: 'Latitud y longitud capturadas al revés en un lote y sin validación de coordenadas.',
-    consecuencia: 'El mapa de concentración salió sesgado y se descubrió hasta la reunión de presentación.',
-    leccion: 'Se validan las coordenadas contra el rango del municipio antes de mapear. Lo que se excluye se anota en el pie del mapa.',
+    consecuencia: 'El mapa mostraba ubicaciones falsas y se descubrió hasta la reunión de presentación.',
+    leccion: 'Antes de graficar, se revisan las coordenadas con el rango de práctica. Los puntos erróneos se identifican y no se corrigen a ojo.',
     pregunta: '¿Qué rango de latitud y longitud le exigiría a Ciudad Juárez?',
   },
   {
@@ -73,11 +73,11 @@ export const escenarios: Escenario[] = [
     situacion:
       'Su jefe le pide un mapa de incidentes en diez minutos. Al cargar el archivo, treinta puntos tienen coordenadas fuera del municipio.',
     opciones: [
-      { texto: 'Mapear todo tal como está para no perder tiempo.', porque: 'Los puntos fuera del municipio distorsionan la densidad y nadie lo sabrá.' },
+      { texto: 'Mapear todo tal como está para no perder tiempo.', porque: 'Los puntos fuera del municipio dan una imagen equivocada de dónde ocurrieron los incidentes.' },
       {
-        texto: 'Excluir los treinta puntos, generar el mapa y anotar en el pie cuántos se excluyeron y por qué.',
+        texto: 'Filtrar los treinta puntos erróneos, guardar el proyecto y explicar cuántos se excluyeron y por qué.',
         mejor: true,
-        porque: 'Entrega a tiempo, el mapa es confiable y la omisión queda a la vista del mando.',
+        porque: 'El mapa queda claro y la exclusión se explica antes de tomar una decisión.',
       },
       { texto: 'Corregir las coordenadas a ojo, cambiándolas de lugar.', porque: 'Inventar un dato es peor que omitirlo. Solo se corrige con la fuente original.' },
     ],
@@ -168,7 +168,7 @@ export const verificacion: GrupoVerificacion[] = [
   {
     id: 'depurado',
     titulo: 'Archivo depurado',
-    icon: 'icon-[tabler--database-check]',
+    icon: 'icon-[tabler--database]',
     items: [
       'Fechas en un solo formato y ninguna posterior a hoy.',
       'Horas válidas, entre 00:00 y 23:59.',
@@ -192,13 +192,12 @@ export const verificacion: GrupoVerificacion[] = [
   },
   {
     id: 'mapa',
-    titulo: 'Mapa de concentración',
+    titulo: 'Proyecto básico de QGIS',
     icon: 'icon-[tabler--map-2]',
     items: [
-      'Los puntos excluidos por coordenadas inválidas están contados y anotados en el pie del mapa.',
-      'El sistema de coordenadas es el correcto y el mismo en todas las capas.',
-      'El método de clasificación (cortes naturales o cuantiles) está indicado en la leyenda.',
-      'El mapa incluye periodo, fuente y fecha de elaboración.',
+      'Añadí un mapa base de teselas debajo de las capas de datos.',
+      'Dibujé un polígono sencillo y lo guardé como GeoJSON.',
+      'Grafiqué los puntos del archivo sintético y apliqué un filtro que puedo explicar.',
     ],
   },
   {
