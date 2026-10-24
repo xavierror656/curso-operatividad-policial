@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout.astro'
 import { href } from '../lib/site'
 
 const rubrica = [
-  { criterio: 'Tablero e indicador', c2: 'Identifica el tablero existente, la pregunta, la fuente, el periodo y la definición de la cifra.', c1: 'Identifica el tablero, pero omite parte del contexto del indicador.', c0: 'No identifica qué cifra analizó.' },
-  { criterio: 'Filtros y alcance', c2: 'Registra los filtros activos y explica a qué población y periodo se refiere el resultado.', c1: 'Menciona filtros, pero no aclara su efecto o el alcance.', c0: 'Presenta la cifra sin filtros ni alcance.' },
-  { criterio: 'Verificación y calidad', c2: 'Contrasta con una vista compatible y revisa ceros, vacíos o discrepancias antes de concluir.', c1: 'Hace un contraste parcial o no explica una discrepancia.', c0: 'No verifica la interpretación.' },
-  { criterio: 'Hallazgo y recomendación', c2: 'Explica un hallazgo verificable del tablero, sus límites y una recomendación operativa proporcionada.', c1: 'Presenta un hallazgo o recomendación, pero sin sustento o límites claros.', c0: 'No presenta hallazgo ni recomendación.' },
-  { criterio: 'Manejo seguro de la información', c2: 'No comparte cifras, capturas ni credenciales con herramientas ajenas y documenta cómo verificó su explicación.', c1: 'Mantiene la información protegida, pero documenta la verificación de forma incompleta.', c0: 'Expone información o no verifica la explicación.' },
+  { criterio: 'Tres actividades', c2: 'Entrega una respuesta breve para Territorio, Ritmo temporal y Emergencias.', c1: 'Entrega dos respuestas.', c0: 'Entrega una o ninguna.' },
+  { criterio: 'Gráfica correcta', c2: 'En cada actividad lee la gráfica indicada o la equivalente mostrada por el instructor.', c1: 'Confunde la gráfica en una actividad.', c0: 'Las respuestas no corresponden a las gráficas.' },
+  { criterio: 'Filtros', c2: 'En sus respuestas anota el Periodo y Distrito que usó.', c1: 'Omite uno de esos filtros en alguna respuesta.', c0: 'No indica los filtros.' },
+  { criterio: 'Explicación oral', c2: 'Lee una respuesta clara y dice qué muestra la gráfica sin atribuir causas.', c1: 'Lee la respuesta, pero no explica los filtros o afirma una causa.', c0: 'No presenta su respuesta.' },
+  { criterio: 'Manejo seguro de la información', c2: 'Usa su cuenta asignada y no publica datos, capturas ni contraseñas.', c1: 'Necesita recordatorio para mantener la información dentro de Metabase.', c0: 'Comparte credenciales o información fuera de los medios autorizados.' },
 ]
 const incidente = [
   'Detenga la actividad. No continúe la conversación con el asistente.',
@@ -45,7 +45,7 @@ const planB = [
     </nav>
 
     <section id="rubrica" class="mt-12 scroll-mt-24">
-      <h2 class="text-2xl font-semibold">Rúbrica del análisis de Metabase · Día 3</h2>
+      <h2 class="text-2xl font-semibold">Rúbrica de las tres actividades de Metabase · Día 3</h2>
       <p class="mt-2 text-base-content/75">Cinco criterios de 0 a 2 puntos: 2 completo, 1 parcial, 0 ausente. Se acredita con <strong>6 de 10</strong> y sin incidencias de manejo de la información.</p>
       <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Rúbrica, se desplaza horizontalmente">
         <table class="table">

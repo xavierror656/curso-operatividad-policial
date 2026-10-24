@@ -2,94 +2,54 @@
 import Layout from '../layouts/Layout.astro'
 import { href } from '../lib/site'
 
-const coleccion = 'https://estadisticas.floresjavier.com/collection/5'
-const dashboards = [
-  { id: 2, nombre: 'Territorio y concentración de eventos', consigna: 'Mantén el mismo Periodo y alterna entre dos Distritos. Describe una diferencia territorial visible sin atribuirle una causa.', producto: 'Una comparación con Periodo, Distritos y límite de la interpretación.' },
-  { id: 3, nombre: 'Ritmo temporal y turnos', consigna: 'Fija un Distrito y compara dos Periodos en una vista temporal o por turno. Comprueba si el periodo más reciente está completo.', producto: 'Una frase comparativa que advierta cualquier mes parcial.' },
-  { id: 4, nombre: 'Detenciones y perfil registrado', consigna: 'Elige una vista de detenciones o perfil registrado. Compara dos Distritos con el mismo Periodo y revisa exactamente qué característica fue capturada.', producto: 'Una diferencia observada y un dato que haría falta para explicarla.' },
-  { id: 5, nombre: 'Víctimas y atención declarada', consigna: 'Revisa una vista de víctimas o atención declarada. Distingue lo que consta en el registro de lo que necesitaría confirmación adicional.', producto: 'Una observación y una pregunta de seguimiento.' },
-  { id: 6, nombre: 'Clasificación de hechos y faltas', consigna: 'Selecciona dos categorías visibles y compara su registro bajo el mismo Periodo y Distrito. Consulta cómo se define cada categoría antes de compararlas.', producto: 'Una comparación que nombre las categorías y su definición o una duda pendiente.' },
-  { id: 7, nombre: 'Armas y municiones registradas', consigna: 'Examina una vista de armas o municiones. Comprueba si la unidad presentada es registro, pieza u otra medida antes de interpretar el conteo.', producto: 'Indicador, unidad y una cautela para no confundir objetos con eventos.' },
-  { id: 8, nombre: 'Vehículos y motivos de aseguramiento', consigna: 'Compara un motivo visible en dos Distritos con el mismo Periodo. Revisa si las categorías pueden solaparse antes de sumar sus valores.', producto: 'La comparación y la condición que tendría que cumplirse para sumar.' },
-  { id: 9, nombre: 'Sustancias y objetos asegurados', consigna: 'Elige una vista de sustancias u objetos y cambia solo el Periodo. Identifica si estás comparando conteos, cantidades u otra unidad.', producto: 'Una observación con su unidad y una limitación.' },
-  { id: 10, nombre: 'Emergencias y clasificación de atención', consigna: 'Compara una clasificación de atención entre dos Distritos. Distingue el registro de atención de un hecho confirmado.', producto: 'Una diferencia observada y una frase sobre lo que no demuestra.' },
-  { id: 11, nombre: 'Calidad de captura y cobertura', consigna: 'Localiza una vista de calidad o cobertura. Identifica qué registros podrían faltar y vuelve a revisar una conclusión de las actividades anteriores.', producto: 'La conclusión que matizarías y qué dato comprobarías.' },
-]
-
-const ruta = [
-  { titulo: 'Fija el contexto', texto: 'En cada tablero anota Periodo y Distrito, la unidad de medida y la definición disponible. Si no ves la fuente o definición, anótala como pendiente para preguntarla al instructor. Si cambias de tablero, vuelve a fijar los filtros antes de comparar.' },
-  { titulo: 'Resuelve la consigna', texto: 'Haz el cambio indicado en la actividad. Modifica solo un filtro a la vez para distinguir qué cambió en la vista.' },
-  { titulo: 'Entrega una lectura', texto: 'Escribe el producto pedido: observación verificable, alcance de los datos y una limitación o comprobación pendiente.' },
+const actividades = [
+  { id: 2, titulo: 'Territorio y concentración de eventos', grafica: 'Registros por distrito', filtro: 'Periodo: el elegido por el instructor · Distrito: vista de todos los distritos', pregunta: '¿Qué distrito tiene más registros en la gráfica?' },
+  { id: 3, titulo: 'Ritmo temporal y turnos', grafica: 'Registros por turno', filtro: 'Periodo: el mismo · Distrito: el asignado por el instructor', pregunta: '¿Qué turno tiene más registros?' },
+  { id: 10, titulo: 'Emergencias y clasificación de atención', grafica: 'Registros por tipo de atención', filtro: 'Periodo: el mismo · Distrito: el asignado por el instructor', pregunta: '¿Qué tipo de atención tiene más registros?' },
 ]
 ---
 
-<Layout title="Actividades de Metabase · Día 3" description="Diez actividades de análisis con los tableros de Metabase del Día 3.">
-  <article class="mx-auto max-w-6xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
-    <header class="max-w-4xl">
+<Layout title="Tres actividades guiadas de Metabase · Día 3" description="Tres actividades sencillas con los tableros de Metabase de Javier: territorio, turnos y emergencias.">
+  <article class="mx-auto max-w-5xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
+    <header class="max-w-3xl">
       <div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
         <a class="link link-hover" href={href('/participante/dia-3/')}>Material del Día 3</a>
         <span aria-hidden="true">/</span>
         <span aria-current="page">Metabase</span>
       </div>
-      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Actividades con los tableros de Metabase</h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-base-content/75 md:text-lg">La clase recorre diez actividades, una por tablero. Cada equipo resuelve su ruta asignada y comparte sus lecturas con el grupo; así se revisan los diez tableros durante la sesión.</p>
-      <div class="mt-7 flex flex-wrap gap-3 print:hidden">
-        <a class="btn btn-secondary" href={coleccion} target="_blank" rel="noopener noreferrer"><span class="icon-[tabler--external-link] size-5" aria-hidden="true"></span>Abrir colección en Metabase</a>
-        <a class="btn btn-outline" href="#actividades">Ir a las diez actividades</a>
-      </div>
-      <p class="mt-4 text-sm text-base-content/70">El acceso requiere una cuenta individual asignada para la clase y permiso de lectura. Inicia sesión si Metabase te lo pide. La colección se abre en otra pestaña; deja esta guía a la mano.</p>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Tres actividades guiadas en Metabase</h1>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-base-content/75 md:text-lg">Abre una gráfica en cada tablero. Responde una pregunta con una frase breve. El instructor hará la primera demostración en pantalla.</p>
+      <a class="btn btn-secondary mt-7 print:hidden" href="#actividades"><span class="icon-[tabler--arrow-down] size-5" aria-hidden="true"></span>Empezar las actividades</a>
     </header>
 
-    <div class="mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(15rem,1fr)]">
-      <section id="ruta" class="scroll-mt-24 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8 sm:py-8" aria-labelledby="ruta-titulo">
-        <h2 id="ruta-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Método para las diez actividades</h2>
-        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/80">Sigue el mismo método en los tableros asignados a tu equipo para que sus respuestas se puedan revisar y comparar.</p>
-        <ol class="mt-7 space-y-0">
-          {ruta.map((paso, i) => (
-            <li class="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-4 border-t border-white/20 py-5 first:border-0 first:pt-0 last:pb-0">
-              <span class="grid size-9 place-items-center rounded-full bg-white/15 font-display text-sm font-semibold" aria-hidden="true">{i + 1}</span>
-              <div>
-                <h3 class="font-display text-lg font-semibold">{paso.titulo}</h3>
-                <p class="mt-1 max-w-2xl text-sm leading-relaxed text-white/85">{paso.texto}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </section>
+    <section class="mt-10 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8 sm:py-8" aria-labelledby="antes-titulo">
+      <h2 id="antes-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Antes de empezar</h2>
+      <ol class="mt-5 space-y-3 text-sm leading-relaxed text-white/90 sm:text-base">
+        <li><strong>1.</strong> Entra con la cuenta que te dio el instructor. Si no puedes abrir un tablero, avísale.</li>
+        <li><strong>2.</strong> Usa el <strong>Periodo completo</strong> que indique el instructor. Evita un mes que todavía no termina.</li>
+        <li><strong>3.</strong> Mira el filtro <strong>Distrito</strong> antes de leer cada gráfica. El instructor mostrará cómo dejar la vista de todos los distritos para la primera actividad.</li>
+      </ol>
+      <p class="mt-5 text-sm leading-relaxed text-white/80">Sólo vas a consultar los tableros. No necesitas crear gráficas, descargar datos ni revisar todas las tarjetas.</p>
+    </section>
 
-      <aside class="rounded-2xl bg-base-200 px-5 py-6 sm:px-7" aria-labelledby="antes-titulo">
-        <h2 id="antes-titulo" class="font-display text-xl font-semibold">Antes de empezar</h2>
-        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-base-content/80">
-          <li class="flex gap-2"><span class="icon-[tabler--user-check] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Ten a mano la cuenta que te entregó el instructor. No compartas tu contraseña.</span></li>
-          <li class="flex gap-2"><span class="icon-[tabler--filter] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Verifica Periodo y Distrito cada vez que cambies de tablero. Si un mes sigue en curso, sus datos son parciales.</span></li>
-          <li class="flex gap-2"><span class="icon-[tabler--eye] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Trabaja en modo consulta: no subas archivos, no crees tableros y no exportes datos.</span></li>
-        </ul>
-        <div class="mt-6 border-t border-base-content/15 pt-5">
-          <h3 class="font-display font-semibold">Si no puedes entrar</h3>
-          <p class="mt-2 text-sm leading-relaxed text-base-content/75">Comprueba que abriste el enlace correcto e inicia sesión. Si aparece “sin permiso” o no ves la colección, pide al instructor que revise el acceso de tu cuenta. No intentes usar credenciales de otra persona.</p>
-        </div>
-      </aside>
-    </div>
-
-    <section id="actividades" class="mt-14 scroll-mt-24" aria-labelledby="tableros-titulo">
-      <div class="max-w-3xl">
-        <h2 id="tableros-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Diez tableros, diez actividades</h2>
-        <p class="mt-2 text-base-content/75">Cada equipo abre los tableros de su ruta y registra una respuesta breve por consigna. Después comparte sus hallazgos con la clase; las cifras pueden cambiar con los filtros y las actualizaciones.</p>
-        <p class="mt-3 text-sm font-medium text-base-content/80"><strong>Rutas:</strong> A · tableros 2–3 (territorio y tiempo) · B · 4–6 (personas y hechos) · C · 7–9 (aseguramientos) · D · 10–11 (emergencias y calidad).</p>
-      </div>
-      <ol class="mt-6 grid gap-x-8 lg:grid-cols-2">
-        {dashboards.map((tablero, i) => (
-          <li class="break-inside-avoid border-t border-base-content/15 py-5">
+    <section id="actividades" class="mt-14 scroll-mt-24" aria-labelledby="actividades-titulo">
+      <h2 id="actividades-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Haz estas tres actividades</h2>
+      <p class="mt-2 max-w-2xl text-base-content/75">Puedes trabajar en pareja. El nombre de una gráfica puede variar: si no la encuentras, el instructor te señalará una equivalente.</p>
+      <ol class="mt-7 space-y-5">
+        {actividades.map((actividad, i) => (
+          <li class="rounded-2xl border border-base-content/15 bg-base-100 p-5 sm:p-7">
             <div class="flex items-start gap-4">
-              <span class="w-7 shrink-0 pt-1 font-display text-sm font-semibold tabular-nums text-secondary">{String(i + 1).padStart(2, '0')}</span>
-              <div class="min-w-0">
-                <h3 class="font-display text-lg font-semibold leading-snug">
-                  <a class="group inline-flex items-start gap-1 text-base-content no-underline hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary" href={`https://estadisticas.floresjavier.com/dashboard/${tablero.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${tablero.nombre} en Metabase, en una pestaña nueva`}>
-                    {tablero.nombre}<span class="icon-[tabler--arrow-up-right] mt-0.5 size-5 shrink-0 text-secondary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 print:hidden" aria-hidden="true"></span>
-                  </a>
-                </h3>
-                <p class="mt-2 text-sm leading-relaxed text-base-content/80">{tablero.consigna}</p>
-                <p class="mt-3 text-sm leading-relaxed"><strong class="text-secondary">Producto:</strong> {tablero.producto}</p>
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-base-100 font-display font-semibold" aria-hidden="true">{i + 1}</span>
+              <div class="min-w-0 flex-1">
+                <h3 class="font-display text-xl font-semibold leading-snug">{actividad.titulo}</h3>
+                <p class="mt-2 text-sm text-base-content/75"><strong>Busca una gráfica:</strong> {actividad.grafica}</p>
+                <p class="mt-1 text-sm text-base-content/75"><strong>Filtros:</strong> {actividad.filtro}</p>
+                <p class="mt-4 text-base font-semibold">{actividad.pregunta}</p>
+                <p class="mt-2 text-sm text-base-content/75">Responde en una frase: «En el periodo ___, con Distrito ___, la gráfica muestra más registros en ___».</p>
+                <a class="btn btn-outline btn-sm mt-5 print:hidden" href={`https://estadisticas.floresjavier.com/dashboard/${actividad.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir el tablero ${actividad.titulo} en otra pestaña`}>
+                  Abrir tablero <span class="icon-[tabler--external-link] size-4" aria-hidden="true"></span>
+                </a>
+                <div class="mt-6 border-b border-base-content/35 pb-1 text-sm text-base-content/65 print:mt-8">Mi respuesta:</div>
               </div>
             </div>
           </li>
@@ -97,20 +57,11 @@ const ruta = [
       </ol>
     </section>
 
-    <section class="mt-14 border-t border-base-content/20 pt-10" aria-labelledby="registro-titulo">
-      <div class="max-w-3xl">
-        <h2 id="registro-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Formato de respuesta por actividad</h2>
-        <p class="mt-2 text-base-content/75">Usa estas cuatro líneas en tu libreta para cada producto de tu equipo. También puedes imprimir esta página.</p>
-      </div>
-      <dl class="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
-        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Tablero y vista</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué tablero y qué visualización consultaste?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
-        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Alcance de los datos</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué Periodo y Distrito, unidad y fuente aplican? ¿El mes está completo?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
-        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Hallazgo comprobable</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué muestra la vista? Anota la comparación que hiciste.</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
-        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Límite y comprobación</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué no demuestra y qué dato revisarías antes de usarlo?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
-      </dl>
-      <div class="mt-8 flex flex-wrap gap-3 print:hidden">
-        <a class="btn btn-ghost" href={href('/participante/dia-3/')}>Volver al material del día</a>
-      </div>
+    <section class="mt-10 max-w-3xl rounded-2xl bg-base-200 p-5 sm:p-7" aria-labelledby="cierre-titulo">
+      <h2 id="cierre-titulo" class="font-display text-xl font-semibold">Al terminar</h2>
+      <p class="mt-2 text-sm leading-relaxed text-base-content/80">Lee una de tus tres frases a un compañero. Di qué Periodo y Distrito usaste. La gráfica muestra registros capturados; por sí sola no explica por qué ocurrieron.</p>
+      <p class="mt-3 text-sm leading-relaxed text-base-content/80">La colección de Javier contiene más material que el instructor puede mostrar si queda tiempo. No forma parte de la tarea.</p>
+      <a class="btn btn-secondary mt-5 print:hidden" href={href('/cuestionario/dia-3/')}>Responder repaso de tres preguntas</a>
     </section>
   </article>
 </Layout>

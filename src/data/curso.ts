@@ -10,10 +10,10 @@ export const curso = {
   dirigido:
     'Personal de tecnologías de la información y personal operativo de la Secretaría de Seguridad Pública Municipal.',
   prerrequisito:
-    'Conocimientos básicos de estadística, cartografía y hojas de cálculo. No se requiere experiencia previa en programación.',
+    'Manejo básico de computadora e internet. No se requieren conocimientos previos de estadística, cartografía o programación.',
   herramientas: ['Python con Jupyter', 'Metabase', 'QGIS', 'Asistentes de IA'],
   objetivo:
-    'Que el participante sea capaz de depurar información de práctica, construir un mapa de puntos en QGIS e interpretar tableros institucionales de Metabase para sustentar decisiones, empleando software libre y asistentes de inteligencia artificial bajo criterios de seguridad de la información.',
+    'Que el participante revise datos de práctica, construya un mapa sencillo en QGIS y lea tres gráficas de tableros existentes de Metabase, con acompañamiento paso a paso y cuidado de la información.',
 }
 
 export const enfoque = [
@@ -21,7 +21,7 @@ export const enfoque = [
     icon: 'icon-[tabler--database]',
     titulo: 'Del archivo al análisis',
     texto:
-      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se analizan tableros existentes de Metabase; sus cifras se verifican según su propia fuente y periodo.',
+      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se lee una gráfica de territorio, una de turnos y una de emergencias en Metabase.',
   },
   {
     icon: 'icon-[tabler--sparkles]',
@@ -59,8 +59,8 @@ export const sesiones = [
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'Análisis de tableros existentes en Metabase',
-    entregable: 'Ficha de análisis de un tablero existente: fuente, periodo, filtros, hallazgo y recomendación.',
+    titulo: 'Metabase: tres actividades guiadas',
+    entregable: 'Tres respuestas breves sobre territorio, turnos y emergencias; cada una indica Periodo y Distrito.',
     disponible: true,
   },
 ]
@@ -127,46 +127,43 @@ export const temas: Tema[] = [
   },
   {
     num: 7,
-    titulo: 'Business Intelligence y lectura de Metabase',
+    titulo: 'Primeros pasos con Metabase',
     horas: 4,
     contenido:
-      'Conceptos de Business Intelligence, navegación por la colección de diez tableros existentes y lectura de sus preguntas, fuentes, periodos y filtros.',
-    ia: 'Ayuda para formular preguntas de análisis sin pegar datos ni resultados; verificación en la fuente autorizada.',
-    producto: 'Ficha de lectura de un tablero con fuente, periodo, filtros y hallazgo verificable.',
+      'Acceso guiado a Metabase y lectura de una gráfica sencilla en cada uno de tres tableros: Territorio, Ritmo temporal y Emergencias.',
+    producto: 'Primera respuesta breve con Periodo y Distrito visibles.',
   },
   {
     num: 8,
-    titulo: 'Interpretación de visualizaciones en Metabase',
+    titulo: 'Leer tres gráficas de Metabase',
     horas: 4,
     contenido:
-      'Lectura de gráficas, tablas y series temporales de los tableros disponibles. Uso de filtros visibles y comparación solo cuando fuente, periodo y definición son compatibles.',
-    ia: 'Redacción de una explicación clara del indicador, sin compartir cifras ni capturas institucionales con el asistente.',
-    producto: 'Interpretación de un tablero existente con sus límites y una pregunta para el mando.',
+      'Lectura guiada de gráficas por distrito, turno y tipo de atención. Identificación de la barra mayor sin atribuir causas.',
+    producto: 'Tres respuestas breves, una por gráfica.',
   },
   {
     num: 9,
-    titulo: 'Verificación y comparación de tableros en Metabase',
+    titulo: 'Revisar Periodo y Distrito',
     horas: 4,
     contenido:
-      'Comparación de preguntas y vistas de los tableros existentes solo cuando coinciden fuente, periodo, filtros, unidad y definición. Identificación de vacíos de captura, valores atípicos y límites del indicador.',
-    ia: 'Apoyo para formular preguntas de control sin pegar datos operativos, cifras ni capturas del tablero.',
-    producto: 'Ficha de verificación y comparación de dos vistas compatibles de Metabase.',
+      'Comprobación de los filtros Periodo y Distrito antes de leer cada gráfica. Uso de un periodo completo indicado por el instructor.',
+    producto: 'Tres frases con los filtros utilizados.',
   },
   {
     num: 10,
-    titulo: 'Presentación de hallazgos de Metabase',
+    titulo: 'Compartir una respuesta de Metabase',
     horas: 3,
     contenido:
-      'Presentación de un hallazgo de los tableros existentes: fuente, periodo, filtros, definición, control de calidad, límite de interpretación y recomendación operativa. Retroalimentación grupal y responsabilidad sobre el resultado.',
-    producto: 'Análisis de Metabase presentado ante el grupo.',
+      'Lectura en voz alta de una de las tres respuestas. El participante nombra el Periodo y Distrito y distingue lo observado en la gráfica de una explicación de las causas.',
+    producto: 'Una respuesta breve presentada al grupo.',
   },
 ]
 
 export const productos = [
   {
     icon: 'icon-[tabler--layout-dashboard]',
-    titulo: 'Lectura verificada de Metabase',
-    texto: 'Describe la fuente, el periodo y los filtros de un tablero existente antes de sacar conclusiones.',
+    titulo: 'Tres lecturas de Metabase',
+    texto: 'Responde tres preguntas breves e indica el Periodo y Distrito usados.',
   },
   {
     icon: 'icon-[tabler--zoom-exclamation]',
@@ -180,8 +177,8 @@ export const productos = [
   },
   {
     icon: 'icon-[tabler--file-analytics]',
-    titulo: 'Recomendación sustentada',
-    texto: 'Expone un hallazgo de Metabase, sus límites y una decisión operativa justificable.',
+    titulo: 'Respuesta clara al grupo',
+    texto: 'Lee una frase y explica qué muestra la gráfica, sin atribuir causas.',
   },
 ]
 
@@ -196,7 +193,7 @@ export const requerimientos = [
 
 export const acreditacion = [
   { icon: 'icon-[tabler--user-check]', texto: 'Asistencia mínima del 80% de las sesiones.' },
-  { icon: 'icon-[tabler--presentation]', texto: 'Entrega de la ficha de análisis de Metabase del Día 3.' },
+  { icon: 'icon-[tabler--presentation]', texto: 'Entrega de tres respuestas breves de Metabase del Día 3.' },
   { icon: 'icon-[tabler--checklist]', texto: 'Puntaje mínimo de 6 sobre 10 en la rúbrica del producto final.' },
   { icon: 'icon-[tabler--shield-lock]', texto: 'Cero incidencias en el manejo seguro de la información.' },
 ]
