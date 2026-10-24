@@ -44,7 +44,7 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
         </div>
         <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">BI básico: de la pregunta al tablero</h1>
         <p class="mt-5 text-lg leading-relaxed text-base-content/80"><strong>BI significa inteligencia de negocios:</strong> convertir datos en respuestas útiles. En este curso lo aplicamos a información institucional: hacer una pregunta, comprobar las cifras y explicar qué nos dicen.</p>
-        <p class="mt-4 leading-relaxed text-base-content/75">Tienes <strong>30 minutos</strong>. Trabaja en pareja con el tablero y las tres gráficas que ya creaste en <a class="link font-semibold text-secondary" href={href('/metabase/')}>IA y Metabase</a>. Elige una para revisarla a fondo y mejorarla.</p>
+        <p class="mt-4 leading-relaxed text-base-content/75">Tienes <strong>30 minutos</strong>. Trabaja en pareja con las tres gráficas que ya creaste y guardaste en <a class="link font-semibold text-secondary" href={href('/metabase/')}>IA y Metabase</a>. Elige una para revisarla a fondo y mejorarla.</p>
       </header>
 
       <div class="mt-7 rounded-xl bg-primary p-5 text-primary-content sm:p-6">
@@ -62,7 +62,7 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
       <section id="elegir" class="mt-12 scroll-mt-28" aria-labelledby="elegir-titulo">
         <p class="text-sm font-semibold text-secondary">Minutos 0–5 · En pareja</p>
         <h2 id="elegir-titulo" class="mt-2 font-display text-2xl font-semibold md:text-3xl">1. Elige una gráfica y su pregunta</h2>
-        <p class="mt-3 max-w-3xl leading-relaxed text-base-content/80">Lean estos cinco conceptos breves. Después abran su tablero, elijan una de las tres gráficas y anoten en la ficha qué pregunta responde y qué columnas necesita.</p>
+        <p class="mt-3 max-w-3xl leading-relaxed text-base-content/80">Lean estos cinco conceptos breves. Después abran una de sus tres gráficas guardadas y anoten en la ficha qué pregunta responde y qué columnas necesita.</p>
         <dl class="mt-5 divide-y divide-base-content/15 border-y border-base-content/15">
           {conceptos.map((concepto) => (
             <div class="py-4 sm:grid sm:grid-cols-[13rem_1fr] sm:gap-6">
@@ -75,7 +75,7 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
       </section>
 
       <section id="comprobar" class="mt-12 scroll-mt-28" aria-labelledby="comprobar-titulo">
-        <p class="text-sm font-semibold text-secondary">Minutos 5–15 · En su tablero</p>
+        <p class="text-sm font-semibold text-secondary">Minutos 5–15 · En su gráfica</p>
         <h2 id="comprobar-titulo" class="mt-2 font-display text-2xl font-semibold md:text-3xl">2. Comprueba y corrige</h2>
         <p class="mt-3 max-w-3xl leading-relaxed text-base-content/80">Revisen la gráfica elegida contra la tabla ficticia y las cifras de referencia. Corrijan lo necesario y guarden el cambio.</p>
 
@@ -84,7 +84,7 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
           <li><strong>Operación:</strong> comprueben las columnas, el grupo y el cálculo. Para prácticas se usa conteo; para tiempo medio, promedio. La columna id identifica cada registro: no se suma como medida.</li>
           <li><strong>Unidad y cantidad:</strong> indiquen «prácticas» o «minutos», según corresponda, y cuántas filas entran en el cálculo (n). Aquí n cuenta prácticas, no personas del curso. Revisen si hay algún filtro activo.</li>
           <li><strong>Resultado:</strong> cotejen cada cifra con la referencia de abajo. Si difiere, revisen la tabla, el filtro y la operación antes de aceptar la respuesta.</li>
-          <li><strong>Contexto:</strong> escriban en la descripción de la gráfica o en un texto del tablero: «Fuente: practica_ia_metabase. Datos ficticios de 12 prácticas, del 1 al 12 de octubre de 2026. Uso didáctico».</li>
+          <li><strong>Contexto:</strong> escriban en la descripción de la gráfica o en la ficha: «Fuente: practica_ia_metabase. Datos ficticios de 12 prácticas, del 1 al 12 de octubre de 2026. Uso didáctico».</li>
         </ol>
 
         <h3 class="mt-8 font-display text-lg font-semibold">Referencia para tus tres gráficas</h3>
@@ -110,7 +110,7 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
         <p class="text-sm font-semibold text-secondary">Minutos 15–25 · Con otra pareja</p>
         <h2 id="intercambiar-titulo" class="mt-2 font-display text-2xl font-semibold md:text-3xl">3. Intercambia y explica</h2>
         <ol class="mt-5 list-decimal space-y-3 ps-5 leading-relaxed text-base-content/80">
-          <li>Compartan con otra pareja el <strong>enlace interno de Metabase</strong> a su tablero. Cada persona entra con su propia cuenta; conserven sus contraseñas.</li>
+          <li>Compartan con otra pareja el <strong>enlace interno de Metabase</strong> a la gráfica guardada que eligieron. Cada persona entra con su propia cuenta; conserven sus contraseñas.</li>
           <li>Usen cinco minutos para revisar el trabajo de la otra pareja y cinco para recibir su revisión. Si el enlace no abre, pidan apoyo al instructor y revisen juntos en pantalla.</li>
           <li>Quien revisa comprueba: ¿la pregunta coincide con el título?, ¿el conteo o promedio es correcto?, ¿se ve la unidad, el número de registros y que son datos ficticios?</li>
           <li>Den <strong>dos aciertos y una duda concreta</strong>. Por ejemplo: «El título es claro; el total coincide con 12. ¿Dónde dice que los tiempos son ficticios?».</li>
@@ -125,9 +125,10 @@ const ficha = ['Pregunta', 'Tabla y columnas', 'Medida: conteo o promedio; unida
           <li>Escriban una conclusión breve con el dato: «En estas 12 prácticas ficticias, ___».</li>
           <li>Añadan lo que la gráfica <strong>no permite afirmar</strong>. Estos datos no prueban ahorro real, mejor desempeño policial ni resultados de toda una institución.</li>
           <li>Sinteticen su corrección en una frase: «Cambiamos ___ porque ___». Si no hubo cambio, expliquen qué comprobaron.</li>
-          <li>Guarden el tablero y compartan con el instructor su enlace interno y la ficha completa.</li>
+          <li>Guarden los cambios de la gráfica y compartan con el instructor su enlace interno y la ficha completa.</li>
         </ol>
         <p class="mt-5 rounded-xl bg-base-200 p-5 text-sm leading-relaxed"><strong>Ejemplo:</strong> «En las prácticas ficticias de Redactar borrador, el promedio es de 14 minutos sin IA y 8 con IA. Esto describe la tabla de enseñanza; no demuestra un ahorro real. Cambiamos la suma por el promedio para responder la pregunta sobre tiempo medio».</p>
+        <p class="mt-4 text-sm leading-relaxed text-base-content/75">Después de este laboratorio integrarán sus tres gráficas en el mismo tablero de la práctica de Metabase.</p>
       </section>
     </div>
 
