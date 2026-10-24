@@ -22,6 +22,7 @@ export const materiales = {
   datos: { label: 'Archivos del curso', path: '/datos/', icon: 'icon-[tabler--database]' },
   'datos-qgis': { label: 'Archivos para QGIS · Día 2', path: '/datos/', icon: 'icon-[tabler--files]' },
   'datos-ia': { label: 'CSV sintético · Práctica IA', path: '/datos/practica_ia_metabase.csv', icon: 'icon-[tabler--file-spreadsheet]' },
+  'bi-basico': { label: 'BI desde cero · Laboratorio guiado', path: '/practica/bi-basico/', icon: 'icon-[tabler--school]' },
   'graficas-cientificas': { label: 'Qué gráfica elegir · Cinco lecciones', path: '/graficas-cientificas/', icon: 'icon-[tabler--chart-scatter]' },
   'bonus-tasas': { label: 'Bonus · Conteos y tasas', path: '/graficas-cientificas/#bonus', icon: 'icon-[tabler--chart-bar]' },
   metabase: { label: 'IA y Metabase · Tres trabajos', path: '/metabase/', icon: 'icon-[tabler--layout-dashboard]' },

@@ -8,13 +8,13 @@ export const dia3: Deck = {
   title: 'IA y Metabase: tu primer tablero',
   subtitle: 'Día 3',
   schedule: '08:00 a 12:00',
-  objective: 'Que cada equipo elija una gráfica según la pregunta y el tipo de dato, y use un asistente de IA dentro de Metabase para crear, comprobar y reunir tres gráficas simuladas en un tablero sobre uso responsable de IA.',
+  objective: 'Que cada equipo explique cómo una pregunta se convierte en una respuesta con datos, elija una gráfica adecuada y use un asistente de IA dentro de Metabase para crear, comprobar y reunir tres gráficas simuladas en un tablero sobre uso responsable de IA.',
   blocks: [
     { id: 'Apertura', label: 'Apertura', range: '08:00' },
-    { id: '1', label: 'IA y elección de una gráfica', range: '08:00 – 08:45' },
-    { id: '2', label: 'Trabajos 1 y 2: tareas y tiempo', range: '08:45 – 10:00' },
+    { id: '1', label: 'BI desde cero, IA y gráficas', range: '08:00 – 08:50' },
+    { id: '2', label: 'Trabajos 1 y 2: tareas y tiempo', range: '08:50 – 10:00' },
     { id: 'Receso', label: 'Receso técnico', range: '10:00 – 10:15' },
-    { id: '3', label: 'Trabajo 3: revisión humana', range: '10:15 – 11:00' },
+    { id: '3', label: 'Trabajo 3 y laboratorio de BI', range: '10:15 – 11:00' },
     { id: '4', label: 'Armar, comprobar y presentar', range: '11:00 – 12:00' },
   ],
   slides: [
@@ -31,11 +31,66 @@ export const dia3: Deck = {
       kicker: 'Qué se logra hoy',
       title: 'Al terminar entregará un tablero sencillo',
       bullets: ['Trabajo 1: prácticas por tarea', 'Trabajo 2: tiempo promedio de práctica', 'Trabajo 3: revisión humana'],
-      material: ['metabase', 'datos-ia'],
+      material: ['bi-basico', 'metabase', 'datos-ia'],
       notes: 'Cada trabajo tiene una actividad y produce una gráfica. Las tres se reúnen en un solo dashboard. El conjunto tiene doce registros ficticios y no contiene información policial.',
     },
     {
-      block: '1', time: '08:10', layout: 'cards',
+      block: '1', time: '08:10', layout: 'flow',
+      title: 'BI: pasar de datos a una respuesta',
+      lead: 'BI significa inteligencia de negocios: usar datos para responder una pregunta y apoyar una decisión.',
+      steps: [
+        { label: 'Datos', detail: '12 prácticas ficticias' },
+        { label: 'Pregunta', detail: '¿Cuántas hay por tarea?' },
+        { label: 'Gráfica', detail: 'Barras que cuentan prácticas' },
+        { label: 'Respuesta', detail: 'Hay 5, 4 y 3 por tarea' },
+      ],
+      material: ['bi-basico'],
+      notes: 'Pronuncie primero la idea en español. No necesita memorizar las siglas. Aquí BI es un proceso sencillo: partir de registros, hacer una pregunta, elegir una representación y comprobar una respuesta. Pida que una pareja diga qué quiere saber antes de mencionar botones o gráficas.',
+    },
+    {
+      block: '1', time: '08:13', layout: 'table',
+      title: 'Cada herramienta ayuda en un paso',
+      table: { head: ['Herramienta', 'Para qué la usamos en el curso'], rows: [
+        ['Hoja de cálculo', 'Revisar filas y limpiar datos'],
+        ['QGIS', 'Ubicar y filtrar información en un mapa'],
+        ['Metabase', 'Resumir datos y reunir gráficas'],
+        ['Asistente de IA', 'Ayudar a pedir y explicar; usted comprueba'],
+      ] },
+      material: ['bi-basico'],
+      notes: 'Use las herramientas como referencias conocidas, sin pedir instalar otra aplicación. Explique que una hoja de cálculo, un mapa y un tablero muestran aspectos distintos. El asistente de IA es apoyo: no sustituye la revisión de datos ni la decisión de la persona.',
+    },
+    {
+      block: '1', time: '08:16', layout: 'table',
+      title: 'Una fila es una práctica; una columna, una característica',
+      lead: 'Una variable es lo que anotamos o medimos: tarea, minutos o revisión.',
+      table: { head: ['Tarea', 'Minutos con IA', 'Revisado'], rows: [
+        ['Redactar borrador', '6', 'Sí'],
+        ['Redactar borrador', '7', 'Sí'],
+      ] },
+      material: ['bi-basico', 'datos-ia'],
+      notes: 'Señale una fila completa y diga: este registro corresponde a una práctica ficticia. Después señale la columna de minutos y diga qué se mide y en qué unidad. Las dos filas son un recorte del CSV; la tabla completa tiene doce registros. Pida al grupo que distinga una tarea, una cantidad de minutos y un estado Sí o No.',
+    },
+    {
+      block: '1', time: '08:19', layout: 'compare',
+      title: 'Primero la pregunta; después la operación',
+      left: { tone: 'neutral', label: '¿Cuántas prácticas hay?', items: ['Cuente las filas de cada tarea', 'La unidad es prácticas', 'Resultado: 5, 4 y 3'] },
+      right: { label: '¿Cuánto tardan en promedio?', items: ['Sume minutos y divida entre prácticas', 'La unidad es minutos por práctica', 'Use Promedio; compruebe los valores'] },
+      material: ['bi-basico'],
+      notes: 'Explique el promedio con el reparto del total entre el número de prácticas. Contar filas y sumar minutos responden preguntas diferentes. Pida que una pareja elija la operación para cada pregunta. No introduzca fórmulas, SQL ni consultas nuevas.',
+    },
+    {
+      block: '1', time: '08:22', layout: 'cards',
+      title: 'Un tablero reúne tres respuestas',
+      cards: [
+        { icon: 'icon-[tabler--chart-bar]', title: 'Tareas', text: '¿Cuántas prácticas hay por tarea?' },
+        { icon: 'icon-[tabler--clock]', title: 'Tiempo', text: '¿Cuántos minutos duran en promedio?' },
+        { icon: 'icon-[tabler--user-check]', title: 'Revisión', text: '¿Cuántas fueron revisadas?' },
+      ],
+      material: ['bi-basico', 'metabase'],
+      notes: 'Un tablero o dashboard es una pantalla que reúne gráficas relacionadas. Una gráfica responde una pregunta. Hoy las tres respuestas salen de la misma tabla ficticia y se guardan juntas; no hacen falta más productos ni programación. Pida al grupo que señale cuál respuesta contiene minutos y cuáles contienen conteos.',
+    },
+    {
+      block: '1', time: '08:25', layout: 'cards',
       title: 'La IA ayuda a preparar; usted comprueba',
       cards: [
         { icon: 'icon-[tabler--message-chatbot]', title: 'Asistente de IA', text: 'Pida la gráfica con palabras comunes.' },
@@ -45,7 +100,7 @@ export const dia3: Deck = {
       notes: 'Las herramientas de IA autorizadas pueden ayudar con borradores, instrucciones y explicaciones y reducir pasos técnicos; no garantice ahorro de tiempo. Hoy se usa el asistente habilitado por el instructor dentro de Metabase.',
     },
     {
-      block: '1', time: '08:15', layout: 'compare',
+      block: '1', time: '08:28', layout: 'compare',
       title: 'Cuidar la información es parte del trabajo',
       left: { tone: 'neutral', label: 'Datos de esta clase', items: ['12 registros inventados', 'Una tabla de práctica', 'Sin nombres ni folios policiales'] },
       right: { label: 'Acceso y revisión', items: ['Cuenta individual y colección de práctica', 'Permisos configurados por el responsable', 'Resultado revisado antes de compartir'] },
@@ -54,7 +109,7 @@ export const dia3: Deck = {
     },
     ...leccionesGraficas.map((leccion, index) => ({
       block: '1',
-      time: ['08:20', '08:24', '08:28', '08:32', '08:36'][index],
+      time: ['08:31', '08:34', '08:37', '08:40', '08:43'][index],
       layout: 'chart' as const,
       title: [
         '1. Barras · comparar categorías',
@@ -69,7 +124,7 @@ export const dia3: Deck = {
       notes: leccion.notas,
     })),
     {
-      block: '1', time: '08:40', layout: 'flow',
+      block: '1', time: '08:46', layout: 'flow',
       title: 'Prepare su pantalla con el instructor',
       steps: [
         { label: 'Entrar', detail: 'Cuenta individual en Metabase de Javier' },
@@ -81,7 +136,7 @@ export const dia3: Deck = {
       notes: 'La tabla debe estar cargada antes de la sesión, con campos numéricos correctos para los tiempos. Los alumnos necesitan acceso a datos, creación de preguntas, guardado en colección y acceso a IA. Si falta una opción, revise la cuenta o demuestre desde el equipo del instructor. Los nombres de botones dependen del idioma y versión.',
     },
     {
-      block: '2', time: '08:45', layout: 'goal',
+      block: '2', time: '08:50', layout: 'goal',
       title: 'Trabajo 1 · ¿Para qué usamos la IA?',
       bullets: ['Abra la instrucción 1 de la guía', 'Pida contar registros por tarea', 'Revise la gráfica de barras', 'Guarde «01 · Prácticas por tarea»'],
       material: ['metabase'], ruleReminder: true,
@@ -110,12 +165,13 @@ export const dia3: Deck = {
       notes: 'Circule para comprobar los dos campos numéricos y la agrupación por tarea. Si la IA falla, muestre el editor visual con dos promedios y agrupación por tarea. No pida más gráficas.',
     },
     {
-      block: '2', time: '09:50', layout: 'table',
+      block: '2', time: '09:45', layout: 'table',
       title: 'Los promedios de la práctica deben coincidir',
+      lead: 'Hasta las 10:00: compruebe, escriba una comparación y guarde.',
       table: { head: ['Tarea', 'Sin IA', 'Con IA'], rows: [
         ['Redactar borrador', '14 min', '8 min'], ['Resumir texto', '18 min', '9 min'], ['Revisar tabla', '20 min', '12 min'],
       ] },
-      notes: 'Esta es la clave del conjunto sintético. Explique que la tabla muestra un ejemplo preparado, no resultados de una evaluación de productividad. Revise la operación si aparecen sumas en lugar de promedios.',
+      notes: 'Use los quince minutos completos: de 09:45 a 09:50 cada pareja coteja campos, operación y valores con esta clave; de 09:50 a 09:55 escribe una comparación con su unidad y la frase datos simulados; de 09:55 a 10:00 guarda y comprueba que la gráfica vuelve a abrir. El instructor circula y acompaña a las parejas pendientes. La tabla es un ejemplo preparado, no una evaluación de productividad; revise si aparecen sumas en lugar de promedios.',
     },
     {
       block: 'Receso', time: '10:00', layout: 'break',
@@ -131,12 +187,40 @@ export const dia3: Deck = {
       notes: 'La actividad cuenta prácticas por su estado de revisión; no califica al personal ni garantiza ausencia de errores. Si necesita el editor visual, use Conteo de filas agrupado por revisado.',
     },
     {
-      block: '3', time: '10:40', layout: 'chart',
+      block: '3', time: '10:25', layout: 'chart',
       title: 'Revisadas y pendientes suman doce',
       chart: { kind: 'bar', caption: 'Estado de revisión de 12 prácticas ficticias', data: [
         { label: 'Sí', value: 9 }, { label: 'No', value: 3 },
       ] },
-      notes: 'Verifique nueve Sí y tres No. Una respuesta revisada todavía puede contener errores: el estado sólo documenta que una persona la revisó. Complete el guardado antes de armar el dashboard.',
+      notes: 'Verifique nueve Sí y tres No. Una respuesta revisada todavía puede contener errores: el estado sólo documenta que una persona la revisó. Dé hasta las 10:30 para comprobar categorías, corregir y guardar la tercera gráfica antes de comenzar el laboratorio.',
+    },
+    {
+      block: '3', time: '10:30', layout: 'timer', minutes: 5,
+      title: 'Laboratorio 1 · Diga qué quiere responder',
+      bullets: ['Elija una de sus tres gráficas guardadas', 'Escriba una pregunta que esa gráfica responda', 'Diga si cuenta prácticas o resume minutos'],
+      material: ['bi-basico', 'metabase'],
+      notes: 'Son cinco minutos de trabajo en parejas. Una persona formula la pregunta y la otra señala qué parte de su gráfica la responde; después intercambian funciones. Reutilice una de las tres gráficas existentes, sin crear una cuarta ni otro tablero. El docente ayuda a convertir frases vagas en preguntas concretas.',
+    },
+    {
+      block: '3', time: '10:35', layout: 'timer', minutes: 10,
+      title: 'Laboratorio 2 · Corrija y compruebe su gráfica',
+      bullets: ['Ponga un título que responda a su pregunta', 'Revise operación, unidad y n = 12 prácticas', 'Compare sus cifras con la clave de la guía'],
+      material: ['bi-basico', 'metabase'],
+      notes: 'Durante diez minutos cada pareja corrige una de las gráficas que ya tiene. Compruebe Conteo de filas para tareas 5/4/3 o revisión 9/3; si elige tiempo, Promedio por tarea: sin IA 14/18/20 y con IA 8/9/12 minutos. n = 12 es el total de prácticas; los grupos de tarea contienen 5, 4 y 3. Use un título claro y la unidad adecuada, guarde y vuelva a abrir. El instructor muestra un ejemplo y luego circula; no solicita nuevas consultas.',
+    },
+    {
+      block: '3', time: '10:45', layout: 'timer', minutes: 10,
+      title: 'Laboratorio 3 · Otra pareja revisa su respuesta',
+      bullets: ['Comparta un enlace interno a su gráfica guardada', 'La otra pareja revisa pregunta, cifra y unidad', 'Anote una mejora y aplíquela sin compartir cuentas'],
+      material: ['bi-basico', 'metabase'], ruleReminder: true,
+      notes: 'Trabaje diez minutos con la pareja vecina. Comparta sólo el enlace interno a una pregunta guardada en la colección de práctica; cada persona usa su cuenta. Si el enlace no abre, el instructor revisa el acceso configurado o permite mostrar la pantalla: no cambie permisos ni cree enlaces públicos. Dé cuatro minutos a la primera revisión, cuatro a la segunda y dos para aplicar una mejora. Se revisan las gráficas existentes, no se agrega un producto.',
+    },
+    {
+      block: '3', time: '10:55', layout: 'timer', minutes: 5,
+      title: 'Laboratorio 4 · Escriba una conclusión y un límite',
+      bullets: ['Complete: «En estas 12 prácticas simuladas…»', 'Nombre una cifra y su unidad', 'Añada: «Estos datos no permiten afirmar…»'],
+      material: ['bi-basico', 'metabase'],
+      notes: 'Use cinco minutos para escribir dos frases debajo de la pregunta de la pareja. Ejemplo de conclusión: en estas doce prácticas simuladas, cinco corresponden a redactar borradores. Límite: estos datos inventados no permiten afirmar cuánto tiempo ahorra realmente la IA. La conclusión debe coincidir con la gráfica elegida. Conserve ambas frases para explicar el tablero a las 11:45; no se pide un cuarto trabajo.',
     },
     {
       block: '4', time: '11:00', layout: 'flow',

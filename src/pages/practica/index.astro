@@ -4,7 +4,8 @@ import { href } from '../../lib/site'
 import { cuestionariosPractica } from '../../data/cuestionarios-practica'
 
 const actividades = [
-  { ruta: '/graficas-cientificas/', icon: 'icon-[tabler--chart-scatter]', titulo: 'Qué gráfica elegir', texto: 'Cinco lecciones científicas con figuras: barras, líneas, histograma, dispersión y caja con puntos.', min: '20 min' },
+  { ruta: '/practica/bi-basico/', icon: 'icon-[tabler--school]', titulo: 'BI desde cero · Día 3', texto: 'De una pregunta a una respuesta: filas, columnas, conteo, promedio y un laboratorio para revisar sus tres gráficas.', min: '30 min de práctica' },
+  { ruta: '/graficas-cientificas/', icon: 'icon-[tabler--chart-scatter]', titulo: 'Qué gráfica elegir', texto: 'Cinco lecciones científicas con figuras: barras, líneas, histograma, dispersión y caja con puntos.', min: '15 min' },
   { ruta: '/practica/regla-de-oro/', icon: 'icon-[tabler--shield-question]', titulo: '¿Se puede pegar?', texto: 'Diez casos para entrenar la regla de oro con asistentes de IA.', min: '5 min' },
   { ruta: '/practica/prompts/', icon: 'icon-[tabler--message-chatbot]', titulo: 'Prompts para IA', texto: 'Plantillas para copiar: análisis exploratorio (EDA), limpieza y gráficas.', min: 'Consulta' },
   { ruta: '/practica/detecta-errores/', icon: 'icon-[tabler--zoom-exclamation]', titulo: 'Detecte las capturas inconsistentes', texto: 'Una tabla ficticia con registros defectuosos. Marque los que no pasarían una revisión.', min: '10 min' },
@@ -25,7 +26,7 @@ const actividades = [
       <div>
         <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Actividad del Día 3</p>
         <h2 id="metabase-dia-3" class="mt-1 text-xl font-semibold">Cree un tablero con IA y Metabase</h2>
-        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Tres trabajos con datos simulados: tareas, tiempo y revisión humana. Cada actividad crea una gráfica para el tablero final, con una comprobación sencilla.</p>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Empiece desde cero: pregunta, datos, gráfica y respuesta. Cree tres gráficas con datos simulados y dedique 30 minutos de laboratorio a comprobarlas con otra pareja antes de reunirlas en un tablero.</p>
       </div>
       <a href={href('/metabase/')} class="btn btn-secondary mt-4 w-full shrink-0 justify-center sm:mt-0 sm:w-auto"><span class="icon-[tabler--layout-dashboard] size-5" aria-hidden="true"></span>Abrir guía de Metabase</a>
     </section>
