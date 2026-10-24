@@ -4,27 +4,26 @@ import { href } from '../lib/site'
 
 const coleccion = 'https://estadisticas.floresjavier.com/collection/5'
 const dashboards = [
-  { id: 2, nombre: 'Territorio y concentración de eventos' },
-  { id: 3, nombre: 'Ritmo temporal y turnos' },
-  { id: 4, nombre: 'Detenciones y perfil registrado' },
-  { id: 5, nombre: 'Víctimas y atención declarada' },
-  { id: 6, nombre: 'Clasificación de hechos y faltas' },
-  { id: 7, nombre: 'Armas y municiones registradas' },
-  { id: 8, nombre: 'Vehículos y motivos de aseguramiento' },
-  { id: 9, nombre: 'Sustancias y objetos asegurados' },
-  { id: 10, nombre: 'Emergencias y clasificación de atención' },
-  { id: 11, nombre: 'Calidad de captura y cobertura' },
+  { id: 2, nombre: 'Territorio y concentración de eventos', consigna: 'Mantén el mismo Periodo y alterna entre dos Distritos. Describe una diferencia territorial visible sin atribuirle una causa.', producto: 'Una comparación con Periodo, Distritos y límite de la interpretación.' },
+  { id: 3, nombre: 'Ritmo temporal y turnos', consigna: 'Fija un Distrito y compara dos Periodos en una vista temporal o por turno. Comprueba si el periodo más reciente está completo.', producto: 'Una frase comparativa que advierta cualquier mes parcial.' },
+  { id: 4, nombre: 'Detenciones y perfil registrado', consigna: 'Elige una vista de detenciones o perfil registrado. Compara dos Distritos con el mismo Periodo y revisa exactamente qué característica fue capturada.', producto: 'Una diferencia observada y un dato que haría falta para explicarla.' },
+  { id: 5, nombre: 'Víctimas y atención declarada', consigna: 'Revisa una vista de víctimas o atención declarada. Distingue lo que consta en el registro de lo que necesitaría confirmación adicional.', producto: 'Una observación y una pregunta de seguimiento.' },
+  { id: 6, nombre: 'Clasificación de hechos y faltas', consigna: 'Selecciona dos categorías visibles y compara su registro bajo el mismo Periodo y Distrito. Consulta cómo se define cada categoría antes de compararlas.', producto: 'Una comparación que nombre las categorías y su definición o una duda pendiente.' },
+  { id: 7, nombre: 'Armas y municiones registradas', consigna: 'Examina una vista de armas o municiones. Comprueba si la unidad presentada es registro, pieza u otra medida antes de interpretar el conteo.', producto: 'Indicador, unidad y una cautela para no confundir objetos con eventos.' },
+  { id: 8, nombre: 'Vehículos y motivos de aseguramiento', consigna: 'Compara un motivo visible en dos Distritos con el mismo Periodo. Revisa si las categorías pueden solaparse antes de sumar sus valores.', producto: 'La comparación y la condición que tendría que cumplirse para sumar.' },
+  { id: 9, nombre: 'Sustancias y objetos asegurados', consigna: 'Elige una vista de sustancias u objetos y cambia solo el Periodo. Identifica si estás comparando conteos, cantidades u otra unidad.', producto: 'Una observación con su unidad y una limitación.' },
+  { id: 10, nombre: 'Emergencias y clasificación de atención', consigna: 'Compara una clasificación de atención entre dos Distritos. Distingue el registro de atención de un hecho confirmado.', producto: 'Una diferencia observada y una frase sobre lo que no demuestra.' },
+  { id: 11, nombre: 'Calidad de captura y cobertura', consigna: 'Localiza una vista de calidad o cobertura. Identifica qué registros podrían faltar y vuelve a revisar una conclusión de las actividades anteriores.', producto: 'La conclusión que matizarías y qué dato comprobarías.' },
 ]
 
 const ruta = [
-  { titulo: 'Entra con tu cuenta', texto: 'Abre la colección y usa la cuenta individual que te asignaron para la clase. Si Metabase muestra la pantalla de acceso, inicia sesión y vuelve a abrir el enlace.' },
-  { titulo: 'Ubica el contexto', texto: 'Elige un tablero. Lee su título y revisa los filtros Periodo y Distrito, la unidad de medida y la fuente o definición disponible antes de interpretar una cifra.' },
-  { titulo: 'Prueba un cambio', texto: 'Cambia un filtro a la vez y observa qué visualizaciones se actualizan. Para comparar tableros, vuelve a seleccionar el mismo Periodo y Distrito en ambos.' },
-  { titulo: 'Explica una decisión', texto: 'Describe qué se ve, qué no se puede concluir con esa vista y qué dato comprobarías antes de llevar el hallazgo a una decisión operativa.' },
+  { titulo: 'Fija el contexto', texto: 'En cada tablero anota Periodo y Distrito, la unidad de medida y la definición disponible. Si no ves la fuente o definición, anótala como pendiente para preguntarla al instructor. Si cambias de tablero, vuelve a fijar los filtros antes de comparar.' },
+  { titulo: 'Resuelve la consigna', texto: 'Haz el cambio indicado en la actividad. Modifica solo un filtro a la vez para distinguir qué cambió en la vista.' },
+  { titulo: 'Entrega una lectura', texto: 'Escribe el producto pedido: observación verificable, alcance de los datos y una limitación o comprobación pendiente.' },
 ]
 ---
 
-<Layout title="Metabase · Guía del Día 3" description="Acceso y recorrido de análisis para los tableros de Metabase del Día 3.">
+<Layout title="Actividades de Metabase · Día 3" description="Diez actividades de análisis con los tableros de Metabase del Día 3.">
   <article class="mx-auto max-w-6xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
     <header class="max-w-4xl">
       <div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
@@ -32,19 +31,19 @@ const ruta = [
         <span aria-hidden="true">/</span>
         <span aria-current="page">Metabase</span>
       </div>
-      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Explora los tableros de Metabase</h1>
-      <p class="mt-5 max-w-3xl text-base leading-relaxed text-base-content/75 md:text-lg">Durante el Día 3 trabajaremos con la colección de tableros del curso. Usa las vistas para formular preguntas, comprobar el alcance de los datos y explicar un hallazgo con sus límites.</p>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Actividades con los tableros de Metabase</h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-base-content/75 md:text-lg">La clase recorre diez actividades, una por tablero. Cada equipo resuelve su ruta asignada y comparte sus lecturas con el grupo; así se revisan los diez tableros durante la sesión.</p>
       <div class="mt-7 flex flex-wrap gap-3 print:hidden">
         <a class="btn btn-secondary" href={coleccion} target="_blank" rel="noopener noreferrer"><span class="icon-[tabler--external-link] size-5" aria-hidden="true"></span>Abrir colección en Metabase</a>
-        <a class="btn btn-outline" href="#ruta">Ver cómo trabajar</a>
+        <a class="btn btn-outline" href="#actividades">Ir a las diez actividades</a>
       </div>
-      <p class="mt-4 text-sm text-base-content/70">El acceso requiere una cuenta individual asignada para la clase y permiso de lectura. La colección se abre en otra pestaña; deja esta guía a la mano.</p>
+      <p class="mt-4 text-sm text-base-content/70">El acceso requiere una cuenta individual asignada para la clase y permiso de lectura. Inicia sesión si Metabase te lo pide. La colección se abre en otra pestaña; deja esta guía a la mano.</p>
     </header>
 
     <div class="mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(15rem,1fr)]">
       <section id="ruta" class="scroll-mt-24 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8 sm:py-8" aria-labelledby="ruta-titulo">
-        <h2 id="ruta-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Ruta de trabajo</h2>
-        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/80">Repite estos pasos con al menos dos tableros. La meta es sostener una interpretación, no solo abrir una gráfica.</p>
+        <h2 id="ruta-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Método para las diez actividades</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/80">Sigue el mismo método en los tableros asignados a tu equipo para que sus respuestas se puedan revisar y comparar.</p>
         <ol class="mt-7 space-y-0">
           {ruta.map((paso, i) => (
             <li class="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-4 border-t border-white/20 py-5 first:border-0 first:pt-0 last:pb-0">
@@ -63,7 +62,7 @@ const ruta = [
         <ul class="mt-4 space-y-3 text-sm leading-relaxed text-base-content/80">
           <li class="flex gap-2"><span class="icon-[tabler--user-check] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Ten a mano la cuenta que te entregó el instructor. No compartas tu contraseña.</span></li>
           <li class="flex gap-2"><span class="icon-[tabler--filter] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Verifica Periodo y Distrito cada vez que cambies de tablero. Si un mes sigue en curso, sus datos son parciales.</span></li>
-          <li class="flex gap-2"><span class="icon-[tabler--eye] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Trabaja en modo consulta: no necesitas subir archivos ni crear tableros.</span></li>
+          <li class="flex gap-2"><span class="icon-[tabler--eye] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Trabaja en modo consulta: no subas archivos, no crees tableros y no exportes datos.</span></li>
         </ul>
         <div class="mt-6 border-t border-base-content/15 pt-5">
           <h3 class="font-display font-semibold">Si no puedes entrar</h3>
@@ -72,19 +71,27 @@ const ruta = [
       </aside>
     </div>
 
-    <section class="mt-14" aria-labelledby="tableros-titulo">
+    <section id="actividades" class="mt-14 scroll-mt-24" aria-labelledby="tableros-titulo">
       <div class="max-w-3xl">
-        <h2 id="tableros-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Tableros para la práctica</h2>
-        <p class="mt-2 text-base-content/75">Cada enlace abre un tablero de la colección. Elige uno para empezar y otro para contrastar tu lectura. El contenido de cada vista puede cambiar con sus filtros y actualizaciones.</p>
+        <h2 id="tableros-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Diez tableros, diez actividades</h2>
+        <p class="mt-2 text-base-content/75">Cada equipo abre los tableros de su ruta y registra una respuesta breve por consigna. Después comparte sus hallazgos con la clase; las cifras pueden cambiar con los filtros y las actualizaciones.</p>
+        <p class="mt-3 text-sm font-medium text-base-content/80"><strong>Rutas:</strong> A · tableros 2–3 (territorio y tiempo) · B · 4–6 (personas y hechos) · C · 7–9 (aseguramientos) · D · 10–11 (emergencias y calidad).</p>
       </div>
-      <ol class="mt-6 grid gap-x-8 sm:grid-cols-2">
+      <ol class="mt-6 grid gap-x-8 lg:grid-cols-2">
         {dashboards.map((tablero, i) => (
-          <li class="border-t border-base-content/15">
-            <a class="group flex min-h-18 items-center gap-4 py-4 text-base-content no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary" href={`https://estadisticas.floresjavier.com/dashboard/${tablero.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${tablero.nombre} en Metabase, en una pestaña nueva`}>
-              <span class="w-7 shrink-0 font-display text-sm font-semibold tabular-nums text-secondary">{String(i + 1).padStart(2, '0')}</span>
-              <span class="grow font-display font-semibold leading-snug group-hover:text-secondary">{tablero.nombre}</span>
-              <span class="icon-[tabler--arrow-up-right] size-5 shrink-0 text-secondary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></span>
-            </a>
+          <li class="break-inside-avoid border-t border-base-content/15 py-5">
+            <div class="flex items-start gap-4">
+              <span class="w-7 shrink-0 pt-1 font-display text-sm font-semibold tabular-nums text-secondary">{String(i + 1).padStart(2, '0')}</span>
+              <div class="min-w-0">
+                <h3 class="font-display text-lg font-semibold leading-snug">
+                  <a class="group inline-flex items-start gap-1 text-base-content no-underline hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary" href={`https://estadisticas.floresjavier.com/dashboard/${tablero.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${tablero.nombre} en Metabase, en una pestaña nueva`}>
+                    {tablero.nombre}<span class="icon-[tabler--arrow-up-right] mt-0.5 size-5 shrink-0 text-secondary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 print:hidden" aria-hidden="true"></span>
+                  </a>
+                </h3>
+                <p class="mt-2 text-sm leading-relaxed text-base-content/80">{tablero.consigna}</p>
+                <p class="mt-3 text-sm leading-relaxed"><strong class="text-secondary">Producto:</strong> {tablero.producto}</p>
+              </div>
+            </div>
           </li>
         ))}
       </ol>
@@ -92,17 +99,16 @@ const ruta = [
 
     <section class="mt-14 border-t border-base-content/20 pt-10" aria-labelledby="registro-titulo">
       <div class="max-w-3xl">
-        <h2 id="registro-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Registro de hallazgo</h2>
-        <p class="mt-2 text-base-content/75">Usa estas preguntas en tu libreta o imprime esta página. Completa un registro por cada tablero que consultes.</p>
+        <h2 id="registro-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Formato de respuesta por actividad</h2>
+        <p class="mt-2 text-base-content/75">Usa estas cuatro líneas en tu libreta para cada producto de tu equipo. También puedes imprimir esta página.</p>
       </div>
       <dl class="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
         <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Tablero y vista</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué tablero y qué visualización consultaste?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
         <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Alcance de los datos</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué Periodo y Distrito, unidad y fuente aplican? ¿El mes está completo?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
         <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Hallazgo comprobable</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué muestra la vista? Anota la comparación que hiciste.</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
-        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Límite y siguiente paso</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué no demuestra y qué dato revisarías antes de actuar?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
+        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Límite y comprobación</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué no demuestra y qué dato revisarías antes de usarlo?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
       </dl>
       <div class="mt-8 flex flex-wrap gap-3 print:hidden">
-        <a class="btn btn-outline" href={href('/cuestionario/dia-3/')}><span class="icon-[tabler--checklist] size-5" aria-hidden="true"></span>Repasar el Día 3</a>
         <a class="btn btn-ghost" href={href('/participante/dia-3/')}>Volver al material del día</a>
       </div>
     </section>

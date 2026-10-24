@@ -64,7 +64,7 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
     preguntas: [
       {
         pregunta: '¿Dónde se encuentran los tableros preparados para esta práctica en Metabase?',
-        opciones: ['En la colección indicada para el curso', 'En Teselas XYZ de QGIS', 'En el archivo GeoJSON del mapa', 'En una carpeta de descargas del navegador'],
+        opciones: ['En la colección indicada para el curso', 'En la configuración de administradores', 'En un editor de consultas nuevo', 'En la carpeta de descargas del navegador'],
         correcta: 0,
         explicacion: 'La actividad empieza en la colección de tableros existentes; no requiere crear preguntas ni cargar archivos.',
       },
@@ -87,10 +87,10 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
         explicacion: 'Un filtro puede cambiar el conjunto mostrado. El hallazgo debe mencionar el filtro aplicado y las vistas que afecta.',
       },
       {
-        pregunta: 'Al presentar el tablero de Metabase junto al mapa de QGIS del Día 2, ¿qué advertencia corresponde?',
-        opciones: ['Que representan necesariamente los mismos registros', 'Que se pueden sumar sus cifras sin revisar nada', 'Que el mapa de práctica y el tablero pueden tener fuentes y periodos distintos', 'Que el mapa corrige cualquier error del tablero'],
+        pregunta: 'Si una vista del tablero muestra cero, ¿qué debe hacer antes de concluir que no hubo casos?',
+        opciones: ['Tomar el cero como ausencia confirmada', 'Ocultar la vista', 'Revisar fuente, periodo, filtros y si hubo captura; dejar constancia de la duda', 'Cambiar a un periodo que muestre casos'],
         correcta: 2,
-        explicacion: 'El mapa del Día 2 usa un CSV sintético. Antes de relacionarlo con un tablero institucional hay que revisar la fuente, el periodo y los límites de cada producto.',
+        explicacion: 'Un cero puede deberse al periodo, al filtro o a falta de captura. Se verifica antes de informar una conclusión.',
       },
     ],
   },

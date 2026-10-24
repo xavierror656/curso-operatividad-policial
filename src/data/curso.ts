@@ -59,8 +59,8 @@ export const sesiones = [
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'Lectura de tableros en Metabase y proyecto integrador',
-    entregable: 'Análisis verificado de un tablero existente y presentación junto al mapa de QGIS.',
+    titulo: 'Análisis de tableros existentes en Metabase',
+    entregable: 'Ficha de análisis de un tablero existente: fuente, periodo, filtros, hallazgo y recomendación.',
     disponible: true,
   },
 ]
@@ -145,20 +145,20 @@ export const temas: Tema[] = [
   },
   {
     num: 9,
-    titulo: 'Integración del análisis con QGIS y Metabase',
+    titulo: 'Verificación y comparación de tableros en Metabase',
     horas: 4,
     contenido:
-      'Presentación del mapa de práctica de QGIS junto con la lectura de un tablero de Metabase. Documentación de fuente, periodo, filtros, limitaciones y diferencia entre ambos conjuntos de datos.',
-    ia: 'Apoyo para ordenar una presentación sin pegar datos operativos ni cifras del tablero.',
-    producto: 'Presentación breve con mapa, lectura verificada del tablero y recomendación condicionada por las fuentes.',
+      'Comparación de preguntas y vistas de los tableros existentes solo cuando coinciden fuente, periodo, filtros, unidad y definición. Identificación de vacíos de captura, valores atípicos y límites del indicador.',
+    ia: 'Apoyo para formular preguntas de control sin pegar datos operativos, cifras ni capturas del tablero.',
+    producto: 'Ficha de verificación y comparación de dos vistas compatibles de Metabase.',
   },
   {
     num: 10,
-    titulo: 'Proyecto final aplicado a seguridad pública',
+    titulo: 'Presentación de hallazgos de Metabase',
     horas: 3,
     contenido:
-      'Producto analítico que integra estadística, visualización y cartografía. Retroalimentación grupal. Límites de la IA: verificación, sesgo y responsabilidad sobre el resultado.',
-    producto: 'Proyecto integrador presentado ante el grupo.',
+      'Presentación de un hallazgo de los tableros existentes: fuente, periodo, filtros, definición, control de calidad, límite de interpretación y recomendación operativa. Retroalimentación grupal y responsabilidad sobre el resultado.',
+    producto: 'Análisis de Metabase presentado ante el grupo.',
   },
 ]
 
@@ -180,8 +180,8 @@ export const productos = [
   },
   {
     icon: 'icon-[tabler--file-analytics]',
-    titulo: 'Presentación integradora',
-    texto: 'Expone el mapa de práctica y un hallazgo de Metabase con sus límites y una recomendación.',
+    titulo: 'Recomendación sustentada',
+    texto: 'Expone un hallazgo de Metabase, sus límites y una decisión operativa justificable.',
   },
 ]
 
@@ -196,7 +196,7 @@ export const requerimientos = [
 
 export const acreditacion = [
   { icon: 'icon-[tabler--user-check]', texto: 'Asistencia mínima del 80% de las sesiones.' },
-  { icon: 'icon-[tabler--presentation]', texto: 'Entrega del producto integrador del Día 3.' },
+  { icon: 'icon-[tabler--presentation]', texto: 'Entrega de la ficha de análisis de Metabase del Día 3.' },
   { icon: 'icon-[tabler--checklist]', texto: 'Puntaje mínimo de 6 sobre 10 en la rúbrica del producto final.' },
   { icon: 'icon-[tabler--shield-lock]', texto: 'Cero incidencias en el manejo seguro de la información.' },
 ]

@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout.astro'
 import { href } from '../lib/site'
 
 const rubrica = [
-  { criterio: 'Archivo depurado', c2: 'Documenta los errores hallados y cómo se resolvieron; conteo antes y después que cuadra.', c1: 'Depura, pero no documenta o el conteo no se explica.', c0: 'No entrega archivo depurado.' },
-  { criterio: 'Lectura de Metabase', c2: 'Explica un hallazgo de un tablero existente con fuente, definición, periodo y filtros; lo contrasta con una vista compatible.', c1: 'Describe el hallazgo, pero omite fuente, periodo, filtros o contraste.', c0: 'No presenta una lectura del tablero.' },
-  { criterio: 'Mapa básico en QGIS', c2: 'Mapa base, capas proporcionadas de colonias y cuadrantes, GeoJSON propio y puntos de práctica con filtro aplicado.', c1: 'Falta una capa, el polígono propio o el filtro no funciona.', c0: 'No presenta el proyecto o no logra mostrar los puntos.' },
-  { criterio: 'Recomendación operativa', c2: 'Propone una decisión concreta apoyada en el tablero consultado y el mapa de práctica, indicando si sus fuentes o periodos no son comparables.', c1: 'Recomendación general o con límites de comparación poco claros.', c0: 'No recomienda.' },
-  { criterio: 'Uso seguro de la IA', c2: 'No compartió datos institucionales y verificó las explicaciones que pidió al asistente.', c1: 'No compartió datos, pero no documentó cómo verificó las explicaciones.', c0: 'Compartió datos reales o no verificó.' },
+  { criterio: 'Tablero e indicador', c2: 'Identifica el tablero existente, la pregunta, la fuente, el periodo y la definición de la cifra.', c1: 'Identifica el tablero, pero omite parte del contexto del indicador.', c0: 'No identifica qué cifra analizó.' },
+  { criterio: 'Filtros y alcance', c2: 'Registra los filtros activos y explica a qué población y periodo se refiere el resultado.', c1: 'Menciona filtros, pero no aclara su efecto o el alcance.', c0: 'Presenta la cifra sin filtros ni alcance.' },
+  { criterio: 'Verificación y calidad', c2: 'Contrasta con una vista compatible y revisa ceros, vacíos o discrepancias antes de concluir.', c1: 'Hace un contraste parcial o no explica una discrepancia.', c0: 'No verifica la interpretación.' },
+  { criterio: 'Hallazgo y recomendación', c2: 'Explica un hallazgo verificable del tablero, sus límites y una recomendación operativa proporcionada.', c1: 'Presenta un hallazgo o recomendación, pero sin sustento o límites claros.', c0: 'No presenta hallazgo ni recomendación.' },
+  { criterio: 'Manejo seguro de la información', c2: 'No comparte cifras, capturas ni credenciales con herramientas ajenas y documenta cómo verificó su explicación.', c1: 'Mantiene la información protegida, pero documenta la verificación de forma incompleta.', c0: 'Expone información o no verifica la explicación.' },
 ]
 const incidente = [
   'Detenga la actividad. No continúe la conversación con el asistente.',
@@ -17,7 +17,8 @@ const incidente = [
   'Registre el incidente y lo aprendido. Se reconoce al participante que avisa a tiempo.',
 ]
 const planB = [
-  ['Sin internet', 'El sitio queda guardado en el navegador si se abrió una vez con conexión. Las teselas de OpenStreetMap y la colección remota de Metabase necesitan red. Continúe QGIS con los GeoJSON y el CSV locales; para el Día 3 use capturas previamente autorizadas o el guion y el resumen impresos.'],
+  ['Sin internet en QGIS · Día 2', 'El sitio queda guardado en el navegador si se abrió una vez con conexión. Las teselas de OpenStreetMap necesitan red; continúe con los GeoJSON y el CSV locales sin mapa base.'],
+  ['Sin internet en Metabase · Día 3', 'La colección remota no se abrirá sin red. Use capturas de tableros previamente autorizadas, sin datos identificables, o el guion y el resumen impresos para practicar la lectura de fuente, periodo y filtros.'],
   ['No autorizan instalar Python o QGIS', 'Equipo preinstalado o máquina virtual, Jupyter local en memoria USB, QGIS portable. Google Colab solo con los CSV sintéticos de este sitio, nunca con las capas GeoJSON reales ni exportaciones institucionales, porque los sube a un tercero.'],
   ['No abre la colección de Metabase', 'Confirme con el responsable del servidor el acceso de lectura de cada participante. Mientras se restablece, use capturas autorizadas de los tableros, sin credenciales ni datos identificables, para practicar fuente, periodo y filtros.'],
   ['No hay asistente de IA autorizado', 'Demostración con la pantalla del instructor, con instrucciones ya preparadas en la página de prompts.'],
@@ -44,7 +45,7 @@ const planB = [
     </nav>
 
     <section id="rubrica" class="mt-12 scroll-mt-24">
-      <h2 class="text-2xl font-semibold">Rúbrica del producto final</h2>
+      <h2 class="text-2xl font-semibold">Rúbrica del análisis de Metabase · Día 3</h2>
       <p class="mt-2 text-base-content/75">Cinco criterios de 0 a 2 puntos: 2 completo, 1 parcial, 0 ausente. Se acredita con <strong>6 de 10</strong> y sin incidencias de manejo de la información.</p>
       <div class="mt-4 overflow-x-auto rounded-box border border-base-content/10" tabindex="0" role="region" aria-label="Rúbrica, se desplaza horizontalmente">
         <table class="table">
@@ -87,7 +88,7 @@ const planB = [
         <div class="rounded-box border border-base-content/10 p-5">
           <h3 class="font-display font-semibold">Condiciones del aula (se llena al inicio)</h3>
           <ul class="mt-2 space-y-1">
-            {['Cada participante tiene equipo con sesión abierta', 'La red funciona y el sitio se abrió una vez con conexión', 'Proyector legible desde la última fila (probar teclas L y C)', 'CSV sintéticos y capas GeoJSON descargados en cada equipo', 'QGIS funciona y cada participante abre la colección de Metabase con acceso de lectura'].map((t) => <li><label class="flex items-start gap-3 p-1"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5" /><span>{t}</span></label></li>)}
+            {['Cada participante tiene equipo con sesión abierta', 'La red funciona y el sitio se abrió una vez con conexión', 'Proyector legible desde la última fila (probar teclas L y C)', 'Para el Día 2: CSV y GeoJSON descargados; QGIS funciona', 'Para el Día 3: cada participante abre la colección de Metabase con acceso de lectura'].map((t) => <li><label class="flex items-start gap-3 p-1"><input type="checkbox" class="checkbox checkbox-secondary mt-0.5" /><span>{t}</span></label></li>)}
           </ul>
         </div>
         <div class="rounded-box border border-base-content/10 p-5">

@@ -280,9 +280,9 @@ export const dia2: Deck = {
       steps: [
         { label: 'Día 1', detail: 'Archivo sintético depurado' },
         { label: 'Día 2', detail: 'Primer mapa en QGIS' },
-        { label: 'Día 3', detail: 'Análisis de tableros existentes y proyecto integrador' },
+        { label: 'Día 3', detail: 'Análisis de tableros existentes en Metabase' },
       ],
-      notes: 'Recoja la evidencia del mapa de práctica. El Día 3 se consultan tableros ya preparados en Metabase; no se sube el CSV sintético ni se asume que sus 928 puntos coinciden con las cifras institucionales. Al presentarlos juntos se explican las diferencias de fuente y periodo.',
+      notes: 'Recoja la evidencia del mapa de práctica; el trabajo de QGIS termina hoy. El Día 3 se dedica a consultar los tableros ya preparados en Metabase, identificar su fuente, periodo y filtros, y explicar un hallazgo. No se sube el CSV sintético ni se usa su conteo de 928 como control de los tableros.',
     },
   ],
 }

@@ -5,6 +5,7 @@
  */
 export const materiales = {
   cuestionario: { label: 'Cuestionario', path: '/cuestionario/', icon: 'icon-[tabler--bulb]' },
+  'cuestionario-dia3': { label: 'Cuestionario · Metabase', path: '/cuestionario/dia-3/', icon: 'icon-[tabler--checklist]' },
   'regla-de-oro': { label: '¿Se puede pegar?', path: '/practica/regla-de-oro/', icon: 'icon-[tabler--shield-question]' },
   prompts: { label: 'Prompts para IA', path: '/practica/prompts/', icon: 'icon-[tabler--message-chatbot]' },
   'prompts-eda': { label: 'Prompts de EDA', path: '/practica/prompts/#eda', icon: 'icon-[tabler--message-chatbot]' },

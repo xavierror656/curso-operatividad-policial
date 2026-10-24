@@ -18,8 +18,16 @@ const actividades = [
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica</p>
     <h1 class="mt-3 text-4xl font-semibold">Aprender haciendo</h1>
     <p class="mt-3 max-w-3xl text-base-content/70">
-      Todo se hace con datos ficticios y se contesta en el propio navegador; nada se envía a ningún servidor. Funciona sin conexión.
+      Los ejercicios breves de esta página usan casos ficticios y se contestan en el navegador. Para los tableros de Metabase del Día 3 se necesita conexión y la cuenta asignada.
     </p>
+    <section class="mt-8 rounded-2xl border border-secondary/40 bg-secondary/10 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-6" aria-labelledby="metabase-dia-3">
+      <div>
+        <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Actividad del Día 3</p>
+        <h2 id="metabase-dia-3" class="mt-1 text-xl font-semibold">Analice los tableros existentes de Metabase</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Abra la guía de los diez tableros, revise fuente, periodo y filtros, y prepare una ficha con un hallazgo verificable.</p>
+      </div>
+      <a href={href('/metabase/')} class="btn btn-secondary mt-4 w-full shrink-0 justify-center sm:mt-0 sm:w-auto"><span class="icon-[tabler--layout-dashboard] size-5" aria-hidden="true"></span>Abrir guía de Metabase</a>
+    </section>
     <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {actividades.map((a) => (
         <a href={href(a.ruta)} class="card border border-base-content/10 shadow-none transition hover:border-secondary">
