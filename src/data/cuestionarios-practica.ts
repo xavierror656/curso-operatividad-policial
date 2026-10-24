@@ -59,11 +59,11 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
   },
   dia3: {
     dia: 3,
-    titulo: 'Cuestionario del Día 3 · DeepSeek y Metabase',
+    titulo: 'Cuestionario del Día 3 · IA y Metabase',
     descripcion: 'Tres preguntas sobre el apoyo de IA, la comprobación de gráficas y el cuidado del acceso.',
     preguntas: [
       {
-        pregunta: 'DeepSeek creó una gráfica de prácticas por tarea. ¿Qué haces antes de guardarla?',
+        pregunta: 'El asistente de IA creó una gráfica de prácticas por tarea. ¿Qué haces antes de guardarla?',
         opciones: ['Compruebo la tabla, los campos y los conteos con los datos de práctica', 'La guardo porque una respuesta de IA ya está verificada', 'Cambio los datos para que coincidan con la gráfica', 'La publico antes de revisar el resultado'],
         correcta: 0,
         explicacion: 'La IA propone un resultado. El equipo comprueba que usa la tabla ficticia y que los conteos son 5, 4 y 3: doce prácticas.',
@@ -76,7 +76,7 @@ export const cuestionariosPractica: Record<'dia2' | 'dia3', CuestionarioPractica
       },
       {
         pregunta: '¿Qué ayuda a proteger el acceso al tablero en Metabase?',
-        opciones: ['Un filtro visible que oculte algunas filas', 'Un título que diga «privado»', 'Los permisos de datos y de colección configurados y comprobados por el responsable', 'Que DeepSeek haya creado las gráficas'],
+        opciones: ['Un filtro visible que oculte algunas filas', 'Un título que diga «privado»', 'Los permisos de datos y de colección configurados y comprobados por el responsable', 'Que la IA haya creado las gráficas'],
         correcta: 2,
         explicacion: 'Los filtros cambian la vista; los permisos controlan el acceso. Activar IA no vuelve confidencial la información automáticamente.',
       },

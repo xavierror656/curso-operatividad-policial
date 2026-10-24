@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+import { fuentesGraficas, leccionesGraficas } from '../data/graficas-cientificas'
+---
+
+<Layout title="Qué gráfica elegir · Cinco lecciones" description="Cinco lecciones para elegir y leer barras, líneas, histogramas, dispersión y cajas con puntos desde una pregunta científica.">
+  <article class="mx-auto max-w-6xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
+    <header class="max-w-3xl">
+      <a class="link link-hover text-sm text-base-content/70" href={href('/metabase/')}>Volver a la práctica de IA y Metabase</a>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Elige la gráfica según la pregunta y el dato</h1>
+      <p class="mt-5 text-base leading-relaxed text-base-content/80 md:text-lg">Cinco lecciones breves para observar con cuidado, comparar y explicar lo que muestran los datos. Primero decide qué quieres saber; después elige la gráfica.</p>
+      <p class="mt-3 text-sm leading-relaxed text-base-content/75">Las primeras tres se revisan paso a paso. Dispersión y caja se presentan como una introducción para reconocerlas y leer sus elementos.</p>
+      <p class="mt-4 text-sm leading-relaxed text-base-content/70">Todos los ejemplos son simulados. Cuatro usan el archivo de práctica de IA; la línea usa seis lecturas ficticias de temperatura de una misma muestra.</p>
+      <div class="mt-6 flex flex-wrap gap-3 print:hidden">
+        <a class="btn btn-secondary" href="#elegir">Elegir una gráfica</a>
+        <a class="btn btn-outline" href={href('/datos/practica_ia_metabase.csv')} download>Descargar datos de práctica</a>
+      </div>
+      <a class="link mt-4 inline-block text-sm font-semibold text-secondary print:hidden" href="#bonus">Ir al bonus de conteos y tasas · 20 minutos</a>
+    </header>
+
+    <section id="elegir" class="mt-10 scroll-mt-24" aria-labelledby="elegir-titulo">
+      <h2 id="elegir-titulo" class="font-display text-2xl font-semibold">Empieza por tu pregunta</h2>
+      <div class="mt-5 overflow-x-auto rounded-xl border border-base-content/15" tabindex="0" role="region" aria-label="Guía de elección de gráfica; permite desplazamiento horizontal">
+        <table class="w-full min-w-[38rem] text-left text-sm">
+          <thead class="bg-primary text-primary-content"><tr><th scope="col" class="px-5 py-4 font-semibold">Quiero saber…</th><th scope="col" class="px-5 py-4 font-semibold">Tengo…</th><th scope="col" class="px-5 py-4 font-semibold">Elijo…</th></tr></thead>
+          <tbody>
+            {leccionesGraficas.map((leccion) => (
+              <tr class="border-t border-base-content/10 hover:bg-base-200/60">
+                <th scope="row" class="px-5 py-4 font-medium">{leccion.pregunta}</th>
+                <td class="px-5 py-4 text-base-content/75">{leccion.dato}</td>
+                <td class="px-5 py-4"><a class="link font-semibold text-secondary" href={`#${leccion.id}`}>{leccion.grafica}</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-8 rounded-2xl bg-base-200 p-5 sm:p-7" aria-labelledby="cientifica-titulo">
+      <h2 id="cientifica-titulo" class="font-display text-xl font-semibold">Qué hace clara una figura científica</h2>
+      <ul class="mt-4 grid gap-x-8 gap-y-3 text-sm leading-relaxed sm:grid-cols-2">
+        <li><strong>Una pregunta concreta.</strong> Di qué estás comparando o midiendo.</li>
+        <li><strong>Ejes y unidades.</strong> Minutos, grados Celsius o número de registros.</li>
+        <li><strong>Origen y tamaño.</strong> Indica fuente, periodo y <strong>n</strong>: cuántas observaciones hay.</li>
+        <li><strong>Una interpretación prudente.</strong> Separa lo observado de su posible explicación.</li>
+      </ul>
+      <p class="mt-4 text-sm leading-relaxed text-base-content/75">Una figura puede mostrar cuánto varían los datos. Si añades barras de incertidumbre, debes explicar qué representan y cómo se calcularon; no las inventes ni las confundas con la dispersión de las observaciones.</p>
+    </section>
+
+    <div class="mt-12">
+      {leccionesGraficas.map((leccion, index) => (
+        <section id={leccion.id} class="scroll-mt-24 border-t border-base-content/20 py-10 first:border-t-2 first:border-primary" aria-labelledby={`${leccion.id}-titulo`}>
+          <div class="max-w-3xl">
+            <h2 id={`${leccion.id}-titulo`} class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">{index + 1}. {leccion.titulo}</h2>
+            <p class="mt-3 text-lg font-medium text-secondary">{leccion.pregunta}</p>
+            <p class="mt-3 leading-relaxed text-base-content/80">{leccion.explicacion}</p>
+          </div>
+          <div class="mt-7 grid items-start gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(15rem,1fr)]">
+            <figure class="min-w-0">
+              <a class="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary" href={href(leccion.imagen)} target="_blank" rel="noopener noreferrer" aria-label={`Abrir figura ampliada: ${leccion.titulo}`}>
+                <img src={href(leccion.imagen)} alt={leccion.alt} class="h-auto w-full" loading="lazy" width="1200" height="700" />
+              </a>
+              <figcaption class="mt-3 text-sm leading-relaxed text-base-content/70">{leccion.caption}. <a class="link print:hidden" href={href(leccion.imagen)} target="_blank" rel="noopener noreferrer">Ampliar figura</a><span class="print:hidden"> · </span><a class="link print:hidden" href={href(leccion.imagen.replace('.svg', '.png'))} download>Descargar PNG</a></figcaption>
+            </figure>
+            <div class="space-y-5 text-sm leading-relaxed">
+              <div><h3 class="font-display text-base font-semibold">Cómo se lee</h3><p class="mt-2 text-base-content/80">{leccion.lectura}</p></div>
+              <div><h3 class="font-display text-base font-semibold">Qué comprobar</h3><p class="mt-2 text-base-content/80">{leccion.cuidado}</p></div>
+              {leccion.id === 'caja' && <details class="border-t border-base-content/15 pt-4"><summary class="cursor-pointer font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Qué representan los bigotes</summary><p class="mt-3 text-base-content/75">En este ejemplo llegan hasta las observaciones más extremas que quedan dentro de 1.5 veces la amplitud de la caja, medidas desde sus bordes. Esta regla ayuda a detectar valores apartados; no es un intervalo de confianza.</p></details>}
+            </div>
+          </div>
+          <details class="mt-7 max-w-3xl rounded-xl bg-base-200 p-5">
+            <summary class="cursor-pointer font-semibold leading-relaxed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Piensa qué elegirías: {leccion.ejercicio}</summary>
+            <p class="mt-3 text-sm leading-relaxed text-base-content/80">{leccion.respuesta}</p>
+          </details>
+        </section>
+      ))}
+    </div>
+
+    <section id="bonus" class="scroll-mt-24 border-t-2 border-primary py-10" aria-labelledby="bonus-titulo">
+      <div class="max-w-3xl">
+        <h2 id="bonus-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Bonus: el conteo y la tasa responden preguntas distintas</h2>
+        <p class="mt-3 leading-relaxed text-base-content/80">Durante el mismo periodo ficticio, una zona tiene más registros y también más habitantes. Para comparar registros por tamaño de población, necesitamos un denominador.</p>
+      </div>
+      <div class="mt-6 overflow-x-auto rounded-xl border border-base-content/15">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-base-200"><tr><th scope="col" class="px-5 py-3">Zona ficticia</th><th scope="col" class="px-5 py-3">Registros</th><th scope="col" class="px-5 py-3">Habitantes</th></tr></thead>
+          <tbody><tr class="border-t border-base-content/10"><th scope="row" class="px-5 py-3 font-medium">A</th><td class="px-5 py-3">30</td><td class="px-5 py-3">6,000</td></tr><tr class="border-t border-base-content/10"><th scope="row" class="px-5 py-3 font-medium">B</th><td class="px-5 py-3">20</td><td class="px-5 py-3">2,000</td></tr></tbody>
+        </table>
+      </div>
+      <p class="mt-5 font-semibold">Registros por 1,000 habitantes = registros ÷ población × 1,000</p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-base-content/80">En pareja, calcula ambas tasas durante seis minutos. Puedes usar una calculadora o pedir al asistente de IA que muestre los pasos con estos valores inventados. Comprueba la división y la multiplicación.</p>
+      <details class="mt-5 max-w-3xl rounded-xl bg-base-200 p-5">
+        <summary class="cursor-pointer font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Comprobar las operaciones</summary>
+        <p class="mt-3 text-sm leading-relaxed">Zona A: 30 ÷ 6,000 × 1,000 = <strong>5 registros por 1,000 habitantes</strong>. Zona B: 20 ÷ 2,000 × 1,000 = <strong>10 por 1,000</strong>.</p>
+      </details>
+      <figure class="mt-7">
+        <a class="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary" href={href('/figuras/graficas-cientificas/06-bonus-conteos-tasas.svg')} target="_blank" rel="noopener noreferrer" aria-label="Abrir la comparación de conteos y tasas">
+          <img src={href('/figuras/graficas-cientificas/06-bonus-conteos-tasas.svg')} alt="Zona A: 30 registros y tasa de 5 por 1,000 habitantes. Zona B: 20 registros y tasa de 10 por 1,000. El orden de la comparación cambia al usar población como denominador." class="h-auto w-full" loading="lazy" width="1200" height="700" />
+        </a>
+        <figcaption class="mt-3 text-sm text-base-content/70">Ejemplo independiente del CSV de IA; todos los valores son ficticios. <a class="link print:hidden" href={href('/figuras/graficas-cientificas/06-bonus-conteos-tasas.png')} download>Descargar figura PNG</a></figcaption>
+      </figure>
+      <p class="mt-5 max-w-3xl text-sm leading-relaxed text-base-content/80">A tiene más registros absolutos; B tiene una tasa de registros mayor en este ejemplo. Para interpretar una comparación real hay que comprobar el mismo periodo, definición de registro, población y cobertura. Esta tasa no demuestra riesgo individual, delitos confirmados ni causas.</p>
+    </section>
+
+    <section class="border-t border-base-content/20 pt-8" aria-labelledby="aplicar-titulo">
+      <h2 id="aplicar-titulo" class="font-display text-2xl font-semibold">Aplícalo a tu tablero</h2>
+      <p class="mt-3 max-w-3xl leading-relaxed text-base-content/80">En los tres trabajos de Metabase comparas categorías, así que las barras son una elección sencilla. Si quieres estudiar la distribución de los tiempos o la relación entre dos medidas, ya sabes qué otra figura pedir y qué revisar.</p>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-base-content/75">Puedes pedir al asistente de IA: «Tengo estas variables y esta pregunta. Recomienda una gráfica y explica qué irá en cada eje, su unidad y qué no permite concluir». Comprueba la propuesta antes de guardarla.</p>
+      <a class="btn btn-secondary mt-6 print:hidden" href={href('/metabase/#trabajos')}>Volver a los tres trabajos</a>
+    </section>
+
+    <section class="mt-10 border-t border-base-content/15 pt-6" aria-labelledby="fuentes-titulo">
+      <h2 id="fuentes-titulo" class="font-display text-lg font-semibold">Fuentes para ampliar</h2>
+      <p class="mt-2 text-sm text-base-content/70">NIST, ONS y CDC explican estas convenciones y sus límites. Las figuras del curso usan valores simulados.</p>
+      <ul class="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+        {fuentesGraficas.map((fuente) => <li><a class="link" href={fuente.url} target="_blank" rel="noopener noreferrer">{fuente.titulo}</a></li>)}
+      </ul>
+    </section>
+  </article>
+</Layout>

@@ -112,6 +112,8 @@ export interface Slide {
   alerts?: Alert[]
   table?: { head: string[]; rows: string[][] }
   chart?: Chart
+  /** Figura científica preparada con datos y ejes verificables. */
+  figure?: { src: string; alt: string; caption: string }
   /** Para layout 'er': tablas y sus relaciones */
   er?: Er
   /** Minutos del cronómetro para layout 'timer' */

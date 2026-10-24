@@ -422,6 +422,20 @@
 .s-chart {
   margin: 0;
 }
+.s-chart-wrap--figure {
+  grid-template-columns: 1.85fr 1fr;
+  gap: 2cqw;
+}
+.s-scientific-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 30.5cqw;
+  object-fit: contain;
+}
+.s-chart-wrap--figure .s-chart-notes {
+  font-size: calc(1.48cqw * var(--tz, 1));
+  gap: 1.2cqw;
+}
 .s-chart-caption {
   margin-bottom: 1.2cqw;
   font-size: calc(1.45cqw * var(--tz, 1));

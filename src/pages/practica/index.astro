@@ -4,6 +4,7 @@ import { href } from '../../lib/site'
 import { cuestionariosPractica } from '../../data/cuestionarios-practica'
 
 const actividades = [
+  { ruta: '/graficas-cientificas/', icon: 'icon-[tabler--chart-scatter]', titulo: 'Qué gráfica elegir', texto: 'Cinco lecciones científicas con figuras: barras, líneas, histograma, dispersión y caja con puntos.', min: '20 min' },
   { ruta: '/practica/regla-de-oro/', icon: 'icon-[tabler--shield-question]', titulo: '¿Se puede pegar?', texto: 'Diez casos para entrenar la regla de oro con asistentes de IA.', min: '5 min' },
   { ruta: '/practica/prompts/', icon: 'icon-[tabler--message-chatbot]', titulo: 'Prompts para IA', texto: 'Plantillas para copiar: análisis exploratorio (EDA), limpieza y gráficas.', min: 'Consulta' },
   { ruta: '/practica/detecta-errores/', icon: 'icon-[tabler--zoom-exclamation]', titulo: 'Detecte las capturas inconsistentes', texto: 'Una tabla ficticia con registros defectuosos. Marque los que no pasarían una revisión.', min: '10 min' },
@@ -18,12 +19,12 @@ const actividades = [
     <p class="font-display text-sm font-semibold uppercase tracking-[0.18em] text-secondary">Práctica</p>
     <h1 class="mt-3 text-4xl font-semibold">Aprender haciendo</h1>
     <p class="mt-3 max-w-3xl text-base-content/70">
-      Los ejercicios breves de esta página usan casos ficticios y se contestan en el navegador. Para crear el tablero del Día 3 se necesita conexión, la cuenta de Metabase y acceso al asistente DeepSeek.
+      Los ejercicios breves de esta página usan casos ficticios y se contestan en el navegador. Para crear el tablero del Día 3 se necesita conexión, la cuenta de Metabase y acceso al asistente de IA habilitado por el instructor.
     </p>
     <section class="mt-8 rounded-2xl border border-secondary/40 bg-secondary/10 p-5 sm:flex sm:items-center sm:justify-between sm:gap-6 sm:p-6" aria-labelledby="metabase-dia-3">
       <div>
         <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Actividad del Día 3</p>
-        <h2 id="metabase-dia-3" class="mt-1 text-xl font-semibold">Cree un tablero con DeepSeek y Metabase</h2>
+        <h2 id="metabase-dia-3" class="mt-1 text-xl font-semibold">Cree un tablero con IA y Metabase</h2>
         <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Tres trabajos con datos simulados: tareas, tiempo y revisión humana. Cada actividad crea una gráfica para el tablero final, con una comprobación sencilla.</p>
       </div>
       <a href={href('/metabase/')} class="btn btn-secondary mt-4 w-full shrink-0 justify-center sm:mt-0 sm:w-auto"><span class="icon-[tabler--layout-dashboard] size-5" aria-hidden="true"></span>Abrir guía de Metabase</a>

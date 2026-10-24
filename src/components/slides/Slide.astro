@@ -247,11 +247,13 @@ const material = (s.material ?? []).map((id) => materiales[id])
       )}
 
       {/* Gráfica de una sola serie, con conclusiones a la derecha */}
-      {s.layout === 'chart' && chart && (
-        <div class="s-chart-wrap">
-          <figure class="s-chart">
-            <figcaption class="s-chart-caption">{chart.caption}</figcaption>
-            {chart.kind === 'bar' ? (
+      {s.layout === 'chart' && (chart || s.figure) && (
+        <div class:list={['s-chart-wrap', { 's-chart-wrap--figure': s.figure }]}>
+          <figure class:list={['s-chart', { 's-scientific-figure': s.figure }]}>
+            <figcaption class="s-chart-caption">{s.figure?.caption ?? chart?.caption}</figcaption>
+            {s.figure ? (
+              <img src={href(s.figure.src)} alt={s.figure.alt} loading="lazy" />
+            ) : chart?.kind === 'bar' ? (
               <ul class="s-bars" role="list">
                 {chart.data.map((d) => (
                   <li class:list={['s-bar-row', { 'is-hi': isHi(d.label) }]} title={`${d.label}: ${d.value}`}>
@@ -261,7 +263,7 @@ const material = (s.material ?? []).map((id) => materiales[id])
                   </li>
                 ))}
               </ul>
-            ) : (
+            ) : chart ? (
               <svg class="s-line" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={chart.caption}>
                 {ticks.map((t) => (
                   <g>
@@ -280,7 +282,7 @@ const material = (s.material ?? []).map((id) => materiales[id])
                   </g>
                 ))}
               </svg>
-            )}
+            ) : null}
           </figure>
           {s.bullets && <ul class="s-chart-notes">{s.bullets.map((b) => <li data-step>{b}</li>)}</ul>}
         </div>

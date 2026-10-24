@@ -13,7 +13,7 @@ export const curso = {
     'Manejo básico de computadora e internet. No se requieren conocimientos previos de estadística, cartografía o programación.',
   herramientas: ['Python con Jupyter', 'Metabase', 'QGIS', 'Asistentes de IA'],
   objetivo:
-    'Que el participante revise datos de práctica, construya un mapa sencillo en QGIS y cree un tablero de tres gráficas en Metabase con apoyo de DeepSeek, acompañamiento paso a paso y cuidado de la información.',
+    'Que el participante revise datos de práctica, construya un mapa sencillo en QGIS y cree un tablero de tres gráficas en Metabase con apoyo de IA, acompañamiento paso a paso y cuidado de la información.',
 }
 
 export const enfoque = [
@@ -21,7 +21,7 @@ export const enfoque = [
     icon: 'icon-[tabler--database]',
     titulo: 'Del archivo al análisis',
     texto:
-      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se usa otro conjunto ficticio para crear un tablero sobre uso responsable de IA con DeepSeek dentro de Metabase.',
+      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se usa otro conjunto ficticio para crear un tablero sobre uso responsable de IA con un asistente habilitado dentro de Metabase.',
   },
   {
     icon: 'icon-[tabler--sparkles]',
@@ -59,7 +59,7 @@ export const sesiones = [
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'DeepSeek y Metabase: tres trabajos guiados',
+    titulo: 'IA y Metabase: tres trabajos guiados',
     entregable: 'Un tablero sobre uso responsable de IA con tres gráficas comprobadas y una nota de datos simulados.',
     disponible: true,
   },
@@ -127,10 +127,10 @@ export const temas: Tema[] = [
   },
   {
     num: 7,
-    titulo: 'Primeros pasos con DeepSeek y Metabase',
+    titulo: 'Primeros pasos con IA y Metabase',
     horas: 4,
     contenido:
-      'Acceso a la tabla de práctica y al asistente de IA dentro de Metabase. Ventajas del lenguaje natural y preparación de instrucciones sencillas con datos ficticios.',
+      'Acceso a la tabla de práctica y al asistente de IA dentro de Metabase. Elección de gráfica según la pregunta y el tipo de dato: barras, líneas, histograma, dispersión y caja con puntos. Instrucciones sencillas con datos ficticios.',
     producto: 'Primera gráfica: conteo de prácticas por tarea.',
   },
   {
@@ -146,7 +146,7 @@ export const temas: Tema[] = [
     titulo: 'Comprobar resultados y cuidar el acceso',
     horas: 4,
     contenido:
-      'Comprobación de conteos y promedios con el conjunto de doce registros ficticios. Diferencia entre permisos y filtros; información que puede procesar el proveedor de IA.',
+      'Comprobación de conteos y promedios con doce registros ficticios. Lectura científica de ejes, unidades, número de observaciones y límites. Bonus de conteos y tasas con denominadores comparables. Permisos e información que procesa el proveedor de IA.',
     producto: 'Gráficas comprobadas y nota de alcance de la simulación.',
   },
   {
@@ -154,7 +154,7 @@ export const temas: Tema[] = [
     titulo: 'Armar y presentar el tablero de práctica',
     horas: 3,
     contenido:
-      'Armado de un dashboard con las tres gráficas y una nota que identifica los datos simulados. Presentación breve del apoyo de IA, la comprobación y el cuidado de la información.',
+      'Armado de un dashboard con tres gráficas y una nota de datos simulados. Presentación en parejas y cierre que conecta calidad de datos, cartografía en QGIS y elección de gráficas con apoyo de IA.',
     producto: 'Tablero «Uso responsable de IA» presentado al instructor por enlace interno.',
   },
 ]
@@ -162,7 +162,7 @@ export const temas: Tema[] = [
 export const productos = [
   {
     icon: 'icon-[tabler--layout-dashboard]',
-    titulo: 'Tablero creado con apoyo de DeepSeek',
+    titulo: 'Tablero creado con apoyo de IA',
     texto: 'Reúne tres gráficas comprobadas de tareas, tiempo y revisión humana.',
   },
   {
@@ -186,7 +186,7 @@ export const requerimientos = [
   'Equipo por participante con privilegios de instalación y 8 GB de RAM como mínimo.',
   'Python con Jupyter, o Google Colab si no se autoriza la instalación local.',
   'QGIS LTR, misma versión para todo el grupo, con acceso a un mapa base de teselas.',
-  'Cuenta de Metabase con acceso a la tabla ficticia, al asistente DeepSeek y a una colección donde crear y guardar gráficas y tableros.',
+  'Cuenta de Metabase con acceso a la tabla ficticia, al asistente de IA habilitado por el instructor y a una colección donde crear y guardar gráficas y tableros.',
   'Acceso a internet y a los asistentes de IA definidos para el curso.',
   'Conjunto de datos sintético o anonimizado, proporcionado por el instructor.',
 ]

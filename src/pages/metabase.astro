@@ -30,14 +30,14 @@ const trabajos = [
 ]
 ---
 
-<Layout title="DeepSeek y Metabase · Tres trabajos guiados" description="Crea un tablero sencillo sobre uso responsable de IA con DeepSeek dentro de Metabase y datos simulados.">
+<Layout title="IA y Metabase · Tres trabajos guiados" description="Crea un tablero sencillo sobre uso responsable de IA con un asistente habilitado en Metabase y datos simulados.">
   <article class="mx-auto max-w-5xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
     <header class="max-w-3xl">
       <div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
         <a class="link link-hover" href={href('/participante/dia-3/')}>Material del Día 3</a>
-        <span aria-hidden="true">/</span><span aria-current="page">DeepSeek y Metabase</span>
+        <span aria-hidden="true">/</span><span aria-current="page">IA y Metabase</span>
       </div>
-      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Crea tu primer tablero con ayuda de DeepSeek</h1>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Crea tu primer tablero con apoyo de IA</h1>
       <p class="mt-5 max-w-2xl text-base leading-relaxed text-base-content/75 md:text-lg">Tres trabajos, una actividad por trabajo y un tablero final sobre el uso responsable de IA. El instructor demuestra cada paso y después lo repites en pareja.</p>
       <div class="mt-7 flex flex-wrap gap-3 print:hidden">
         <a class="btn btn-secondary" href="#trabajos">Empezar los tres trabajos</a>
@@ -47,11 +47,17 @@ const trabajos = [
       <a class="link link-hover mt-3 inline-block text-sm font-semibold" href={href('/acceso-metabase/')}>Consultar usuarios y vigencia del curso</a>
     </header>
 
+    <section class="mt-8 border-y border-base-content/15 py-6" aria-labelledby="elegir-grafica-titulo">
+      <h2 id="elegir-grafica-titulo" class="font-display text-xl font-semibold">Antes de pedir una gráfica, elige qué quieres observar</h2>
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-base-content/80">Cinco lecciones con enfoque científico: categorías, tiempo, distribución, relación entre medidas y comparación de grupos. Cada figura explica sus ejes, unidades y límites.</p>
+      <a class="link mt-3 inline-block font-semibold text-secondary" href={href('/graficas-cientificas/')}>Ver qué gráfica elegir según el dato</a>
+    </section>
+
     <section class="mt-10 grid gap-8 border-y border-base-content/15 py-8 md:grid-cols-2" aria-labelledby="apoyo-titulo">
       <div>
         <h2 id="apoyo-titulo" class="font-display text-2xl font-semibold">Qué aporta la inteligencia artificial</h2>
-        <p class="mt-3 leading-relaxed text-base-content/80">DeepSeek te permite pedir una gráfica con palabras comunes. También ayuda a ordenar instrucciones, preparar borradores y explicar un resultado. Así puedes avanzar con menos pasos técnicos; la persona comprueba el trabajo.</p>
-        <p class="mt-3 text-sm text-base-content/70">En otras tareas, asistentes como ChatGPT o Codex pueden apoyar con redacción o código. Hoy trabajamos sólo con la integración de DeepSeek habilitada por el instructor en Metabase.</p>
+        <p class="mt-3 leading-relaxed text-base-content/80">El asistente de IA te ayuda a pedir una gráfica con palabras comunes, ordenar instrucciones, preparar borradores y explicar un resultado. Así puedes avanzar con menos pasos técnicos; la persona comprueba el trabajo.</p>
+        <p class="mt-3 text-sm text-base-content/70">Las herramientas de IA autorizadas pueden apoyar otras tareas de redacción o código. En esta práctica usamos el asistente habilitado por el instructor dentro de Metabase.</p>
       </div>
       <div>
         <h2 class="font-display text-2xl font-semibold">Qué aporta Metabase</h2>
@@ -90,7 +96,7 @@ const trabajos = [
               <div class="min-w-0 flex-1">
                 <h3 class="font-display text-xl font-semibold sm:text-2xl">Trabajo {i + 1} · {trabajo.titulo}</h3>
                 <p class="mt-3 leading-relaxed text-base-content/80"><strong>Actividad:</strong> {trabajo.actividad}</p>
-                <label class="mt-5 block text-sm font-semibold" for={`prompt-${i}`}>Instrucción para DeepSeek</label>
+                <label class="mt-5 block text-sm font-semibold" for={`prompt-${i}`}>Instrucción para el asistente de IA</label>
                 <textarea id={`prompt-${i}`} class="mt-2 min-h-40 w-full resize-y rounded-xl border border-base-content/25 bg-base-200 p-4 text-sm leading-relaxed focus:outline-2 focus:outline-offset-2 focus:outline-secondary" rows="5" readonly>{trabajo.prompt}</textarea>
                 <div class="mt-2 flex flex-wrap items-center gap-3 print:hidden">
                   <button type="button" class="btn btn-outline btn-sm" data-copy={`prompt-${i}`}>Copiar instrucción</button>
