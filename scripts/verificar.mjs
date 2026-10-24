@@ -8,7 +8,7 @@ import { reactivos, explicaciones } from '../src/data/cuestionario.ts'
 import { cuestionariosPractica } from '../src/data/cuestionarios-practica.ts'
 import { temas } from '../src/data/curso.ts'
 import { materiales } from '../src/data/materiales.ts'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 
 const decks = [dia1, dia2, dia3]
 const errores = []
@@ -81,6 +81,20 @@ try {
 } catch {
   falla('No se pudo verificar el filtro del Día 2 en el CSV depurado')
 }
+
+// Los paquetes de credenciales del instructor nunca deben copiarse al sitio público.
+const archivoPrivado = /^(?:cuentas-metabase.*\.csv|cuentas-solo-instructor\.csv|Accesos-Metabase.*\.zip|CLAVE-DEL-ZIP.*\.txt|(?:transito-)?admin\.env)$/i
+function revisarArchivosPublicos(directorio, prefijo = '') {
+  for (const entrada of readdirSync(directorio, { withFileTypes: true })) {
+    const relativo = `${prefijo}${entrada.name}`
+    if (archivoPrivado.test(entrada.name) || /Administracion privada - Metabase/i.test(relativo)) {
+      falla(`Archivo de accesos privados dentro de public/: ${relativo}`)
+    } else if (entrada.isDirectory()) {
+      revisarArchivosPublicos(new URL(`${encodeURIComponent(entrada.name)}/`, directorio), `${relativo}/`)
+    }
+  }
+}
+revisarArchivosPublicos(new URL('../public/', import.meta.url))
 
 if (errores.length) {
   console.error(`✗ ${errores.length} problema${errores.length === 1 ? '' : 's'}:\n` + errores.map((e) => `  - ${e}`).join('\n'))

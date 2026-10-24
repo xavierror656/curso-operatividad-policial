@@ -23,3 +23,12 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 .playwright-mcp/
+
+# Accesos privados del curso: se entregan fuera del repositorio y de public/.
+**/cuentas-metabase*.csv
+**/cuentas-solo-instructor.csv
+**/Accesos-Metabase*.zip
+**/CLAVE-DEL-ZIP*.txt
+**/admin.env
+**/transito-admin.env
+**/Administracion privada - Metabase/

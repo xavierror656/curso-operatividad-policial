@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+import { accesosMetabase, obtenerEstadoAccesosMetabase } from '../data/accesos-metabase'
+
+const estado = obtenerEstadoAccesosMetabase()
+const estados = {
+  pendiente: { titulo: 'Alta pendiente', texto: 'Estos 50 identificadores están preparados, pero las cuentas todavía no están activadas. El instructor avisará cuando puedan utilizarse.' },
+  activo: { titulo: 'Cuentas activadas', texto: 'Usa únicamente el número que te asignó el instructor y la contraseña que recibiste por privado.' },
+  caducado: { titulo: 'Vigencia terminada', texto: 'El plazo de estas cuentas ha terminado. Consulta con el instructor si necesitas continuar la práctica.' },
+}
+const formatoFecha = (fecha: string | null) => fecha && Number.isFinite(Date.parse(fecha)) ? new Intl.DateTimeFormat('es-MX', {
+  dateStyle: 'long', timeStyle: 'short', timeZone: accesosMetabase.zonaHoraria,
+}).format(new Date(fecha)) : 'Por confirmar'
+---
+
+<Layout title="Accesos del curso · Metabase" description="Identificadores de acceso para la práctica de Metabase. Las contraseñas se entregan por privado.">
+  <article class="mx-auto max-w-4xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
+    <header class="max-w-3xl">
+      <a class="link link-hover text-sm text-base-content/70" href={href('/metabase/')}>Volver a la práctica de DeepSeek y Metabase</a>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Accesos del curso</h1>
+      <p class="mt-5 max-w-2xl leading-relaxed text-base-content/80 md:text-lg">Busca el número que te asignó el instructor. Copia tu usuario y entra a Metabase con la contraseña que te entrega por privado.</p>
+      <a class="btn btn-secondary mt-6 print:hidden" href={accesosMetabase.url} target="_blank" rel="noopener noreferrer">Entrar a Metabase <span class="icon-[tabler--external-link] size-5" aria-hidden="true"></span></a>
+    </header>
+
+    <section class="mt-9 rounded-2xl bg-primary p-5 text-primary-content sm:p-7" aria-labelledby="estado-titulo">
+      <div class="flex items-start gap-3">
+        <span class="icon-[tabler--clock] mt-0.5 size-6 shrink-0" aria-hidden="true"></span>
+        <div>
+          <h2 id="estado-titulo" class="font-display text-xl font-semibold" data-acceso-estado>{estados[estado].titulo}</h2>
+          <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/90" data-acceso-explicacion>{estados[estado].texto}</p>
+        </div>
+      </div>
+      <dl class="mt-6 grid gap-4 border-t border-white/20 pt-5 text-sm sm:grid-cols-3">
+        <div><dt class="text-white/75">Duración</dt><dd class="mt-1 font-semibold">{accesosMetabase.vigenciaDias} días desde la activación</dd></div>
+        <div><dt class="text-white/75">Inicio</dt><dd class="mt-1 font-semibold">{formatoFecha(accesosMetabase.activado)}</dd></div>
+        <div><dt class="text-white/75">Fin</dt><dd class="mt-1 font-semibold">{formatoFecha(accesosMetabase.caduca)}</dd></div>
+      </dl>
+      <p class="mt-4 text-xs leading-relaxed text-white/75">Las fechas se muestran en la hora de Ciudad Juárez.</p>
+    </section>
+
+    <section class="mt-10" aria-labelledby="usuarios-titulo">
+      <div class="flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <h2 id="usuarios-titulo" class="font-display text-2xl font-semibold">Encuentra tu usuario</h2>
+          <p class="mt-2 max-w-xl text-sm leading-relaxed text-base-content/75">El identificador completo se escribe en el campo de correo de Metabase. No es un buzón para recibir mensajes.</p>
+        </div>
+        <p class="text-sm text-base-content/70" id="usuarios-contador" role="status" aria-live="polite">50 usuarios</p>
+      </div>
+      <div class="mt-6 print:hidden">
+        <label class="block text-sm font-semibold" for="buscar-usuario">Número o usuario</label>
+        <div class="relative mt-2">
+          <span class="icon-[tabler--search] pointer-events-none absolute start-4 top-3.5 size-5 text-base-content/60" aria-hidden="true"></span>
+          <input id="buscar-usuario" type="search" placeholder="Ejemplo: 07 o usuario07" autocomplete="off" spellcheck="false" class="w-full rounded-xl border border-base-content/25 bg-base-100 py-3 pe-4 ps-12 text-base focus:outline-2 focus:outline-offset-2 focus:outline-secondary" aria-controls="lista-usuarios" />
+        </div>
+      </div>
+      <p class="mt-3 min-h-5 text-sm font-medium text-secondary print:hidden" id="copiar-estado" role="status" aria-live="polite"></p>
+      <div class="mt-2 overflow-x-auto rounded-xl border border-base-content/15">
+        <table class="w-full text-left text-sm" id="lista-usuarios">
+          <thead class="bg-base-200 text-base-content/75"><tr><th class="w-16 px-4 py-3 font-semibold" scope="col">Núm.</th><th class="px-4 py-3 font-semibold" scope="col">Usuario de Metabase</th><th class="w-20 px-4 py-3 text-right font-semibold print:hidden" scope="col"><span class="sr-only">Copiar usuario</span></th></tr></thead>
+          <tbody>
+            {accesosMetabase.usuarios.map(({ numero, usuario }) => (
+              <tr class="border-t border-base-content/10 hover:bg-base-200/60" data-usuario-fila data-busqueda={`${numero} ${String(numero).padStart(2, '0')} ${usuario}`}>
+                <th class="px-4 py-3 font-medium tabular-nums text-base-content/65" scope="row">{String(numero).padStart(2, '0')}</th>
+                <td class="px-4 py-3 font-semibold"><span data-usuario-texto>{usuario}</span></td>
+                <td class="px-4 py-3 text-right print:hidden"><button type="button" class="btn btn-ghost btn-sm" data-copiar-usuario={usuario} aria-label={`Copiar usuario ${usuario}`}><span class="icon-[tabler--copy] size-4" aria-hidden="true"></span><span class="max-sm:sr-only">Copiar</span></button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="px-5 py-10 text-center text-sm text-base-content/75" id="sin-usuarios" hidden>No hay coincidencias. Prueba con el número asignado o borra la búsqueda para ver todos.</p>
+      </div>
+      <p class="mt-5 max-w-2xl text-sm leading-relaxed text-base-content/75">La contraseña la entrega el instructor por privado. Si no la recibiste o tienes problemas para entrar, comunícate con él.</p>
+    </section>
+  </article>
+</Layout>
+
+<script>
+  import { obtenerEstadoAccesosMetabase } from '../data/accesos-metabase'
+
+  const estados = {
+    pendiente: { titulo: 'Alta pendiente', texto: 'Estos 50 identificadores están preparados, pero las cuentas todavía no están activadas. El instructor avisará cuando puedan utilizarse.' },
+    activo: { titulo: 'Cuentas activadas', texto: 'Usa únicamente el número que te asignó el instructor y la contraseña que recibiste por privado.' },
+    caducado: { titulo: 'Vigencia terminada', texto: 'El plazo de estas cuentas ha terminado. Consulta con el instructor si necesitas continuar la práctica.' },
+  }
+  const actualizarEstado = () => {
+    const estado = estados[obtenerEstadoAccesosMetabase()]
+    document.querySelector<HTMLElement>('[data-acceso-estado]')!.textContent = estado.titulo
+    document.querySelector<HTMLElement>('[data-acceso-explicacion]')!.textContent = estado.texto
+  }
+  actualizarEstado()
+  window.setInterval(actualizarEstado, 60_000)
+  window.addEventListener('pageshow', actualizarEstado)
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) actualizarEstado() })
+
+  const buscador = document.querySelector<HTMLInputElement>('#buscar-usuario')!
+  const filas = [...document.querySelectorAll<HTMLTableRowElement>('[data-usuario-fila]')]
+  const contador = document.querySelector<HTMLElement>('#usuarios-contador')!
+  const vacio = document.querySelector<HTMLElement>('#sin-usuarios')!
+  buscador.addEventListener('input', () => {
+    const busqueda = buscador.value.trim().toLocaleLowerCase('es-MX')
+    let visibles = 0
+    filas.forEach((fila) => {
+      const coincide = fila.dataset.busqueda!.toLocaleLowerCase('es-MX').includes(busqueda)
+      fila.hidden = !coincide
+      if (coincide) visibles++
+    })
+    contador.textContent = busqueda ? `${visibles} de ${filas.length} usuarios` : `${filas.length} usuarios`
+    vacio.hidden = visibles > 0
+  })
+
+  const aviso = document.querySelector<HTMLElement>('#copiar-estado')!
+  document.querySelectorAll<HTMLButtonElement>('[data-copiar-usuario]').forEach((boton) => {
+    boton.addEventListener('click', async () => {
+      const usuario = boton.dataset.copiarUsuario!
+      try {
+        await navigator.clipboard.writeText(usuario)
+        aviso.textContent = `Usuario copiado: ${usuario}`
+      } catch {
+        const texto = boton.closest('tr')!.querySelector('[data-usuario-texto]')!
+        const rango = document.createRange()
+        rango.selectNodeContents(texto)
+        const seleccion = window.getSelection()
+        seleccion?.removeAllRanges()
+        seleccion?.addRange(rango)
+        aviso.textContent = 'El usuario quedó seleccionado. Cópialo con Ctrl+C.'
+      }
+    })
+  })
+</script>
