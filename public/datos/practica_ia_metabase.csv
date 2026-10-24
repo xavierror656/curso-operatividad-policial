@@ -1,0 +1,13 @@
+id,fecha,tarea,minutos_sin_ia,minutos_con_ia,revisado
+1,2026-10-01,Redactar borrador,10,6,Sí
+2,2026-10-02,Redactar borrador,12,7,Sí
+3,2026-10-03,Redactar borrador,14,8,Sí
+4,2026-10-04,Redactar borrador,16,9,No
+5,2026-10-05,Redactar borrador,18,10,Sí
+6,2026-10-06,Resumir texto,12,6,Sí
+7,2026-10-07,Resumir texto,16,8,Sí
+8,2026-10-08,Resumir texto,20,10,No
+9,2026-10-09,Resumir texto,24,12,Sí
+10,2026-10-10,Revisar tabla,15,10,Sí
+11,2026-10-11,Revisar tabla,20,12,Sí
+12,2026-10-12,Revisar tabla,25,14,No

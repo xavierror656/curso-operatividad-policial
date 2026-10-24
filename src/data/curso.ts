@@ -13,7 +13,7 @@ export const curso = {
     'Manejo básico de computadora e internet. No se requieren conocimientos previos de estadística, cartografía o programación.',
   herramientas: ['Python con Jupyter', 'Metabase', 'QGIS', 'Asistentes de IA'],
   objetivo:
-    'Que el participante revise datos de práctica, construya un mapa sencillo en QGIS y lea tres gráficas de tableros existentes de Metabase, con acompañamiento paso a paso y cuidado de la información.',
+    'Que el participante revise datos de práctica, construya un mapa sencillo en QGIS y cree un tablero de tres gráficas en Metabase con apoyo de DeepSeek, acompañamiento paso a paso y cuidado de la información.',
 }
 
 export const enfoque = [
@@ -21,7 +21,7 @@ export const enfoque = [
     icon: 'icon-[tabler--database]',
     titulo: 'Del archivo al análisis',
     texto:
-      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se lee una gráfica de territorio, una de turnos y una de emergencias en Metabase.',
+      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se usa otro conjunto ficticio para crear un tablero sobre uso responsable de IA con DeepSeek dentro de Metabase.',
   },
   {
     icon: 'icon-[tabler--sparkles]',
@@ -59,8 +59,8 @@ export const sesiones = [
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'Metabase: tres actividades guiadas',
-    entregable: 'Tres respuestas breves sobre territorio, turnos y emergencias; cada una indica Periodo y Distrito.',
+    titulo: 'DeepSeek y Metabase: tres trabajos guiados',
+    entregable: 'Un tablero sobre uso responsable de IA con tres gráficas comprobadas y una nota de datos simulados.',
     disponible: true,
   },
 ]
@@ -127,43 +127,43 @@ export const temas: Tema[] = [
   },
   {
     num: 7,
-    titulo: 'Primeros pasos con Metabase',
+    titulo: 'Primeros pasos con DeepSeek y Metabase',
     horas: 4,
     contenido:
-      'Acceso guiado a Metabase y lectura de una gráfica sencilla en cada uno de tres tableros: Territorio, Ritmo temporal y Emergencias.',
-    producto: 'Primera respuesta breve con Periodo y Distrito visibles.',
+      'Acceso a la tabla de práctica y al asistente de IA dentro de Metabase. Ventajas del lenguaje natural y preparación de instrucciones sencillas con datos ficticios.',
+    producto: 'Primera gráfica: conteo de prácticas por tarea.',
   },
   {
     num: 8,
-    titulo: 'Leer tres gráficas de Metabase',
+    titulo: 'Crear tres gráficas con apoyo de IA',
     horas: 4,
     contenido:
-      'Lectura guiada de gráficas por distrito, turno y tipo de atención. Identificación de la barra mayor sin atribuir causas.',
-    producto: 'Tres respuestas breves, una por gráfica.',
+      'Tres trabajos guiados: prácticas por tarea, tiempo promedio con y sin IA y estado de revisión humana. Guardado de cada gráfica en la colección de práctica.',
+    producto: 'Tres gráficas guardadas con nombres claros.',
   },
   {
     num: 9,
-    titulo: 'Revisar Periodo y Distrito',
+    titulo: 'Comprobar resultados y cuidar el acceso',
     horas: 4,
     contenido:
-      'Comprobación de los filtros Periodo y Distrito antes de leer cada gráfica. Uso de un periodo completo indicado por el instructor.',
-    producto: 'Tres frases con los filtros utilizados.',
+      'Comprobación de conteos y promedios con el conjunto de doce registros ficticios. Diferencia entre permisos y filtros; información que puede procesar el proveedor de IA.',
+    producto: 'Gráficas comprobadas y nota de alcance de la simulación.',
   },
   {
     num: 10,
-    titulo: 'Compartir una respuesta de Metabase',
+    titulo: 'Armar y presentar el tablero de práctica',
     horas: 3,
     contenido:
-      'Lectura en voz alta de una de las tres respuestas. El participante nombra el Periodo y Distrito y distingue lo observado en la gráfica de una explicación de las causas.',
-    producto: 'Una respuesta breve presentada al grupo.',
+      'Armado de un dashboard con las tres gráficas y una nota que identifica los datos simulados. Presentación breve del apoyo de IA, la comprobación y el cuidado de la información.',
+    producto: 'Tablero «Uso responsable de IA» presentado al instructor por enlace interno.',
   },
 ]
 
 export const productos = [
   {
     icon: 'icon-[tabler--layout-dashboard]',
-    titulo: 'Tres lecturas de Metabase',
-    texto: 'Responde tres preguntas breves e indica el Periodo y Distrito usados.',
+    titulo: 'Tablero creado con apoyo de DeepSeek',
+    texto: 'Reúne tres gráficas comprobadas de tareas, tiempo y revisión humana.',
   },
   {
     icon: 'icon-[tabler--zoom-exclamation]',
@@ -177,8 +177,8 @@ export const productos = [
   },
   {
     icon: 'icon-[tabler--file-analytics]',
-    titulo: 'Respuesta clara al grupo',
-    texto: 'Lee una frase y explica qué muestra la gráfica, sin atribuir causas.',
+    titulo: 'Explicación clara del resultado',
+    texto: 'Explica cómo verificó las gráficas y qué límites tienen los datos simulados.',
   },
 ]
 
@@ -186,14 +186,14 @@ export const requerimientos = [
   'Equipo por participante con privilegios de instalación y 8 GB de RAM como mínimo.',
   'Python con Jupyter, o Google Colab si no se autoriza la instalación local.',
   'QGIS LTR, misma versión para todo el grupo, con acceso a un mapa base de teselas.',
-  'Acceso autorizado de lectura a la colección de tableros del curso en Metabase.',
+  'Cuenta de Metabase con acceso a la tabla ficticia, al asistente DeepSeek y a una colección donde crear y guardar gráficas y tableros.',
   'Acceso a internet y a los asistentes de IA definidos para el curso.',
   'Conjunto de datos sintético o anonimizado, proporcionado por el instructor.',
 ]
 
 export const acreditacion = [
   { icon: 'icon-[tabler--user-check]', texto: 'Asistencia mínima del 80% de las sesiones.' },
-  { icon: 'icon-[tabler--presentation]', texto: 'Entrega de tres respuestas breves de Metabase del Día 3.' },
+  { icon: 'icon-[tabler--presentation]', texto: 'Entrega del tablero de práctica del Día 3 con tres gráficas comprobadas.' },
   { icon: 'icon-[tabler--checklist]', texto: 'Puntaje mínimo de 6 sobre 10 en la rúbrica del producto final.' },
   { icon: 'icon-[tabler--shield-lock]', texto: 'Cero incidencias en el manejo seguro de la información.' },
 ]

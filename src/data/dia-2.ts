@@ -276,13 +276,13 @@ export const dia2: Deck = {
     {
       block: '4', time: '11:56', layout: 'flow',
       kicker: 'Puente al Día 3',
-      title: 'Mañana leerá los tableros existentes de Metabase',
+      title: 'Mañana creará un tablero con ayuda de DeepSeek',
       steps: [
         { label: 'Día 1', detail: 'Archivo sintético depurado' },
         { label: 'Día 2', detail: 'Primer mapa en QGIS' },
-        { label: 'Día 3', detail: 'Análisis de tableros existentes en Metabase' },
+        { label: 'Día 3', detail: 'Tres gráficas y un tablero en Metabase con DeepSeek' },
       ],
-      notes: 'Recoja la evidencia del mapa de práctica; el trabajo de QGIS termina hoy. El Día 3 se dedica a consultar los tableros ya preparados en Metabase, identificar su fuente, periodo y filtros, y explicar un hallazgo. No se sube el CSV sintético ni se usa su conteo de 928 como control de los tableros.',
+      notes: 'Recoja la evidencia del mapa de práctica. El Día 3 usa otro conjunto ficticio sobre uso de IA: cada equipo crea tres gráficas con DeepSeek, comprueba los resultados y las reúne en un tablero de Metabase.',
     },
   ],
 }

@@ -47,6 +47,16 @@ const exportaciones = [
       <p>Los dos CSV de incidentes son <strong>sintéticos</strong>. Las seis capas GeoJSON son archivos geográficos proporcionados para el curso e incluyen nombres y límites reales; <code>colonias.geojson</code> también contiene conteos agregados. Los nombres «Colonia Demo» del CSV no coinciden con los de esa capa.</p>
     </div>
 
+    <section id="archivo-dia-3" class="mt-8 scroll-mt-24 rounded-box bg-primary p-5 text-primary-content md:p-7" aria-labelledby="titulo-archivo-dia-3">
+      <h2 id="titulo-archivo-dia-3" class="text-2xl font-semibold">Práctica IA · Día 3</h2>
+      <p class="mt-3 max-w-2xl leading-relaxed text-white/85">12 registros ficticios sobre redacción, resúmenes y revisión de tablas. Se usan para crear tres gráficas con DeepSeek dentro de Metabase. Los tiempos están simulados y no prueban mejoras reales de productividad.</p>
+      <div class="mt-5 flex flex-wrap gap-3">
+        <a href={href('/datos/practica_ia_metabase.csv')} download class="btn btn-secondary"><span class="icon-[tabler--download] size-5" aria-hidden="true"></span>Descargar CSV de IA</a>
+        <a href={href('/metabase/')} class="btn btn-outline border-white/40 text-white hover:bg-white/10">Ver los tres trabajos</a>
+      </div>
+      <p class="mt-4 text-sm text-white/80">El instructor prepara la tabla <strong>practica_ia_metabase</strong> y comprueba el acceso del grupo antes de clase.</p>
+    </section>
+
     <section class="mt-8 rounded-box border border-secondary/35 bg-secondary/10 p-5 md:flex md:items-center md:justify-between md:gap-7 md:p-7" aria-labelledby="titulo-paquete-practica">
       <div>
         <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Archivos de práctica de los Días 1 y 2</p>
@@ -184,7 +194,7 @@ const exportaciones = [
     </div>
 
     <h2 class="mt-12 text-2xl font-semibold">Cómo se generaron</h2>
-    <p class="mt-2 text-base-content/75">Con el script <code>datos/generar.py</code> del repositorio, con semilla fija: se obtienen siempre los mismos CSV sintéticos. Esos registros son para los ejercicios de los Días 1 y 2; las cifras de Metabase del Día 3 se interpretan según sus propias fuentes.</p>
+    <p class="mt-2 text-base-content/75">Los CSV de incidentes se generan con <code>datos/generar.py</code> y semilla fija para los Días 1 y 2. El Día 3 usa un conjunto separado de doce prácticas ficticias de IA, con conteos y promedios preparados para poder comprobar cada gráfica.</p>
   </article>
 
 <script>

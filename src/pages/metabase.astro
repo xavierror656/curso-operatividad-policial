@@ -2,54 +2,108 @@
 import Layout from '../layouts/Layout.astro'
 import { href } from '../lib/site'
 
-const actividades = [
-  { id: 2, titulo: 'Territorio y concentración de eventos', grafica: 'Registros por distrito', filtro: 'Periodo: el elegido por el instructor · Distrito: vista de todos los distritos', pregunta: '¿Qué distrito tiene más registros en la gráfica?' },
-  { id: 3, titulo: 'Ritmo temporal y turnos', grafica: 'Registros por turno', filtro: 'Periodo: el mismo · Distrito: el asignado por el instructor', pregunta: '¿Qué turno tiene más registros?' },
-  { id: 10, titulo: 'Emergencias y clasificación de atención', grafica: 'Registros por tipo de atención', filtro: 'Periodo: el mismo · Distrito: el asignado por el instructor', pregunta: '¿Qué tipo de atención tiene más registros?' },
+const trabajos = [
+  {
+    titulo: '¿Para qué usamos la IA?',
+    nombre: '01 · Prácticas por tarea',
+    actividad: 'Pide una gráfica de barras que cuente las prácticas de cada tarea.',
+    prompt: 'Usa únicamente la tabla de práctica practica_ia_metabase. Cuenta los registros agrupados por tarea y crea una gráfica de barras. Titúlala «01 · Prácticas por tarea». No uses otras tablas ni inventes datos.',
+    revision: 'Deben aparecer 5 prácticas de Redactar borrador, 4 de Resumir texto y 3 de Revisar tabla: 12 en total.',
+    manual: 'En una pregunta nueva, elige la tabla de práctica. En Resumir, selecciona Conteo de filas y agrupa por tarea. Visualiza como barras.',
+  },
+  {
+    titulo: '¿Cuánto tiempo marca la práctica?',
+    nombre: '02 · Tiempo promedio de práctica',
+    actividad: 'Pide comparar el tiempo promedio con y sin IA para cada tarea.',
+    prompt: 'Usa únicamente practica_ia_metabase. Agrupa por tarea y calcula el promedio de minutos_sin_ia y el promedio de minutos_con_ia. Muestra ambas medidas en barras, con minutos como unidad. Titula «02 · Tiempo promedio de práctica». Son datos simulados: no concluyas que prueban un ahorro real.',
+    revision: 'Promedios sin IA / con IA: Redactar borrador 14 / 8 min; Resumir texto 18 / 9 min; Revisar tabla 20 / 12 min. Comprueba que usó Promedio, no Suma.',
+    manual: 'En una pregunta nueva, elige la tabla. En Resumir, añade Promedio de minutos_sin_ia y Promedio de minutos_con_ia; agrupa por tarea. Visualiza las dos medidas como barras.',
+  },
+  {
+    titulo: '¿Qué resultados revisó una persona?',
+    nombre: '03 · Revisión humana',
+    actividad: 'Pide contar las prácticas revisadas y las que siguen pendientes.',
+    prompt: 'Usa únicamente practica_ia_metabase. Cuenta los registros agrupados por revisado y crea una gráfica de barras titulada «03 · Revisión humana». Conserva las categorías Sí y No. No cambies los datos ni supongas que una respuesta de IA es correcta por estar revisada.',
+    revision: 'Deben aparecer Sí = 9 y No = 3. El total vuelve a ser 12. «Revisado» indica que alguien lo revisó; no garantiza que esté libre de errores.',
+    manual: 'En una pregunta nueva, elige la tabla. En Resumir, selecciona Conteo de filas y agrupa por revisado. Visualiza como barras.',
+  },
 ]
 ---
 
-<Layout title="Tres actividades guiadas de Metabase · Día 3" description="Tres actividades sencillas con los tableros de Metabase de Javier: territorio, turnos y emergencias.">
+<Layout title="DeepSeek y Metabase · Tres trabajos guiados" description="Crea un tablero sencillo sobre uso responsable de IA con DeepSeek dentro de Metabase y datos simulados.">
   <article class="mx-auto max-w-5xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
     <header class="max-w-3xl">
       <div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
         <a class="link link-hover" href={href('/participante/dia-3/')}>Material del Día 3</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">Metabase</span>
+        <span aria-hidden="true">/</span><span aria-current="page">DeepSeek y Metabase</span>
       </div>
-      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Tres actividades guiadas en Metabase</h1>
-      <p class="mt-5 max-w-2xl text-base leading-relaxed text-base-content/75 md:text-lg">Abre una gráfica en cada tablero. Responde una pregunta con una frase breve. El instructor hará la primera demostración en pantalla.</p>
-      <a class="btn btn-secondary mt-7 print:hidden" href="#actividades"><span class="icon-[tabler--arrow-down] size-5" aria-hidden="true"></span>Empezar las actividades</a>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Crea tu primer tablero con ayuda de DeepSeek</h1>
+      <p class="mt-5 max-w-2xl text-base leading-relaxed text-base-content/75 md:text-lg">Tres trabajos, una actividad por trabajo y un tablero final sobre el uso responsable de IA. El instructor demuestra cada paso y después lo repites en pareja.</p>
+      <div class="mt-7 flex flex-wrap gap-3 print:hidden">
+        <a class="btn btn-secondary" href="#trabajos">Empezar los tres trabajos</a>
+        <a class="btn btn-outline" href={href('/datos/practica_ia_metabase.csv')} download>Descargar datos simulados</a>
+      </div>
+      <p class="mt-4 text-sm text-base-content/70">El ejercicio usa 12 registros ficticios. Sus tiempos sirven para aprender; no prueban mejoras reales de productividad.</p>
     </header>
 
-    <section class="mt-10 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8 sm:py-8" aria-labelledby="antes-titulo">
-      <h2 id="antes-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Antes de empezar</h2>
-      <ol class="mt-5 space-y-3 text-sm leading-relaxed text-white/90 sm:text-base">
-        <li><strong>1.</strong> Entra con la cuenta que te dio el instructor. Si no puedes abrir un tablero, avísale.</li>
-        <li><strong>2.</strong> Usa el <strong>Periodo completo</strong> que indique el instructor. Evita un mes que todavía no termina.</li>
-        <li><strong>3.</strong> Mira el filtro <strong>Distrito</strong> antes de leer cada gráfica. El instructor mostrará cómo dejar la vista de todos los distritos para la primera actividad.</li>
-      </ol>
-      <p class="mt-5 text-sm leading-relaxed text-white/80">Sólo vas a consultar los tableros. No necesitas crear gráficas, descargar datos ni revisar todas las tarjetas.</p>
+    <section class="mt-10 grid gap-8 border-y border-base-content/15 py-8 md:grid-cols-2" aria-labelledby="apoyo-titulo">
+      <div>
+        <h2 id="apoyo-titulo" class="font-display text-2xl font-semibold">Qué aporta la inteligencia artificial</h2>
+        <p class="mt-3 leading-relaxed text-base-content/80">DeepSeek te permite pedir una gráfica con palabras comunes. También ayuda a ordenar instrucciones, preparar borradores y explicar un resultado. Así puedes avanzar con menos pasos técnicos; la persona comprueba el trabajo.</p>
+        <p class="mt-3 text-sm text-base-content/70">En otras tareas, asistentes como ChatGPT o Codex pueden apoyar con redacción o código. Hoy trabajamos sólo con la integración de DeepSeek habilitada por el instructor en Metabase.</p>
+      </div>
+      <div>
+        <h2 class="font-display text-2xl font-semibold">Qué aporta Metabase</h2>
+        <p class="mt-3 leading-relaxed text-base-content/80">Reúne las gráficas en un tablero, permite volver a los mismos datos y reduce la necesidad de repartir copias de archivos. Sus permisos configurados controlan quién consulta o modifica el contenido. <a class="link" href="https://www.metabase.com/docs/latest/permissions/collections" target="_blank" rel="noopener noreferrer">Cómo funcionan los permisos</a>.</p>
+        <p class="mt-3 text-sm text-base-content/70">Un filtro de pantalla cambia la vista; no sustituye una restricción de acceso. La seguridad depende de los permisos de datos, las colecciones y la configuración del servidor.</p>
+      </div>
     </section>
 
-    <section id="actividades" class="mt-14 scroll-mt-24" aria-labelledby="actividades-titulo">
-      <h2 id="actividades-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Haz estas tres actividades</h2>
-      <p class="mt-2 max-w-2xl text-base-content/75">Puedes trabajar en pareja. El nombre de una gráfica puede variar: si no la encuentras, el instructor te señalará una equivalente.</p>
-      <ol class="mt-7 space-y-5">
-        {actividades.map((actividad, i) => (
-          <li class="rounded-2xl border border-base-content/15 bg-base-100 p-5 sm:p-7">
+    <section class="mt-8 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8" aria-labelledby="antes-titulo">
+      <h2 id="antes-titulo" class="font-display text-2xl font-semibold">Antes de empezar</h2>
+      <ol class="mt-4 list-decimal space-y-3 ps-5 text-sm leading-relaxed sm:text-base">
+        <li>Entra a <a class="font-semibold underline underline-offset-4" href="https://estadisticas.floresjavier.com" target="_blank" rel="noopener noreferrer">Metabase de Javier</a> con tu cuenta asignada.</li>
+        <li>El instructor te muestra el asistente de IA y la tabla <strong>practica_ia_metabase</strong>. Comprueba que puedes guardar en la colección de práctica.</li>
+        <li>Usa únicamente esa tabla ficticia. Pide una gráfica a la vez y revisa el resultado antes de guardarlo.</li>
+      </ol>
+      <p class="mt-5 text-sm leading-relaxed text-white/85">La IA puede enviar al proveedor tus instrucciones, nombres de campos, muestras y datos derivados de las gráficas. Por eso esta práctica usa datos simulados. Mantén fuera de la conversación datos policiales, nombres, folios y contraseñas. <a class="font-semibold underline underline-offset-4" href="https://www.metabase.com/docs/latest/ai/privacy" target="_blank" rel="noopener noreferrer">Datos que procesa la IA</a>.</p>
+    </section>
+
+    <details class="mt-5 border-b border-base-content/15 pb-5">
+      <summary class="cursor-pointer font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Preparación del instructor y ayuda de acceso</summary>
+      <div class="mt-4 max-w-3xl space-y-3 text-sm leading-relaxed text-base-content/80">
+        <p>Antes de clase, carga el CSV sintético en una base de práctica y confirma el nombre visible de la tabla. Da a las cuentas del grupo permiso para consultarla, crear gráficas y guardar en una colección de práctica. Prueba con una cuenta de alumno que la tabla y el asistente aparecen y que se pueden crear y guardar las tres gráficas y el tablero. Esta guía no crea automáticamente la tabla ni cambia permisos.</p>
+        <p>La carga de CSV requiere una base compatible y configuración de administrador. No pidas al alumno que busque “Subir CSV” si su cuenta no lo permite. <a class="link" href="https://www.metabase.com/docs/latest/databases/uploads" target="_blank" rel="noopener noreferrer">Preparar las cargas</a>.</p>
+        <p>Si falta el botón de IA o la opción de guardar, revisa los permisos con la persona responsable. Mientras tanto, demuestra el ejercicio en la pantalla del instructor. Las etiquetas de los botones pueden variar con el idioma y la versión.</p>
+      </div>
+    </details>
+
+    <section id="trabajos" class="mt-12 scroll-mt-24" aria-labelledby="trabajos-titulo">
+      <h2 id="trabajos-titulo" class="font-display text-2xl font-semibold md:text-3xl">Tres trabajos para un mismo tablero</h2>
+      <p class="mt-3 max-w-2xl text-base-content/75">Abre el asistente de IA dentro de Metabase. Copia la instrucción, observa la gráfica y guárdala con el nombre indicado. Metabase llama “pregunta” a una gráfica o consulta guardada.</p>
+      <ol class="mt-7">
+        {trabajos.map((trabajo, i) => (
+          <li class="border-t border-base-content/20 py-8 first:border-t-2 first:border-primary">
             <div class="flex items-start gap-4">
-              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-secondary text-base-100 font-display font-semibold" aria-hidden="true">{i + 1}</span>
+              <span class="grid size-10 shrink-0 place-items-center rounded-full bg-secondary font-display font-semibold text-base-100" aria-hidden="true">{i + 1}</span>
               <div class="min-w-0 flex-1">
-                <h3 class="font-display text-xl font-semibold leading-snug">{actividad.titulo}</h3>
-                <p class="mt-2 text-sm text-base-content/75"><strong>Busca una gráfica:</strong> {actividad.grafica}</p>
-                <p class="mt-1 text-sm text-base-content/75"><strong>Filtros:</strong> {actividad.filtro}</p>
-                <p class="mt-4 text-base font-semibold">{actividad.pregunta}</p>
-                <p class="mt-2 text-sm text-base-content/75">Responde en una frase: «En el periodo ___, con Distrito ___, la gráfica muestra más registros en ___».</p>
-                <a class="btn btn-outline btn-sm mt-5 print:hidden" href={`https://estadisticas.floresjavier.com/dashboard/${actividad.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir el tablero ${actividad.titulo} en otra pestaña`}>
-                  Abrir tablero <span class="icon-[tabler--external-link] size-4" aria-hidden="true"></span>
-                </a>
-                <div class="mt-6 border-b border-base-content/35 pb-1 text-sm text-base-content/65 print:mt-8">Mi respuesta:</div>
+                <h3 class="font-display text-xl font-semibold sm:text-2xl">Trabajo {i + 1} · {trabajo.titulo}</h3>
+                <p class="mt-3 leading-relaxed text-base-content/80"><strong>Actividad:</strong> {trabajo.actividad}</p>
+                <label class="mt-5 block text-sm font-semibold" for={`prompt-${i}`}>Instrucción para DeepSeek</label>
+                <textarea id={`prompt-${i}`} class="mt-2 min-h-40 w-full resize-y rounded-xl border border-base-content/25 bg-base-200 p-4 text-sm leading-relaxed focus:outline-2 focus:outline-offset-2 focus:outline-secondary" rows="5" readonly>{trabajo.prompt}</textarea>
+                <div class="mt-2 flex flex-wrap items-center gap-3 print:hidden">
+                  <button type="button" class="btn btn-outline btn-sm" data-copy={`prompt-${i}`}>Copiar instrucción</button>
+                  <span class="text-sm text-base-content/70" data-copy-status={`prompt-${i}`} role="status" aria-live="polite"></span>
+                </div>
+                <p class="mt-5 text-sm leading-relaxed"><strong>Entrega del trabajo {i + 1}:</strong> una gráfica guardada como <strong>«{trabajo.nombre}»</strong>, revisada por tu equipo.</p>
+                <details class="mt-4 rounded-xl bg-base-200 p-4">
+                  <summary class="cursor-pointer font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Comprobar el resultado</summary>
+                  <p class="mt-3 text-sm leading-relaxed text-base-content/80">{trabajo.revision}</p>
+                </details>
+                <details class="mt-3 text-sm">
+                  <summary class="cursor-pointer font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary">Si la IA no crea la gráfica</summary>
+                  <p class="mt-3 leading-relaxed text-base-content/80">El instructor puede ayudarte con <strong>Nuevo → Pregunta</strong> (New → Question) y el editor visual. {trabajo.manual} No hace falta escribir SQL.</p>
+                </details>
               </div>
             </div>
           </li>
@@ -57,11 +111,36 @@ const actividades = [
       </ol>
     </section>
 
-    <section class="mt-10 max-w-3xl rounded-2xl bg-base-200 p-5 sm:p-7" aria-labelledby="cierre-titulo">
-      <h2 id="cierre-titulo" class="font-display text-xl font-semibold">Al terminar</h2>
-      <p class="mt-2 text-sm leading-relaxed text-base-content/80">Lee una de tus tres frases a un compañero. Di qué Periodo y Distrito usaste. La gráfica muestra registros capturados; por sí sola no explica por qué ocurrieron.</p>
-      <p class="mt-3 text-sm leading-relaxed text-base-content/80">La colección de Javier contiene más material que el instructor puede mostrar si queda tiempo. No forma parte de la tarea.</p>
-      <a class="btn btn-secondary mt-5 print:hidden" href={href('/cuestionario/dia-3/')}>Responder repaso de tres preguntas</a>
+    <section class="mt-6 rounded-2xl bg-base-200 p-5 sm:p-8" aria-labelledby="tablero-titulo">
+      <h2 id="tablero-titulo" class="font-display text-2xl font-semibold">Arma el tablero y explica lo que ves</h2>
+      <ol class="mt-5 list-decimal space-y-3 ps-5 leading-relaxed text-base-content/80">
+        <li>Con ayuda del instructor, abre <strong>Nuevo → Tablero</strong> (New → Dashboard). Nómbralo <strong>«Uso responsable de IA – Equipo ___»</strong> y guárdalo en la colección de práctica asignada.</li>
+        <li>Añade las tres gráficas guardadas. Ordénalas: tareas, tiempo promedio y revisión humana.</li>
+        <li>Añade una nota: <strong>«Datos simulados de 12 prácticas. Los tiempos no prueban un ahorro real. Los resultados de IA requieren revisión humana».</strong></li>
+        <li>Guarda y comprueba con el instructor quién puede verlo. Comparte el enlace interno con él y presenta una explicación de un minuto.</li>
+      </ol>
+      <p class="mt-5 text-sm text-base-content/75">Entrega final: un tablero con tres gráficas correctas y la nota de alcance. <a class="link" href="https://www.metabase.com/docs/latest/dashboards/introduction" target="_blank" rel="noopener noreferrer">Guía oficial para crear un tablero</a>.</p>
+      <a class="btn btn-secondary mt-6 print:hidden" href={href('/cuestionario/dia-3/')}>Repaso de tres preguntas</a>
     </section>
+
+    <p class="mt-8 max-w-3xl text-sm leading-relaxed text-base-content/70">Recuerda: la IA propone; tú compruebas los campos y las cifras; Metabase organiza el resultado y aplica los accesos configurados. <a class="link" href="https://www.metabase.com/docs/latest/ai/metabot" target="_blank" rel="noopener noreferrer">Qué puede hacer el asistente de Metabase</a>.</p>
   </article>
 </Layout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const id = button.dataset.copy!
+      const input = document.getElementById(id) as HTMLTextAreaElement
+      const status = document.querySelector<HTMLElement>(`[data-copy-status="${id}"]`)!
+      try {
+        await navigator.clipboard.writeText(input.value)
+        status.textContent = 'Instrucción copiada.'
+      } catch {
+        input.focus()
+        input.select()
+        status.textContent = 'Selecciona y copia el texto con Ctrl+C.'
+      }
+    })
+  })
+</script>

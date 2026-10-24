@@ -682,7 +682,7 @@ export const dia1: Deck = {
         { tone: 'warning', icon: 'icon-[tabler--copy]', value: '17', label: 'Posibles duplicados' },
       ],
       notes:
-        'Estas tarjetas son una visualización del material de práctica, no una pantalla de SSPM. Pida al grupo identificar las filas afectadas en su CSV. Conciliación: 1,058 registros menos 130 marcados que se excluyen dejan 928 para el mapa del Día 2. Las cifras de los tableros existentes del Día 3 pertenecen a sus propias fuentes.',
+        'Estas tarjetas son una visualización del material de práctica, no una pantalla de SSPM. Pida al grupo identificar las filas afectadas en su CSV. Conciliación: 1,058 registros menos 130 marcados que se excluyen dejan 928 para el mapa del Día 2. El Día 3 usa otro conjunto ficticio sobre uso de IA.',
     },
     {
       block: '3B',
@@ -799,7 +799,7 @@ export const dia1: Deck = {
       steps: [
         { label: 'Día 1', detail: 'Archivo depurado' },
         { label: 'Día 2', detail: 'Teselas, GeoJSON y puntos filtrados' },
-        { label: 'Día 3', detail: 'Lectura de tableros existentes en Metabase' },
+        { label: 'Día 3', detail: 'Tablero con datos ficticios y apoyo de DeepSeek' },
       ],
       notes:
         'Cierre con el hilo del curso. Mañana se añade un mapa base de teselas, se dibuja un GeoJSON y se grafican y filtran en QGIS los puntos del archivo depurado de hoy.',
