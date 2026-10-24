@@ -1,0 +1,110 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+
+const coleccion = 'https://estadisticas.floresjavier.com/collection/5'
+const dashboards = [
+  { id: 2, nombre: 'Territorio y concentración de eventos' },
+  { id: 3, nombre: 'Ritmo temporal y turnos' },
+  { id: 4, nombre: 'Detenciones y perfil registrado' },
+  { id: 5, nombre: 'Víctimas y atención declarada' },
+  { id: 6, nombre: 'Clasificación de hechos y faltas' },
+  { id: 7, nombre: 'Armas y municiones registradas' },
+  { id: 8, nombre: 'Vehículos y motivos de aseguramiento' },
+  { id: 9, nombre: 'Sustancias y objetos asegurados' },
+  { id: 10, nombre: 'Emergencias y clasificación de atención' },
+  { id: 11, nombre: 'Calidad de captura y cobertura' },
+]
+
+const ruta = [
+  { titulo: 'Entra con tu cuenta', texto: 'Abre la colección y usa la cuenta individual que te asignaron para la clase. Si Metabase muestra la pantalla de acceso, inicia sesión y vuelve a abrir el enlace.' },
+  { titulo: 'Ubica el contexto', texto: 'Elige un tablero. Lee su título y revisa los filtros Periodo y Distrito, la unidad de medida y la fuente o definición disponible antes de interpretar una cifra.' },
+  { titulo: 'Prueba un cambio', texto: 'Cambia un filtro a la vez y observa qué visualizaciones se actualizan. Para comparar tableros, vuelve a seleccionar el mismo Periodo y Distrito en ambos.' },
+  { titulo: 'Explica una decisión', texto: 'Describe qué se ve, qué no se puede concluir con esa vista y qué dato comprobarías antes de llevar el hallazgo a una decisión operativa.' },
+]
+---
+
+<Layout title="Metabase · Guía del Día 3" description="Acceso y recorrido de análisis para los tableros de Metabase del Día 3.">
+  <article class="mx-auto max-w-6xl px-4 pb-16 pt-8 md:px-6 md:pt-12">
+    <header class="max-w-4xl">
+      <div class="flex flex-wrap items-center gap-2 text-sm text-base-content/70">
+        <a class="link link-hover" href={href('/participante/dia-3/')}>Material del Día 3</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">Metabase</span>
+      </div>
+      <h1 class="mt-4 font-display text-4xl font-semibold leading-tight tracking-[-0.025em] text-balance md:text-5xl">Explora los tableros de Metabase</h1>
+      <p class="mt-5 max-w-3xl text-base leading-relaxed text-base-content/75 md:text-lg">Durante el Día 3 trabajaremos con la colección de tableros del curso. Usa las vistas para formular preguntas, comprobar el alcance de los datos y explicar un hallazgo con sus límites.</p>
+      <div class="mt-7 flex flex-wrap gap-3 print:hidden">
+        <a class="btn btn-secondary" href={coleccion} target="_blank" rel="noopener noreferrer"><span class="icon-[tabler--external-link] size-5" aria-hidden="true"></span>Abrir colección en Metabase</a>
+        <a class="btn btn-outline" href="#ruta">Ver cómo trabajar</a>
+      </div>
+      <p class="mt-4 text-sm text-base-content/70">El acceso requiere una cuenta individual asignada para la clase y permiso de lectura. La colección se abre en otra pestaña; deja esta guía a la mano.</p>
+    </header>
+
+    <div class="mt-10 grid items-start gap-6 lg:grid-cols-[minmax(0,1.65fr)_minmax(15rem,1fr)]">
+      <section id="ruta" class="scroll-mt-24 rounded-2xl bg-primary px-5 py-6 text-primary-content sm:px-8 sm:py-8" aria-labelledby="ruta-titulo">
+        <h2 id="ruta-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em]">Ruta de trabajo</h2>
+        <p class="mt-2 max-w-2xl text-sm leading-relaxed text-white/80">Repite estos pasos con al menos dos tableros. La meta es sostener una interpretación, no solo abrir una gráfica.</p>
+        <ol class="mt-7 space-y-0">
+          {ruta.map((paso, i) => (
+            <li class="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-4 border-t border-white/20 py-5 first:border-0 first:pt-0 last:pb-0">
+              <span class="grid size-9 place-items-center rounded-full bg-white/15 font-display text-sm font-semibold" aria-hidden="true">{i + 1}</span>
+              <div>
+                <h3 class="font-display text-lg font-semibold">{paso.titulo}</h3>
+                <p class="mt-1 max-w-2xl text-sm leading-relaxed text-white/85">{paso.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <aside class="rounded-2xl bg-base-200 px-5 py-6 sm:px-7" aria-labelledby="antes-titulo">
+        <h2 id="antes-titulo" class="font-display text-xl font-semibold">Antes de empezar</h2>
+        <ul class="mt-4 space-y-3 text-sm leading-relaxed text-base-content/80">
+          <li class="flex gap-2"><span class="icon-[tabler--user-check] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Ten a mano la cuenta que te entregó el instructor. No compartas tu contraseña.</span></li>
+          <li class="flex gap-2"><span class="icon-[tabler--filter] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Verifica Periodo y Distrito cada vez que cambies de tablero. Si un mes sigue en curso, sus datos son parciales.</span></li>
+          <li class="flex gap-2"><span class="icon-[tabler--eye] mt-0.5 size-5 shrink-0 text-secondary" aria-hidden="true"></span><span>Trabaja en modo consulta: no necesitas subir archivos ni crear tableros.</span></li>
+        </ul>
+        <div class="mt-6 border-t border-base-content/15 pt-5">
+          <h3 class="font-display font-semibold">Si no puedes entrar</h3>
+          <p class="mt-2 text-sm leading-relaxed text-base-content/75">Comprueba que abriste el enlace correcto e inicia sesión. Si aparece “sin permiso” o no ves la colección, pide al instructor que revise el acceso de tu cuenta. No intentes usar credenciales de otra persona.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="mt-14" aria-labelledby="tableros-titulo">
+      <div class="max-w-3xl">
+        <h2 id="tableros-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Tableros para la práctica</h2>
+        <p class="mt-2 text-base-content/75">Cada enlace abre un tablero de la colección. Elige uno para empezar y otro para contrastar tu lectura. El contenido de cada vista puede cambiar con sus filtros y actualizaciones.</p>
+      </div>
+      <ol class="mt-6 grid gap-x-8 sm:grid-cols-2">
+        {dashboards.map((tablero, i) => (
+          <li class="border-t border-base-content/15">
+            <a class="group flex min-h-18 items-center gap-4 py-4 text-base-content no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary" href={`https://estadisticas.floresjavier.com/dashboard/${tablero.id}`} target="_blank" rel="noopener noreferrer" aria-label={`Abrir ${tablero.nombre} en Metabase, en una pestaña nueva`}>
+              <span class="w-7 shrink-0 font-display text-sm font-semibold tabular-nums text-secondary">{String(i + 1).padStart(2, '0')}</span>
+              <span class="grow font-display font-semibold leading-snug group-hover:text-secondary">{tablero.nombre}</span>
+              <span class="icon-[tabler--arrow-up-right] size-5 shrink-0 text-secondary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true"></span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="mt-14 border-t border-base-content/20 pt-10" aria-labelledby="registro-titulo">
+      <div class="max-w-3xl">
+        <h2 id="registro-titulo" class="font-display text-2xl font-semibold tracking-[-0.025em] md:text-3xl">Registro de hallazgo</h2>
+        <p class="mt-2 text-base-content/75">Usa estas preguntas en tu libreta o imprime esta página. Completa un registro por cada tablero que consultes.</p>
+      </div>
+      <dl class="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Tablero y vista</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué tablero y qué visualización consultaste?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
+        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Alcance de los datos</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué Periodo y Distrito, unidad y fuente aplican? ¿El mes está completo?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
+        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Hallazgo comprobable</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué muestra la vista? Anota la comparación que hiciste.</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
+        <div class="border-b border-base-content/25 pb-5"><dt class="font-semibold">Límite y siguiente paso</dt><dd class="mt-2 text-sm text-base-content/70">¿Qué no demuestra y qué dato revisarías antes de actuar?</dd><div class="mt-7 border-b border-base-content/25" aria-hidden="true"></div></div>
+      </dl>
+      <div class="mt-8 flex flex-wrap gap-3 print:hidden">
+        <a class="btn btn-outline" href={href('/cuestionario/dia-3/')}><span class="icon-[tabler--checklist] size-5" aria-hidden="true"></span>Repasar el Día 3</a>
+        <a class="btn btn-ghost" href={href('/participante/dia-3/')}>Volver al material del día</a>
+      </div>
+    </section>
+  </article>
+</Layout>

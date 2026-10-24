@@ -276,13 +276,13 @@ export const dia2: Deck = {
     {
       block: '4', time: '11:56', layout: 'flow',
       kicker: 'Puente al Día 3',
-      title: 'Mañana usará el mismo CSV para crear un tablero',
+      title: 'Mañana leerá los tableros existentes de Metabase',
       steps: [
         { label: 'Día 1', detail: 'Archivo sintético depurado' },
         { label: 'Día 2', detail: 'Primer mapa en QGIS' },
-        { label: 'Día 3', detail: 'Tablero y proyecto integrador' },
+        { label: 'Día 3', detail: 'Análisis de tableros existentes y proyecto integrador' },
       ],
-      notes: 'Recoja la evidencia de las tres tareas. Recuerde que el Día 3 reutiliza el mismo CSV, sin pedir análisis espacial avanzado.',
+      notes: 'Recoja la evidencia del mapa de práctica. El Día 3 se consultan tableros ya preparados en Metabase; no se sube el CSV sintético ni se asume que sus 928 puntos coinciden con las cifras institucionales. Al presentarlos juntos se explican las diferencias de fuente y periodo.',
     },
   ],
 }

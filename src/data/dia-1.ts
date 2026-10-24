@@ -42,7 +42,7 @@ export const dia1: Deck = {
       time: '08:02',
       layout: 'bullets',
       kicker: 'Qué se logra hoy',
-      title: 'Al mediodía usted entrega un archivo listo para el tablero',
+      title: 'Al mediodía usted entrega un archivo listo para el mapa',
       bullets: [
         'Reconoce los seis vicios de captura más frecuentes',
         'Ubica las vistas exportables y valida el CSV de práctica',
@@ -381,7 +381,7 @@ export const dia1: Deck = {
       },
       bullets: ['Un folio con 2 unidades genera 2 filas al unir', 'Cuente folios distintos, no filas', 'Compare contra un conteo de control'],
       notes:
-        'Adelante el caso del Día 3: una consulta generada con IA unía incidentes con unidades y el tablero mostró 428 registros en un distrito que tenía 214. La causa es esta relación. Pida al grupo que prediga cuántas filas salen si un incidente tuvo dos unidades. Es un modelo ilustrativo.',
+        'Use un modelo ilustrativo de una relación mal hecha: al unir incidentes con unidades, una fila puede duplicarse si un incidente tiene dos unidades. Pregunte al grupo cuántas filas produciría ese caso. Este ejemplo es del CSV ficticio y no describe ninguna cifra de los tableros de Metabase.',
     },
     {
       block: '2A',
@@ -682,7 +682,7 @@ export const dia1: Deck = {
         { tone: 'warning', icon: 'icon-[tabler--copy]', value: '17', label: 'Posibles duplicados' },
       ],
       notes:
-        'Estas tarjetas son una visualización del material de práctica, no una pantalla de SSPM. Pida al grupo identificar las filas afectadas en su CSV. Conciliación: 1,058 registros menos 130 marcados que se excluyen dejan 928 para los Días 2 y 3.',
+        'Estas tarjetas son una visualización del material de práctica, no una pantalla de SSPM. Pida al grupo identificar las filas afectadas en su CSV. Conciliación: 1,058 registros menos 130 marcados que se excluyen dejan 928 para el mapa del Día 2. Las cifras de los tableros existentes del Día 3 pertenecen a sus propias fuentes.',
     },
     {
       block: '3B',
@@ -769,7 +769,7 @@ export const dia1: Deck = {
       title: 'Hoy entrega un diagnóstico y un archivo depurado',
       cards: [
         { icon: 'icon-[tabler--report-search]', title: 'Diagnóstico de calidad', text: 'Coordenadas erróneas, duplicados y fechas inválidas detectados.' },
-        { icon: 'icon-[tabler--file-check]', title: 'Archivo normalizado', text: 'Formatos uniformes, listo para tableros y mapas.' },
+        { icon: 'icon-[tabler--file-check]', title: 'Archivo normalizado', text: 'Formatos uniformes, listo para el mapa de práctica.' },
       ],
       notes: 'Recoja los dos productos. Confirme que cada participante guardó su archivo en el lugar indicado para el Día 2.',
     },
@@ -799,7 +799,7 @@ export const dia1: Deck = {
       steps: [
         { label: 'Día 1', detail: 'Archivo depurado' },
         { label: 'Día 2', detail: 'Teselas, GeoJSON y puntos filtrados' },
-        { label: 'Día 3', detail: 'Tablero de mando' },
+        { label: 'Día 3', detail: 'Lectura de tableros existentes en Metabase' },
       ],
       notes:
         'Cierre con el hilo del curso. Mañana se añade un mapa base de teselas, se dibuja un GeoJSON y se grafican y filtran en QGIS los puntos del archivo depurado de hoy.',

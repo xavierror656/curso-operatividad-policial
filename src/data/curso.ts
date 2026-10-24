@@ -13,21 +13,21 @@ export const curso = {
     'Conocimientos básicos de estadística, cartografía y hojas de cálculo. No se requiere experiencia previa en programación.',
   herramientas: ['Python con Jupyter', 'Metabase', 'QGIS', 'Asistentes de IA'],
   objetivo:
-    'Que el participante sea capaz de tomar información operativa de la Secretaría, depurarla, analizarla y convertirla en productos que apoyen la toma de decisiones: tableros de mando, mapas de puntos filtrados y reportes periódicos, empleando software libre y asistentes de inteligencia artificial bajo criterios de seguridad de la información.',
+    'Que el participante sea capaz de depurar información de práctica, construir un mapa de puntos en QGIS e interpretar tableros institucionales de Metabase para sustentar decisiones, empleando software libre y asistentes de inteligencia artificial bajo criterios de seguridad de la información.',
 }
 
 export const enfoque = [
   {
     icon: 'icon-[tabler--database]',
-    titulo: 'Un solo conjunto de datos',
+    titulo: 'Del archivo al análisis',
     texto:
-      'El archivo sintético de incidentes acompaña las tres sesiones: se depura, se muestra como puntos y se usa en un tablero.',
+      'El CSV sintético se depura el Día 1 y se mapea en QGIS el Día 2. El Día 3 se analizan tableros existentes de Metabase; sus cifras se verifican según su propia fuente y periodo.',
   },
   {
     icon: 'icon-[tabler--sparkles]',
-    titulo: 'La IA como apoyo en Python y SQL',
+    titulo: 'La IA como apoyo al análisis',
     texto:
-      'El participante dirige un asistente para generar Python y SQL, y verifica lo que devuelve. Se resuelven problemas con criterio, no se memoriza código.',
+      'El participante usa asistentes para entender procedimientos y formular preguntas sin compartir filas ni resultados institucionales; siempre verifica las respuestas.',
   },
   {
     icon: 'icon-[tabler--package]',
@@ -59,8 +59,8 @@ export const sesiones = [
   {
     dia: 3,
     slug: 'dia-3',
-    titulo: 'Business Intelligence, tableros de mando y proyecto integrador',
-    entregable: 'Tablero con tres vistas, un filtro de periodo y proyecto integrador.',
+    titulo: 'Lectura de tableros en Metabase y proyecto integrador',
+    entregable: 'Análisis verificado de un tablero existente y presentación junto al mapa de QGIS.',
     disponible: true,
   },
 ]
@@ -127,30 +127,30 @@ export const temas: Tema[] = [
   },
   {
     num: 7,
-    titulo: 'Business Intelligence con Metabase y SQL asistido',
+    titulo: 'Business Intelligence y lectura de Metabase',
     horas: 4,
     contenido:
-      'Conceptos de Business Intelligence, interfaz de Metabase, conexión a bases de datos institucionales, navegación y construcción de preguntas.',
-    ia: 'Consultas SQL a partir solo del esquema de tablas. Verificación obligatoria contra un conteo de control conocido.',
-    producto: 'Colección de preguntas guardadas y verificadas.',
+      'Conceptos de Business Intelligence, navegación por la colección de diez tableros existentes y lectura de sus preguntas, fuentes, periodos y filtros.',
+    ia: 'Ayuda para formular preguntas de análisis sin pegar datos ni resultados; verificación en la fuente autorizada.',
+    producto: 'Ficha de lectura de un tablero con fuente, periodo, filtros y hallazgo verificable.',
   },
   {
     num: 8,
-    titulo: 'Visualización y dashboards en Metabase',
+    titulo: 'Interpretación de visualizaciones en Metabase',
     horas: 4,
     contenido:
-      'Gráficas, tablas y series temporales. Filtros y parámetros. Diseño de tableros institucionales orientados a la decisión de mando.',
-    ia: 'Definición de indicadores y jerarquía visual del tablero a partir del perfil del usuario final.',
-    producto: 'Tablero de mando por sector, hora del día y día de la semana.',
+      'Lectura de gráficas, tablas y series temporales de los tableros disponibles. Uso de filtros visibles y comparación solo cuando fuente, periodo y definición son compatibles.',
+    ia: 'Redacción de una explicación clara del indicador, sin compartir cifras ni capturas institucionales con el asistente.',
+    producto: 'Interpretación de un tablero existente con sus límites y una pregunta para el mando.',
   },
   {
     num: 9,
-    titulo: 'Integración de Python, Metabase y QGIS',
+    titulo: 'Integración del análisis con QGIS y Metabase',
     horas: 4,
     contenido:
-      'Flujo completo entre herramientas, exportación en CSV y GeoPackage, conexión directa a la base de datos, actualización periódica y documentación.',
-    ia: 'Script único que ejecuta el flujo completo, revisado y validado por el participante.',
-    producto: 'Reporte semanal automatizado.',
+      'Presentación del mapa de práctica de QGIS junto con la lectura de un tablero de Metabase. Documentación de fuente, periodo, filtros, limitaciones y diferencia entre ambos conjuntos de datos.',
+    ia: 'Apoyo para ordenar una presentación sin pegar datos operativos ni cifras del tablero.',
+    producto: 'Presentación breve con mapa, lectura verificada del tablero y recomendación condicionada por las fuentes.',
   },
   {
     num: 10,
@@ -165,8 +165,8 @@ export const temas: Tema[] = [
 export const productos = [
   {
     icon: 'icon-[tabler--layout-dashboard]',
-    titulo: 'Tablero de incidencia delictiva',
-    texto: 'Organiza las cifras del archivo depurado en vistas y filtros para consultar la incidencia.',
+    titulo: 'Lectura verificada de Metabase',
+    texto: 'Describe la fuente, el periodo y los filtros de un tablero existente antes de sacar conclusiones.',
   },
   {
     icon: 'icon-[tabler--zoom-exclamation]',
@@ -180,8 +180,8 @@ export const productos = [
   },
   {
     icon: 'icon-[tabler--file-analytics]',
-    titulo: 'Reporte periódico automatizado',
-    texto: 'Mapa, gráficas y cifras del periodo en un solo documento.',
+    titulo: 'Presentación integradora',
+    texto: 'Expone el mapa de práctica y un hallazgo de Metabase con sus límites y una recomendación.',
   },
 ]
 
@@ -189,7 +189,7 @@ export const requerimientos = [
   'Equipo por participante con privilegios de instalación y 8 GB de RAM como mínimo.',
   'Python con Jupyter, o Google Colab si no se autoriza la instalación local.',
   'QGIS LTR, misma versión para todo el grupo, con acceso a un mapa base de teselas.',
-  'Instancia de Metabase conectada a una base de datos de práctica.',
+  'Acceso autorizado de lectura a la colección de tableros del curso en Metabase.',
   'Acceso a internet y a los asistentes de IA definidos para el curso.',
   'Conjunto de datos sintético o anonimizado, proporcionado por el instructor.',
 ]

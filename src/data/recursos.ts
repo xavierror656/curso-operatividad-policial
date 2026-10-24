@@ -36,12 +36,12 @@ export const casos: Caso[] = [
   },
   {
     dia: 3,
-    titulo: 'La consulta que contó de más',
-    paso: 'Un asistente de IA generó una consulta SQL que unía incidentes con una tabla de unidades. El tablero mostró 428 registros para un distrito que en realidad tenía 214.',
-    error: 'La unión duplicaba las filas con más de una unidad asignada y nadie comparó contra el conteo de control (214).',
-    consecuencia: 'El informe al mando sobrestimó la incidencia en más de 50 % y hubo que retirarlo.',
-    leccion: 'Toda consulta generada con IA se verifica contra un conteo conocido antes de publicarse.',
-    pregunta: '¿Qué conteo de control habría usado?',
+    titulo: 'El filtro que nadie mencionó',
+    paso: 'Un analista abrió un tablero existente de Metabase y presentó una cifra visible como si correspondiera a toda la ciudad y al año completo.',
+    error: 'No revisó ni anotó el distrito y el periodo seleccionados en los filtros del tablero.',
+    consecuencia: 'La recomendación al mando se basó en una lectura más amplia que la información realmente mostrada.',
+    leccion: 'Antes de comunicar una cifra, identifique la fuente, la definición del indicador, el periodo y los filtros activos.',
+    pregunta: '¿Qué datos del tablero anotaría antes de repetir la cifra?',
   },
   {
     dia: 2,
@@ -84,15 +84,15 @@ export const escenarios: Escenario[] = [
   },
   {
     situacion:
-      'El asistente de IA le devuelve una consulta SQL que corre sin errores, pero el total del mes no coincide con el que usted conoce.',
+      'Dos tableros existentes de Metabase muestran totales distintos para un tema parecido y su mando pide una explicación inmediata.',
     opciones: [
-      { texto: 'Confiar en la consulta: corrió sin errores.', porque: 'Que corra no significa que cuente bien. Es el error más común.' },
+      { texto: 'Elegir el total mayor y presentarlo.', porque: 'La cifra más alta no es necesariamente la que responde la pregunta del mando.' },
       {
-        texto: 'Comparar contra el conteo de control y revisar si hay uniones que duplican filas.',
+        texto: 'Revisar fuente, definición, periodo y filtros de ambos tableros antes de compararlos.',
         mejor: true,
-        porque: 'Es la verificación obligatoria del curso y localiza la causa.',
+        porque: 'Los tableros pueden medir poblaciones o periodos distintos; primero hay que establecer si las cifras son comparables.',
       },
-      { texto: 'Pegar los resultados en el asistente para que los «corrija».', porque: 'Los resultados también son información institucional y no se comparten.' },
+      { texto: 'Pegar las cifras y capturas en un asistente externo para que decida.', porque: 'Los resultados institucionales no se comparten con herramientas no autorizadas.' },
     ],
   },
   {
@@ -180,14 +180,14 @@ export const verificacion: GrupoVerificacion[] = [
   },
   {
     id: 'tablero',
-    titulo: 'Tablero o consulta',
+    titulo: 'Lectura de un tablero existente',
     icon: 'icon-[tabler--layout-dashboard]',
     items: [
-      'Cada consulta se comparó contra un conteo de control conocido.',
-      'Revisé que ninguna unión duplique filas.',
-      'El filtro de periodo cambia todas las vistas, sin excepción.',
-      'Las cifras en cero se confirmaron con el área antes de interpretarlas.',
-      'El título de cada gráfica dice qué mide y en qué periodo.',
+      'Identifiqué el tablero y la pregunta o visualización que sustenta mi hallazgo.',
+      'Anoté la fuente, la definición del indicador y el periodo visible.',
+      'Registré los filtros activos y comprobé qué vistas cambian al aplicarlos.',
+      'Antes de comparar tableros, confirmé que miden lo mismo en periodos compatibles.',
+      'Expresé las limitaciones de los datos y confirmé los valores en cero antes de interpretarlos.',
     ],
   },
   {

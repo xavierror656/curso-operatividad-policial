@@ -20,6 +20,7 @@ export const materiales = {
   'hoja-entrega': { label: 'Verificación · Entrega', path: '/practica/hoja-de-verificacion/#entrega', icon: 'icon-[tabler--checklist]' },
   datos: { label: 'Archivos del curso', path: '/datos/', icon: 'icon-[tabler--database]' },
   'datos-qgis': { label: 'Archivos para QGIS · Día 2', path: '/datos/', icon: 'icon-[tabler--files]' },
+  metabase: { label: 'Guía y tableros de Metabase · Día 3', path: '/metabase/', icon: 'icon-[tabler--layout-dashboard]' },
   cierre: { label: 'Cierre del curso', path: '/cierre/', icon: 'icon-[tabler--flag-check]' },
 } satisfies Record<string, { label: string; path: string; icon: string }>
 

@@ -21,7 +21,7 @@ const errores = [
 ]
 const archivos = [
   { nombre: 'incidentes_practica_sucio.csv', detalle: '1,058 registros con 130 errores sembrados. Es el archivo del Día 1.' },
-  { nombre: 'incidentes_practica_depurado.csv', detalle: '928 registros ya depurados. Es el archivo de los Días 2 y 3.' },
+  { nombre: 'incidentes_practica_depurado.csv', detalle: '928 registros sintéticos ya depurados. Se usa para el mapa del Día 2.' },
 ]
 const capasGeojson = [
   { nombre: 'colonias.geojson', titulo: 'Colonias', detalle: '1,126 polígonos de colonias; incluye atributos de conteos.' },
@@ -49,7 +49,7 @@ const exportaciones = [
 
     <section class="mt-8 rounded-box border border-secondary/35 bg-secondary/10 p-5 md:flex md:items-center md:justify-between md:gap-7 md:p-7" aria-labelledby="titulo-paquete-practica">
       <div>
-        <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Archivos de trabajo para los tres días</p>
+        <p class="font-display text-xs font-semibold uppercase tracking-[0.15em] text-secondary">Archivos de práctica de los Días 1 y 2</p>
         <h2 id="titulo-paquete-practica" class="mt-1 text-2xl font-semibold">Descargue el paquete de práctica</h2>
         <p class="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/75">Incluye los dos CSV de práctica, los seis GeoJSON proporcionados, <code>.gitignore</code> y un LEEME. Extraiga el ZIP antes de abrir los archivos en QGIS; <code>.gitignore</code> no es una capa. Las tres exportaciones institucionales se descargan con clave más abajo.</p>
       </div>
@@ -184,7 +184,7 @@ const exportaciones = [
     </div>
 
     <h2 class="mt-12 text-2xl font-semibold">Cómo se generaron</h2>
-    <p class="mt-2 text-base-content/75">Con el script <code>datos/generar.py</code> del repositorio, con semilla fija: se obtienen siempre los mismos archivos. Si cambian las cifras del Día 3, se ajusta el script y se vuelven a generar.</p>
+    <p class="mt-2 text-base-content/75">Con el script <code>datos/generar.py</code> del repositorio, con semilla fija: se obtienen siempre los mismos CSV sintéticos. Esos registros son para los ejercicios de los Días 1 y 2; las cifras de Metabase del Día 3 se interpretan según sus propias fuentes.</p>
   </article>
 
 <script>

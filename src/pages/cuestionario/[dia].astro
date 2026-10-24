@@ -18,7 +18,7 @@ type Quiz = {
 }
 const { quiz } = Astro.props as { quiz: Quiz }
 const otroDia = quiz.dia === 2 ? 3 : 2
-const tema = quiz.dia === 2 ? 'QGIS básico' : 'Metabase y tablero'
+const tema = quiz.dia === 2 ? 'QGIS básico' : 'Lectura de Metabase'
 const icono = quiz.dia === 2 ? 'icon-[tabler--map-2]' : 'icon-[tabler--layout-dashboard]'
 const letras = ['A', 'B', 'C', 'D']
 ---
