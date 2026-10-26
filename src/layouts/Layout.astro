@@ -16,6 +16,7 @@ const path = Astro.url.pathname
 const links = [
   { href: `${base}/#temario`, label: 'Temario', active: false },
   { href: `${base}/diapositivas/`, label: 'Diapositivas', active: path.includes('/diapositivas') },
+  { href: `${base}/recursos/`, label: 'Recursos', active: path.includes('/recursos') || path.includes('/diagramas') },
   { href: `${base}/participante/dia-1/`, label: 'Participantes', active: path.includes('/participante') },
   { href: `${base}/practica/`, label: 'Práctica', active: path.includes('/practica') },
   { href: `${base}/cuestionario/`, label: 'Cuestionario', active: path.includes('/cuestionario') },
@@ -33,7 +34,7 @@ const links = [
 
     <nav class="navbar sticky top-0 z-30 flex-col border-b border-base-content/10 bg-base-100/95 backdrop-blur max-md:px-4 print:hidden" aria-label="Principal">
       <div class="mx-auto flex w-full max-w-6xl items-center gap-4 md:px-6">
-        <a href={`${base}/`} class="flex items-center gap-3 no-underline">
+        <a href={`${base}/`} class="flex shrink-0 items-center gap-3 no-underline">
           <span class="grid size-9 place-items-center rounded-md bg-primary text-primary-content">
             <span class="icon-[tabler--shield-check] size-5" aria-hidden="true"></span>
           </span>
@@ -42,20 +43,20 @@ const links = [
             <span class="block text-xs text-base-content/65">Curso 3 · SSPM Ciudad Juárez</span>
           </span>
         </a>
-        <ul class="menu menu-horizontal ms-auto gap-1 p-0 max-lg:hidden">
+        <ul class="menu menu-horizontal ms-auto flex-nowrap gap-1 p-0 text-sm max-xl:hidden">
           {links.map((l) => (
             <li><a href={l.href} class:list={{ 'menu-active': l.active }} aria-current={l.active ? 'page' : undefined}>{l.label}</a></li>
           ))}
         </ul>
-        <a href={`${base}/diapositivas/`} class="btn btn-secondary btn-sm max-lg:ms-auto max-sm:hidden">
+        <a href={`${base}/diapositivas/`} class="btn btn-secondary btn-sm max-xl:ms-auto max-sm:hidden xl:hidden">
           <span class="icon-[tabler--presentation] size-4" aria-hidden="true"></span>Presentar
         </a>
-        <button type="button" class="collapse-toggle btn btn-outline btn-square btn-sm max-sm:ms-auto lg:hidden" data-collapse="#menu-movil" aria-controls="menu-movil" aria-expanded="false" aria-label="Menú">
+        <button type="button" class="collapse-toggle btn btn-outline btn-square btn-sm max-sm:ms-auto xl:hidden" data-collapse="#menu-movil" aria-controls="menu-movil" aria-expanded="false" aria-label="Menú">
           <span class="icon-[tabler--menu-2] collapse-open:hidden size-5" aria-hidden="true"></span>
           <span class="icon-[tabler--x] collapse-open:block hidden size-5" aria-hidden="true"></span>
         </button>
       </div>
-      <div id="menu-movil" class="collapse hidden w-full overflow-hidden transition-[height] duration-300 lg:hidden">
+      <div id="menu-movil" class="collapse hidden w-full overflow-hidden transition-[height] duration-300 xl:hidden">
         <ul class="menu mx-auto max-w-6xl gap-1 px-0 py-3 md:px-6">
           {links.map((l) => (
             <li><a href={l.href} class:list={{ 'menu-active': l.active }} aria-current={l.active ? 'page' : undefined}>{l.label}</a></li>
