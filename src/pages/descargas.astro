@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { href } from '../lib/site'
+const groups = [{"title": "Manuales y actividades", "files": [{"name": "Cuaderno de actividades", "path": "/descargas/General/Cuaderno-de-actividades.pdf", "format": "PDF", "size": "95 KB"}, {"name": "Diagramas del curso", "path": "/descargas/General/Diagramas-del-curso.pdf", "format": "PDF", "size": "77 KB"}, {"name": "Glosario", "path": "/descargas/General/Glosario.pdf", "format": "PDF", "size": "74 KB"}, {"name": "Manual del participante", "path": "/descargas/General/Manual-del-participante.pdf", "format": "PDF", "size": "186 KB"}]}, {"title": "Plantillas para completar", "files": [{"name": "Diagnóstico de datos", "path": "/descargas/Plantillas/Diagnostico-de-datos.rtf", "format": "RTF", "size": "1 KB"}, {"name": "Flujo ETL", "path": "/descargas/Plantillas/Flujo-ETL.rtf", "format": "RTF", "size": "1 KB"}, {"name": "Plantillas para imprimir", "path": "/descargas/Plantillas/Plantillas-para-imprimir.pdf", "format": "PDF", "size": "74 KB"}, {"name": "Reporte del tablero", "path": "/descargas/Plantillas/Reporte-del-tablero.rtf", "format": "RTF", "size": "1 KB"}]}, {"title": "Día 1 · Calidad de datos", "files": [{"name": "Incidentes de práctica · depurados", "path": "/descargas/Dia-1/incidentes_practica_depurado.csv", "format": "CSV", "size": "83 KB"}, {"name": "Incidentes para depurar", "path": "/descargas/Dia-1/incidentes_practica_sucio.csv", "format": "CSV", "size": "94 KB"}, {"name": "Presentación · Día 1", "path": "/descargas/Dia-1/Presentacion-Dia-1.pdf", "format": "PDF", "size": "2.1 MB"}, {"name": "Presentación · Día 1", "path": "/descargas/Dia-1/Presentacion-Dia-1.pptx", "format": "PPTX", "size": "264 KB"}]}, {"title": "Día 2 · Mapas con QGIS", "files": [{"name": "Guía rápida de QGIS", "path": "/descargas/Dia-2/Guia-rapida-QGIS.pdf", "format": "PDF", "size": "79 KB"}, {"name": "Incidentes de práctica · depurados", "path": "/descargas/Dia-2/incidentes_practica_depurado.csv", "format": "CSV", "size": "83 KB"}, {"name": "Capas geográficas para QGIS", "path": "/descargas/Dia-2/paquete_capas_geojson.zip", "format": "ZIP", "size": "1.6 MB"}, {"name": "Presentación · Día 2", "path": "/descargas/Dia-2/Presentacion-Dia-2.pdf", "format": "PDF", "size": "784 KB"}, {"name": "Presentación · Día 2", "path": "/descargas/Dia-2/Presentacion-Dia-2.pptx", "format": "PPTX", "size": "109 KB"}]}, {"title": "Día 3 · Tableros con Metabase", "files": [{"name": "Guía rápida de Metabase", "path": "/descargas/Dia-3/Guia-rapida-Metabase.pdf", "format": "PDF", "size": "75 KB"}, {"name": "Datos de práctica de IA y Metabase", "path": "/descargas/Dia-3/practica_ia_metabase.csv", "format": "CSV", "size": "1 KB"}, {"name": "Presentación · Día 3", "path": "/descargas/Dia-3/Presentacion-Dia-3.pdf", "format": "PDF", "size": "1.2 MB"}, {"name": "Presentación · Día 3", "path": "/descargas/Dia-3/Presentacion-Dia-3.pptx", "format": "PPTX", "size": "226 KB"}]}]
+---
+<Layout title="Descargas del curso · PDF y PowerPoint" description="Materiales listos para leer, imprimir y realizar las actividades del curso.">
+<section class="mx-auto max-w-6xl px-4 py-12 md:px-6">
+<a href={href('/recursos/')} class="link text-sm">Biblioteca de recursos</a>
+<p class="mt-8 text-sm font-semibold uppercase tracking-widest text-secondary">Material del participante</p>
+<h1 class="mt-3 text-4xl font-semibold">Su curso, listo para descargar</h1>
+<p class="mt-4 max-w-3xl text-lg">Use los PDF para leer e imprimir. Abra los PowerPoint para consultar o adaptar las presentaciones. Las actividades y sus archivos están organizados por día.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="btn btn-primary" href={href('/descargas/Curso-Participantes.zip')} download>Descargar todo · ZIP (5.8 MB)</a>
+<a class="btn btn-outline" href={href('/descargas/EMPIEZA-AQUI.pdf')}>Cómo usar los materiales · PDF</a>
+</div>
+<p class="mt-4 text-sm text-base-content/70">11 PDF · 3 PowerPoint · 3 plantillas editables · Archivos de práctica. Para usar el ZIP, descárguelo, seleccione «Extraer todo» y abra EMPIEZA-AQUI.pdf.</p>
+{groups.map(group => <section class="mt-12" aria-label={group.title}>
+<h2 class="border-b border-base-content/20 pb-4 text-2xl font-semibold">{group.title}</h2>
+<ul>{group.files.map(file => <li class="flex flex-col gap-3 border-b border-base-content/10 py-5 sm:flex-row sm:items-center sm:justify-between">
+<div><h3 class="text-lg font-semibold">{file.name}</h3><p class="mt-1 text-sm text-base-content/70">{file.format} · {file.size}{file.format === 'RTF' ? ' · Editable en Word o LibreOffice' : ''}</p></div>
+<div class="flex shrink-0 flex-wrap gap-2">{file.format === 'PDF' && <a class="btn btn-outline" href={href(file.path)} aria-label={`Ver ${file.name}`}>Ver PDF</a>}<a class="btn btn-primary" href={href(file.path)} download aria-label={`Descargar ${file.name} ${file.format}`}>Descargar {file.format}</a></div>
+</li>)}</ul>
+</section>)}
+<p class="mt-10 max-w-3xl text-base-content/70">Las prácticas de mapas y tableros requieren QGIS o el acceso a Metabase que indique el instructor. Los archivos de ejercicios contienen datos sintéticos. Descargue los materiales antes de la sesión si necesita consultarlos sin internet.</p>
+</section>
+</Layout>

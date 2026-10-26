@@ -55,7 +55,7 @@ export default function offline({ name, shortName, themeColor = '#191b2d' }) {
           hash.update(rel).update(await readFile(f))
           // Las descargas portátiles se guardan cuando se piden; no ralentizan
           // la instalación sin conexión para quienes solo consultan el curso.
-          if (!/^herramientas\/visor-html-sspm-juarez\.(exe|zip)$/.test(rel)) {
+          if ((!rel.startsWith('descargas/') || rel === 'descargas/index.html') && !/^herramientas\/visor-html-sspm-juarez\.(exe|zip)$/.test(rel)) {
             urls.push(base + rel.replace(/(^|\/)index\.html$/, '$1'))
           }
         }

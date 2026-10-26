@@ -14,6 +14,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '')
       Cada presentación funciona en el navegador, sin conexión una vez cargada. Use la vista del presentador en su pantalla y la de diapositivas en el proyector: se mantienen sincronizadas.
     </p>
 
+    <p class="mt-6"><a href={`${base}/descargas/`} class="btn btn-primary">Descargar PDF y PowerPoint de los tres días</a></p>
     <div class="mt-10 grid gap-6">
       {sesiones.map((s) => {
         const deck = getDeck(s.slug)

@@ -10,7 +10,8 @@ const tipos = [...new Set(biblioteca.map(r => r.tipo))]
     <h1 class="mt-5 text-4xl font-semibold text-balance">Biblioteca de recursos</h1>
     <p class="mt-4 max-w-3xl text-lg">Encuentre la presentación de su sesión, descargue los archivos de práctica o repase un procedimiento con los diagramas.</p>
     <div class="mt-6 flex flex-wrap gap-3">
-      <a href={href('/diapositivas/')} class="btn btn-primary">Abrir presentaciones</a>
+      <a href={href('/descargas/')} class="btn btn-primary">Descargar materiales PDF y PowerPoint</a>
+      <a href={href('/diapositivas/')} class="btn btn-outline">Abrir presentaciones</a>
       <a href={href('/diagramas/')} class="btn btn-outline">Ver diagramas</a>
     </div>
 
