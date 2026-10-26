@@ -1,0 +1,929 @@
+folio,fecha_evento,hora,delito,colonia,distrito,sector,latitud,longitud
+S-00001,18/03/2026,07:47,Robo a comercio,Colonia Demo 2B,Universidad,2,31.79959,-106.47471
+S-00002,06/03/2026,11:56,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.64938,-106.35214
+S-00003,16/03/2026,09:30,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.63059,-106.54648
+S-00004,12/03/2026,19:57,Robo a comercio,Colonia Demo 4C,Babícora,4,31.69009,-106.36154
+S-00005,29/03/2026,17:37,Violencia familiar,Colonia Demo 4D,Babícora,4,31.62433,-106.39714
+S-00006,21/03/2026,15:12,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.71969,-106.46505
+S-00007,14/03/2026,14:07,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.75415,-106.3553
+S-00008,28/03/2026,18:32,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.7386,-106.41208
+S-00009,18/03/2026,02:16,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.62139,-106.46984
+S-00010,27/03/2026,14:29,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.62116,-106.44419
+S-00011,01/03/2026,17:04,Lesiones,Colonia Demo 2B,Universidad,2,31.73564,-106.31094
+S-00012,04/03/2026,19:57,Violencia familiar,Colonia Demo 4D,Babícora,4,31.71008,-106.47906
+S-00013,18/03/2026,08:35,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.72674,-106.39406
+S-00014,25/03/2026,19:03,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.65488,-106.54275
+S-00015,30/03/2026,22:14,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.64408,-106.30188
+S-00016,18/03/2026,14:59,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.77051,-106.32323
+S-00017,07/03/2026,15:31,Robo a comercio,Colonia Demo 5A,Delicias,5,31.61348,-106.48426
+S-00018,29/03/2026,07:16,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.60679,-106.33306
+S-00019,02/03/2026,20:49,Robo a transeúnte,Colonia Demo 6C,Chihuahua,6,31.74431,-106.40232
+S-00020,31/03/2026,14:01,Robo a comercio,Colonia Demo 3C,Aldama,3,31.73515,-106.49181
+S-00021,04/03/2026,16:04,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.76751,-106.35395
+S-00022,20/03/2026,10:09,Violencia familiar,Colonia Demo 3A,Aldama,3,31.60839,-106.38945
+S-00023,24/03/2026,05:33,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.63096,-106.32132
+S-00024,21/03/2026,22:02,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.67638,-106.52516
+S-00025,14/03/2026,22:19,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.76709,-106.54418
+S-00026,14/03/2026,19:14,Violencia familiar,Colonia Demo 5D,Delicias,5,31.6659,-106.51353
+S-00027,06/03/2026,08:03,Robo a comercio,Colonia Demo 2A,Universidad,2,31.79896,-106.5451
+S-00028,28/03/2026,12:20,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.60866,-106.31426
+S-00029,06/03/2026,03:45,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.66891,-106.4961
+S-00030,31/03/2026,21:55,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.60261,-106.43689
+S-00031,25/03/2026,01:07,Violencia familiar,Colonia Demo 3D,Aldama,3,31.63373,-106.47435
+S-00032,17/03/2026,15:53,Violencia familiar,Colonia Demo 3C,Aldama,3,31.71277,-106.35994
+S-00033,18/03/2026,20:23,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.71368,-106.4887
+S-00034,01/03/2026,12:50,Violencia familiar,Colonia Demo 4B,Babícora,4,31.61834,-106.40635
+S-00035,05/03/2026,13:00,Violencia familiar,Colonia Demo 5B,Delicias,5,31.68546,-106.36651
+S-00036,03/03/2026,18:40,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.7045,-106.39951
+S-00037,08/03/2026,01:25,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.78206,-106.33533
+S-00038,02/03/2026,20:13,Lesiones,Colonia Demo 5B,Delicias,5,31.76593,-106.39928
+S-00039,22/03/2026,19:40,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.77839,-106.34588
+S-00040,28/03/2026,15:36,Robo a comercio,Colonia Demo 5C,Delicias,5,31.72513,-106.43521
+S-00041,17/03/2026,17:27,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.64864,-106.5181
+S-00042,05/03/2026,11:31,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.79372,-106.51793
+S-00043,21/03/2026,16:52,Robo a comercio,Colonia Demo 4D,Babícora,4,31.66474,-106.45866
+S-00044,07/03/2026,22:38,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.60644,-106.36064
+S-00045,12/03/2026,11:02,Lesiones,Colonia Demo 2B,Universidad,2,31.65793,-106.48172
+S-00046,08/03/2026,13:21,Lesiones,Colonia Demo 2B,Universidad,2,31.72359,-106.30851
+S-00047,21/03/2026,20:02,Violencia familiar,Colonia Demo 4D,Babícora,4,31.69363,-106.50105
+S-00048,21/03/2026,04:17,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.67201,-106.47554
+S-00049,11/03/2026,14:32,Violencia familiar,Colonia Demo 5A,Delicias,5,31.66797,-106.44898
+S-00050,02/03/2026,11:02,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.74599,-106.30563
+S-00051,05/03/2026,20:30,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.62004,-106.51186
+S-00052,07/03/2026,22:33,Robo a comercio,Colonia Demo 6C,Chihuahua,6,31.78986,-106.44219
+S-00053,07/03/2026,00:15,Daño en propiedad,Colonia Demo 4D,Babícora,4,31.77229,-106.47818
+S-00054,19/03/2026,08:18,Violencia familiar,Colonia Demo 6D,Chihuahua,6,31.76552,-106.38218
+S-00055,31/03/2026,13:21,Robo a comercio,Colonia Demo 1D,Cuauhtémoc,1,31.62558,-106.49782
+S-00056,21/03/2026,20:06,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.75832,-106.38821
+S-00057,05/03/2026,21:26,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.67567,-106.46521
+S-00058,17/03/2026,22:45,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.68158,-106.31988
+S-00059,26/03/2026,20:03,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.64799,-106.39165
+S-00060,30/03/2026,15:42,Violencia familiar,Colonia Demo 2D,Universidad,2,31.67136,-106.42033
+S-00061,15/03/2026,08:35,Robo a transeúnte,Colonia Demo 6B,Chihuahua,6,31.63824,-106.31313
+S-00062,20/03/2026,08:52,Lesiones,Colonia Demo 6B,Chihuahua,6,31.65709,-106.51669
+S-00063,22/03/2026,11:21,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.67816,-106.35753
+S-00064,13/03/2026,16:49,Robo a comercio,Colonia Demo 4C,Babícora,4,31.71753,-106.33322
+S-00065,03/03/2026,09:59,Robo a transeúnte,Colonia Demo 5B,Delicias,5,31.64232,-106.33002
+S-00066,31/03/2026,17:24,Violencia familiar,Colonia Demo 2A,Universidad,2,31.64713,-106.42925
+S-00067,19/03/2026,16:40,Violencia familiar,Colonia Demo 2D,Universidad,2,31.61531,-106.53852
+S-00068,21/03/2026,01:10,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.72457,-106.41329
+S-00069,21/03/2026,19:31,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.66746,-106.50729
+S-00070,12/03/2026,12:49,Violencia familiar,Colonia Demo 5C,Delicias,5,31.78459,-106.39879
+S-00071,14/03/2026,20:59,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.62811,-106.4557
+S-00072,14/03/2026,10:06,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.72296,-106.52487
+S-00073,07/03/2026,18:28,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.74375,-106.43628
+S-00074,16/03/2026,02:58,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.61661,-106.44719
+S-00075,14/03/2026,05:05,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.77709,-106.36896
+S-00076,02/03/2026,01:14,Lesiones,Colonia Demo 4C,Babícora,4,31.76616,-106.49535
+S-00077,21/03/2026,20:45,Lesiones,Colonia Demo 2D,Universidad,2,31.66777,-106.48598
+S-00078,28/03/2026,21:09,Violencia familiar,Colonia Demo 4A,Babícora,4,31.67199,-106.32685
+S-00079,29/03/2026,18:37,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.77131,-106.42445
+S-00080,20/03/2026,23:40,Daño en propiedad,Colonia Demo 6B,Chihuahua,6,31.62652,-106.39141
+S-00081,26/03/2026,20:06,Robo a comercio,Colonia Demo 3D,Aldama,3,31.73466,-106.50416
+S-00082,30/03/2026,16:36,Violencia familiar,Colonia Demo 5D,Delicias,5,31.74489,-106.32084
+S-00083,18/03/2026,21:49,Lesiones,Colonia Demo 2A,Universidad,2,31.78596,-106.32244
+S-00084,01/03/2026,16:13,Violencia familiar,Colonia Demo 2C,Universidad,2,31.64817,-106.30308
+S-00085,31/03/2026,16:50,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.67764,-106.4133
+S-00086,08/03/2026,11:25,Robo a comercio,Colonia Demo 3D,Aldama,3,31.74145,-106.41398
+S-00087,05/03/2026,22:03,Lesiones,Colonia Demo 4D,Babícora,4,31.6622,-106.43383
+S-00088,19/03/2026,19:36,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.66222,-106.46024
+S-00089,27/03/2026,17:53,Robo a comercio,Colonia Demo 2A,Universidad,2,31.73542,-106.41229
+S-00090,07/03/2026,19:08,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.78701,-106.38462
+S-00091,03/03/2026,18:39,Robo a transeúnte,Colonia Demo 6D,Chihuahua,6,31.6174,-106.30516
+S-00092,04/03/2026,16:00,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.73839,-106.3244
+S-00093,17/03/2026,10:36,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.60861,-106.46852
+S-00094,03/03/2026,01:16,Violencia familiar,Colonia Demo 2B,Universidad,2,31.72014,-106.54289
+S-00095,30/03/2026,18:11,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.61771,-106.40945
+S-00096,19/03/2026,12:03,Robo a comercio,Colonia Demo 5C,Delicias,5,31.69776,-106.47927
+S-00097,16/03/2026,09:59,Violencia familiar,Colonia Demo 4D,Babícora,4,31.60387,-106.31371
+S-00098,01/03/2026,21:37,Violencia familiar,Colonia Demo 3D,Aldama,3,31.65393,-106.4367
+S-00099,30/03/2026,20:49,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.62164,-106.33027
+S-00100,15/03/2026,21:15,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.65423,-106.49317
+S-00101,01/03/2026,17:09,Robo a transeúnte,Colonia Demo 6C,Chihuahua,6,31.66065,-106.5297
+S-00102,14/03/2026,18:05,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.69393,-106.36119
+S-00103,02/03/2026,15:23,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.65476,-106.41713
+S-00104,10/03/2026,06:51,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.65635,-106.37939
+S-00105,16/03/2026,20:26,Violencia familiar,Colonia Demo 5D,Delicias,5,31.79283,-106.39273
+S-00106,02/03/2026,10:47,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.62657,-106.52302
+S-00107,17/03/2026,08:30,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.72806,-106.33471
+S-00108,20/03/2026,19:32,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.75035,-106.53746
+S-00109,26/03/2026,20:30,Violencia familiar,Colonia Demo 3A,Aldama,3,31.71128,-106.3712
+S-00110,28/03/2026,01:35,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.79557,-106.39011
+S-00111,29/03/2026,09:54,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.72124,-106.40395
+S-00112,05/03/2026,08:14,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.79086,-106.47973
+S-00113,06/03/2026,04:38,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.71717,-106.52697
+S-00114,03/03/2026,23:46,Lesiones,Colonia Demo 1C,Cuauhtémoc,1,31.65611,-106.46849
+S-00115,29/03/2026,12:51,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.78499,-106.30446
+S-00116,21/03/2026,15:59,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.61644,-106.46365
+S-00117,11/03/2026,14:51,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.70452,-106.50056
+S-00118,23/03/2026,20:33,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.63987,-106.52139
+S-00119,08/03/2026,09:39,Violencia familiar,Colonia Demo 3D,Aldama,3,31.7809,-106.48244
+S-00120,27/03/2026,11:41,Robo a transeúnte,Colonia Demo 6D,Chihuahua,6,31.60405,-106.53498
+S-00121,06/03/2026,17:52,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.78065,-106.3209
+S-00122,23/03/2026,01:47,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.79648,-106.50461
+S-00123,01/03/2026,09:23,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.6541,-106.34757
+S-00124,29/03/2026,19:02,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.63609,-106.33066
+S-00125,04/03/2026,02:26,Robo a transeúnte,Colonia Demo 6B,Chihuahua,6,31.65315,-106.52156
+S-00126,06/03/2026,11:15,Daño en propiedad,Colonia Demo 5B,Delicias,5,31.6998,-106.52923
+S-00127,13/03/2026,16:30,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.78324,-106.48472
+S-00128,14/03/2026,20:54,Robo de vehículo,Colonia Demo 6B,Chihuahua,6,31.78613,-106.30301
+S-00129,27/03/2026,17:52,Daño en propiedad,Colonia Demo 5D,Delicias,5,31.69377,-106.49118
+S-00130,27/03/2026,15:16,Robo a comercio,Colonia Demo 3B,Aldama,3,31.74475,-106.54074
+S-00131,22/03/2026,12:54,Daño en propiedad,Colonia Demo 6C,Chihuahua,6,31.66486,-106.54506
+S-00132,06/03/2026,23:58,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.78516,-106.42602
+S-00133,12/03/2026,17:36,Robo a transeúnte,Colonia Demo 6B,Chihuahua,6,31.64613,-106.5191
+S-00134,13/03/2026,22:57,Daño en propiedad,Colonia Demo 4A,Babícora,4,31.69998,-106.54008
+S-00135,07/03/2026,18:54,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.69691,-106.31018
+S-00136,23/03/2026,13:55,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.71506,-106.38413
+S-00137,14/03/2026,09:07,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.71831,-106.37423
+S-00138,16/03/2026,21:00,Robo de vehículo,Colonia Demo 4B,Babícora,4,31.65091,-106.50626
+S-00139,12/03/2026,22:01,Violencia familiar,Colonia Demo 2C,Universidad,2,31.60375,-106.4694
+S-00140,06/03/2026,23:33,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.73462,-106.4934
+S-00141,31/03/2026,16:10,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.68428,-106.5299
+S-00142,05/03/2026,18:50,Violencia familiar,Colonia Demo 3B,Aldama,3,31.69013,-106.35834
+S-00143,14/03/2026,06:27,Lesiones,Colonia Demo 5B,Delicias,5,31.69651,-106.52681
+S-00144,23/03/2026,22:30,Violencia familiar,Colonia Demo 2C,Universidad,2,31.65052,-106.35647
+S-00145,05/03/2026,15:10,Violencia familiar,Colonia Demo 3B,Aldama,3,31.7221,-106.45631
+S-00146,24/03/2026,02:39,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.70517,-106.43441
+S-00147,25/03/2026,09:11,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.7001,-106.34011
+S-00148,15/03/2026,22:51,Violencia familiar,Colonia Demo 3C,Aldama,3,31.65183,-106.37705
+S-00149,27/03/2026,15:01,Daño en propiedad,Colonia Demo 2A,Universidad,2,31.7297,-106.31633
+S-00150,08/03/2026,11:47,Violencia familiar,Colonia Demo 2B,Universidad,2,31.7566,-106.36714
+S-00151,09/03/2026,22:12,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.78493,-106.48241
+S-00152,23/03/2026,21:20,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.6629,-106.49491
+S-00153,20/03/2026,18:19,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.66476,-106.52639
+S-00154,08/03/2026,08:00,Lesiones,Colonia Demo 3A,Aldama,3,31.79439,-106.37423
+S-00155,05/03/2026,19:09,Lesiones,Colonia Demo 2C,Universidad,2,31.64253,-106.37796
+S-00156,16/03/2026,23:17,Lesiones,Colonia Demo 5C,Delicias,5,31.75671,-106.46465
+S-00157,12/03/2026,19:45,Robo de vehículo,Colonia Demo 6B,Chihuahua,6,31.6413,-106.36529
+S-00158,09/03/2026,19:32,Robo a transeúnte,Colonia Demo 5B,Delicias,5,31.69768,-106.47494
+S-00159,29/03/2026,09:23,Lesiones,Colonia Demo 4A,Babícora,4,31.76696,-106.50631
+S-00160,13/03/2026,18:08,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.77284,-106.47843
+S-00161,04/03/2026,15:29,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.60367,-106.33067
+S-00162,20/03/2026,21:10,Lesiones,Colonia Demo 3B,Aldama,3,31.71619,-106.36097
+S-00163,21/03/2026,00:36,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.75271,-106.46473
+S-00164,21/03/2026,18:28,Robo a comercio,Colonia Demo 2A,Universidad,2,31.756,-106.47356
+S-00165,15/03/2026,12:15,Daño en propiedad,Colonia Demo 2B,Universidad,2,31.70767,-106.49084
+S-00166,30/03/2026,17:50,Daño en propiedad,Colonia Demo 4A,Babícora,4,31.70158,-106.47248
+S-00167,22/03/2026,20:19,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.61407,-106.49663
+S-00168,12/03/2026,17:00,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.68574,-106.38995
+S-00169,24/03/2026,21:16,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.60981,-106.41797
+S-00170,27/03/2026,18:56,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.69591,-106.41175
+S-00171,03/03/2026,22:50,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.77933,-106.39579
+S-00172,15/03/2026,10:24,Violencia familiar,Colonia Demo 2A,Universidad,2,31.78441,-106.45766
+S-00173,14/03/2026,17:26,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.74119,-106.50162
+S-00174,11/03/2026,02:06,Violencia familiar,Colonia Demo 2D,Universidad,2,31.75011,-106.36227
+S-00175,19/03/2026,08:36,Violencia familiar,Colonia Demo 2A,Universidad,2,31.62406,-106.36108
+S-00176,15/03/2026,19:03,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.60612,-106.52856
+S-00177,08/03/2026,15:13,Lesiones,Colonia Demo 2A,Universidad,2,31.6128,-106.30931
+S-00178,16/03/2026,13:16,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.75074,-106.36845
+S-00179,30/03/2026,13:43,Violencia familiar,Colonia Demo 5D,Delicias,5,31.61986,-106.53283
+S-00180,16/03/2026,20:28,Violencia familiar,Colonia Demo 4B,Babícora,4,31.64416,-106.3491
+S-00181,26/03/2026,11:39,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.64065,-106.40162
+S-00182,20/03/2026,11:16,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.67598,-106.39228
+S-00183,10/03/2026,22:31,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.66633,-106.54793
+S-00184,23/03/2026,17:09,Robo de vehículo,Colonia Demo 6A,Chihuahua,6,31.7982,-106.49868
+S-00185,01/03/2026,10:19,Robo a comercio,Colonia Demo 5A,Delicias,5,31.62631,-106.48975
+S-00186,16/03/2026,18:54,Lesiones,Colonia Demo 3A,Aldama,3,31.61417,-106.31835
+S-00187,28/03/2026,12:33,Daño en propiedad,Colonia Demo 2B,Universidad,2,31.73116,-106.32237
+S-00188,22/03/2026,20:41,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.79207,-106.30027
+S-00189,27/03/2026,08:35,Lesiones,Colonia Demo 2D,Universidad,2,31.78482,-106.45173
+S-00190,15/03/2026,18:54,Robo a comercio,Colonia Demo 6A,Chihuahua,6,31.69419,-106.45012
+S-00191,06/03/2026,20:15,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.6318,-106.42545
+S-00192,28/03/2026,23:59,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.62474,-106.4558
+S-00193,19/03/2026,22:31,Robo a comercio,Colonia Demo 1B,Cuauhtémoc,1,31.70151,-106.30385
+S-00194,28/03/2026,17:25,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.72923,-106.44032
+S-00195,10/03/2026,20:17,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.70124,-106.5196
+S-00196,09/03/2026,13:47,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.71406,-106.49499
+S-00197,01/03/2026,21:41,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.64641,-106.45631
+S-00198,20/03/2026,11:18,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.65093,-106.33715
+S-00199,09/03/2026,19:12,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.7157,-106.36998
+S-00200,07/03/2026,17:15,Violencia familiar,Colonia Demo 5A,Delicias,5,31.65233,-106.32198
+S-00201,15/03/2026,15:54,Robo de vehículo,Colonia Demo 6A,Chihuahua,6,31.76688,-106.42617
+S-00202,15/03/2026,19:59,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.76541,-106.38496
+S-00203,05/03/2026,21:59,Violencia familiar,Colonia Demo 3D,Aldama,3,31.62468,-106.5341
+S-00204,08/03/2026,17:24,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.69773,-106.33509
+S-00205,06/03/2026,21:44,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.67596,-106.30356
+S-00206,07/03/2026,10:47,Daño en propiedad,Colonia Demo 5D,Delicias,5,31.68339,-106.47282
+S-00207,18/03/2026,18:22,Violencia familiar,Colonia Demo 4B,Babícora,4,31.74886,-106.35932
+S-00208,09/03/2026,16:21,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.71788,-106.44092
+S-00209,07/03/2026,19:33,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.63416,-106.52339
+S-00210,21/03/2026,10:50,Lesiones,Colonia Demo 1C,Cuauhtémoc,1,31.69417,-106.43125
+S-00211,06/03/2026,02:55,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.72783,-106.38134
+S-00212,19/03/2026,16:25,Robo a comercio,Colonia Demo 3B,Aldama,3,31.62865,-106.52134
+S-00213,09/03/2026,05:57,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.75385,-106.35498
+S-00214,18/03/2026,21:59,Violencia familiar,Colonia Demo 2C,Universidad,2,31.61741,-106.42036
+S-00215,10/03/2026,16:35,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.62994,-106.47013
+S-00216,29/03/2026,15:16,Robo a comercio,Colonia Demo 5B,Delicias,5,31.73533,-106.34252
+S-00217,20/03/2026,18:18,Robo a comercio,Colonia Demo 6A,Chihuahua,6,31.66046,-106.38365
+S-00218,11/03/2026,23:21,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.63492,-106.35484
+S-00219,28/03/2026,15:14,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.71129,-106.35467
+S-00220,28/03/2026,18:50,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.73073,-106.39257
+S-00221,20/03/2026,23:10,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.71844,-106.46688
+S-00222,04/03/2026,22:46,Robo de vehículo,Colonia Demo 5A,Delicias,5,31.79229,-106.30612
+S-00223,23/03/2026,12:14,Violencia familiar,Colonia Demo 5D,Delicias,5,31.79332,-106.42686
+S-00224,07/03/2026,11:29,Lesiones,Colonia Demo 6B,Chihuahua,6,31.7246,-106.38526
+S-00225,17/03/2026,15:09,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.67749,-106.48669
+S-00226,14/03/2026,14:12,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.79789,-106.46339
+S-00227,25/03/2026,21:11,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.75265,-106.31463
+S-00228,10/03/2026,13:54,Violencia familiar,Colonia Demo 2B,Universidad,2,31.6884,-106.47
+S-00229,12/03/2026,19:59,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.61106,-106.39682
+S-00230,13/03/2026,17:53,Robo a comercio,Colonia Demo 1B,Cuauhtémoc,1,31.79924,-106.41169
+S-00231,20/03/2026,15:07,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.64319,-106.32842
+S-00232,14/03/2026,06:32,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.65338,-106.45512
+S-00233,12/03/2026,21:58,Robo de vehículo,Colonia Demo 6C,Chihuahua,6,31.63669,-106.32466
+S-00234,25/03/2026,22:14,Robo a comercio,Colonia Demo 6B,Chihuahua,6,31.7117,-106.44174
+S-00235,09/03/2026,15:53,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.77166,-106.51432
+S-00236,12/03/2026,22:46,Lesiones,Colonia Demo 5A,Delicias,5,31.60722,-106.51149
+S-00237,26/03/2026,13:35,Violencia familiar,Colonia Demo 4A,Babícora,4,31.66416,-106.43002
+S-00238,17/03/2026,17:03,Violencia familiar,Colonia Demo 3C,Aldama,3,31.63327,-106.34354
+S-00239,13/03/2026,21:29,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.70007,-106.40337
+S-00240,28/03/2026,18:15,Violencia familiar,Colonia Demo 2B,Universidad,2,31.74793,-106.43401
+S-00241,06/03/2026,10:50,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.73215,-106.38561
+S-00242,02/03/2026,23:50,Lesiones,Colonia Demo 5C,Delicias,5,31.77752,-106.47703
+S-00243,22/03/2026,12:33,Robo de vehículo,Colonia Demo 6B,Chihuahua,6,31.78121,-106.38478
+S-00244,05/03/2026,20:19,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.73479,-106.533
+S-00245,31/03/2026,19:29,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.66967,-106.48531
+S-00246,23/03/2026,16:45,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.64739,-106.54787
+S-00247,28/03/2026,13:18,Robo a transeúnte,Colonia Demo 6C,Chihuahua,6,31.6667,-106.41142
+S-00248,02/03/2026,05:23,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.6387,-106.53059
+S-00249,06/03/2026,13:15,Violencia familiar,Colonia Demo 5A,Delicias,5,31.64353,-106.33579
+S-00250,12/03/2026,09:18,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.62774,-106.39396
+S-00251,01/03/2026,10:12,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.71202,-106.36663
+S-00252,15/03/2026,15:28,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.76264,-106.35107
+S-00253,09/03/2026,21:12,Violencia familiar,Colonia Demo 2D,Universidad,2,31.67349,-106.46008
+S-00254,28/03/2026,13:34,Robo de vehículo,Colonia Demo 5D,Delicias,5,31.60005,-106.41405
+S-00255,08/03/2026,22:17,Robo a transeúnte,Colonia Demo 5A,Delicias,5,31.6412,-106.3603
+S-00256,19/03/2026,18:32,Violencia familiar,Colonia Demo 3B,Aldama,3,31.7644,-106.34458
+S-00257,19/03/2026,23:03,Violencia familiar,Colonia Demo 2D,Universidad,2,31.70394,-106.5029
+S-00258,14/03/2026,08:19,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.6688,-106.48166
+S-00259,29/03/2026,23:56,Violencia familiar,Colonia Demo 5B,Delicias,5,31.68828,-106.37871
+S-00260,20/03/2026,19:22,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.60772,-106.49201
+S-00261,11/03/2026,14:30,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.60392,-106.54916
+S-00262,19/03/2026,14:02,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.72565,-106.32762
+S-00263,26/03/2026,03:17,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.61832,-106.40527
+S-00264,16/03/2026,20:04,Robo a comercio,Colonia Demo 6C,Chihuahua,6,31.75624,-106.30793
+S-00265,15/03/2026,08:56,Violencia familiar,Colonia Demo 2A,Universidad,2,31.62428,-106.39373
+S-00266,21/03/2026,16:06,Robo de vehículo,Colonia Demo 4D,Babícora,4,31.68171,-106.30517
+S-00267,06/03/2026,16:52,Violencia familiar,Colonia Demo 3A,Aldama,3,31.65218,-106.40707
+S-00268,08/03/2026,11:21,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.62906,-106.32721
+S-00269,28/03/2026,01:39,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.62369,-106.41427
+S-00270,11/03/2026,10:47,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.61144,-106.36414
+S-00271,09/03/2026,14:37,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.66009,-106.39283
+S-00272,12/03/2026,20:34,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.77604,-106.31806
+S-00273,28/03/2026,23:11,Lesiones,Colonia Demo 2C,Universidad,2,31.78172,-106.4764
+S-00274,28/03/2026,20:43,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.75441,-106.31453
+S-00275,24/03/2026,23:21,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.64929,-106.51689
+S-00276,21/03/2026,16:41,Violencia familiar,Colonia Demo 5A,Delicias,5,31.67413,-106.42738
+S-00277,25/03/2026,21:03,Violencia familiar,Colonia Demo 3C,Aldama,3,31.78399,-106.39952
+S-00278,15/03/2026,20:55,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.75225,-106.31723
+S-00279,26/03/2026,21:55,Robo a comercio,Colonia Demo 3C,Aldama,3,31.62417,-106.53197
+S-00280,27/03/2026,00:44,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.69425,-106.50576
+S-00281,23/03/2026,14:33,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.73641,-106.34421
+S-00282,14/03/2026,23:09,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.76828,-106.44504
+S-00283,17/03/2026,09:07,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.66974,-106.41888
+S-00284,23/03/2026,23:50,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.78383,-106.42418
+S-00285,09/03/2026,00:42,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.76864,-106.33627
+S-00286,20/03/2026,12:56,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.66186,-106.51904
+S-00287,20/03/2026,20:21,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.63534,-106.51719
+S-00288,28/03/2026,22:31,Robo de vehículo,Colonia Demo 5D,Delicias,5,31.71614,-106.45451
+S-00289,23/03/2026,13:55,Violencia familiar,Colonia Demo 2C,Universidad,2,31.74271,-106.47651
+S-00290,08/03/2026,19:10,Lesiones,Colonia Demo 3C,Aldama,3,31.68664,-106.43479
+S-00291,05/03/2026,02:33,Robo a comercio,Colonia Demo 3D,Aldama,3,31.70341,-106.3339
+S-00292,05/03/2026,19:04,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.76825,-106.3537
+S-00293,08/03/2026,11:54,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.76097,-106.36965
+S-00294,15/03/2026,22:06,Violencia familiar,Colonia Demo 2D,Universidad,2,31.6963,-106.41583
+S-00295,16/03/2026,14:23,Robo de vehículo,Colonia Demo 6D,Chihuahua,6,31.66592,-106.39127
+S-00296,02/03/2026,17:03,Violencia familiar,Colonia Demo 2A,Universidad,2,31.70578,-106.50142
+S-00297,27/03/2026,13:24,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.74504,-106.52177
+S-00298,07/03/2026,17:40,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.74056,-106.43355
+S-00299,13/03/2026,18:05,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.64715,-106.35711
+S-00300,13/03/2026,11:02,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.76822,-106.52278
+S-00301,29/03/2026,09:26,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.72887,-106.3716
+S-00302,04/03/2026,13:03,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.79388,-106.44262
+S-00303,08/03/2026,14:15,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.66283,-106.53025
+S-00304,14/03/2026,22:43,Daño en propiedad,Colonia Demo 6D,Chihuahua,6,31.75465,-106.53861
+S-00305,06/03/2026,18:56,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.64985,-106.46717
+S-00306,23/03/2026,13:03,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.76307,-106.54609
+S-00307,20/03/2026,13:01,Robo de vehículo,Colonia Demo 5D,Delicias,5,31.71043,-106.30821
+S-00308,11/03/2026,17:32,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.77496,-106.34824
+S-00309,26/03/2026,21:09,Violencia familiar,Colonia Demo 3B,Aldama,3,31.71737,-106.49767
+S-00310,07/03/2026,20:09,Violencia familiar,Colonia Demo 3A,Aldama,3,31.71903,-106.31671
+S-00311,07/03/2026,19:12,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.60245,-106.32571
+S-00312,21/03/2026,13:31,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.67342,-106.42084
+S-00313,21/03/2026,21:17,Robo a comercio,Colonia Demo 3D,Aldama,3,31.61177,-106.45452
+S-00314,22/03/2026,17:32,Violencia familiar,Colonia Demo 2A,Universidad,2,31.67003,-106.44964
+S-00315,20/03/2026,02:07,Lesiones,Colonia Demo 4A,Babícora,4,31.79948,-106.50053
+S-00316,28/03/2026,13:58,Violencia familiar,Colonia Demo 3D,Aldama,3,31.75097,-106.51745
+S-00317,16/03/2026,20:26,Lesiones,Colonia Demo 6A,Chihuahua,6,31.78198,-106.52611
+S-00318,21/03/2026,12:01,Lesiones,Colonia Demo 2D,Universidad,2,31.79771,-106.43929
+S-00319,06/03/2026,14:24,Daño en propiedad,Colonia Demo 2B,Universidad,2,31.77912,-106.49926
+S-00320,24/03/2026,23:59,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.69364,-106.46751
+S-00321,27/03/2026,18:02,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.6963,-106.41139
+S-00322,06/03/2026,18:19,Robo a comercio,Colonia Demo 3D,Aldama,3,31.63414,-106.53406
+S-00323,28/03/2026,22:26,Violencia familiar,Colonia Demo 6A,Chihuahua,6,31.64285,-106.33204
+S-00324,29/03/2026,01:42,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.63046,-106.39088
+S-00325,22/03/2026,17:12,Lesiones,Colonia Demo 6D,Chihuahua,6,31.76609,-106.31154
+S-00326,14/03/2026,21:28,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.64312,-106.4852
+S-00327,12/03/2026,03:30,Violencia familiar,Colonia Demo 3D,Aldama,3,31.62846,-106.40414
+S-00328,12/03/2026,19:08,Violencia familiar,Colonia Demo 2D,Universidad,2,31.74642,-106.52547
+S-00329,07/03/2026,20:12,Daño en propiedad,Colonia Demo 5C,Delicias,5,31.61807,-106.38248
+S-00330,19/03/2026,10:12,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.67088,-106.42456
+S-00331,29/03/2026,10:48,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.60313,-106.5467
+S-00332,05/03/2026,17:44,Violencia familiar,Colonia Demo 4B,Babícora,4,31.6739,-106.33038
+S-00333,01/03/2026,14:27,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.64959,-106.54321
+S-00334,14/03/2026,05:34,Violencia familiar,Colonia Demo 2A,Universidad,2,31.70271,-106.45304
+S-00335,14/03/2026,17:07,Daño en propiedad,Colonia Demo 5A,Delicias,5,31.79405,-106.51297
+S-00336,24/03/2026,03:15,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.7653,-106.36571
+S-00337,10/03/2026,18:06,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.68,-106.31729
+S-00338,17/03/2026,21:03,Lesiones,Colonia Demo 2D,Universidad,2,31.64626,-106.48145
+S-00339,04/03/2026,09:25,Violencia familiar,Colonia Demo 3A,Aldama,3,31.68761,-106.44462
+S-00340,15/03/2026,13:11,Violencia familiar,Colonia Demo 4C,Babícora,4,31.71266,-106.44415
+S-00341,22/03/2026,23:42,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.65398,-106.53213
+S-00342,20/03/2026,22:30,Violencia familiar,Colonia Demo 6D,Chihuahua,6,31.76638,-106.33257
+S-00343,04/03/2026,22:07,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.67043,-106.52542
+S-00344,28/03/2026,01:09,Violencia familiar,Colonia Demo 4C,Babícora,4,31.68146,-106.35973
+S-00345,09/03/2026,18:34,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.79434,-106.30922
+S-00346,17/03/2026,17:08,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.71447,-106.54704
+S-00347,25/03/2026,23:28,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.74711,-106.32106
+S-00348,19/03/2026,18:09,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.67908,-106.54036
+S-00349,10/03/2026,19:16,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.77141,-106.4366
+S-00350,07/03/2026,22:07,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.6341,-106.36663
+S-00351,08/03/2026,03:52,Violencia familiar,Colonia Demo 2D,Universidad,2,31.60149,-106.37728
+S-00352,18/03/2026,11:19,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.61784,-106.54794
+S-00353,02/03/2026,21:45,Robo de vehículo,Colonia Demo 6B,Chihuahua,6,31.64165,-106.49105
+S-00354,11/03/2026,22:14,Lesiones,Colonia Demo 4A,Babícora,4,31.7249,-106.45528
+S-00355,27/03/2026,22:02,Robo a comercio,Colonia Demo 3D,Aldama,3,31.72958,-106.30154
+S-00356,17/03/2026,20:50,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.79788,-106.41487
+S-00357,29/03/2026,18:20,Violencia familiar,Colonia Demo 3D,Aldama,3,31.60439,-106.5085
+S-00358,18/03/2026,21:03,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.73,-106.47858
+S-00359,13/03/2026,23:44,Robo a comercio,Colonia Demo 1B,Cuauhtémoc,1,31.74687,-106.3684
+S-00360,25/03/2026,16:49,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.69177,-106.49259
+S-00361,05/03/2026,10:27,Robo de vehículo,Colonia Demo 5A,Delicias,5,31.79483,-106.53278
+S-00362,19/03/2026,21:35,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.73243,-106.37622
+S-00363,31/03/2026,01:57,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.7242,-106.53758
+S-00364,14/03/2026,23:20,Violencia familiar,Colonia Demo 4D,Babícora,4,31.66792,-106.54607
+S-00365,19/03/2026,11:09,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.76264,-106.47428
+S-00366,07/03/2026,00:45,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.64214,-106.38819
+S-00367,17/03/2026,22:04,Violencia familiar,Colonia Demo 4B,Babícora,4,31.69477,-106.31034
+S-00368,02/03/2026,15:11,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.74901,-106.49105
+S-00369,04/03/2026,19:58,Violencia familiar,Colonia Demo 3D,Aldama,3,31.62443,-106.52436
+S-00370,24/03/2026,04:25,Violencia familiar,Colonia Demo 4C,Babícora,4,31.72765,-106.4347
+S-00371,22/03/2026,20:27,Robo de vehículo,Colonia Demo 6A,Chihuahua,6,31.78823,-106.39991
+S-00372,05/03/2026,19:24,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.70719,-106.54683
+S-00373,07/03/2026,19:57,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.62651,-106.36455
+S-00374,31/03/2026,21:08,Violencia familiar,Colonia Demo 3D,Aldama,3,31.77644,-106.36225
+S-00375,07/03/2026,17:48,Violencia familiar,Colonia Demo 6C,Chihuahua,6,31.6944,-106.33312
+S-00376,09/03/2026,15:57,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.6285,-106.46268
+S-00377,23/03/2026,11:29,Lesiones,Colonia Demo 3D,Aldama,3,31.67643,-106.45728
+S-00378,11/03/2026,12:51,Violencia familiar,Colonia Demo 3C,Aldama,3,31.60926,-106.38528
+S-00379,21/03/2026,21:45,Daño en propiedad,Colonia Demo 2A,Universidad,2,31.77158,-106.38265
+S-00380,02/03/2026,21:46,Violencia familiar,Colonia Demo 2A,Universidad,2,31.74481,-106.39218
+S-00381,30/03/2026,20:58,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.73606,-106.42616
+S-00382,03/03/2026,16:06,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.70573,-106.37125
+S-00383,01/03/2026,11:22,Lesiones,Colonia Demo 2B,Universidad,2,31.78211,-106.46001
+S-00384,26/03/2026,12:40,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.6517,-106.36107
+S-00385,02/03/2026,13:09,Violencia familiar,Colonia Demo 3D,Aldama,3,31.7363,-106.314
+S-00386,18/03/2026,13:16,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.66067,-106.36173
+S-00387,20/03/2026,21:44,Violencia familiar,Colonia Demo 3C,Aldama,3,31.60111,-106.46589
+S-00388,14/03/2026,19:03,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.63846,-106.36899
+S-00389,08/03/2026,14:42,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.7807,-106.31299
+S-00390,10/03/2026,21:27,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.74053,-106.43799
+S-00391,20/03/2026,21:29,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.72552,-106.4365
+S-00392,05/03/2026,20:07,Lesiones,Colonia Demo 3B,Aldama,3,31.64268,-106.46044
+S-00393,06/03/2026,19:31,Robo a comercio,Colonia Demo 6A,Chihuahua,6,31.76632,-106.31534
+S-00394,26/03/2026,12:22,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.72703,-106.47373
+S-00395,18/03/2026,00:36,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.79748,-106.38943
+S-00396,27/03/2026,04:38,Violencia familiar,Colonia Demo 2A,Universidad,2,31.66354,-106.4111
+S-00397,10/03/2026,03:31,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.68743,-106.41319
+S-00398,08/03/2026,10:54,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.73837,-106.48015
+S-00399,28/03/2026,17:06,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.77907,-106.52143
+S-00400,05/03/2026,07:35,Robo a comercio,Colonia Demo 2B,Universidad,2,31.76225,-106.52239
+S-00401,07/03/2026,16:19,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.64907,-106.37482
+S-00402,25/03/2026,17:07,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.73985,-106.47408
+S-00403,27/03/2026,04:43,Lesiones,Colonia Demo 6A,Chihuahua,6,31.66844,-106.50315
+S-00404,08/03/2026,11:29,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.69538,-106.47426
+S-00405,23/03/2026,11:32,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.73842,-106.38875
+S-00406,21/03/2026,11:25,Lesiones,Colonia Demo 3B,Aldama,3,31.71981,-106.43368
+S-00407,05/03/2026,21:33,Daño en propiedad,Colonia Demo 5C,Delicias,5,31.64356,-106.39311
+S-00408,27/03/2026,11:04,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.60902,-106.42416
+S-00409,07/03/2026,08:28,Robo a transeúnte,Colonia Demo 5B,Delicias,5,31.62379,-106.38755
+S-00410,24/03/2026,14:51,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.65711,-106.35561
+S-00411,24/03/2026,17:41,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.62018,-106.34853
+S-00412,02/03/2026,01:52,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.74907,-106.40417
+S-00413,08/03/2026,18:51,Violencia familiar,Colonia Demo 2A,Universidad,2,31.74169,-106.52793
+S-00414,11/03/2026,09:21,Violencia familiar,Colonia Demo 4B,Babícora,4,31.66004,-106.42056
+S-00415,01/03/2026,12:43,Robo a comercio,Colonia Demo 2A,Universidad,2,31.70187,-106.46522
+S-00416,24/03/2026,11:10,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.73161,-106.35362
+S-00417,03/03/2026,15:57,Lesiones,Colonia Demo 3B,Aldama,3,31.77069,-106.53322
+S-00418,24/03/2026,20:41,Violencia familiar,Colonia Demo 5C,Delicias,5,31.72443,-106.44398
+S-00419,08/03/2026,21:46,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.67079,-106.45407
+S-00420,20/03/2026,00:51,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.66203,-106.53773
+S-00421,14/03/2026,21:51,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.66371,-106.34996
+S-00422,31/03/2026,18:26,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.74044,-106.51349
+S-00423,16/03/2026,10:31,Robo a comercio,Colonia Demo 5B,Delicias,5,31.63288,-106.48613
+S-00424,22/03/2026,02:57,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.74611,-106.46374
+S-00425,05/03/2026,15:14,Robo a comercio,Colonia Demo 4A,Babícora,4,31.70673,-106.40316
+S-00426,26/03/2026,19:05,Violencia familiar,Colonia Demo 4B,Babícora,4,31.61788,-106.33058
+S-00427,03/03/2026,18:58,Daño en propiedad,Colonia Demo 4D,Babícora,4,31.62429,-106.40881
+S-00428,06/03/2026,10:12,Violencia familiar,Colonia Demo 2D,Universidad,2,31.71443,-106.30897
+S-00429,01/03/2026,18:12,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.6077,-106.52684
+S-00430,21/03/2026,23:00,Violencia familiar,Colonia Demo 3C,Aldama,3,31.61101,-106.317
+S-00431,05/03/2026,04:26,Lesiones,Colonia Demo 6C,Chihuahua,6,31.7135,-106.41298
+S-00432,16/03/2026,22:17,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.76349,-106.37509
+S-00433,02/03/2026,07:09,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.71464,-106.5168
+S-00434,22/03/2026,00:52,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.65404,-106.53968
+S-00435,16/03/2026,15:20,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.6932,-106.44472
+S-00436,09/03/2026,20:15,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.67068,-106.41224
+S-00437,12/03/2026,08:20,Lesiones,Colonia Demo 2A,Universidad,2,31.72821,-106.54169
+S-00438,17/03/2026,12:20,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.65132,-106.3525
+S-00439,14/03/2026,20:44,Violencia familiar,Colonia Demo 2B,Universidad,2,31.62604,-106.45229
+S-00440,04/03/2026,22:53,Violencia familiar,Colonia Demo 2A,Universidad,2,31.65179,-106.51246
+S-00441,29/03/2026,19:01,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.76785,-106.42738
+S-00442,28/03/2026,16:42,Violencia familiar,Colonia Demo 3C,Aldama,3,31.7881,-106.41989
+S-00443,29/03/2026,07:28,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.74289,-106.38611
+S-00444,19/03/2026,16:30,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.79431,-106.33447
+S-00445,01/03/2026,12:38,Daño en propiedad,Colonia Demo 4D,Babícora,4,31.64629,-106.37172
+S-00446,04/03/2026,14:45,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.74893,-106.52062
+S-00447,18/03/2026,22:08,Robo de vehículo,Colonia Demo 4D,Babícora,4,31.70413,-106.54809
+S-00448,10/03/2026,16:35,Lesiones,Colonia Demo 2A,Universidad,2,31.61194,-106.47664
+S-00449,08/03/2026,19:30,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.79845,-106.33786
+S-00450,17/03/2026,10:05,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.65215,-106.46758
+S-00451,04/03/2026,10:29,Lesiones,Colonia Demo 2C,Universidad,2,31.64183,-106.51155
+S-00452,13/03/2026,15:58,Lesiones,Colonia Demo 3C,Aldama,3,31.70278,-106.39102
+S-00453,14/03/2026,18:31,Robo a comercio,Colonia Demo 3C,Aldama,3,31.76757,-106.53264
+S-00454,08/03/2026,22:10,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.61115,-106.34868
+S-00455,31/03/2026,21:47,Violencia familiar,Colonia Demo 6D,Chihuahua,6,31.73918,-106.31167
+S-00456,31/03/2026,12:46,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.67119,-106.48814
+S-00457,17/03/2026,13:28,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.7945,-106.49585
+S-00458,18/03/2026,23:44,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.78701,-106.52293
+S-00459,07/03/2026,14:30,Robo a comercio,Colonia Demo 4B,Babícora,4,31.67468,-106.54742
+S-00460,07/03/2026,19:53,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.7267,-106.36398
+S-00461,11/03/2026,22:05,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.64557,-106.5237
+S-00462,31/03/2026,05:19,Daño en propiedad,Colonia Demo 3C,Aldama,3,31.78546,-106.50811
+S-00463,09/03/2026,16:30,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.65377,-106.5439
+S-00464,07/03/2026,06:30,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.71114,-106.38796
+S-00465,03/03/2026,13:49,Lesiones,Colonia Demo 5D,Delicias,5,31.60443,-106.37743
+S-00466,19/03/2026,20:38,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.65831,-106.46381
+S-00467,15/03/2026,19:03,Violencia familiar,Colonia Demo 2D,Universidad,2,31.78322,-106.53905
+S-00468,04/03/2026,08:33,Violencia familiar,Colonia Demo 3A,Aldama,3,31.7066,-106.42756
+S-00469,08/03/2026,00:09,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.6708,-106.50084
+S-00470,21/03/2026,21:40,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.74476,-106.37861
+S-00471,13/03/2026,12:58,Lesiones,Colonia Demo 3D,Aldama,3,31.6714,-106.44441
+S-00472,16/03/2026,21:58,Lesiones,Colonia Demo 6B,Chihuahua,6,31.67578,-106.41671
+S-00473,30/03/2026,17:47,Lesiones,Colonia Demo 6A,Chihuahua,6,31.65171,-106.47847
+S-00474,04/03/2026,09:43,Robo de vehículo,Colonia Demo 6B,Chihuahua,6,31.78779,-106.39901
+S-00475,23/03/2026,21:12,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.63138,-106.37634
+S-00476,25/03/2026,12:00,Robo de vehículo,Colonia Demo 5A,Delicias,5,31.74191,-106.51911
+S-00477,08/03/2026,08:37,Robo a comercio,Colonia Demo 3D,Aldama,3,31.61832,-106.30127
+S-00478,30/03/2026,00:06,Lesiones,Colonia Demo 5D,Delicias,5,31.67203,-106.40309
+S-00479,15/03/2026,20:47,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.6107,-106.43888
+S-00480,21/03/2026,09:18,Violencia familiar,Colonia Demo 5A,Delicias,5,31.75002,-106.47303
+S-00481,04/03/2026,13:59,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.66768,-106.51842
+S-00482,15/03/2026,00:11,Robo a comercio,Colonia Demo 1D,Cuauhtémoc,1,31.77169,-106.49603
+S-00483,19/03/2026,18:44,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.61011,-106.34312
+S-00484,23/03/2026,20:04,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.71294,-106.4617
+S-00485,11/03/2026,17:37,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.72131,-106.52187
+S-00486,16/03/2026,12:41,Daño en propiedad,Colonia Demo 3B,Aldama,3,31.75099,-106.35624
+S-00487,01/03/2026,06:55,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.71382,-106.40341
+S-00488,04/03/2026,19:50,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.6396,-106.39443
+S-00489,26/03/2026,10:16,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.63635,-106.42179
+S-00490,14/03/2026,19:19,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.75138,-106.34485
+S-00491,07/03/2026,16:41,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.68002,-106.35279
+S-00492,20/03/2026,15:43,Robo a comercio,Colonia Demo 3A,Aldama,3,31.75678,-106.44041
+S-00493,11/03/2026,20:52,Robo de vehículo,Colonia Demo 5D,Delicias,5,31.78047,-106.36909
+S-00494,13/03/2026,23:53,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.74713,-106.50744
+S-00495,04/03/2026,22:06,Violencia familiar,Colonia Demo 2D,Universidad,2,31.69876,-106.52771
+S-00496,02/03/2026,22:01,Robo a comercio,Colonia Demo 1A,Cuauhtémoc,1,31.68195,-106.35326
+S-00497,12/03/2026,10:05,Violencia familiar,Colonia Demo 3C,Aldama,3,31.76697,-106.50877
+S-00498,06/03/2026,12:14,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.69972,-106.31364
+S-00499,21/03/2026,18:07,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.70648,-106.30413
+S-00500,01/03/2026,07:49,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.65451,-106.54841
+S-00501,31/03/2026,20:47,Daño en propiedad,Colonia Demo 6C,Chihuahua,6,31.6032,-106.5335
+S-00502,16/03/2026,21:18,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.71225,-106.34719
+S-00503,03/03/2026,21:44,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.7584,-106.44276
+S-00504,07/03/2026,20:08,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.65628,-106.5112
+S-00505,16/03/2026,15:09,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.7136,-106.49488
+S-00506,01/03/2026,22:01,Daño en propiedad,Colonia Demo 6B,Chihuahua,6,31.77709,-106.43796
+S-00507,21/03/2026,19:46,Robo a transeúnte,Colonia Demo 4B,Babícora,4,31.70228,-106.43166
+S-00508,25/03/2026,12:05,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.79303,-106.31903
+S-00509,01/03/2026,03:04,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.79257,-106.49751
+S-00510,05/03/2026,13:38,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.76909,-106.52728
+S-00511,14/03/2026,23:51,Violencia familiar,Colonia Demo 5A,Delicias,5,31.66097,-106.43291
+S-00512,08/03/2026,18:13,Robo a comercio,Colonia Demo 6D,Chihuahua,6,31.76622,-106.53807
+S-00513,05/03/2026,11:53,Violencia familiar,Colonia Demo 3B,Aldama,3,31.73744,-106.37767
+S-00514,20/03/2026,15:56,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.74899,-106.31397
+S-00515,19/03/2026,16:57,Robo a comercio,Colonia Demo 3D,Aldama,3,31.69072,-106.48888
+S-00516,26/03/2026,19:24,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.69436,-106.34685
+S-00517,28/03/2026,11:29,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.77587,-106.38209
+S-00518,21/03/2026,22:34,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.66422,-106.52761
+S-00519,25/03/2026,17:20,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.77962,-106.37672
+S-00520,27/03/2026,23:08,Violencia familiar,Colonia Demo 4C,Babícora,4,31.66222,-106.50187
+S-00521,18/03/2026,18:50,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.79437,-106.33417
+S-00522,31/03/2026,12:53,Violencia familiar,Colonia Demo 4C,Babícora,4,31.75288,-106.51519
+S-00523,14/03/2026,08:49,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.72448,-106.42198
+S-00524,25/03/2026,21:48,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.67473,-106.41504
+S-00525,22/03/2026,13:01,Violencia familiar,Colonia Demo 2B,Universidad,2,31.64907,-106.38993
+S-00526,13/03/2026,00:56,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.77431,-106.51511
+S-00527,20/03/2026,12:03,Robo a comercio,Colonia Demo 3B,Aldama,3,31.77076,-106.4256
+S-00528,29/03/2026,01:51,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.63993,-106.44257
+S-00529,09/03/2026,19:52,Violencia familiar,Colonia Demo 2C,Universidad,2,31.71656,-106.51073
+S-00530,07/03/2026,16:28,Violencia familiar,Colonia Demo 2B,Universidad,2,31.65002,-106.44354
+S-00531,21/03/2026,16:11,Violencia familiar,Colonia Demo 2A,Universidad,2,31.78148,-106.39342
+S-00532,08/03/2026,20:30,Violencia familiar,Colonia Demo 2A,Universidad,2,31.6128,-106.33655
+S-00533,01/03/2026,21:15,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.77964,-106.41748
+S-00534,14/03/2026,14:18,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.68832,-106.45947
+S-00535,27/03/2026,20:23,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.77719,-106.5494
+S-00536,22/03/2026,10:03,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.79293,-106.3468
+S-00537,27/03/2026,19:38,Robo a transeúnte,Colonia Demo 4B,Babícora,4,31.64424,-106.33451
+S-00538,11/03/2026,09:07,Lesiones,Colonia Demo 2A,Universidad,2,31.74993,-106.34752
+S-00539,20/03/2026,07:34,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.65064,-106.31452
+S-00540,03/03/2026,06:10,Lesiones,Colonia Demo 5A,Delicias,5,31.70466,-106.47483
+S-00541,13/03/2026,07:33,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.62512,-106.33515
+S-00542,18/03/2026,14:55,Violencia familiar,Colonia Demo 4A,Babícora,4,31.72353,-106.32598
+S-00543,11/03/2026,10:27,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.60543,-106.47615
+S-00544,05/03/2026,19:09,Violencia familiar,Colonia Demo 3B,Aldama,3,31.7109,-106.54339
+S-00545,03/03/2026,19:28,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.678,-106.32729
+S-00546,01/03/2026,17:37,Lesiones,Colonia Demo 3D,Aldama,3,31.76831,-106.49333
+S-00547,28/03/2026,10:58,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.77452,-106.48496
+S-00548,12/03/2026,19:47,Lesiones,Colonia Demo 3C,Aldama,3,31.73889,-106.50099
+S-00549,01/03/2026,19:08,Robo a comercio,Colonia Demo 5A,Delicias,5,31.74359,-106.43306
+S-00550,05/03/2026,22:52,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.71559,-106.46924
+S-00551,20/03/2026,06:28,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.72402,-106.54166
+S-00552,28/03/2026,12:50,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.7747,-106.4015
+S-00553,16/03/2026,10:21,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.63608,-106.47086
+S-00554,13/03/2026,17:36,Violencia familiar,Colonia Demo 3A,Aldama,3,31.73153,-106.53481
+S-00555,16/03/2026,06:28,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.66941,-106.54514
+S-00556,31/03/2026,11:49,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.65469,-106.42401
+S-00557,07/03/2026,07:04,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.68867,-106.47663
+S-00558,16/03/2026,17:52,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.76181,-106.30457
+S-00559,19/03/2026,11:07,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.67907,-106.36509
+S-00560,04/03/2026,03:59,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.63492,-106.47054
+S-00561,04/03/2026,06:30,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.74109,-106.48831
+S-00562,01/03/2026,21:24,Violencia familiar,Colonia Demo 3D,Aldama,3,31.7991,-106.33912
+S-00563,28/03/2026,18:46,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.63902,-106.46413
+S-00564,03/03/2026,08:55,Violencia familiar,Colonia Demo 5D,Delicias,5,31.62407,-106.32122
+S-00565,14/03/2026,13:11,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.68903,-106.47806
+S-00566,26/03/2026,19:59,Lesiones,Colonia Demo 2B,Universidad,2,31.72621,-106.49855
+S-00567,03/03/2026,08:21,Violencia familiar,Colonia Demo 4C,Babícora,4,31.75644,-106.30367
+S-00568,14/03/2026,00:29,Violencia familiar,Colonia Demo 2C,Universidad,2,31.78716,-106.43478
+S-00569,19/03/2026,21:04,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.63594,-106.36003
+S-00570,27/03/2026,09:12,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.67163,-106.41464
+S-00571,10/03/2026,08:36,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.76046,-106.45297
+S-00572,27/03/2026,19:14,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.76805,-106.34082
+S-00573,23/03/2026,19:51,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.6965,-106.47464
+S-00574,25/03/2026,19:18,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.76656,-106.49429
+S-00575,02/03/2026,03:33,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.73351,-106.35602
+S-00576,27/03/2026,14:40,Violencia familiar,Colonia Demo 3A,Aldama,3,31.76467,-106.44643
+S-00577,28/03/2026,22:44,Robo a transeúnte,Colonia Demo 5B,Delicias,5,31.75229,-106.43867
+S-00578,15/03/2026,10:46,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.76356,-106.54161
+S-00579,18/03/2026,11:41,Lesiones,Colonia Demo 4C,Babícora,4,31.67138,-106.45651
+S-00580,30/03/2026,13:26,Robo a transeúnte,Colonia Demo 6C,Chihuahua,6,31.67084,-106.39584
+S-00581,06/03/2026,19:12,Robo a comercio,Colonia Demo 3C,Aldama,3,31.62899,-106.46449
+S-00582,19/03/2026,22:50,Lesiones,Colonia Demo 1C,Cuauhtémoc,1,31.66088,-106.50736
+S-00583,07/03/2026,17:49,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.62976,-106.44432
+S-00584,14/03/2026,20:43,Violencia familiar,Colonia Demo 5B,Delicias,5,31.76503,-106.46592
+S-00585,07/03/2026,18:38,Robo a transeúnte,Colonia Demo 6D,Chihuahua,6,31.6719,-106.50427
+S-00586,11/03/2026,01:55,Violencia familiar,Colonia Demo 3B,Aldama,3,31.60418,-106.47596
+S-00587,15/03/2026,14:13,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.62675,-106.4139
+S-00588,07/03/2026,18:58,Violencia familiar,Colonia Demo 3C,Aldama,3,31.76955,-106.51356
+S-00589,22/03/2026,13:14,Robo a transeúnte,Colonia Demo 2A,Universidad,2,31.79498,-106.50242
+S-00590,20/03/2026,15:28,Lesiones,Colonia Demo 2D,Universidad,2,31.76409,-106.32388
+S-00591,15/03/2026,20:24,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.63328,-106.38426
+S-00592,22/03/2026,14:53,Violencia familiar,Colonia Demo 5B,Delicias,5,31.76984,-106.34784
+S-00593,01/03/2026,10:10,Violencia familiar,Colonia Demo 2B,Universidad,2,31.60008,-106.42548
+S-00594,17/03/2026,23:55,Lesiones,Colonia Demo 2D,Universidad,2,31.78694,-106.52692
+S-00595,23/03/2026,23:36,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.61985,-106.40524
+S-00596,27/03/2026,21:01,Robo de vehículo,Colonia Demo 5D,Delicias,5,31.72237,-106.51885
+S-00597,15/03/2026,07:26,Lesiones,Colonia Demo 2B,Universidad,2,31.73252,-106.54791
+S-00598,15/03/2026,03:04,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.64341,-106.3511
+S-00599,29/03/2026,21:33,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.67745,-106.5231
+S-00600,31/03/2026,02:39,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.73116,-106.48331
+S-00601,28/03/2026,16:13,Robo a comercio,Colonia Demo 4C,Babícora,4,31.79028,-106.30304
+S-00602,08/03/2026,09:34,Robo a transeúnte,Colonia Demo 6B,Chihuahua,6,31.66303,-106.33493
+S-00603,13/03/2026,15:23,Violencia familiar,Colonia Demo 5A,Delicias,5,31.61735,-106.42695
+S-00604,16/03/2026,02:30,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.7698,-106.31619
+S-00605,12/03/2026,01:07,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.68946,-106.46287
+S-00606,11/03/2026,19:16,Robo a comercio,Colonia Demo 3A,Aldama,3,31.72947,-106.41305
+S-00607,18/03/2026,13:38,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.66684,-106.43586
+S-00608,14/03/2026,09:14,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.78799,-106.53156
+S-00609,25/03/2026,02:52,Violencia familiar,Colonia Demo 3C,Aldama,3,31.63289,-106.51101
+S-00610,18/03/2026,01:44,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.6448,-106.43582
+S-00611,18/03/2026,12:51,Violencia familiar,Colonia Demo 2A,Universidad,2,31.68932,-106.41963
+S-00612,06/03/2026,12:42,Violencia familiar,Colonia Demo 6A,Chihuahua,6,31.6865,-106.54097
+S-00613,18/03/2026,20:15,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.75648,-106.46164
+S-00614,18/03/2026,12:43,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.7685,-106.32642
+S-00615,18/03/2026,16:38,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.7011,-106.35355
+S-00616,14/03/2026,07:24,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.60607,-106.49209
+S-00617,05/03/2026,10:50,Violencia familiar,Colonia Demo 3A,Aldama,3,31.73362,-106.37186
+S-00618,19/03/2026,21:41,Lesiones,Colonia Demo 3C,Aldama,3,31.76313,-106.50058
+S-00619,14/03/2026,09:32,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.65619,-106.40551
+S-00620,03/03/2026,13:41,Violencia familiar,Colonia Demo 5D,Delicias,5,31.79166,-106.32034
+S-00621,07/03/2026,18:20,Violencia familiar,Colonia Demo 4C,Babícora,4,31.78531,-106.52083
+S-00622,26/03/2026,14:19,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.67718,-106.35914
+S-00623,09/03/2026,18:36,Lesiones,Colonia Demo 5D,Delicias,5,31.78618,-106.4567
+S-00624,20/03/2026,15:46,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.70946,-106.44469
+S-00625,22/03/2026,17:03,Violencia familiar,Colonia Demo 4C,Babícora,4,31.64415,-106.30758
+S-00626,02/03/2026,10:55,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.77534,-106.53066
+S-00627,07/03/2026,21:46,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.63989,-106.43574
+S-00628,21/03/2026,21:38,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.70069,-106.52687
+S-00629,01/03/2026,21:59,Lesiones,Colonia Demo 3A,Aldama,3,31.73635,-106.43525
+S-00630,18/03/2026,01:50,Violencia familiar,Colonia Demo 5B,Delicias,5,31.69076,-106.44505
+S-00631,10/03/2026,20:32,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.62022,-106.33588
+S-00632,17/03/2026,21:59,Robo a comercio,Colonia Demo 5C,Delicias,5,31.64531,-106.44979
+S-00633,21/03/2026,14:01,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.70435,-106.50657
+S-00634,13/03/2026,13:05,Daño en propiedad,Colonia Demo 3B,Aldama,3,31.73893,-106.40681
+S-00635,08/03/2026,22:55,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.63405,-106.50905
+S-00636,30/03/2026,21:03,Robo a transeúnte,Colonia Demo 5B,Delicias,5,31.71187,-106.35442
+S-00637,07/03/2026,04:29,Violencia familiar,Colonia Demo 6B,Chihuahua,6,31.74603,-106.3021
+S-00638,11/03/2026,09:11,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.64749,-106.43297
+S-00639,26/03/2026,06:09,Violencia familiar,Colonia Demo 4B,Babícora,4,31.78101,-106.33863
+S-00640,12/03/2026,20:57,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.63007,-106.33283
+S-00641,10/03/2026,19:33,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.6462,-106.46028
+S-00642,01/03/2026,04:30,Violencia familiar,Colonia Demo 3B,Aldama,3,31.78939,-106.53513
+S-00643,21/03/2026,07:37,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.78553,-106.49574
+S-00644,25/03/2026,21:53,Robo de vehículo,Colonia Demo 5A,Delicias,5,31.68222,-106.45415
+S-00645,06/03/2026,22:19,Robo a comercio,Colonia Demo 3A,Aldama,3,31.66616,-106.39698
+S-00646,28/03/2026,20:33,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.77641,-106.36652
+S-00647,06/03/2026,16:26,Robo a comercio,Colonia Demo 6B,Chihuahua,6,31.75332,-106.53059
+S-00648,04/03/2026,07:38,Violencia familiar,Colonia Demo 5D,Delicias,5,31.75617,-106.39674
+S-00649,21/03/2026,17:06,Violencia familiar,Colonia Demo 4A,Babícora,4,31.7158,-106.4199
+S-00650,21/03/2026,16:30,Violencia familiar,Colonia Demo 3C,Aldama,3,31.60747,-106.52667
+S-00651,17/03/2026,09:00,Robo de vehículo,Colonia Demo 4D,Babícora,4,31.73625,-106.43503
+S-00652,12/03/2026,15:28,Violencia familiar,Colonia Demo 2C,Universidad,2,31.66296,-106.32624
+S-00653,25/03/2026,19:54,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.60458,-106.48378
+S-00654,19/03/2026,21:48,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.78073,-106.38536
+S-00655,08/03/2026,14:11,Violencia familiar,Colonia Demo 5D,Delicias,5,31.74619,-106.41288
+S-00656,29/03/2026,21:23,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.74609,-106.42346
+S-00657,18/03/2026,13:22,Violencia familiar,Colonia Demo 3C,Aldama,3,31.66333,-106.3884
+S-00658,22/03/2026,08:47,Daño en propiedad,Colonia Demo 1B,Cuauhtémoc,1,31.76897,-106.35697
+S-00659,28/03/2026,19:46,Daño en propiedad,Colonia Demo 2B,Universidad,2,31.6605,-106.42898
+S-00660,30/03/2026,10:58,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.62162,-106.52983
+S-00661,28/03/2026,10:36,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.61751,-106.50979
+S-00662,02/03/2026,21:16,Violencia familiar,Colonia Demo 2D,Universidad,2,31.62678,-106.51906
+S-00663,09/03/2026,02:16,Violencia familiar,Colonia Demo 4C,Babícora,4,31.77766,-106.35844
+S-00664,17/03/2026,17:10,Lesiones,Colonia Demo 3A,Aldama,3,31.75505,-106.37372
+S-00665,22/03/2026,16:38,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.62438,-106.30909
+S-00666,21/03/2026,07:44,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.63748,-106.30595
+S-00667,21/03/2026,12:38,Robo a comercio,Colonia Demo 2A,Universidad,2,31.66874,-106.54695
+S-00668,19/03/2026,22:27,Robo a comercio,Colonia Demo 1D,Cuauhtémoc,1,31.69748,-106.44375
+S-00669,18/03/2026,12:48,Violencia familiar,Colonia Demo 5A,Delicias,5,31.64124,-106.30413
+S-00670,30/03/2026,00:02,Violencia familiar,Colonia Demo 5C,Delicias,5,31.66208,-106.32635
+S-00671,01/03/2026,21:14,Daño en propiedad,Colonia Demo 4B,Babícora,4,31.67236,-106.48501
+S-00672,11/03/2026,18:47,Lesiones,Colonia Demo 4D,Babícora,4,31.68878,-106.44116
+S-00673,06/03/2026,18:54,Robo a transeúnte,Colonia Demo 4B,Babícora,4,31.61316,-106.52282
+S-00674,12/03/2026,17:37,Daño en propiedad,Colonia Demo 5A,Delicias,5,31.68362,-106.3424
+S-00675,26/03/2026,17:37,Lesiones,Colonia Demo 2A,Universidad,2,31.61874,-106.49243
+S-00676,20/03/2026,20:27,Violencia familiar,Colonia Demo 3A,Aldama,3,31.6462,-106.49404
+S-00677,24/03/2026,19:13,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.76415,-106.42259
+S-00678,19/03/2026,02:55,Robo de vehículo,Colonia Demo 3B,Aldama,3,31.71609,-106.39656
+S-00679,16/03/2026,14:36,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.69229,-106.31418
+S-00680,07/03/2026,23:18,Violencia familiar,Colonia Demo 2D,Universidad,2,31.73947,-106.30746
+S-00681,06/03/2026,14:07,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.63829,-106.38077
+S-00682,17/03/2026,19:26,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.62832,-106.50653
+S-00683,22/03/2026,20:10,Lesiones,Colonia Demo 6C,Chihuahua,6,31.64189,-106.45038
+S-00684,28/03/2026,20:06,Lesiones,Colonia Demo 3D,Aldama,3,31.74886,-106.32253
+S-00685,19/03/2026,16:55,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.66686,-106.35429
+S-00686,04/03/2026,20:07,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.69991,-106.3145
+S-00687,06/03/2026,23:06,Daño en propiedad,Colonia Demo 6A,Chihuahua,6,31.68282,-106.32426
+S-00688,29/03/2026,08:45,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.61733,-106.3609
+S-00689,28/03/2026,23:10,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.74297,-106.48321
+S-00690,05/03/2026,07:21,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.62183,-106.47705
+S-00691,24/03/2026,12:11,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.6671,-106.37537
+S-00692,05/03/2026,00:21,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.62405,-106.51447
+S-00693,02/03/2026,20:46,Violencia familiar,Colonia Demo 3B,Aldama,3,31.68931,-106.39963
+S-00694,22/03/2026,19:06,Robo a transeúnte,Colonia Demo 2D,Universidad,2,31.79819,-106.31208
+S-00695,05/03/2026,08:53,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.62666,-106.41462
+S-00696,21/03/2026,12:44,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.7677,-106.30512
+S-00697,17/03/2026,07:22,Violencia familiar,Colonia Demo 2A,Universidad,2,31.6466,-106.3199
+S-00698,21/03/2026,17:31,Violencia familiar,Colonia Demo 3D,Aldama,3,31.64838,-106.36165
+S-00699,25/03/2026,00:24,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.61783,-106.50348
+S-00700,02/03/2026,09:15,Violencia familiar,Colonia Demo 3A,Aldama,3,31.72189,-106.39048
+S-00701,17/03/2026,19:24,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.62292,-106.54738
+S-00702,19/03/2026,19:22,Robo a comercio,Colonia Demo 6B,Chihuahua,6,31.77675,-106.32743
+S-00703,08/03/2026,00:23,Violencia familiar,Colonia Demo 3D,Aldama,3,31.70269,-106.43021
+S-00704,23/03/2026,18:35,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.60125,-106.5246
+S-00705,27/03/2026,23:24,Violencia familiar,Colonia Demo 4A,Babícora,4,31.62412,-106.41646
+S-00706,28/03/2026,17:50,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.64678,-106.32184
+S-00707,31/03/2026,08:11,Daño en propiedad,Colonia Demo 5D,Delicias,5,31.77811,-106.4239
+S-00708,26/03/2026,14:00,Robo de vehículo,Colonia Demo 6D,Chihuahua,6,31.60874,-106.46218
+S-00709,05/03/2026,15:13,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.76155,-106.47647
+S-00710,13/03/2026,10:03,Robo a comercio,Colonia Demo 2D,Universidad,2,31.75324,-106.46777
+S-00711,01/03/2026,23:07,Daño en propiedad,Colonia Demo 5A,Delicias,5,31.73524,-106.46965
+S-00712,30/03/2026,14:44,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.78983,-106.43712
+S-00713,11/03/2026,08:10,Daño en propiedad,Colonia Demo 4A,Babícora,4,31.73651,-106.34995
+S-00714,18/03/2026,20:49,Robo a transeúnte,Colonia Demo 4B,Babícora,4,31.79495,-106.38521
+S-00715,06/03/2026,21:49,Violencia familiar,Colonia Demo 2D,Universidad,2,31.73597,-106.35437
+S-00716,25/03/2026,16:15,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.78897,-106.46427
+S-00717,15/03/2026,06:00,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.72521,-106.44584
+S-00718,07/03/2026,23:11,Lesiones,Colonia Demo 2B,Universidad,2,31.77377,-106.39867
+S-00719,18/03/2026,21:53,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.63787,-106.41447
+S-00720,21/03/2026,04:54,Violencia familiar,Colonia Demo 4C,Babícora,4,31.73306,-106.50301
+S-00721,02/03/2026,18:35,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.64288,-106.46965
+S-00722,13/03/2026,11:35,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.67606,-106.51744
+S-00723,10/03/2026,09:12,Robo a comercio,Colonia Demo 2B,Universidad,2,31.77828,-106.4125
+S-00724,27/03/2026,16:55,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.6669,-106.54255
+S-00725,02/03/2026,18:35,Violencia familiar,Colonia Demo 3B,Aldama,3,31.60708,-106.40418
+S-00726,06/03/2026,12:30,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.75947,-106.31785
+S-00727,25/03/2026,08:31,Robo de vehículo,Colonia Demo 4B,Babícora,4,31.76016,-106.42729
+S-00728,24/03/2026,23:19,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.74829,-106.30194
+S-00729,22/03/2026,15:01,Robo de vehículo,Colonia Demo 1B,Cuauhtémoc,1,31.70677,-106.47697
+S-00730,11/03/2026,21:33,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.63777,-106.50432
+S-00731,17/03/2026,20:38,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.64153,-106.39554
+S-00732,10/03/2026,22:52,Violencia familiar,Colonia Demo 3B,Aldama,3,31.79411,-106.36797
+S-00733,25/03/2026,13:17,Violencia familiar,Colonia Demo 4B,Babícora,4,31.61854,-106.41626
+S-00734,17/03/2026,10:52,Robo a comercio,Colonia Demo 2D,Universidad,2,31.68589,-106.35436
+S-00735,20/03/2026,14:42,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.67573,-106.33052
+S-00736,28/03/2026,15:26,Daño en propiedad,Colonia Demo 4D,Babícora,4,31.72499,-106.34357
+S-00737,22/03/2026,02:34,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.6734,-106.48577
+S-00738,19/03/2026,20:18,Lesiones,Colonia Demo 3C,Aldama,3,31.77475,-106.46219
+S-00739,22/03/2026,17:13,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.68865,-106.39764
+S-00740,09/03/2026,11:40,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.74066,-106.31847
+S-00741,10/03/2026,22:44,Violencia familiar,Colonia Demo 4A,Babícora,4,31.64882,-106.31366
+S-00742,04/03/2026,13:54,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.6036,-106.42882
+S-00743,01/03/2026,16:23,Violencia familiar,Colonia Demo 4B,Babícora,4,31.6611,-106.47461
+S-00744,04/03/2026,15:54,Daño en propiedad,Colonia Demo 5C,Delicias,5,31.63312,-106.51276
+S-00745,18/03/2026,19:24,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.76473,-106.36463
+S-00746,26/03/2026,00:18,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.64714,-106.40745
+S-00747,28/03/2026,16:52,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.78898,-106.47079
+S-00748,17/03/2026,12:08,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.60643,-106.34288
+S-00749,04/03/2026,05:52,Violencia familiar,Colonia Demo 2B,Universidad,2,31.60834,-106.33988
+S-00750,23/03/2026,18:46,Violencia familiar,Colonia Demo 2B,Universidad,2,31.6826,-106.37787
+S-00751,13/03/2026,22:19,Violencia familiar,Colonia Demo 3C,Aldama,3,31.67276,-106.32359
+S-00752,27/03/2026,18:58,Robo a comercio,Colonia Demo 1C,Cuauhtémoc,1,31.72766,-106.43311
+S-00753,13/03/2026,07:50,Violencia familiar,Colonia Demo 2B,Universidad,2,31.61284,-106.49724
+S-00754,17/03/2026,06:55,Robo a transeúnte,Colonia Demo 1C,Cuauhtémoc,1,31.64415,-106.30447
+S-00755,05/03/2026,18:59,Violencia familiar,Colonia Demo 1C,Cuauhtémoc,1,31.66636,-106.41558
+S-00756,11/03/2026,14:25,Violencia familiar,Colonia Demo 2D,Universidad,2,31.73268,-106.34587
+S-00757,10/03/2026,07:13,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.76981,-106.43513
+S-00758,09/03/2026,15:05,Lesiones,Colonia Demo 2D,Universidad,2,31.74401,-106.32002
+S-00759,31/03/2026,17:36,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.64677,-106.38675
+S-00760,08/03/2026,05:50,Daño en propiedad,Colonia Demo 1C,Cuauhtémoc,1,31.6267,-106.38806
+S-00761,10/03/2026,20:22,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.601,-106.52717
+S-00762,08/03/2026,16:58,Lesiones,Colonia Demo 3D,Aldama,3,31.71927,-106.33337
+S-00763,25/03/2026,23:29,Daño en propiedad,Colonia Demo 3B,Aldama,3,31.74471,-106.37177
+S-00764,23/03/2026,02:34,Lesiones,Colonia Demo 1D,Cuauhtémoc,1,31.71806,-106.33238
+S-00765,20/03/2026,16:38,Violencia familiar,Colonia Demo 3D,Aldama,3,31.67221,-106.34358
+S-00766,04/03/2026,21:04,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.60092,-106.4353
+S-00767,07/03/2026,09:10,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.70766,-106.54878
+S-00768,06/03/2026,20:30,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.76846,-106.54141
+S-00769,05/03/2026,02:09,Robo a comercio,Colonia Demo 2A,Universidad,2,31.73006,-106.44356
+S-00770,05/03/2026,17:10,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.66556,-106.31005
+S-00771,10/03/2026,22:48,Robo a transeúnte,Colonia Demo 1B,Cuauhtémoc,1,31.74152,-106.52292
+S-00772,22/03/2026,09:25,Robo a comercio,Colonia Demo 6C,Chihuahua,6,31.70608,-106.38617
+S-00773,13/03/2026,08:45,Robo a comercio,Colonia Demo 1A,Cuauhtémoc,1,31.78837,-106.49781
+S-00774,14/03/2026,19:45,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.685,-106.46733
+S-00775,27/03/2026,22:52,Robo a transeúnte,Colonia Demo 5C,Delicias,5,31.67693,-106.40293
+S-00776,17/03/2026,18:08,Violencia familiar,Colonia Demo 2B,Universidad,2,31.6691,-106.42087
+S-00777,01/03/2026,09:02,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.63649,-106.41684
+S-00778,18/03/2026,20:04,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.66947,-106.30317
+S-00779,10/03/2026,18:09,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.61338,-106.412
+S-00780,15/03/2026,17:48,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.66571,-106.32281
+S-00781,04/03/2026,13:41,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.63774,-106.30055
+S-00782,17/03/2026,00:49,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.68765,-106.3988
+S-00783,11/03/2026,16:17,Robo de vehículo,Colonia Demo 5A,Delicias,5,31.68512,-106.46798
+S-00784,14/03/2026,16:16,Daño en propiedad,Colonia Demo 2D,Universidad,2,31.69981,-106.36175
+S-00785,03/03/2026,18:15,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.74279,-106.40424
+S-00786,11/03/2026,08:27,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.62711,-106.43849
+S-00787,25/03/2026,23:13,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.75825,-106.37447
+S-00788,27/03/2026,20:47,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.61888,-106.52403
+S-00789,23/03/2026,21:37,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.63247,-106.33164
+S-00790,26/03/2026,22:10,Robo de vehículo,Colonia Demo 5B,Delicias,5,31.7755,-106.51639
+S-00791,10/03/2026,15:30,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.72426,-106.3364
+S-00792,29/03/2026,15:28,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.78836,-106.43084
+S-00793,08/03/2026,07:41,Violencia familiar,Colonia Demo 3A,Aldama,3,31.65243,-106.4425
+S-00794,14/03/2026,03:50,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.68252,-106.30258
+S-00795,21/03/2026,01:40,Violencia familiar,Colonia Demo 3C,Aldama,3,31.66822,-106.54144
+S-00796,31/03/2026,11:11,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.70832,-106.35275
+S-00797,21/03/2026,18:18,Robo a transeúnte,Colonia Demo 2C,Universidad,2,31.72785,-106.43475
+S-00798,10/03/2026,09:44,Violencia familiar,Colonia Demo 6A,Chihuahua,6,31.62908,-106.51199
+S-00799,27/03/2026,13:10,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.69239,-106.46631
+S-00800,06/03/2026,13:36,Lesiones,Colonia Demo 3C,Aldama,3,31.76929,-106.4147
+S-00801,05/03/2026,05:56,Lesiones,Colonia Demo 1B,Cuauhtémoc,1,31.65931,-106.54914
+S-00802,02/03/2026,22:39,Daño en propiedad,Colonia Demo 5B,Delicias,5,31.78151,-106.33298
+S-00803,16/03/2026,15:52,Robo de vehículo,Colonia Demo 6D,Chihuahua,6,31.78107,-106.34857
+S-00804,02/03/2026,04:15,Robo a comercio,Colonia Demo 3B,Aldama,3,31.67459,-106.34471
+S-00805,13/03/2026,15:25,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.76294,-106.41388
+S-00806,08/03/2026,22:12,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.68979,-106.39708
+S-00807,26/03/2026,09:39,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.68236,-106.34773
+S-00808,25/03/2026,14:06,Robo a transeúnte,Colonia Demo 3B,Aldama,3,31.65712,-106.4961
+S-00809,14/03/2026,08:58,Robo de vehículo,Colonia Demo 6D,Chihuahua,6,31.63572,-106.53501
+S-00810,15/03/2026,12:14,Robo a comercio,Colonia Demo 3A,Aldama,3,31.64794,-106.50473
+S-00811,06/03/2026,22:19,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.69293,-106.34924
+S-00812,13/03/2026,00:48,Daño en propiedad,Colonia Demo 3A,Aldama,3,31.62146,-106.47899
+S-00813,20/03/2026,10:02,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.79349,-106.4616
+S-00814,06/03/2026,19:10,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.78962,-106.40626
+S-00815,29/03/2026,23:48,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.73972,-106.37828
+S-00816,27/03/2026,23:10,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.67616,-106.38877
+S-00817,18/03/2026,01:09,Daño en propiedad,Colonia Demo 6D,Chihuahua,6,31.71533,-106.54799
+S-00818,09/03/2026,22:01,Violencia familiar,Colonia Demo 5A,Delicias,5,31.6071,-106.48368
+S-00819,19/03/2026,10:06,Violencia familiar,Colonia Demo 2C,Universidad,2,31.6563,-106.38209
+S-00820,06/03/2026,17:05,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.79274,-106.40171
+S-00821,11/03/2026,11:48,Violencia familiar,Colonia Demo 3A,Aldama,3,31.75141,-106.47871
+S-00822,22/03/2026,00:03,Robo de vehículo,Colonia Demo 2C,Universidad,2,31.77048,-106.40224
+S-00823,24/03/2026,09:16,Robo a transeúnte,Colonia Demo 6A,Chihuahua,6,31.62298,-106.52156
+S-00824,30/03/2026,00:19,Daño en propiedad,Colonia Demo 5C,Delicias,5,31.72244,-106.43936
+S-00825,21/03/2026,03:13,Daño en propiedad,Colonia Demo 2A,Universidad,2,31.7269,-106.48515
+S-00826,10/03/2026,03:07,Robo a comercio,Colonia Demo 5A,Delicias,5,31.62686,-106.4966
+S-00827,03/03/2026,13:18,Daño en propiedad,Colonia Demo 1A,Cuauhtémoc,1,31.63826,-106.38963
+S-00828,19/03/2026,10:20,Robo de vehículo,Colonia Demo 6C,Chihuahua,6,31.68916,-106.53871
+S-00829,23/03/2026,14:24,Daño en propiedad,Colonia Demo 4C,Babícora,4,31.68123,-106.4329
+S-00830,06/03/2026,12:49,Violencia familiar,Colonia Demo 5A,Delicias,5,31.66011,-106.53757
+S-00831,09/03/2026,05:42,Violencia familiar,Colonia Demo 1B,Cuauhtémoc,1,31.77304,-106.45707
+S-00832,09/03/2026,03:04,Lesiones,Colonia Demo 5C,Delicias,5,31.65475,-106.532
+S-00833,10/03/2026,14:52,Violencia familiar,Colonia Demo 1A,Cuauhtémoc,1,31.68933,-106.31435
+S-00834,22/03/2026,20:09,Robo de vehículo,Colonia Demo 1A,Cuauhtémoc,1,31.68543,-106.48996
+S-00835,23/03/2026,15:01,Robo a comercio,Colonia Demo 2B,Universidad,2,31.74594,-106.32721
+S-00836,18/03/2026,04:15,Robo a comercio,Colonia Demo 3C,Aldama,3,31.60372,-106.3001
+S-00837,28/03/2026,22:00,Robo de vehículo,Colonia Demo 1D,Cuauhtémoc,1,31.67903,-106.38331
+S-00838,12/03/2026,20:06,Robo a comercio,Colonia Demo 1B,Cuauhtémoc,1,31.697,-106.48172
+S-00839,24/03/2026,17:18,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.70812,-106.45373
+S-00840,27/03/2026,20:35,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.66062,-106.50936
+S-00841,11/03/2026,16:01,Robo a comercio,Colonia Demo 1A,Cuauhtémoc,1,31.6412,-106.44123
+S-00842,05/03/2026,16:52,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.647,-106.4697
+S-00843,22/03/2026,17:01,Robo de vehículo,Colonia Demo 2A,Universidad,2,31.63333,-106.50467
+S-00844,23/03/2026,17:43,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.68049,-106.35953
+S-00845,20/03/2026,12:46,Robo a comercio,Colonia Demo 1D,Cuauhtémoc,1,31.73528,-106.47688
+S-00846,20/03/2026,01:43,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.66959,-106.51786
+S-00847,18/03/2026,09:22,Lesiones,Colonia Demo 3D,Aldama,3,31.69043,-106.36817
+S-00848,29/03/2026,01:41,Lesiones,Colonia Demo 4A,Babícora,4,31.63795,-106.42319
+S-00849,18/03/2026,16:55,Robo de vehículo,Colonia Demo 3D,Aldama,3,31.75549,-106.50966
+S-00850,03/03/2026,14:25,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.74272,-106.33617
+S-00851,12/03/2026,01:15,Violencia familiar,Colonia Demo 5C,Delicias,5,31.79054,-106.53086
+S-00852,02/03/2026,10:24,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.72594,-106.39181
+S-00853,10/03/2026,09:18,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.68363,-106.51896
+S-00854,29/03/2026,17:33,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.63227,-106.50898
+S-00855,27/03/2026,08:47,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.63384,-106.52394
+S-00856,29/03/2026,18:23,Violencia familiar,Colonia Demo 3C,Aldama,3,31.78298,-106.41677
+S-00857,28/03/2026,21:52,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.67551,-106.40341
+S-00858,13/03/2026,21:36,Robo de vehículo,Colonia Demo 3C,Aldama,3,31.64773,-106.38807
+S-00859,08/03/2026,09:12,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.76866,-106.44678
+S-00860,30/03/2026,22:33,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.60523,-106.33088
+S-00861,20/03/2026,21:14,Daño en propiedad,Colonia Demo 3D,Aldama,3,31.7314,-106.39947
+S-00862,19/03/2026,15:15,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.71976,-106.37985
+S-00863,14/03/2026,06:26,Robo a transeúnte,Colonia Demo 1D,Cuauhtémoc,1,31.66264,-106.33435
+S-00864,14/03/2026,18:27,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.61807,-106.41264
+S-00865,21/03/2026,00:03,Daño en propiedad,Colonia Demo 2A,Universidad,2,31.63245,-106.31492
+S-00866,28/03/2026,21:49,Daño en propiedad,Colonia Demo 5C,Delicias,5,31.71156,-106.30878
+S-00867,07/03/2026,01:04,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.73042,-106.50046
+S-00868,28/03/2026,16:32,Violencia familiar,Colonia Demo 3B,Aldama,3,31.61776,-106.48633
+S-00869,07/03/2026,00:54,Robo de vehículo,Colonia Demo 5C,Delicias,5,31.7405,-106.30764
+S-00870,07/03/2026,00:30,Robo a comercio,Colonia Demo 3C,Aldama,3,31.7436,-106.54423
+S-00871,29/03/2026,07:27,Robo a transeúnte,Colonia Demo 5D,Delicias,5,31.74258,-106.35405
+S-00872,24/03/2026,19:01,Robo de vehículo,Colonia Demo 6C,Chihuahua,6,31.76044,-106.41283
+S-00873,13/03/2026,12:46,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.73547,-106.40959
+S-00874,07/03/2026,19:09,Violencia familiar,Colonia Demo 2A,Universidad,2,31.63327,-106.54839
+S-00875,25/03/2026,01:11,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.66893,-106.30611
+S-00876,22/03/2026,20:52,Daño en propiedad,Colonia Demo 3B,Aldama,3,31.73461,-106.50726
+S-00877,05/03/2026,00:22,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.77117,-106.36004
+S-00878,12/03/2026,02:53,Daño en propiedad,Colonia Demo 4D,Babícora,4,31.69909,-106.53844
+S-00879,21/03/2026,02:31,Robo de vehículo,Colonia Demo 2D,Universidad,2,31.79322,-106.40174
+S-00880,16/03/2026,00:48,Lesiones,Colonia Demo 5D,Delicias,5,31.73175,-106.37862
+S-00881,19/03/2026,22:14,Robo a transeúnte,Colonia Demo 2B,Universidad,2,31.62384,-106.43097
+S-00882,05/03/2026,21:41,Lesiones,Colonia Demo 6B,Chihuahua,6,31.63977,-106.33084
+S-00883,12/03/2026,00:42,Robo a transeúnte,Colonia Demo 4D,Babícora,4,31.69832,-106.33678
+S-00884,06/03/2026,20:17,Robo a transeúnte,Colonia Demo 4A,Babícora,4,31.72204,-106.35553
+S-00885,25/03/2026,18:32,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.78363,-106.31038
+S-00886,26/03/2026,21:11,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.79259,-106.53183
+S-00887,07/03/2026,15:58,Violencia familiar,Colonia Demo 4A,Babícora,4,31.76978,-106.49453
+S-00888,27/03/2026,14:55,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.66945,-106.38519
+S-00889,06/03/2026,19:35,Daño en propiedad,Colonia Demo 2C,Universidad,2,31.715,-106.53002
+S-00890,28/03/2026,04:23,Robo a comercio,Colonia Demo 3D,Aldama,3,31.78204,-106.52535
+S-00891,06/03/2026,14:23,Daño en propiedad,Colonia Demo 2A,Universidad,2,31.67717,-106.40842
+S-00892,31/03/2026,09:39,Lesiones,Colonia Demo 2C,Universidad,2,31.69116,-106.54903
+S-00893,14/03/2026,00:00,Violencia familiar,Colonia Demo 3C,Aldama,3,31.69989,-106.39253
+S-00894,08/03/2026,14:14,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.71821,-106.52137
+S-00895,19/03/2026,23:41,Violencia familiar,Colonia Demo 5B,Delicias,5,31.7715,-106.34145
+S-00896,06/03/2026,21:52,Lesiones,Colonia Demo 1D,Cuauhtémoc,1,31.67171,-106.44096
+S-00897,13/03/2026,11:31,Robo a transeúnte,Colonia Demo 1A,Cuauhtémoc,1,31.6538,-106.49183
+S-00898,27/03/2026,07:38,Violencia familiar,Colonia Demo 3A,Aldama,3,31.60398,-106.39721
+S-00899,18/03/2026,18:06,Violencia familiar,Colonia Demo 2D,Universidad,2,31.63451,-106.54709
+S-00900,27/03/2026,21:53,Daño en propiedad,Colonia Demo 6D,Chihuahua,6,31.6756,-106.32586
+S-00901,13/03/2026,03:06,Violencia familiar,Colonia Demo 2D,Universidad,2,31.72833,-106.35285
+S-00902,13/03/2026,21:42,Robo a transeúnte,Colonia Demo 3D,Aldama,3,31.6231,-106.34227
+S-00903,20/03/2026,20:31,Robo a transeúnte,Colonia Demo 3A,Aldama,3,31.76965,-106.41945
+S-00904,05/03/2026,21:35,Robo de vehículo,Colonia Demo 3A,Aldama,3,31.66931,-106.38223
+S-00905,06/03/2026,17:32,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.69191,-106.3541
+S-00906,15/03/2026,16:21,Lesiones,Colonia Demo 2C,Universidad,2,31.78335,-106.48398
+S-00907,02/03/2026,11:37,Robo de vehículo,Colonia Demo 2B,Universidad,2,31.65998,-106.44301
+S-00908,20/03/2026,16:49,Lesiones,Colonia Demo 5B,Delicias,5,31.67763,-106.54145
+S-00909,19/03/2026,21:54,Lesiones,Colonia Demo 2C,Universidad,2,31.7027,-106.49891
+S-00910,28/03/2026,11:23,Daño en propiedad,Colonia Demo 2B,Universidad,2,31.74116,-106.51877
+S-00911,08/03/2026,18:46,Robo a comercio,Colonia Demo 5B,Delicias,5,31.70502,-106.36724
+S-00912,21/03/2026,08:04,Robo de vehículo,Colonia Demo 4C,Babícora,4,31.70902,-106.34619
+S-00913,15/03/2026,12:39,Robo de vehículo,Colonia Demo 4B,Babícora,4,31.67615,-106.45539
+S-00914,06/03/2026,20:04,Lesiones,Colonia Demo 1A,Cuauhtémoc,1,31.62992,-106.50552
+S-00915,28/03/2026,00:40,Robo a transeúnte,Colonia Demo 3C,Aldama,3,31.67155,-106.41753
+S-00916,22/03/2026,11:51,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.75027,-106.49424
+S-00917,26/03/2026,20:06,Daño en propiedad,Colonia Demo 3B,Aldama,3,31.66991,-106.35666
+S-00918,14/03/2026,19:55,Robo de vehículo,Colonia Demo 1C,Cuauhtémoc,1,31.64216,-106.36257
+S-00919,03/03/2026,11:24,Robo a comercio,Colonia Demo 3C,Aldama,3,31.77297,-106.47184
+S-00920,01/03/2026,10:18,Violencia familiar,Colonia Demo 4D,Babícora,4,31.77808,-106.48748
+S-00921,16/03/2026,12:49,Robo a comercio,Colonia Demo 1A,Cuauhtémoc,1,31.79886,-106.38396
+S-00922,13/03/2026,18:48,Violencia familiar,Colonia Demo 1D,Cuauhtémoc,1,31.6725,-106.37578
+S-00923,22/03/2026,21:39,Robo a comercio,Colonia Demo 1A,Cuauhtémoc,1,31.78599,-106.37231
+S-00924,04/03/2026,13:56,Daño en propiedad,Colonia Demo 1D,Cuauhtémoc,1,31.78022,-106.50854
+S-00925,07/03/2026,11:06,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.61712,-106.3687
+S-00926,17/03/2026,07:10,Robo de vehículo,Colonia Demo 4A,Babícora,4,31.72358,-106.49837
+S-00927,05/03/2026,22:38,Robo a transeúnte,Colonia Demo 4C,Babícora,4,31.70033,-106.39172
+S-00928,06/03/2026,17:51,Violencia familiar,Colonia Demo 4A,Babícora,4,31.68015,-106.38811

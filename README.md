@@ -15,6 +15,9 @@ Sitio del curso (Astro + FlyonUI) con diapositivas de los tres días, material d
 
 ## Dónde cambiar cada cosa
 
+- **Biblioteca de recursos** (`/recursos/`): `src/data/biblioteca.ts` reúne las presentaciones disponibles, materiales, descargas y repositorios. La búsqueda y los filtros funcionan en el navegador, sin solicitudes a servidores. La carpeta de Drive queda pendiente de recibir su enlace.
+- **Diagramas imprimibles** (`/diagramas/`): `src/pages/diagramas.astro` contiene el recorrido del participante y los flujos ETL, QGIS y Metabase.
+
 - **Día en que va el grupo** (línea de avance de la portada): `diaActual` en `src/data/curso.ts`.
 - **Diapositivas**: `src/data/dia-1.ts`, `dia-2.ts`, `dia-3.ts`. Cada una lleva bloque, hora, layout y notas del instructor.
 - **Cuestionario**: `src/data/cuestionario.ts` (reactivos, clave y explicaciones). Si cambia el número de reactivos, actualice `cortas` en `src/pages/cuestionario/resultados.astro`.
