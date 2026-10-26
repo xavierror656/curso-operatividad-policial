@@ -1,1 +1,5 @@
 public/datos/capas-sspm/* -text
+
+*.pdf binary
+*.pptx binary
+*.zip binary
